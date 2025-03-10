@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.Tables">
+
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Tables"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TableLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:background="@drawable/table_cell_border">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="S.no"
+                                android:padding="8dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/table_cell_border" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Name"
+                                android:padding="8dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/table_cell_border" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/table_cell_border"
+                                android:padding="8dp"
+                                android:text="Email"
+                                android:textStyle="bold" />
+
+                        </TableRow>
+
+
+                        <TableRow android:background="@drawable/table_cell_border">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:padding="8dp"
+                                android:background="@drawable/table_cell_border" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="John Doe"
+                                android:padding="8dp"
+                                android:background="@drawable/table_cell_border" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="johndoe@example.com"
+                                android:padding="8dp"
+                                android:background="@drawable/table_cell_border" />
+                        </TableRow>
+
+                        <TableRow android:background="@drawable/table_cell_border">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2"
+                                android:padding="8dp"
+                                android:background="@drawable/table_cell_border" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Richard Smith"
+                                android:padding="8dp"
+                                android:background="@drawable/table_cell_border" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/table_cell_border"
+                                android:padding="8dp"
+                                android:text="richard@example.com" />
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

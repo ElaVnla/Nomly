@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="page_margin">20dp</dimen>
+    <dimen name="page_offset">30dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="tab_bg_radius">10dp</dimen>
+</resources>

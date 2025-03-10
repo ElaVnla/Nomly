@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.Socials">
+
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Socials"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Socials Icons"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:flexWrap="wrap"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.Material3.Button.IconButton"
+                            app:icon="@drawable/ic_facebook"
+                            android:layout_marginEnd="10dp"
+                            app:iconTint="@null"
+                            app:backgroundTint="#3E6EEA"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:backgroundTint="#39BFBFBF"
+                            android:layout_marginEnd="10dp"
+                            app:icon="@drawable/ic_google"
+                            app:iconTint="@null" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="#FF000000"
+                            app:icon="@drawable/x_icon"
+                            app:iconTint="@null" />
+
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="#39CA1F27"
+                            app:icon="@drawable/pinterest"
+                            app:iconTint="@null" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="#39F4B5B8"
+                            app:icon="@drawable/instagram"
+                            app:iconTint="@null" />
+
+
+                    </com.google.android.flexbox.FlexboxLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+   <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Socials Buttons"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:flexWrap="wrap"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.Material3.Button.IconButton"
+                            app:icon="@drawable/ic_facebook"
+
+                            android:text="Facebook"
+                            android:textSize="14sp"
+                            app:iconPadding="12dp"
+                            android:textColor="@color/white"
+                            android:layout_marginEnd="10dp"
+                            app:iconTint="@null"
+                            app:backgroundTint="#3E6EEA"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:backgroundTint="#39BFBFBF"
+                            android:layout_marginEnd="10dp"
+                            android:text="Google"
+                            android:textSize="14sp"
+                            app:iconPadding="12dp"
+                            android:textColor="@color/black"
+                            app:icon="@drawable/ic_google"
+                            app:iconTint="@null" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="#FF000000"
+                            android:text="Twitter"
+                            android:textSize="14sp"
+                            app:iconPadding="12dp"
+                            android:textColor="@color/white"
+                            app:icon="@drawable/x_icon"
+                            app:iconTint="@null" />
+
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="#39CA1F27"
+                            android:text="Pinterest"
+                            android:textSize="14sp"
+                            app:iconPadding="12dp"
+                            android:textColor="@color/black"
+                            app:icon="@drawable/pinterest"
+                            app:iconTint="@null" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="#39F4B5B8"
+                            android:text="Instagram"
+                            android:textSize="14sp"
+                            app:iconPadding="12dp"
+                            android:textColor="@color/black"
+                            app:icon="@drawable/instagram"
+                            app:iconTint="@null" />
+
+
+                    </com.google.android.flexbox.FlexboxLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.Reward">
+
+        <!-- This FrameLayout contains the Back Button and Title -->
+        <FrameLayout
+            android:background="@color/actionBarBackground"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backbtn"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/icon_button_bg_color"
+                app:icon="@drawable/right_arrow"
+                app:iconTint="@color/icon_button_icon_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/semi_bold"
+                android:paddingTop="10dp"
+                android:text="Rewards"
+                android:textColor="@color/text_color_primary"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:paddingStart="30dp"
+                android:background="@drawable/rewards_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:textSize="18sp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/medium"
+                    android:textColor="@color/text_color_white"
+                    android:layout_height="wrap_content"
+                    android:text="My Points"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:textSize="34dp"
+                    android:layout_marginTop="54dp"
+                    android:fontFamily="@font/semi_bold"
+                    android:textColor="@color/text_color_white"
+                    android:layout_height="wrap_content"
+                    android:text="87,550"/>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/button_primary_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="120dp"
+                    android:backgroundTint="#26FFFFFF"
+                    android:layout_marginStart="0dp"
+                    android:fontFamily="@font/medium"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:cornerRadius="7dp"
+                    android:text="Redeem Gift"/>
+
+            </FrameLayout>
+
+            <!-- Sticky Top Bar that stops when it reaches the top -->
+            <LinearLayout
+                android:id="@+id/stikyTopBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="28dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="18dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="History Reward"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/medium"/>
+
+                <TextView
+                    android:id="@+id/filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Newest"
+                    android:textColor="@color/color_primary"
+                    android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    android:layout_marginEnd="27dp"
+                    android:drawableEnd="@drawable/dropdwonicon"
+                    android:fontFamily="@font/medium"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rewardView"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:listitem="@layout/item_rewards"
+                android:nestedScrollingEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragments.ProductsFragment">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backbtn"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/icon_button_bg_color"
+                app:icon="@drawable/right_arrow"
+                app:iconTint="@color/icon_button_icon_color" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/semi_bold"
+                android:paddingTop="10dp"
+                android:text="Rewards"
+                android:textColor="@color/text_color_primary"
+                android:textSize="20sp" />
+
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="182dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginEnd="28dp"
+                    android:paddingStart="30dp"
+                    android:background="@drawable/rewards_card">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="start|top"
+                        android:textSize="18sp"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/medium"
+                        android:textColor="@color/text_color_white"
+                        android:layout_height="wrap_content"
+                        android:text="My Points"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="start|top"
+                        android:textSize="34dp"
+                        android:layout_marginTop="54dp"
+                        android:fontFamily="@font/semi_bold"
+                        android:textColor="@color/text_color_white"
+                        android:layout_height="wrap_content"
+                        android:text="87,550"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/button_primary_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="120dp"
+                        android:backgroundTint="#26FFFFFF"
+                        android:layout_marginStart="0dp"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        app:cornerRadius="7dp"
+                        android:text="Redeem Gift"/>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/stikyTopBar"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="18dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="textStart"
+                        android:layout_height="wrap_content"
+                        android:text="History Reward"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/medium"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Newest"
+                        android:textColor="@color/color_primary"
+                        android:textSize="16sp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginEnd="27dp"
+                        android:drawableEnd="@drawable/dropdwonicon"
+                        android:fontFamily="@font/medium"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rewardView"
+                    android:layout_marginStart="28dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/item_rewards"
+                    android:paddingEnd="28dp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>-->

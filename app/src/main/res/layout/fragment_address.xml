@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.AddressFragment">
+
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Delivery Address"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addressView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/address_item" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addAddressBtn"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="16dp"
+                android:backgroundTint="@color/color_active"
+                android:drawableEnd="@drawable/ic_home"
+                app:icon="@drawable/addaddressico"
+                app:iconTint="@null">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
+                    android:clickable="false"
+                    android:drawableStart="@drawable/addaddressico"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginStart="12dp"
+                    android:text="Add address"
+                    android:drawablePadding="10dp"
+                    android:drawableEnd="@drawable/righticon"
+                    android:textColor="@color/btn_text_color_secondary" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/continueBtn"
+            style="@style/button_primary_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/medium"
+            android:text="Continue"
+            android:textAllCaps="true"
+            android:textColor="@color/btn_text_color_primary"
+            android:textSize="16sp"
+            app:backgroundTint="@color/color_primary"
+            />
+    </LinearLayout>
+</LinearLayout>

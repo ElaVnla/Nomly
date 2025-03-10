@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.ToggleButtons">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/actionBarBackground"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Toggles"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:clickable="false"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="10dp"
+                        android:text="Toggle Buttons"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="16dp" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:layout_marginStart="20dp"
+                        app:checkedButton="@id/buttonM"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonXS"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            app:cornerRadius="5dp"
+                            android:text="XS"
+                            android:textColor="?attr/colorOnSurface" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonS"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="S"
+                            android:textColor="?attr/colorOnSurface" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonM"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="M"
+                            android:textColor="?attr/colorOnSurface" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonL"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="L"
+                            android:textColor="?attr/colorOnSurface" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonXL"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            app:cornerRadius="5dp"
+                            android:padding="0dp"
+                            android:text="XL"
+                            android:textColor="?attr/colorOnSurface" />
+
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:clickable="false"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="10dp"
+                        android:text="Single Select"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="16dp" />
+
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:layout_marginStart="20dp"
+                        app:checkedButton="@id/toggleSelectApple"
+                        app:singleSelection="true">
+
+                        <!-- Apple Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleSelectApple"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:tag="btn"
+                            android:text="Apple"
+                            android:textSize="16sp"
+                            android:textColor="@color/selected_button_text_color"
+                            app:strokeColor="@color/selected_button_stroke_color"
+                            app:backgroundTint="@color/selected_button_color"
+                            app:cornerRadius="5dp"
+                            app:strokeWidth="2dp" />
+
+                        <!-- Banana Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleSelectBanana"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:tag="btn"
+                            android:layout_height="wrap_content"
+                            android:text="Banana"
+                            android:textColor="@color/unselected_button_text_color"
+                            app:strokeColor="@color/unselected_button_stroke_color"
+                            android:textSize="16sp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:cornerRadius="0dp"
+                            app:strokeWidth="1dp" />
+
+                        <!-- Orange Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleSelectOrange"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:tag="btn"
+                            android:layout_height="wrap_content"
+                            android:text="Orange"
+                            android:textColor="@color/unselected_button_text_color"
+                            android:textSize="16sp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:cornerRadius="5dp"
+                            app:strokeColor="@color/unselected_button_stroke_color"
+                            app:strokeWidth="1dp" />
+
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:clickable="false"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="10dp"
+                        android:text="Multi Select"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="16dp" />
+
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/toggleButtonGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        app:checkedButton="@id/toggleSelectPotatoes"
+                        app:singleSelection="true">
+
+                        <!-- Tomatoes Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleSelectTomatoes"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:tag="btn"
+                            android:layout_height="wrap_content"
+                            android:text="Tomatoes"
+                            android:textColor="@color/colorUnselectedText"
+                            app:strokeColor="@color/colorOutline"
+                            app:backgroundTint="@android:color/transparent"
+                            android:textSize="16sp"
+                            app:cornerRadius="5dp"
+                            app:strokeWidth="1dp" />
+
+                        <!-- Potatoes Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleSelectPotatoes"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Potatoes"
+                            android:tag="btn"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorSelectedText"
+                            app:backgroundTint="@color/colorSelectedBackground"
+                            app:strokeColor="@color/colorSelectedOutline"
+                            app:cornerRadius="0dp"
+                            app:strokeWidth="2dp" />
+
+                        <!-- Carrots Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/toggleSelectCarrots"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Carrots"
+                            android:tag="btn"
+                            android:textColor="@color/colorUnselectedText"
+                            android:textSize="16sp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:cornerRadius="5dp"
+                            app:strokeColor="@color/colorOutline"
+                            app:strokeWidth="1dp" />
+
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:clickable="false"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="10dp"
+                        android:text="Icon only"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="16dp" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:checkedButton="@id/op_icon"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:singleSelection="true">
+
+                        <!-- Tomatoes Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/sun"
+                            style="@style/Widget.Material3.Button.IconButton.Outlined"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:backgroundTint="@color/color_transparent"
+                            android:insetRight="0dp"
+                            android:tag="btn"
+                            app:strokeColor="@color/colorOutlineIcon"
+                            app:cornerRadius="5dp"
+                            app:icon="@drawable/sun"
+                            app:iconTint="#42A5F6"
+                            app:strokeWidth="1dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/cloud"
+                            style="@style/Widget.Material3.Button.IconButton.Outlined"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:backgroundTint="@color/color_transparent"
+                            android:insetRight="0dp"
+                            android:insetLeft="0dp"
+                            app:strokeColor="@color/colorOutlineIcon"
+                            android:tag="btn"
+                            app:cornerRadius="16dp"
+                            app:icon="@drawable/cloud"
+                            app:iconTint="#42A5F6"
+                            app:strokeWidth="1dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/op_icon"
+                            style="@style/Widget.Material3.Button.IconButton.Outlined"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:backgroundTint="@color/colorSelectedBackgroundIcon"
+                            app:strokeColor="@color/colorOutlineIcon"
+                            android:insetLeft="0dp"
+                            android:tag="btn"
+                            app:cornerRadius="5dp"
+                            app:icon="@drawable/op_icon"
+                            app:iconTint="#42A5F6"
+                            app:strokeWidth="1dp" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

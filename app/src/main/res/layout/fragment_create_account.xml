@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".activity.login_signin_Activity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="start|center"
+            style="@style/Widget.Material3.Button.IconButton"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color"
+            android:backgroundTint="@color/icon_button_bg_color"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/app_logo24"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="15dp"
+            android:text="@string/app_name"
+            android:textColor="@color/text_color_primary"
+            android:textSize="25dp" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/semi_bold"
+        android:text="Create an account"
+        android:textColor="@color/text_color_primary"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/subTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/regular"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
+        android:textColor="@color/text_color_secondary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/regular"
+        android:text="Username"
+        android:textColor="@color/edittext_hint_color"
+        android:textSize="14sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="26dp"
+        android:fontFamily="@font/regular"
+        android:hint="williamsmith"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/regular"
+        android:text="Email"
+        android:textColor="@color/edittext_hint_color"
+        android:textSize="14sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="26dp"
+        android:fontFamily="@font/regular"
+        android:hint="williamsmith@gmail.com"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/regular"
+        android:text="Password"
+        android:textColor="@color/edittext_hint_color"
+        android:textSize="14sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="26dp"
+        android:fontFamily="@font/regular"
+        android:hint="。。。。。。。。。。"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:drawableEnd="@drawable/show_password"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:textColorHint="@color/text_color_black" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signupBtn"
+        style="@style/button_primary_style"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:paddingTop="10dp"
+        android:text="Sign Up"
+        app:backgroundTint="#606060" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="By tapping “Sign Up” you accept our"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/termsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/regular"
+            android:text="terms"
+            android:textColor="@color/color_primary"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text=" and"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/conditionBnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/regular"
+            android:text=" condition"
+            android:textColor="@color/color_primary"
+            android:textSize="14dp" />
+    </LinearLayout>
+</LinearLayout>

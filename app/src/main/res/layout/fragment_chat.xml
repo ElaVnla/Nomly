@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.chat">
+
+    <!-- This FrameLayout contains the Back Button and Title -->
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/moreOptionBtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginStart="20dp"
+            app:icon="@drawable/optionicon"
+            app:iconTint="@color/icon_button_icon_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Mr. Shandy"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+    </FrameLayout>
+
+    <!-- Main Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/containerMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="16dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/chat_sent_layout"/>
+            <include layout="@layout/chat_receive_layout"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/regular"
+            android:gravity="start"
+            android:textColor="@color/edittext_hint_color"
+            android:textColorHint="#929292"
+            app:boxBackgroundColor="@color/color_transparent"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/stroke_color"
+            app:endIconMode="custom"
+            app:endIconTint="@null"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:hint="Type message..."
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sentBtn"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="25dp"
+            android:shadowColor="#9E9E9E"
+            app:backgroundTint="#E9F4F4F4"
+            app:cornerRadius="5dp"
+            app:icon="@drawable/sendicon"
+            app:iconTint="@color/color_primary" />
+
+
+    </FrameLayout>
+
+</LinearLayout>

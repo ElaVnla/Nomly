@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/background_color_primary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Onboarding">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_marginTop="150dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:tabBackground="@drawable/indicator_unselected" />
+
+    <LinearLayout
+        android:id="@+id/dotsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        android:layout_gravity="bottom|center"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content">
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/back"-->
+<!--            style="@style/Widget.Material3.Button.OutlinedButton"-->
+<!--            android:layout_width="164dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            app:cornerRadius="52dp"-->
+<!--            app:backgroundTint="@color/color_transparent"-->
+<!--            app:strokeColor="@color/color_active"-->
+<!--            android:fontFamily="@font/semi_bold"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@color/btn_text_color_secondary"-->
+<!--            android:text="Back"-->
+<!--            app:strokeWidth="1dp"/>-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20sp"
+            app:cornerRadius="52dp"
+            app:backgroundTint="@color/color_primary"
+            android:fontFamily="@font/semi_bold"
+            android:textSize="16sp"
+            android:textColor="@color/btn_text_color_primary"
+            android:text="Get Started"
+            android:textAllCaps="true"
+            app:strokeWidth="0dp"/>
+
+    </LinearLayout>
+</LinearLayout>
+    
+
+
+
+</LinearLayout>

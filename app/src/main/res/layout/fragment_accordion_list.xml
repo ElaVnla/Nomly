@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.AccordionList">
+
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Accordions List"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Classic Accordion"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerColor="@color/divider_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="1dp"
+                            app:cardCornerRadius="0dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/item1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:tag="click">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/medium"
+                                        android:paddingStart="14dp"
+                                        android:paddingEnd="10dp"
+                                        android:text="Who Can Benefit from Ecommerce?"
+                                        android:textColor="@color/text_color_black"
+                                        android:textSize="16dp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgArrow"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/ic_arrow_down"
+                                        android:tag="imgArrow"
+                                        android:tint="@color/text_color_black"
+                                        tools:ignore="UseAppTint" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/items"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:tag="tag"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:dividerColor="@color/divider_color" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:fontFamily="@font/regular"
+                                        android:padding="10dp"
+                                        android:text="Capitalize 'E-commerce' consistently and use a hyphen."
+                                        android:textSize="13sp" />
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="1dp"
+                            app:cardCornerRadius="0dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/item2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:tag="click">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/medium"
+                                        android:paddingStart="14dp"
+                                        android:paddingEnd="10dp"
+                                        android:text="10 Ways to Maximize Your Profits."
+                                        android:textColor="@color/text_color_black"
+                                        android:textSize="16dp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgArrow2"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/ic_arrow_down"
+                                        android:tag="imgArrow"
+                                        android:tint="@color/text_color_black"
+                                        tools:ignore="UseAppTint" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/items2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:tag="tag"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:dividerColor="@color/divider_color" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:fontFamily="@font/regular"
+                                        android:padding="10dp"
+                                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."
+                                        android:textSize="13sp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="1dp"
+                            app:cardCornerRadius="0dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/item3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:tag="click">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/medium"
+                                        android:paddingStart="14dp"
+                                        android:paddingEnd="10dp"
+                                        android:text="Exploring the Benefits of Ecommerce"
+                                        android:textColor="@color/text_color_black"
+                                        android:textSize="16dp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgArrow3"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/ic_arrow_down"
+                                        android:tag="imgArrow"
+                                        app:tint="@color/text_color_black" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/items3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:tag="tag"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:dividerColor="@color/divider_color" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:fontFamily="@font/regular"
+                                        android:padding="10dp"
+                                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."
+                                        android:textSize="13sp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Accordion With Background"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/awb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerColor="@color/divider_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardCornerRadius="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/itemAvb0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/color_primary"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:tag="click">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="14dp"
+                                        android:layout_marginBottom="14dp"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/medium"
+                                        android:paddingStart="14dp"
+                                        android:paddingEnd="10dp"
+                                        android:text="Lorem ipsum dolor sit amet"
+                                        android:textColor="@color/white"
+                                        android:textSize="16dp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgArrowAvb0"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/ic_arrow_down"
+                                        android:tag="img"
+                                        android:tint="@color/white"
+                                        tools:ignore="UseAppTint" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/itemsAvb0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/divider_color"
+                                    android:orientation="vertical"
+                                    android:tag="view"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:dividerColor="@color/divider_color" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:fontFamily="@font/regular"
+                                        android:padding="10dp"
+                                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."
+                                        android:textSize="13sp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardCornerRadius="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/itemAvb1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/color_primary"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:tag="click">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="14dp"
+                                        android:layout_marginBottom="14dp"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/medium"
+                                        android:paddingStart="14dp"
+                                        android:paddingEnd="10dp"
+                                        android:text="Lorem ipsum dolor sit amet"
+                                        android:textColor="@color/white"
+                                        android:textSize="16dp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgArrowAvb1"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/ic_arrow_down"
+                                        android:tag="img"
+                                        android:tint="@color/white"
+                                        tools:ignore="UseAppTint" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/itemsAvb1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/divider_color"
+                                    android:orientation="vertical"
+                                    android:tag="view"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:dividerColor="@color/divider_color" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:fontFamily="@font/regular"
+                                        android:padding="10dp"
+                                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."
+                                        android:textSize="13sp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardCornerRadius="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/itemAvb2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/color_primary"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:tag="click">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="14dp"
+                                        android:layout_marginBottom="14dp"
+                                        android:layout_weight="1"
+                                        android:clickable="false"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/medium"
+                                        android:paddingStart="14dp"
+                                        android:paddingEnd="10dp"
+                                        android:text="Lorem ipsum dolor sit amet"
+                                        android:textColor="@color/white"
+                                        android:textSize="16dp" />
+
+                                    <ImageView
+                                        android:id="@+id/imgArrowAvb2"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/ic_arrow_down"
+                                        android:tag="img"
+                                        android:tint="@color/white"
+                                        tools:ignore="UseAppTint" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/itemsAvb2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/divider_color"
+                                    android:orientation="vertical"
+                                    android:tag="view"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:dividerColor="@color/divider_color" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:fontFamily="@font/regular"
+                                        android:padding="10dp"
+                                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."
+                                        android:textSize="13sp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

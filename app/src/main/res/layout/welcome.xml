@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/signin_method_bg"
+    android:orientation="vertical"
+    tools:context=".activity.Welcome">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/welcomeScreenBgColor"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="366dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/product1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="21dp"
+            android:fontFamily="@font/semi_bold"
+            android:text="Morning begins with Ombe coffee"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInWithEmail"
+            style="@style/button_primary_style"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:text="Login with email"
+            app:icon="@drawable/ic_email" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInWithFacebook"
+            style="@style/button_primary_style"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:backgroundTint="@color/brand_color_facebook"
+            android:text="Login with facebook"
+            app:icon="@drawable/ic_facebook" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInWithGoogle"
+            style="@style/button_primary_style"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:backgroundTint="@color/white"
+            android:text="Login with Google"
+            android:textColor="@color/btn_text_color_secondary"
+            app:icon="@drawable/ic_google"
+            app:iconTint="@null" />
+
+
+    </LinearLayout>
+</LinearLayout>

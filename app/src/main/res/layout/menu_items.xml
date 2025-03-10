@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="10dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/app_logo24"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/text_color_primary"
+            android:textSize="25dp" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/semi_bold"
+            android:text="Main Menus"
+            android:textColor="@color/text_color_black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/navCloseBtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/ic_close"
+            app:iconTint="@color/icon_button_icon_color" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/homeBtn"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Home"
+                android:textColor="@color/color_primary"
+                android:textSize="18sp"
+                app:icon="@drawable/ic_home"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/color_primary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/products"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Products"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/ic_cart"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/myOrderBtn"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="My Order"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/ic_transction"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/components"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Components"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/components"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/wishlist"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Wishlist"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/wishlist"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/ourStoresBtn"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Stores Location"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/our_stores"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/myCart"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="My Cart"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/carticon"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rewards"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Rewards"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/award_solid"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profileBtn"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Profile"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/ic_profile"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/chatlist"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Chatlist"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/chat"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@color/menu_item_text_color" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutBtn"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center|start"
+                android:padding="16dp"
+                android:text="Logout"
+                android:textColor="@color/menu_item_text_color"
+                android:textSize="18sp"
+                app:icon="@drawable/ic_logout"
+                app:iconGravity="textStart"
+                app:iconPadding="24dp"
+                app:iconSize="24dp"
+                app:iconTint="@null" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/switchBtn"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="start"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/color_stroke"
+        android:layout_marginStart="15dp"
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="16sp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:clickable="false"
+            android:padding="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/sun"
+                android:clickable="false"
+                android:src="@drawable/sun"
+                android:layout_width="24dp"
+                android:tint="#fff"
+                android:background="@drawable/roundbg"
+                android:layout_gravity="center"
+                android:layout_height="24dp"
+                tools:ignore="UseAppTint" />
+
+            <ImageView
+                android:id="@+id/moon"
+                android:src="@drawable/ic_moon"
+                android:clickable="false"
+                android:layout_width="24dp"
+                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:layout_height="24dp"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20sp"
+        android:fontFamily="@font/medium"
+        android:text="Ombe Coffee App"
+        android:textColor="#868686"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0sp"
+        android:layout_marginBottom="50sp"
+        android:fontFamily="@font/medium"
+        android:text="App Version 1.0.0"
+        android:textColor="#B1B1C3"
+        android:textSize="12sp" />
+
+</LinearLayout>

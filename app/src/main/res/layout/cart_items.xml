@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="120dp"
+        android:layout_height="145dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="22dp">
+
+            <ImageView
+                android:id="@+id/coffeeImage"
+                android:layout_width="120dp"
+                android:layout_height="145dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/coffeeimage1" />
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="28dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/coffeeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/medium"
+            android:text="Creamy Mocha Ome Coffee "
+            android:textColor="@color/text_color_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center">
+
+            <TextView
+                android:id="@+id/coffeePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/semi_bold"
+                android:text="$12.6"
+                android:textColor="@color/text_color_black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/buyCoffee"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/star"
+                android:drawableTint="#FFAA40"
+                android:text="   1.5k Review"
+                android:textColor="@color/text_color_secondary" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="bottom|center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/decrement"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/color_primary"
+                android:fontFamily="@font/semi_bold"
+                app:iconGravity="textEnd"
+                android:textColor="@color/text_color_black"
+                app:icon="@drawable/nagitive_icon"
+                app:iconTint="@color/white" />
+
+
+            <TextView
+                android:id="@+id/inDecrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/medium"
+                android:text="1"
+                android:textColor="@color/text_color_black"
+                android:textSize="20dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/increment"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                app:iconGravity="textEnd"
+                android:backgroundTint="@color/color_primary"
+                android:fontFamily="@font/semi_bold"
+                android:textColor="@color/text_color_black"
+                app:icon="@drawable/increment"
+                app:iconTint="@color/white" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/remove"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/semi_bold"
+                android:text="Remove"
+                android:textColor="#EB5757"
+                android:textSize="12sp"
+                app:icon="@drawable/remove"
+                app:iconTint="@null" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

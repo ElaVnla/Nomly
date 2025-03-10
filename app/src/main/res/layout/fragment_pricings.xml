@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.Pricings">
+
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Pricings"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor="@color/color_primary"
+                app:strokeWidth="1dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$10/Month"
+                        android:textSize="30sp"
+                        android:textColor="@color/text_color_black"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Basic Plan"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_black"
+                        android:fontFamily="@font/medium"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="billed Annually"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:fontFamily="@font/medium"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Access to all basic features"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="basic reporing and analytics"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="up to 10 individual users"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="20GB individual data each user"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="Basic Chart and Email Support"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/button_secondary"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginStart="40dp"
+                        android:text="Get Started"/>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor="@color/text_color_secondary"
+                app:strokeWidth="1dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Free"
+                        android:textSize="30sp"
+                        android:textColor="@color/text_color_black"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0/Month"
+                        android:textSize="30sp"
+                        android:textColor="@color/text_color_black"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/medium"
+                        android:text="all the basic features the are jsut getting started"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="16sp" />
+                    
+                    
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        style="@style/button_primary"
+                        android:text="get Started"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Access to all basic features"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="basic reporing and analytics"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="up to 10 individual users"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="20GB individual data each user"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:text="Basic Chart and Email Support"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:drawableStart="@drawable/check_circle"
+                        android:drawableTint="@color/text_color_black"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/medium"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="start|center"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/button_secondary"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginStart="40dp"
+                        android:text="Get Started"/>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

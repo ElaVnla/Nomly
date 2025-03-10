@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_primary"
+    android:orientation="vertical"
+    tools:context=".fragments.Tabs">
+
+    <FrameLayout
+        android:background="@color/actionBarBackground"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backbtn"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/icon_button_bg_color"
+            app:icon="@drawable/right_arrow"
+            app:iconTint="@color/icon_button_icon_color" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/semi_bold"
+            android:paddingTop="10dp"
+            android:text="Tabs"
+            android:textColor="@color/text_color_primary"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Tab Top"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:gravity="start|center"
+                            android:layout_marginBottom="-10dp"
+                            android:layout_height="60dp">
+                            <TextView
+                                android:id="@+id/home"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:background="@drawable/tab_top"
+                                android:gravity="center"
+                                android:text="Home"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:gravity="center"
+                                android:text="Profile"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/about"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:tag="tab"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="About"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:background="@drawable/tab_bg_color_primary"
+                            android:layout_width="match_parent"
+                            android:padding="15dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:textColor="@color/text_color_black"
+                                android:layout_height="wrap_content"
+                                android:text="I'd be glad to assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive guide that incorporates the best aspects of previous responses and addresses potential issues"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Tab Right"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:background="@drawable/tab_bg_color_primary"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:padding="15dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:textColor="@color/text_color_black"
+                                android:layout_height="wrap_content"
+                                android:text="I'd be glad to assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive  assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive  assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive guide that incorporates the best aspects of previous responses and addresses potential issues"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:gravity="start|center"
+                            android:orientation="vertical"
+                            android:layout_marginStart="-10dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/home0"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginTop="10dp"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:background="@drawable/tab_right"
+                                android:gravity="center"
+                                android:text="Home"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/profile0"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:gravity="center"
+                                android:text="Profile"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/about0"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:tag="tab"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="About"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Tab Left"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:gravity="start|center"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/home1"
+                                android:layout_width="85dp"
+                                android:layout_height="60dp"
+                                android:layout_marginTop="10dp"
+                                android:paddingStart="10dp"
+                                android:layout_marginEnd="-13dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:background="@drawable/tab_background_pri"
+                                android:gravity="center"
+                                android:text="Home"
+                                android:textColor="@color/white"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/profile1"
+                                android:layout_width="match_parent"
+                                android:layout_marginEnd="-13dp"  android:layout_height="60dp"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:gravity="center"
+                                android:text="Profile"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/about1"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:tag="tab"
+                                android:layout_marginEnd="-13dp"  android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="About"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:background="@drawable/tab_primary_bg"
+                            android:layout_width="match_parent"
+                            android:padding="15dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:textColor="@color/white"
+                                android:layout_height="wrap_content"
+                                android:text="I'd be glad to assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive  assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive  assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive guide that incorporates the best aspects of previous responses and addresses potential issues"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="10dp"
+                            android:text="Tab Bottom"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:background="@drawable/tab_primary_bg"
+                            android:layout_width="match_parent"
+                            android:padding="15dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:textColor="@color/white"
+                                android:layout_height="wrap_content"
+                                android:text="I'd be glad to assist you with implementing a swipe-to-delete feature in your RecyclerView. Here's a comprehensive guide that incorporates the best aspects of previous responses and addresses potential issues"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:gravity="start|center"
+                            android:layout_marginTop="-10dp"
+                            android:layout_height="60dp">
+                            <TextView
+                                android:id="@+id/home2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:background="@drawable/tab_bottom"
+                                android:gravity="center"
+                                android:text="Home"
+                                android:textColor="@color/white"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/profile2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingStart="10dp"
+                                android:tag="tab"
+                                android:paddingEnd="10dp"
+                                android:gravity="center"
+                                android:text="Profile"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/about2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:tag="tab"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="About"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
