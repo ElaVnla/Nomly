@@ -1,17 +1,11 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
-
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -19,7 +13,18 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
+
+    versionCatalogs {
+        libs {
+            from(files("frontend/gradle/libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "Ombe"
-include ':app'
+rootProject.name = "Ombre"
+
+include ':frontend-app'
+project(':frontend-app').projectDir = new File(rootDir, 'frontend/app')
+
+include ':backend-app'
+project(':backend-app').projectDir = new File(rootDir, 'backend/app')
