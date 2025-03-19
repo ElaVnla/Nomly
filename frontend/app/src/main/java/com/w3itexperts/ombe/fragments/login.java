@@ -28,7 +28,7 @@ public class login extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
         b.createAccountBtn.setOnClickListener(v -> {
 
             Fragment fragment = new create_account();
@@ -51,7 +51,7 @@ public class login extends Fragment {
 
         b.resetPasswordBnt.setOnClickListener(v -> {
 
-            Fragment fragment = new reset_password();
+            Fragment fragment = new reset_password(); // call this specific fragment
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
             transaction.setCustomAnimations(
@@ -70,6 +70,7 @@ public class login extends Fragment {
         });
 
         b.loginBtn.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
+        b.signInWithGoogle.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
 
     }
 }

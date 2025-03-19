@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signin_method_bg"
+    android:background="@drawable/welcomebg"
     android:orientation="vertical"
     tools:context=".activity.Welcome">
 
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="366dp"
             android:layout_marginTop="50dp"
-            android:src="@drawable/product1" />
+            android:src="@drawable/nomlyphone" />
 
         <TextView
             android:layout_width="match_parent"
@@ -28,43 +28,43 @@
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="21dp"
             android:fontFamily="@font/semi_bold"
-            android:text="Morning begins with Ombe coffee"
+            android:text="Let's get started!"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/signInWithEmail"
+            android:id="@+id/logInAccount"
             style="@style/button_primary_style"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
-            android:text="Login with email"
-            app:icon="@drawable/ic_email" />
+            android:text="Login with Account"
+            app:icon="@drawable/login_icon" />
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/signInWithFacebook"-->
+<!--            style="@style/button_primary_style"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginStart="28dp"-->
+<!--            android:layout_marginEnd="28dp"-->
+<!--            android:backgroundTint="@color/brand_color_facebook"-->
+<!--            android:text="Login with facebook"-->
+<!--            app:icon="@drawable/ic_facebook" />-->
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/signInWithFacebook"
-            style="@style/button_primary_style"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginEnd="28dp"
-            android:backgroundTint="@color/brand_color_facebook"
-            android:text="Login with facebook"
-            app:icon="@drawable/ic_facebook" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signInWithGoogle"
+            android:id="@+id/createNewAccount"
             style="@style/button_primary_style"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
             android:backgroundTint="@color/white"
-            android:text="Login with Google"
+            android:text="Create new Account"
             android:textColor="@color/btn_text_color_secondary"
-            app:icon="@drawable/ic_google"
+            app:icon="@drawable/personaddsvg"
             app:iconTint="@null" />
 
 

@@ -108,7 +108,7 @@
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">@font/semi_bold</item>
         <item name="strokeWidth">0dp</item>
-        <item name="backgroundTint">#F7DBB3</item>
+        <item name="backgroundTint">@color/color_secondary</item>
         <item name="cornerRadius">12dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:gravity">center</item>
@@ -312,6 +312,11 @@
         <item name="android:layout_marginEnd">10dp</item>
         <item name="iconTint" tools:targetApi="o">@color/white</item>
     </style>
+
+    <style name="CustomRoundedButton" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">10dp</item> <!-- Change this value as needed -->
+    </style>
+
 
 
 
