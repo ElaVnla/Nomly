@@ -9,191 +9,375 @@
     android:orientation="vertical"
     tools:context=".activity.login_signin_Activity">
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/backbtn"
-            android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="start|center"
-            style="@style/Widget.Material3.Button.IconButton"
-            app:icon="@drawable/right_arrow"
-            app:iconTint="@color/icon_button_icon_color"
-            android:backgroundTint="@color/icon_button_bg_color"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/app_logo24"
-            android:drawablePadding="5dp"
-            android:fontFamily="@font/semi_bold"
-            android:paddingTop="15dp"
-            android:text="@string/app_name"
-            android:textColor="@color/text_color_primary"
-            android:textSize="25dp" />
-
-    </FrameLayout>
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/backbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="start|center"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    app:icon="@drawable/right_arrow"
+                    />
 
 
-    <TextView
-        android:id="@+id/titleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/semi_bold"
-        android:text="Create an account"
-        android:textColor="@color/text_color_primary"
-        android:textSize="24sp" />
+            </FrameLayout>
 
-    <TextView
-        android:id="@+id/subTitleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/regular"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
-        android:textColor="@color/text_color_secondary"
-        android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/regular"
-        android:text="Username"
-        android:textColor="@color/edittext_hint_color"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/league_spartan"
+                android:textStyle="bold"
+                android:textFontWeight="1000"
+                android:text="Hello! Let's create an account to get started!"
+                android:textColor="@color/text_color_primary"
+                android:textSize="30sp" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="26dp"
-        android:fontFamily="@font/regular"
-        android:hint="williamsmith"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp" />
+            <!-- Enter username here -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="25dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="10dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:background="@android:color/transparent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/regular"
-        android:text="Email"
-        android:textColor="@color/edittext_hint_color"
-        android:textSize="14sp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:boxCornerRadiusBottomStart="50dp"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:boxCornerRadiusTopStart="50dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeWidth="0dp"
+                    app:startIconDrawable="@drawable/ic_profile">
 
-    <com.google.android.material.textfield.TextInputEditText
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="26dp"
-        android:fontFamily="@font/regular"
-        android:hint="williamsmith@gmail.com"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/league_spartan"
+                        android:hint="Enter Username"
+                        android:inputType="textPersonName"
+                        android:maxLength="16"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:background="@null"
+                        android:textSize="18dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/regular"
-        android:text="Password"
-        android:textColor="@color/edittext_hint_color"
-        android:textSize="14sp" />
+            <!-- Enter email here -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="25dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="10dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:background="@android:color/transparent">
 
-    <com.google.android.material.textfield.TextInputEditText
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="26dp"
-        android:fontFamily="@font/regular"
-        android:hint="。。。。。。。。。。"
-        android:inputType="textPassword"
-        android:paddingStart="16dp"
-        android:drawableEnd="@drawable/show_password"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:textColorHint="@color/text_color_black" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:boxCornerRadiusBottomStart="50dp"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:boxCornerRadiusTopStart="50dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeWidth="0dp"
+                    app:startIconDrawable="@drawable/ic_email">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signupBtn"
-        style="@style/button_primary_style"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:paddingTop="10dp"
-        android:text="Sign Up"
-        app:backgroundTint="#606060" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/league_spartan"
+                        android:hint="Enter Email"
+                        android:inputType="textPersonName"
+                        android:maxLength="16"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:background="@null"
+                        android:textSize="18dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp">
+            <!-- Input Field -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="25dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="10dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:background="@android:color/transparent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="By tapping “Sign Up” you accept our"
-            android:textColor="@color/text_color_secondary"
-            android:textSize="14dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeWidth="0dp"
+                    app:startIconDrawable="@drawable/allergysvg">
 
-        <TextView
-            android:id="@+id/termsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/regular"
-            android:text="terms"
-            android:textColor="@color/color_primary"
-            android:textSize="14dp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/allergyInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/league_spartan"
+                        android:hint="Enter your allergy(s)"
+                        android:inputType="textPersonName"
+                        android:maxLength="16"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:background="@null"
+                        android:textSize="18dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
+            <!-- Display Inputted Allergies as Tags -->
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/tagContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                app:flexWrap="wrap"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+            <!-- Enter password here -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="15dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="10dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:background="@android:color/transparent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text=" and"
-            android:textColor="@color/text_color_secondary"
-            android:textSize="14dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:boxCornerRadiusBottomStart="50dp"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:boxCornerRadiusTopStart="50dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeWidth="0dp"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_password">
 
-        <TextView
-            android:id="@+id/conditionBnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/regular"
-            android:text=" condition"
-            android:textColor="@color/color_primary"
-            android:textSize="14dp" />
-    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/league_spartan"
+                        android:hint="Enter New Password"
+                        android:inputType="textPassword"
+                        android:maxLength="16"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:background="@null"
+                        android:textSize="18dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Enter password here -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="10dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:background="@android:color/transparent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:boxCornerRadiusBottomStart="50dp"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:boxCornerRadiusTopStart="50dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeWidth="0dp"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_password">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/league_spartan"
+                        android:hint="Enter Confirm Password"
+                        android:inputType="textPassword"
+                        android:maxLength="16"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:background="@null"
+                        android:textSize="18dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signupBtn"
+                style="@style/button_primary_style"
+                android:layout_marginTop="30dp"
+                android:text="Register"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    android:background="@color/text_color_secondary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/league_spartan"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="16dp"
+                    android:text="or register with"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    android:background="@color/text_color_secondary" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/transparent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:cardCornerRadius="20dp"
+                android:layout_gravity="center"
+                app:cardElevation="10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registerWithGoogle"
+                    style="@style/button_primary_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/btn_text_color_secondary"
+                    app:icon="@drawable/ic_google"
+                    app:iconGravity="start"
+                    app:iconTint="@null"
+                    app:shapeAppearanceOverlay="@style/CustomRoundedButton" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="15dp"
+                    android:text="Already have an Account?"/>
+
+                <TextView
+                    android:id="@+id/loginAccountBtn"
+                    android:fontFamily="@font/regular"
+                    android:textSize="15dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="60dp"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/color_secondary"
+                    android:textStyle="bold"
+                    android:textFontWeight="1000"
+                    android:layout_height="wrap_content"
+                    android:text="Login here!"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        
+    </ScrollView>
 </LinearLayout>

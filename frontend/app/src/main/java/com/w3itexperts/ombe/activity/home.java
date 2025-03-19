@@ -109,13 +109,6 @@ public class home extends AppCompatActivity {
 
         });
 
-
-
-
-
-
-
-
     }
     private void selectNavItem(NavButton button) {
         if (selectedButton != null) {

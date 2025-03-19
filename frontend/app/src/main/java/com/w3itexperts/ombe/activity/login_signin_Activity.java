@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.databinding.ActivityLoginSigninBinding;
+import com.w3itexperts.ombe.fragments.create_account;
 import com.w3itexperts.ombe.fragments.login;
 
 public class login_signin_Activity extends AppCompatActivity {
@@ -23,5 +24,16 @@ public class login_signin_Activity extends AppCompatActivity {
         b = ActivityLoginSigninBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
 
+        boolean showCreateAccount = getIntent().getBooleanExtra("showCreateAccount", false);
+
+        if (showCreateAccount) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main, new create_account())  // Replace login fragment with create_account
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main, new login())
+                    .commit();
+        }
     }
 }

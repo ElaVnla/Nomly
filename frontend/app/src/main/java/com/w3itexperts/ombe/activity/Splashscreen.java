@@ -44,11 +44,13 @@ public class Splashscreen extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                // This splashscreen will be the first to run when the app runs. load for 3
+                // seconds then onboarding class gets called.
                 startActivity(new Intent(Splashscreen.this, Onboarding.class));
                 finish();
 
             }
-        }, 1000);
+        }, 2000);
 
     }
 }

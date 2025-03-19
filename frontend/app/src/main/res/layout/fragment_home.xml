@@ -1,234 +1,566 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawerLayout"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_color_primary"
-    android:orientation="vertical"
-    tools:context=".fragments.home_fragment">
-
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:background="@color/background_color_primary"
-    android:layout_height="match_parent">
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawerLayout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/color_transparent"
-        android:fitsSystemWindows="true">
-        <include android:id="@+id/menu" layout="@layout/menu_items"/>
-    </com.google.android.material.navigation.NavigationView>
-</LinearLayout>
+        android:orientation="vertical"
+        tools:context=".fragments.home_fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/background_color_primary"
+        android:layout_height="match_parent">
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/color_transparent"
+            android:fitsSystemWindows="true">
+            <include android:id="@+id/menu" layout="@layout/menu_items"/>
+        </com.google.android.material.navigation.NavigationView>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/containerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
-
         android:background="@color/background_color_primary"
         android:orientation="vertical"
-
         >
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="76dp"
-            android:layout_weight="0">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="16dp"
-                android:alpha="0.80"
-                android:fontFamily="@font/regular"
-                android:text="Good Morning"
-                android:textColor="@color/text_color_black"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="28dp"
-                android:layout_marginBottom="0dp"
-                android:alpha="80"
-                android:fontFamily="@font/semi_bold"
-                android:text="Williams"
-                android:textColor="@color/text_color_black"
-                android:textSize="24dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/notificationBtn"
-                style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end|center"
-                android:layout_marginEnd="73dp"
-                android:padding="0dp"
-                app:icon="@drawable/ic_noti"
-                app:iconGravity="start"
-                app:iconTint="@color/icon_color" />
-
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_gravity="end|center"
-                android:layout_marginEnd="70dp"
-                android:layout_marginBottom="6dp"
-                android:src="@drawable/badge_icon" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/menuBtn"
-                style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end|center"
-                android:layout_marginEnd="28dp"
-                android:padding="0dp"
-                app:icon="@drawable/menu_icon"
-                app:iconGravity="start"
-                app:iconTint="@color/icon_color" />
-
-        </FrameLayout>
-
-
-        <androidx.core.widget.NestedScrollView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:background="@drawable/redgradient_bg"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/redgradient_bg"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="?actionBarSize">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="28dp"
-                        android:layout_marginEnd="25dp"
-                        android:fontFamily="@font/regular"
-                        android:textColor="@color/edittext_hint_color"
-                        android:textColorHint="#929292"
-                        app:boxBackgroundColor="@color/color_transparent"
-                        app:boxBackgroundMode="outline"
-                        app:boxCornerRadiusBottomEnd="50dp"
-                        app:boxCornerRadiusBottomStart="50dp"
-                        app:boxCornerRadiusTopEnd="50dp"
-                        app:boxCornerRadiusTopStart="50dp"
-                        app:boxStrokeColor="@color/stroke_color"
-                        app:endIconDrawable="@drawable/search_icon"
-                        app:endIconMode="custom"
-                        app:endIconTint="@null"
-                        app:hintEnabled="false">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="Search beverages or foods"
-                            android:padding="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/coffeeView"
-                        android:layout_width="match_parent"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingStart="10dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_home_slider_view"
-                        android:layout_height="wrap_content" />
-
-<!--                    <androidx.viewpager2.widget.ViewPager2-->
-<!--                        android:id="@+id/coffeeView"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:layout_height="wrap_content" />-->
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="29dp"
-                        android:layout_marginTop="19dp"
-                        android:layout_marginBottom="28dp"
-                        android:fontFamily="@font/medium"
-                        android:text="Categories"
-                        android:textColor="@color/text_color_black"
-                        android:textSize="18sp" />
+                        android:layout_gravity="start|center"
+                        android:fontFamily="@font/monoton"
+                        android:layout_marginStart="10dp"
+                        android:text="Nomly"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/categoryView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_category_view" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/menuBtn"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="22dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="end|center"
+                        android:layout_marginEnd="28dp"
+                        android:padding="0dp"
+                        app:icon="@drawable/menu_icon"
+                        app:iconGravity="start"
+                        app:iconTint="@color/white" />
 
-                    <!--Featured Beverages-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="19dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="29dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/medium"
-                            android:text="Featured Beverages"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="18sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="29dp"
-                            android:layout_marginEnd="28dp"
-                            android:fontFamily="@font/medium"
-                            android:text="More"
-                            android:textColor="@color/color_primary"
-                            android:textSize="18sp" />
+                </FrameLayout>
 
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/featuredView"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingStart="29dp"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_featured_view" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="30dp"
+                        app:flexWrap="wrap"
+                        android:layout_height="match_parent"
+                        tools:ignore="MissingClass"
+                        android:layout_gravity="center"
+                        >
+
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            style="@style/button_secondary"
+                            android:text="Join a group"
+                            android:background="@drawable/button_shadow"
+                            android:textColor="@color/white"
+                            app:icon="@drawable/joinsvg"
+                            app:iconGravity="start"
+                            app:iconPadding="8dp"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:gravity="center"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            style="@style/button_danger"
+                            android:text="Create a group"
+                            android:background="@drawable/button_shadow"
+                            android:textColor="@color/white"
+                            app:icon="@drawable/personaddsvg"
+                            android:layout_marginTop="30dp"
+                            app:iconGravity="start"
+                            app:iconPadding="8dp"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:gravity="center"/>
+
+
+                    </com.google.android.flexbox.FlexboxLayout>
+<!--                    <ViewFlipper-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:autoStart="true"-->
+<!--                        android:inAnimation="@android:anim/slide_in_left"-->
+<!--                        android:outAnimation="@android:anim/slide_out_right">-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+
+<!--                            android:src="@drawable/product2" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="-50dp"-->
+<!--                            android:src="@drawable/product2" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="-50dp"-->
+<!--                            android:src="@drawable/product2" />-->
+<!--                    </ViewFlipper>-->
+                </FrameLayout>
 
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+            <LinearLayout
+                android:id="@+id/bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="bottom"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="100dp"
+                        app:cardCornerRadius="30dp"
+                        android:backgroundTint="@color/background_color_primary">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="4000dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.divider.MaterialDivider
+                                android:layout_width="61dp"
+                                android:layout_height="6dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="11dp"
+                                android:layout_marginBottom="24dp"
+                                android:background="@drawable/rounded_divider" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="25dp">
+
+                                    <!-- Icon -->
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_person_pn"
+                                        android:contentDescription="Icon"/>
+
+                                    <!-- Text -->
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5"
+                                        android:text="Your groups"
+                                        android:textSize="18sp"
+                                        android:fontFamily="@font/medium"
+                                        android:textColor="@color/text_color_black"
+                                        android:paddingStart="8dp"/>
+
+                                    <!-- Button -->
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5"
+                                        android:text="View all"
+                                        android:textSize="14sp"
+                                        android:fontFamily="@font/medium"
+                                        android:textColor="@color/text_color_secondary"
+                                        android:paddingStart="34dp"
+                                        android:layout_marginStart="130dp"/>
+                                </LinearLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/yourGroupsView"
+                                    android:layout_width="match_parent"
+                                    android:layout_marginStart="29dp"
+                                    android:layout_marginTop="20dp"
+                                    android:orientation="horizontal"
+                                    android:layout_marginBottom="30dp"
+                                    android:layout_height="wrap_content"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    android:scrollbars="horizontal"
+                                    tools:listitem="@layout/latestgroups"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="0dp">
+
+                                    <!-- Icon -->
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_person_pn"
+                                        android:contentDescription="Icon"/>
+
+                                    <!-- Text -->
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5"
+                                        android:text="Incoming Sessions"
+                                        android:textSize="18sp"
+                                        android:fontFamily="@font/medium"
+                                        android:textColor="@color/text_color_black"
+                                        android:paddingStart="8dp"/>
+
+                                    <!-- Button -->
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5"
+                                        android:text="View all"
+                                        android:textSize="14sp"
+                                        android:fontFamily="@font/medium"
+                                        android:textColor="@color/text_color_secondary"
+                                        android:paddingStart="94dp"
+                                        android:layout_marginStart="10dp"/>
+                                </LinearLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/yourSessionView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:orientation="vertical"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    tools:itemCount="3"
+                                    tools:listitem="@layout/incomingsessions" />
+
+
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/featuredView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:nestedScrollingEnabled="false"
+                                android:paddingStart="29dp"
+                                tools:itemCount="5"
+                                tools:listitem="@layout/item_featured_view" />
+
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 
-</FrameLayout>
+    </FrameLayout>
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/color_primary"-->
+<!--    android:orientation="vertical"-->
+<!--    tools:context=".fragments.home_fragment"-->
+<!--    >-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@color/background_color_primary"-->
+<!--        android:layout_height="match_parent">-->
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:background="@color/color_transparent"-->
+<!--            android:fitsSystemWindows="true">-->
+<!--            <include android:id="@+id/menu" layout="@layout/menu_items"/>-->
+<!--        </com.google.android.material.navigation.NavigationView>-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/color_primary"-->
+<!--        android:orientation="vertical"-->
+
+<!--        >-->
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?actionBarSize">-->
+
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/menuBtn"-->
+<!--                style="@style/Widget.Material3.Button.IconButton"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_gravity="end|center"-->
+<!--                android:layout_marginEnd="28dp"-->
+<!--                android:padding="0dp"-->
+<!--                app:icon="@drawable/menu_icon"-->
+<!--                app:iconGravity="start"-->
+<!--                app:iconTint="@color/white" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:fontFamily="@font/semi_bold"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:text="Details"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20sp" />-->
+
+<!--        </FrameLayout>-->
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="-50dp">-->
+
+<!--            <ViewFlipper-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:autoStart="true"-->
+<!--                android:inAnimation="@android:anim/slide_in_left"-->
+<!--                android:outAnimation="@android:anim/slide_out_right">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+
+<!--                    android:src="@drawable/product2" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="-50dp"-->
+<!--                    android:src="@drawable/product2" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="-50dp"-->
+<!--                    android:src="@drawable/product2" />-->
+<!--            </ViewFlipper>-->
+<!--        </FrameLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/bottom_sheet"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">-->
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/drawerLayout"-->
+<!--            android:orientation="vertical">-->
+
+
+
+
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                app:cardCornerRadius="30dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="4000dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <com.google.android.material.divider.MaterialDivider-->
+<!--                        android:layout_width="61dp"-->
+<!--                        android:layout_height="6dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="11dp"-->
+<!--                        android:layout_marginBottom="24dp"-->
+<!--                        android:background="@drawable/rounded_divider" />-->
+
+
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="25dp"-->
+<!--                        android:layout_marginTop="28dp"-->
+<!--                        android:layout_marginEnd="25dp"-->
+<!--                        android:fontFamily="@font/regular"-->
+<!--                        android:textColor="@color/edittext_hint_color"-->
+<!--                        android:textColorHint="#929292"-->
+<!--                        app:boxBackgroundColor="@color/color_transparent"-->
+<!--                        app:boxBackgroundMode="outline"-->
+<!--                        app:boxCornerRadiusBottomEnd="50dp"-->
+<!--                        app:boxCornerRadiusBottomStart="50dp"-->
+<!--                        app:boxCornerRadiusTopEnd="50dp"-->
+<!--                        app:boxCornerRadiusTopStart="50dp"-->
+<!--                        app:boxStrokeColor="@color/stroke_color"-->
+<!--                        app:endIconDrawable="@drawable/search_icon"-->
+<!--                        app:endIconMode="custom"-->
+<!--                        app:endIconTint="@null"-->
+<!--                        app:hintEnabled="false">-->
+
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:hint="Search beverages or foods"-->
+<!--                            android:padding="16dp" />-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/coffeeView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:paddingStart="10dp"-->
+<!--                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                        tools:listitem="@layout/item_home_slider_view"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    &lt;!&ndash;                    <androidx.viewpager2.widget.ViewPager2&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        android:id="@+id/coffeeView"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        android:layout_marginTop="10dp"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="29dp"-->
+<!--                        android:layout_marginTop="19dp"-->
+<!--                        android:layout_marginBottom="28dp"-->
+<!--                        android:fontFamily="@font/medium"-->
+<!--                        android:text="Categories"-->
+<!--                        android:textColor="@color/text_color_black"-->
+<!--                        android:textSize="18sp" />-->
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/categoryView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                        tools:itemCount="3"-->
+<!--                        tools:listitem="@layout/item_category_view" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="19dp"-->
+<!--                        android:layout_marginBottom="20dp"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="29dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:fontFamily="@font/medium"-->
+<!--                            android:text="Featured Beverages"-->
+<!--                            android:textColor="@color/text_color_black"-->
+<!--                            android:textSize="18sp" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="29dp"-->
+<!--                            android:layout_marginEnd="28dp"-->
+<!--                            android:fontFamily="@font/medium"-->
+<!--                            android:text="More"-->
+<!--                            android:textColor="@color/color_primary"-->
+<!--                            android:textSize="18sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/featuredView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:nestedScrollingEnabled="false"-->
+<!--                        android:paddingStart="29dp"-->
+<!--                        tools:itemCount="5"-->
+<!--                        tools:listitem="@layout/item_featured_view" />-->
+
+<!--                </LinearLayout>-->
+<!--            </com.google.android.material.card.MaterialCardView>-->
+
+<!--        </FrameLayout>-->
+
+<!--    </LinearLayout>-->
+<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+

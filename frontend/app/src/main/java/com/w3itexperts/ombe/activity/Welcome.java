@@ -22,9 +22,15 @@ public class Welcome extends AppCompatActivity {
         b = WelcomeBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
 
-        b.signInWithEmail.setOnClickListener(v -> startActivity(new Intent(this, login_signin_Activity.class)));
-        b.signInWithFacebook.setOnClickListener(v -> {});
-        b.signInWithGoogle.setOnClickListener(v -> {});
+        b.logInAccount.setOnClickListener(v -> startActivity(new Intent(this, login_signin_Activity.class)));
+        b.createNewAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(this, login_signin_Activity.class);
+            intent.putExtra("showCreateAccount", true);
+            startActivity(intent);
+        });
+
+//        b.signInWithFacebook.setOnClickListener(v -> {});
+//        b.signInWithGoogle.setOnClickListener(v -> {});
 
 
     }

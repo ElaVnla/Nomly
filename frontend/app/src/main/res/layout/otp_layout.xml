@@ -16,25 +16,12 @@
             android:id="@+id/backbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_gravity="start|center"
             style="@style/Widget.Material3.Button.IconButton"
             app:icon="@drawable/right_arrow"
-            app:iconTint="@color/icon_button_icon_color"
-            android:backgroundTint="@color/icon_button_bg_color"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/app_logo24"
-            android:drawablePadding="5dp"
-            android:fontFamily="@font/semi_bold"
-            android:paddingTop="15dp"
-            android:text="@string/app_name"
-            android:textColor="@color/text_color_primary"
-            android:textSize="25dp" />
 
     </FrameLayout>
 
@@ -208,7 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/regular"
-            android:text="Sign In"
+            android:text="log In"
             android:textColor="@color/color_primary"
             android:textSize="14dp" />
 

@@ -40,12 +40,14 @@ public class Onboarding extends AppCompatActivity {
         b = OnboardingBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
 
+        // When user click on "get started" button, this will be triggered and activate welcome
+        // java class
         b.next.setOnClickListener(v -> startActivity(new Intent(this,Welcome.class)));
 
         onboardingData = new ArrayList<>();
-        onboardingData.add(new OnBordingModal(R.drawable.image1, "Let’s meet our summer coffee drinks", "orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"));
-        onboardingData.add(new OnBordingModal(R.drawable.image1, "Let’s meet our summer coffee drinks", "orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"));
-        onboardingData.add(new OnBordingModal(R.drawable.image1, "Let’s meet our summer coffee drinks", "orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"));
+        onboardingData.add(new OnBordingModal(R.drawable.nomlylogo, "Welcome to Nomly", "Simply swipe through restaurants, and let the highest votes decide where to eat!"));
+        onboardingData.add(new OnBordingModal(R.drawable.junkfoodintro, "Create Groups & Sessions", "Start a group, invite your friends and create as many sessions as you like!"));
+        //onboardingData.add(new OnBordingModal(R.drawable.image1, "Let’s meet our summer coffee drinks", "orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"));
 
         // Set adapter
         adapter = new OnBordingAdapter(this, onboardingData);
