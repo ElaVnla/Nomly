@@ -23,6 +23,8 @@ import com.w3itexperts.ombe.databinding.HomeBinding;
 import com.w3itexperts.ombe.fragments.Cart;
 import com.w3itexperts.ombe.fragments.Profile;
 import com.w3itexperts.ombe.fragments.Wishlist;
+import com.w3itexperts.ombe.fragments.allGroups;
+import com.w3itexperts.ombe.fragments.allSessions;
 import com.w3itexperts.ombe.fragments.home_fragment;
 import com.w3itexperts.ombe.modals.CoffeeItem;
 
@@ -58,7 +60,7 @@ public class home extends AppCompatActivity {
 
         });
 
-        b.navCart.setOnClickListener(v -> {
+        /*b.navCart.setOnClickListener(v -> {
             selectNavItem(b.navCart);
             Fragment fragment = new Cart();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -73,11 +75,28 @@ public class home extends AppCompatActivity {
             transaction.addToBackStack(null);
             transaction.commitAllowingStateLoss();
 
+        });*/
+
+        b.accessSessions.setOnClickListener(v -> {
+            selectNavItem(b.accessSessions);
+            Fragment fragment = new allSessions();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.setCustomAnimations(
+                    R.anim.fragment_popup,
+                    0,
+                    0,
+                    R.anim.fragment_popdown);
+
+            transaction.replace(R.id.fragment_view, fragment);
+            transaction.addToBackStack(null);
+            transaction.commitAllowingStateLoss();
+
         });
 
-        b.navWishlist.setOnClickListener(v -> {
-            selectNavItem(b.navWishlist);
-            Fragment fragment = new Wishlist();
+        b.navAllGroups.setOnClickListener(v -> {
+            selectNavItem(b.navAllGroups);
+            Fragment fragment = new allGroups();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             transaction.setCustomAnimations(
@@ -118,8 +137,9 @@ public class home extends AppCompatActivity {
             }
         }
         b.navHome.setSelected(false);
-        b.navCart.setSelected(false);
-        b.navWishlist.setSelected(false);
+        //b.navCart.setSelected(false);
+        b.accessSessions.setSelected(false);
+        b.navAllGroups.setSelected(false);
         b.navProfile.setSelected(false);
 
         button.setSelected(true);

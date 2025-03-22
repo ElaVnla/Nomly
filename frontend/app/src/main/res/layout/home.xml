@@ -36,22 +36,22 @@
             app:iconSrc="@drawable/ic_home"
             tools:ignore="ResourceCycle" />
         <com.w3itexperts.ombe.component.NavButton
-            android:id="@+id/navWishlist"
+            android:id="@+id/navAllGroups"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"
-            app:iconSrc="@drawable/wishlist"
+            app:iconSrc="@drawable/groupiconsvg"
             tools:ignore="ResourceCycle" />
         <com.w3itexperts.ombe.component.NavButton
-            android:id="@+id/navCart"
+            android:id="@+id/accessSessions"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center"
-            app:iconSrc="@drawable/carticon"
+            app:iconSrc="@drawable/groupsessionsvg"
             tools:ignore="ResourceCycle" />
         <com.w3itexperts.ombe.component.NavButton
             android:id="@+id/navProfile"

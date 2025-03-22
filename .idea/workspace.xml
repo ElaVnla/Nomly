@@ -25,7 +25,32 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/allgroups.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/allsessions.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/create_password.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_add_card.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_allgroups.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_allsessions.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -75,6 +100,11 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_edit_profile.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_home.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -100,6 +130,11 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_wishlist.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/home.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -115,7 +150,22 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/item_featured_view.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/item_home_slider_view.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/latestgroups.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/menu_items.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -140,6 +190,11 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/original_home.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/otp_layout.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -155,67 +210,59 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/wishlist_item.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="lastupdate">
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourGroupsAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourSessionAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/yourGroupsModal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/yourSessionsModal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/button_shadow.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/allergysvg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/button_shadow.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/circle_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/joinsvg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/loginsvg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/nomlylogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/nomlylogo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/personaddsvg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/redgradient_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/tag_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/font/league_spartan.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/font/monoton.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/incomingsessions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/latestgroups.xml" afterDir="false" />
+    <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="Set up, login sign in and halfway homepage">
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/render.experimental.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/GroupsAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/allGroupsAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/allSessionsAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/allGroups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/allSessions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/fooddiningsvg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/groupiconsvg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/groupsessionsvg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/lobstericon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/roundstyle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/allgroups.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/allsessions.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_allgroups.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_allsessions.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.9/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.9/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.9/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.9/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.9/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.9/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/build-attribution/androidGradlePluginAttributionData" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/build-attribution/androidGradlePluginAttributionData.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/Onboarding.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/Onboarding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/Splashscreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/Splashscreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/Welcome.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/login_signin_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/login_signin_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/create_account.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/create_account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourGroupsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourGroupsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourSessionAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourSessionAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/EditProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/EditProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/Profile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/home_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/home_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/login.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/create_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/create_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_create_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_create_account.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/methods/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/methods/DataGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/yourGroupsModal.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/yourGroupsModal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/yourSessionsModal.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/yourSessionsModal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_edit_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_edit_profile.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_reset_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_reset_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/otp_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/otp_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/splashscreen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/splashscreen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/welcome.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/welcome.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/incomingsessions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/incomingsessions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/latestgroups.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/latestgroups.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +310,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="lastupdate" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -309,9 +356,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;lastupdate&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ErikaPartHalfWay&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/erika/AndroidStudioProjects/Nomly2/frontend/app/src/main/res/drawable&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -325,6 +373,7 @@
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\drawable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly" />
     </key>
   </component>
@@ -505,7 +554,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742056283828</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Set up, login sign in and halfway homepage">
+      <option name="closed" value="true" />
+      <created>1742354577509</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742354577509</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -534,7 +591,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="lastupdate" />
+                        <option value="origin/shonimwee" />
                       </list>
                     </value>
                   </entry>
@@ -551,19 +608,20 @@
     <MESSAGE value="Override Everything" />
     <MESSAGE value="override everything please WORK" />
     <MESSAGE value="lastupdate" />
-    <option name="LAST_COMMIT_MESSAGE" value="lastupdate" />
+    <MESSAGE value="Set up, login sign in and halfway homepage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set up, login sign in and halfway homepage" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.w3itexperts.ombe">
           <value>
-            <CheckInfo lastCheckTimestamp="1742281940243" />
+            <CheckInfo lastCheckTimestamp="1742636268193" />
           </value>
         </entry>
         <entry key="com.w3itexperts.ombe.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1742281940245" />
+            <CheckInfo lastCheckTimestamp="1742636268195" />
           </value>
         </entry>
       </map>

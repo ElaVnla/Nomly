@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="135dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="20dp"
+    android:orientation="horizontal"
+    app:cardBackgroundColor="@color/text_color_white"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_color_white"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="22dp">
+
+                <ImageView
+                    android:id="@+id/groupImage"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/coffeeimage1" />
+            </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="28dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/groupName"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/medium"
+                android:text="Creamy Mocha Ome Coffee "
+                android:textColor="@color/text_color_black"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="start">
+
+                <!-- First Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="start|bottom">
+
+                    <TextView
+                        android:id="@+id/NoOfMembers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="10"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/priceOrageTextView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/groupiconsvg"
+                        app:tint="@color/color_danger"/>
+                </LinearLayout>
+
+                <!-- Second Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/noOfSessions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="14"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/priceOrageTextView2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/groupsessionsvg"
+                        app:tint="@color/color_secondary"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
