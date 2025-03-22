@@ -27,7 +27,8 @@ import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.adapter.CategoriesAdapter;
 import com.w3itexperts.ombe.adapter.CoffeeAdapter;
 import com.w3itexperts.ombe.adapter.FeaturedAdapter;
-import com.w3itexperts.ombe.adapter.MostOrderedAdapter;
+import com.w3itexperts.ombe.adapter.yourGroupsAdapter;
+import com.w3itexperts.ombe.adapter.yourSessionAdapter;
 import com.w3itexperts.ombe.databinding.FragmentHomeBinding;
 import com.w3itexperts.ombe.methods.DataGenerator;
 import com.w3itexperts.ombe.methods.OffsetItemDecoration;
@@ -37,7 +38,7 @@ import java.util.List;
 
 public class home_fragment extends Fragment {
     FragmentHomeBinding b;
-    private CoffeeAdapter adapter;
+    private yourGroupsAdapter adapter;
 
     @Nullable
     @Override
@@ -88,7 +89,7 @@ public class home_fragment extends Fragment {
         });
 
 
-        adapter = new CoffeeAdapter(DataGenerator.coffeeItems());
+        adapter = new yourGroupsAdapter(DataGenerator.AllGroupsList());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 //        b.coffeeView.setLayoutManager(layoutManager);
 //        b.coffeeView.setAdapter(adapter);
@@ -129,10 +130,10 @@ public class home_fragment extends Fragment {
 
 
         b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        b.yourGroupsView.setAdapter(new MostOrderedAdapter(getContext(), DataGenerator.generateMostOrderedList()));
+        b.yourGroupsView.setAdapter(new yourGroupsAdapter(DataGenerator.AllGroupsList()));
 
         b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        b.yourSessionView.setAdapter(new MostOrderedAdapter(getContext(), DataGenerator.generateMostOrderedList()));
+        b.yourSessionView.setAdapter(new yourSessionAdapter(DataGenerator.AllSessionsList()));
 
 
 //        List<FeaturedModal> featuredList = DataGenerator.generateFeaturedList();
@@ -217,11 +218,45 @@ public class home_fragment extends Fragment {
 
         });
 
+
+
+
+
         b.menu.rewards.setOnClickListener(v -> {
             new Handler().postDelayed(() -> {
                 SwitchFragment(new Reward());
             }, 200);
 
+        });
+
+        b.viewAllGroups.setClickable(true);
+        b.viewAllGroups.setOnClickListener(v -> {
+            Fragment fragment = new allGroups();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(
+                    android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right,
+                    android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right
+            );
+            transaction.replace(R.id.drawerLayout, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
+        b.viewAllSessions.setClickable(true);
+        b.viewAllSessions.setOnClickListener(v -> {
+            Fragment fragment = new allSessions();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(
+                    android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right,
+                    android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right
+            );
+            transaction.replace(R.id.drawerLayout, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
         b.menu.logoutBtn.setOnClickListener(v -> {

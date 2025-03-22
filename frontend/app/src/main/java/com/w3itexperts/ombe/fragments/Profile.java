@@ -29,7 +29,7 @@ public class Profile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
+        //b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
         b.editProfile.setOnClickListener(v -> {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(
@@ -43,8 +43,8 @@ public class Profile extends Fragment {
 
         });
 
-        b.mostOrderedView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        b.mostOrderedView.setAdapter(new MostOrderedAdapter(getContext(), DataGenerator.generateMostOrderedList()));
+        //b.mostOrderedView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        //b.mostOrderedView.setAdapter(new MostOrderedAdapter(getContext(), DataGenerator.generateMostOrderedList()));
 
 
 

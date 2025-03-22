@@ -1,92 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:padding="1dp"
     android:background="@color/background_color_primary">
 
-    <!-- Vertical Line for Timeline -->
-    <View
-        android:id="@+id/timeline_line"
-        android:layout_width="2dp"
-        android:layout_height="110dp"
-        android:background="@color/color_primary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- Circular Indicator -->
-    <ImageView
-        android:id="@+id/timeline_circle"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/circle_background"
-        app:layout_constraintStart_toStartOf="@id/timeline_line"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="-14dp"
-        android:layout_marginTop="32dp"/>
+        <!-- Vertical Line for Timeline -->
+        <View
+            android:id="@+id/timeline_line"
+            android:layout_width="2dp"
+            android:layout_height="110dp"
+            android:background="@color/color_primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"/>
 
-    <!-- Event Details -->
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="18dp"
-        app:cardElevation="0dp"
-        android:layout_marginTop="-20dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toEndOf="@id/timeline_line"
-        app:layout_constraintTop_toTopOf="@id/timeline_circle"
-        android:layout_marginEnd="18dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/event_card"
-        >
+        <!-- Circular Indicator -->
+        <ImageView
+            android:id="@+id/timeline_circle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/circle_background"
+            app:layout_constraintStart_toStartOf="@id/timeline_line"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="35dp"/>
 
-        <LinearLayout
+        <!-- Event Details -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-10dp"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:background="@color/background_color_primary">
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintStart_toEndOf="@id/timeline_line"
+            app:layout_constraintTop_toTopOf="@id/timeline_circle"
+            android:layout_marginEnd="18dp"
+            android:background="@color/background_color_primary"
+            android:id="@+id/event_card"
+            >
 
-            <!-- Event Title -->
-            <TextView
-                android:id="@+id/event_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lola's Cafe thingy"
-                android:textColor="@color/text_color_black"
-                android:textSize="16sp" />
+                android:layout_marginTop="-10dp"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@color/background_color_primary">
 
-            <!-- Event Details -->
-            <TextView
-                android:id="@+id/event_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="19 February 25, 3pm, Tampines"
-                android:textColor="@color/color_primary"
-                android:textSize="14sp" />
+                <!-- Event Title -->
+                <TextView
+                    android:id="@+id/restaurantName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lola's Cafe thingy"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="16sp" />
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="220dp"
-                android:backgroundTint="@color/color_danger"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
-                android:text="NormanFandom"
-                android:textColor="@android:color/white"
-                android:textSize="10sp" />
+                <!-- Event Details -->
+                <TextView
+                    android:id="@+id/DateTimeAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19 February 25, 3pm, Tampines"
+                    android:textColor="@color/color_primary"
+                    android:textSize="14sp" />
 
-            <!-- Group Name Button -->
-        </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="220dp"
+                    android:backgroundTint="@color/color_danger"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="NormanFandom"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:id="@+id/GroupName"/>
 
-    </com.google.android.material.card.MaterialCardView>
+                <!-- Group Name Button -->
+            </LinearLayout>
 
+        </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</LinearLayout>

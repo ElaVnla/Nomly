@@ -1,6 +1,7 @@
 package com.w3itexperts.ombe.methods;
 
 import com.w3itexperts.ombe.R;
+import com.w3itexperts.ombe.adapter.yourGroupsAdapter;
 import com.w3itexperts.ombe.modals.AddressModal;
 import com.w3itexperts.ombe.modals.CardModal;
 import com.w3itexperts.ombe.modals.CartModal;
@@ -12,6 +13,8 @@ import com.w3itexperts.ombe.modals.MyOrderModal;
 import com.w3itexperts.ombe.modals.OurStoresModal;
 import com.w3itexperts.ombe.modals.rewardModal;
 import com.w3itexperts.ombe.modals.wishlistModal;
+import com.w3itexperts.ombe.modals.yourGroupsModal;
+import com.w3itexperts.ombe.modals.yourSessionsModal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,6 +199,40 @@ public class DataGenerator {
         return reward;
     }
 
+    public static List<yourGroupsModal> AllGroupsList() {
+        List<yourGroupsModal> GroupList = new ArrayList<>();
+        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "The MOFOs"));
+        GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "The DOFOs"));
+        GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "Toni Fandom"));
+        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Erika Fandom"));
+        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "QX Fandom"));
+        GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "JY Fandom"));
+        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "JZ Fandom"));
+        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Gynn Fandom"));
+        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Shonim Fandom"));
+
+
+
+
+
+        return GroupList;
+    }
+
+    public static List<yourSessionsModal> AllSessionsList() {
+        List<yourSessionsModal> SessionList = new ArrayList<>();
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+        SessionList.add(new yourSessionsModal("Lola's Cafe","19 February 25, 3pm, Tampines", "The MOFOs","Ongoing","lunchu lunchee lunchyy"));
+
+        return SessionList;
+    }
 
     public static List<MostOrderedModal> generateMostOrderedList() {
 
@@ -214,6 +251,7 @@ public class DataGenerator {
 
         return mostOrderedList;
     }
+
 
     private static MostOrderedModal createMostOrderedItem(int coffeeimage1, String creamyLatteCoffee, String beverages) {
         MostOrderedModal modal = new MostOrderedModal();
