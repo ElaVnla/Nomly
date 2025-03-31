@@ -26,11 +26,12 @@ public class Users {
 
     public Users(){}
 
-    public Users(String username, String email, String password, String preferences) {
+    public Users(String username, String email, String password, String preferences, Date createdAt) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.preferences = preferences;
+        this.createdAt = createdAt;
     }
 
     public Integer getUserId() {
@@ -73,7 +74,7 @@ public class Users {
         return createdAt;
     }
 
-//    public void setCreatedAt(Date createdAt) {
-//        this.createdAt = createdAt;
-//    }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }
