@@ -49,18 +49,24 @@ CREATE TABLE NomlyDB.Sessions(
 
 );
 
-create table NomlyDB.Eateries(
-	EateryId int NOT NULL auto_increment,
-    primary key (EateryId)
+create table NomlyDB.Restaurants(
+    RestaurantId int not null auto_increment,
+    Location varchar(255) not null,
+    OperationHours varchar(255),
+    -- Images varchar(255),
+    PriceRange char not null,
+    Cuisine varchar(255) not null,
+    Rating float not null,
+    primary key (RestaurantId)
 );
 
-create table NomlyDB.Users_Sessions_Eaateries(
+create table NomlyDB.Users_Sessions_Restaurants(
 	UserId int NOT NULL,
 	SessionId int NOT NULL,
-	EateryId int NOT NULL,
+	RestaurantId int NOT NULL,
     foreign key (UserId) references Users(UserId),
     foreign key (SessionId) references Sessions(SessionId),
-    foreign key (EateryId) references Eateries(EateryId)
+    foreign key (RestaurantId) references Restaurants(RestaurantId)
 
 
 );
