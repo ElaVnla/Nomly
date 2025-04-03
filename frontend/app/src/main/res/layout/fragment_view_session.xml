@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ===== Curved Yellow Header ===== -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="312dp"
+            android:background="@drawable/yellowsession"
+            android:padding="16dp">
+
+            <!-- Back Button -->
+            <TextView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/league_spartan"
+                android:text="\u2190"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <!-- Edit Button -->
+            <ImageView
+                android:id="@+id/editButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/editpencilicon"
+                app:tint="#FFFFFF" />
+
+            <!-- Session Title -->
+            <TextView
+                android:id="@+id/sessionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="48dp"
+                android:fontFamily="@font/league_spartan"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <!-- Session Location -->
+            <TextView
+                android:id="@+id/sessionLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sessionTitle"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/league_spartan"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- 3 Circle Cards -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp">
+
+                <!-- Date -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardBackgroundColor="#E5B657"
+                        app:cardCornerRadius="40dp"
+                        app:cardElevation="8dp">
+
+                        <TextView
+                            android:id="@+id/dateCardText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/league_spartan"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/league_spartan"
+                        android:text="When"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Time -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardBackgroundColor="#E5B657"
+                        app:cardCornerRadius="40dp"
+                        app:cardElevation="8dp">
+
+                        <TextView
+                            android:id="@+id/timeCardText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/league_spartan"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/league_spartan"
+                        android:text="Time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Status -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statusCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/league_spartan"
+                        android:text="Ongoing"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/league_spartan"
+                        android:text="Status"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- ===== Done Swiping Section ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Horizontal Avatar List -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/doneSwipingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/league_spartan"
+                    android:text="Done swiping"
+                    android:textColor="#640000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/swipeButton"
+                    android:background="@drawable/swipepink"
+                    android:layout_width="97dp"
+                    android:layout_height="55dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:backgroundTint="@null"
+                    android:elevation="6dp"
+                    android:fontFamily="@font/league_spartan"
+                    android:text="Swipe"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <!-- User 1 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/variant2"
+                        android:background="@drawable/variant2"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/user1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ToniFoodie"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/league_spartan"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- User 2 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/variant2"
+                        android:background="@drawable/variant2"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/user2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ErikaFoody"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/league_spartan"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- User 3 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/variant2"
+                        android:background="@drawable/variant2"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/user3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JYFoodski"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/league_spartan"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== Finalize Section ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ready for the results?"
+            android:gravity="center"
+            android:textColor="#640000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/league_spartan" />
+
+        <Button
+            android:id="@+id/finalizeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finalize Session"
+            android:textColor="@android:color/white"
+            android:background="@drawable/finalizesession"
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/league_spartan" />
+    </LinearLayout>
+</ScrollView>
