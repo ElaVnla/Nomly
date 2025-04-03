@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/group_page_background"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+
+        <!-- blob -->
+        <ImageView
+            android:layout_width="508dp"
+            android:layout_height="562dp"
+            android:adjustViewBounds="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:scaleType="centerCrop"
+            android:src="@drawable/vector"
+            android:translationY="-200dp" />
+
+        <!-- Placeholder for Group Photo FROM spring boot -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/groupPhotoInput"
+            android:layout_width="131dp"
+            android:layout_height="288dp"
+            android:layout_marginTop="-100dp"
+            android:src="@drawable/person4"
+            android:translationY="-310dp"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            />
+
+        <!-- Placeholder for Group Name Text FROM spring boot -->
+        <TextView
+            android:id="@+id/groupNameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/regular"
+            android:gravity="center"
+            android:text="GroupName"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:translationY="-750dp" />
+
+
+        <!-- Small Circles in a Horizontal Row -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:translationY="-840dp">
+
+            <ImageView
+                android:id="@+id/backbtnToHomePage"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/icon_button_bg_color"
+                android:src="@drawable/right_arrow"
+                app:iconTint="#650411"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8.599dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/leave_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="22dp"
+                android:translationX="350dp"
+                />
+
+            <ImageView
+                android:id="@+id/editGroupButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8.599dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pencil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="-20dp"
+                android:layout_marginTop="26dp"
+                android:translationX="350dp"
+                />
+
+            <ImageView
+                android:layout_width="135dp"
+                android:layout_height="290dp"
+                android:layout_marginStart="216dp"
+                android:src="@drawable/smallcircle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="135dp"
+                android:layout_height="290dp"
+                android:layout_marginStart="56dp"
+                android:src="@drawable/smallcircle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Placeholder for No. of People in the Group Text FROM spring boot -->
+            <TextView
+                android:id="@+id/noOfPeopleGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="254dp"
+                android:layout_marginTop="105dp"
+                android:text="10"
+                android:textColor="#FFFFFF"
+                android:textSize="50sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Placeholder for the date Group was Created Text FROM spring boot -->
+            <TextView
+                android:id="@+id/dateCreatedGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="97dp"
+                android:layout_marginTop="134dp"
+                android:text="20 Feb 2025"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/regular"
+            android:text="No. of Members"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:translationX="81dp"
+            android:translationY="-995dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/regular"
+            android:text="Date Created"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:translationX="-82dp"
+            android:translationY="-1060dp" />
+
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical"
+            android:translationY="-900dp">
+
+            <!-- Flexbox Layout for Members -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/regular"
+                android:text="Members"
+                android:textColor="#650411"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Placeholder for Members LIST each linear layout is one Member ITEM FROM spring boot -->
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexboxMembers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start">
+
+                <!-- Member Item (Wraps Button + Image) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- Member Profile Image (Centered Below Button) -->
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/person4"
+                        android:layout_marginTop="5dp"/>
+
+                    <!-- Member Name (Button) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="90dp"
+                        android:layout_height="25dp"
+                        app:cornerRadius="5dp"
+                        android:textSize="12sp"
+                        android:padding="0dp"
+                        style="@style/button_secondary"
+                        android:text="ToniFoodie"
+                        android:layout_marginTop="10dp"/>
+
+
+                </LinearLayout>
+
+
+                <!-- Member Item (Wraps Button + Image) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- Member Profile Image (Centered Below Button) -->
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/person4"
+                        android:layout_marginTop="5dp"/>
+
+                    <!-- Member Name (Button) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="90dp"
+                        android:layout_height="25dp"
+                        app:cornerRadius="5dp"
+                        android:textSize="12sp"
+                        android:padding="0dp"
+                        style="@style/button_secondary"
+                        android:text="ToniFoodie"
+                        android:layout_marginTop="10dp"/>
+
+
+                </LinearLayout>
+
+                <!-- Member Item 2 (Wraps Button + Image) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- Member Profile Image (Centered Below Button) -->
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/person4"
+                        android:layout_marginTop="5dp"/>
+
+                    <!-- Member Name (Button) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="90dp"
+                        android:layout_height="25dp"
+                        app:cornerRadius="5dp"
+                        android:textSize="12sp"
+                        android:padding="0dp"
+                        style="@style/button_secondary"
+                        android:text="ToniFoodie"
+                        android:layout_marginTop="10dp"/>
+
+
+                </LinearLayout>
+
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <LinearLayout
+                android:id="@+id/containerSessionsGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/regular"
+                    android:text=" All Sessions"
+                    android:textColor="#650411"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="150dp"
+                    android:layout_height="26dp"
+                    app:cornerRadius="5dp"
+                    android:textSize="12sp"
+                    android:padding="0dp"
+                    style="@style/button_primary"
+                    android:text="Create Session"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"/>
+
+
+                <!-- Recycler view for Sessions from Spring Boot using layout/sessions.xml -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/yourGroupSessions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/sessions" />
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
