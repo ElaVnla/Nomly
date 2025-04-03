@@ -34,11 +34,6 @@ import com.w3itexperts.ombe.methods.DataGenerator;
 import com.w3itexperts.ombe.methods.OffsetItemDecoration;
 import com.w3itexperts.ombe.modals.FeaturedModal;
 
-
-// imports
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-
 import java.util.List;
 
 public class home_fragment extends Fragment {
@@ -194,12 +189,6 @@ public class home_fragment extends Fragment {
 
         });
 
-        b.menu.mySessionBtn.setOnClickListener(v -> {
-            new Handler().postDelayed(() -> {
-                SwitchFragment(new PlanSessionFragment());
-            }, 200);
-        });
-
         b.menu.ourStoresBtn.setOnClickListener(v -> {
             new Handler().postDelayed(() -> {
                 SwitchFragment(new StoresLocation());
@@ -276,6 +265,7 @@ public class home_fragment extends Fragment {
 
 
         //b.notificationBtn.setOnClickListener(v -> SwitchFragment(new NotificationFragment()));
+
 
     }
 
