@@ -47,14 +47,27 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.createGroup_activity" />
+
+
+        <activity android:name=".activity.getGroup_code" />
+
+
+        <activity
+            android:name=".activity.groupPage_Activity"
+            android:exported="true"/>
+
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
 
 </manifest>
