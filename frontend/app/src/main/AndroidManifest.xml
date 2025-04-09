@@ -65,6 +65,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".activity.joinGroup_Activity"/>
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
