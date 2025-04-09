@@ -23,6 +23,9 @@ public class Groupings {
     @OneToMany(mappedBy = "grouping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsersGroupings> usersGrouping;
 
+    @OneToMany(mappedBy = "grouping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Sessions> sessions;
+
 
 
     public Groupings() {}
@@ -60,5 +63,11 @@ public class Groupings {
         this.usersGrouping = usersGrouping;
     }
 
+    public List<Sessions> getSessions() {
+        return sessions;
+    }
 
+    public void setSessions(List<Sessions> sessions) {
+        this.sessions = sessions;
+    }
 }

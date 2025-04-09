@@ -14,6 +14,7 @@ public class GroupingsDTO {
     private LocalDateTime createdAt;
 //    private List<Integer> userGroupIds;
     private List<UsersDTO> users;
+    private List<SessionsDTO> sessions;
 
 
     public GroupingsDTO() {
@@ -34,6 +35,14 @@ public class GroupingsDTO {
                     .toList();
         } else {
             this.users = new ArrayList<>();
+        }
+
+        if (grouping.getSessions() == null){
+            this.sessions = new ArrayList<>();
+        }else{
+            this.sessions = grouping.getSessions().stream()
+                    .map(session -> new SessionsDTO(session, false))
+                    .toList();
         }
     }
 
@@ -77,5 +86,13 @@ public class GroupingsDTO {
 
     public void setUsers(List<UsersDTO> users) {
         this.users = users;
+    }
+
+    public List<SessionsDTO> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<SessionsDTO> sessions) {
+        this.sessions = sessions;
     }
 }
