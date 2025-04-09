@@ -37,6 +37,15 @@ import com.w3itexperts.ombe.modals.FeaturedModal;
 import android.content.Intent;
 import com.w3itexperts.ombe.activity.joinGroup_Activity;
 
+import android.util.Log;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.w3itexperts.ombe.APIservice.ApiClient;
+import com.w3itexperts.ombe.APIservice.ApiService;
+import com.w3itexperts.ombe.apimodals.users;
+import java.util.List;
+
 
 
 import java.util.List;
@@ -282,6 +291,28 @@ public class home_fragment extends Fragment {
 
         //b.notificationBtn.setOnClickListener(v -> SwitchFragment(new NotificationFragment()));
 
+
+        // API STUFF HERE =====================================
+
+        ApiService apiService = ApiClient.getApiService();
+        Call<List<users>> call = apiService.getAllUsers();
+
+        call.enqueue(new Callback<List<users>>() {
+            @Override
+            public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<users> usersList = response.body();
+                    Log.d("API_CALL", "Users: " + usersList.toString());
+                } else {
+                    Log.e("API_CALL", "Error code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<users>> call, Throwable t) {
+                Log.e("API_CALL", "API call failed: " + t.getMessage());
+            }
+        });
 
     }
 
