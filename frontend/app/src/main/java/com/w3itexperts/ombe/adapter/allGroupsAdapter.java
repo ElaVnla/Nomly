@@ -45,7 +45,7 @@ public class allGroupsAdapter extends RecyclerView.Adapter<allGroupsAdapter.allG
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return AllGroupsList.size();
     }
 
     public static class allGroupsViewHolder extends RecyclerView.ViewHolder {
