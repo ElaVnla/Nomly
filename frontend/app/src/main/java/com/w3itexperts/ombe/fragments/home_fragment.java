@@ -29,6 +29,8 @@ import com.w3itexperts.ombe.adapter.CoffeeAdapter;
 import com.w3itexperts.ombe.adapter.FeaturedAdapter;
 import com.w3itexperts.ombe.adapter.yourGroupsAdapter;
 import com.w3itexperts.ombe.adapter.yourSessionAdapter;
+import com.w3itexperts.ombe.apimodals.groupings;
+import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.databinding.FragmentHomeBinding;
 import com.w3itexperts.ombe.methods.DataGenerator;
 import com.w3itexperts.ombe.methods.OffsetItemDecoration;
@@ -44,6 +46,10 @@ import retrofit2.Response;
 import com.w3itexperts.ombe.APIservice.ApiClient;
 import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.apimodals.users;
+import com.w3itexperts.ombe.modals.yourGroupsModal;
+import com.w3itexperts.ombe.modals.yourSessionsModal;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -102,52 +108,23 @@ public class home_fragment extends Fragment {
             }
         });
 
-
-        adapter = new yourGroupsAdapter(DataGenerator.AllGroupsList());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        b.coffeeView.setLayoutManager(layoutManager);
-//        b.coffeeView.setAdapter(adapter);
-//        new LinearSnapHelper().attachToRecyclerView(b.coffeeView);
-//        b.coffeeView.scrollToPosition(30);
-//        b.coffeeView.callOnClick();
-
-
-// Define your page margin and offset from resources
+        // Define your page margin and offset from resources
         int pageMarginPx = getResources().getDimensionPixelOffset(R.dimen.page_margin);
         int offsetPx = getResources().getDimensionPixelOffset(R.dimen.page_offset);
 
-// Add an ItemDecoration for page margin
-        //b.coffeeView.addItemDecoration(new OffsetItemDecoration(pageMarginPx, offsetPx));
 
-// Add a scroll listener to apply the transformation effect
-
-//        b.coffeeView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                int center = (recyclerView.getWidth() / 2); // Center of the RecyclerView
-//                int itemCount = layoutManager.getChildCount();
-//
-//                for (int i = 0; i < itemCount; i++) {
-//                    View view = layoutManager.getChildAt(i);
-//                    if (view != null) {
-//                        int childCenter = (view.getLeft() + view.getRight()) / 2;
-//                        int distanceFromCenter = Math.abs(center - childCenter);
-//
-//                        // Scale and adjust alpha based on distance from the center
-//                        float scaleFactor = Math.max(0.7f, 1 - (float) distanceFromCenter / center);
-//                        view.setScaleY(scaleFactor);
-////                        view.setAlpha(scaleFactor);
-//                    }
-//                }
-//            }
-//        });
+//        adapter = new yourGroupsAdapter(DataGenerator.AllGroupsList());
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-        b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        b.yourGroupsView.setAdapter(new yourGroupsAdapter(DataGenerator.AllGroupsList()));
 
-        b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        b.yourSessionView.setAdapter(new yourSessionAdapter(DataGenerator.AllSessionsList()));
+
+
+        //b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        b.yourGroupsView.setAdapter(new yourGroupsAdapter(DataGenerator.AllGroupsList()));
+
+//        b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+//        b.yourSessionView.setAdapter(new yourSessionAdapter(DataGenerator.AllSessionsList()));
 
 
 //        List<FeaturedModal> featuredList = DataGenerator.generateFeaturedList();
@@ -295,24 +272,85 @@ public class home_fragment extends Fragment {
         // API STUFF HERE =====================================
 
         ApiService apiService = ApiClient.getApiService();
-        Call<List<users>> call = apiService.getAllUsers();
-
-        call.enqueue(new Callback<List<users>>() {
+        apiService.getAllUsers().enqueue(new Callback<List<users>>() {
             @Override
             public void onResponse(Call<List<users>> call, Response<List<users>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<users> usersList = response.body();
-                    Log.d("API_CALL", "Users: " + usersList.toString());
+                    // Find the specific user with userId == 1
+                    users specificUser = null;
+                    for (users user : response.body()) {
+                        if (user.getUserId() == 1) {
+                            specificUser = user;
+                            break;
+                        }
+                    }
+                    if (specificUser == null) {
+                        Log.e("API_MERGE", "User with ID 1 not found.");
+                        return;
+                    }
+
+                    // --- Process Groups ---
+                    List<groupings> groupsList = specificUser.getGroups();
+                    List<yourGroupsModal> groupsModalList = new ArrayList<>();
+                    if (groupsList != null) {
+                        for (groupings grp : groupsList) {
+                            yourGroupsModal modal = new yourGroupsModal(
+                                    String.valueOf(grp.getNoUsers()),      // NoOfMembers (update if you have real data)
+                                    String.valueOf(grp.getNoSessions()),     // noOfSessions (update if you have real data)
+                                    R.drawable.tempgroupimg,                 // Replace with actual resource if available
+                                    grp.getGroupName()                       // Assuming getGroupName() returns the group name
+                            );
+                            groupsModalList.add(modal);
+                        }
+                    }
+                    // Set the groups adapter on the horizontal RecyclerView
+                    yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(groupsModalList);
+                    b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                    b.yourGroupsView.setAdapter(groupsAdapter);
+                    Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
+
+                    // --- Process Sessions ---
+                    // Aggregate sessions from all groups for this specific user.
+                    List<yourSessionsModal> sessionsModalList = new ArrayList<>();
+                    if (groupsList != null) {
+                        for (groupings grp : groupsList) {
+                            if (grp.getSessions() != null) {
+                                for (sessions sess : grp.getSessions()) {
+                                    // Map fields from the session object:
+                                    String restaurantName = sess.getLocation();              // For example, using 'location' as restaurant name
+                                    String dateTimeAddress = sess.getMeetingDateTime();        // Using meetingDateTime as the date/time string
+                                    String groupName = grp.getGroupName();                     // Use parent's group name
+                                    String sessionStatus = sess.isCompleted() ? "Completed" : "Upcoming";
+                                    String sessionTitle = "Session " + sess.getSessionId();    // Dummy title; update as needed
+
+                                    yourSessionsModal sessionModal = new yourSessionsModal(
+                                            restaurantName,
+                                            dateTimeAddress,
+                                            groupName,
+                                            sessionStatus,
+                                            sessionTitle
+                                    );
+                                    sessionsModalList.add(sessionModal);
+                                }
+                            }
+                        }
+                    }
+                    // Set the sessions adapter on the vertical RecyclerView
+                    yourSessionAdapter sessionAdapter = new yourSessionAdapter(sessionsModalList);
+                    b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                    b.yourSessionView.setAdapter(sessionAdapter);
+                    Log.d("API_MERGE", "Displayed sessions count: " + sessionsModalList.size());
                 } else {
-                    Log.e("API_CALL", "Error code: " + response.code());
+                    Log.e("API_MERGE", "Response error: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<List<users>> call, Throwable t) {
-                Log.e("API_CALL", "API call failed: " + t.getMessage());
+                Log.e("API_MERGE", "API call failed: " + t.getMessage());
             }
         });
+
 
     }
 

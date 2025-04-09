@@ -46,7 +46,7 @@ public class allSessionsAdapter extends RecyclerView.Adapter<allSessionsAdapter.
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return AllSessionsList.size();
     }
 
     public static class allSessionsViewHolder extends RecyclerView.ViewHolder {

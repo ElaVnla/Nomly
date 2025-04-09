@@ -55,6 +55,16 @@ public class groupings {
         return users;
     }
 
+    public int getNoUsers()
+    {
+        return this.users.size();
+    }
+
+    public int getNoSessions()
+    {
+        return this.sessions.size();
+    }
+
     public void setUsers(List<com.w3itexperts.ombe.apimodals.users> users) {
         this.users = users;
     }
