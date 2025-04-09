@@ -26,11 +26,12 @@ public class SessionsService {
 
     public List<SessionsDTO> getAllSessions(){
         List<Sessions> sessions = sessionsRepository.findAll();
-        return sessions.stream().map(SessionsDTO::new).collect(Collectors.toList());
+//        return sessions.stream().map(SessionsDTO::new).collect(Collectors.toList());
+        return sessions.stream().map(session -> new SessionsDTO(session, true)).collect(Collectors.toList());
     }
 
     public SessionsDTO getSessionById(int id){
-        return new SessionsDTO(sessionsRepository.findById(id).get());
+        return new SessionsDTO(sessionsRepository.findById(id).get(), true);
     }
 
     public boolean deleteSessionById(int id){
@@ -53,7 +54,7 @@ public class SessionsService {
 
         sessionsRepository.save(current);
 
-        return new SessionsDTO(current);
+        return new SessionsDTO(current, true);
     }
 
     public SessionsDTO createSession( Map<String,String> body){
@@ -69,7 +70,7 @@ public class SessionsService {
 
         Sessions newSession = new Sessions(grouping,location,latlong,meetingDateTime,createdAt,completed);
 
-        return new SessionsDTO(sessionsRepository.save(newSession));
+        return new SessionsDTO(sessionsRepository.save(newSession), true);
 
     }
 
@@ -78,7 +79,7 @@ public class SessionsService {
 
         current.setCompleted(true);
 
-        return new SessionsDTO(sessionsRepository.save(current));
+        return new SessionsDTO(sessionsRepository.save(current), true);
 
     }
 }
