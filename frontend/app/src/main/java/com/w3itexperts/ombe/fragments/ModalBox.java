@@ -60,7 +60,7 @@ public class ModalBox extends Fragment {
         b.confirmDialog.setOnClickListener(v -> {
 
             DialogAreYouConfirmBinding bb = DialogAreYouConfirmBinding.inflate(getLayoutInflater());
-            bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
+            //bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
             bb.confirmBtn.setOnClickListener(v1 -> dialog.dismiss());
             dialog.setContentView(bb.getRoot());
             dialog.show();
