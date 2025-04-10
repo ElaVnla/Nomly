@@ -13,6 +13,15 @@ public class users {
     private String createdAt;
     private List<groupings> groups;
 
+    public users(String username, String email, String password, String preferences)
+    {
+
+        this.username = username;
+        this.password = password;
+        this.preferences = preferences;
+        this.email = email;
+    }
+
     public users(int userId, String username, String password, String email, int porfilePic, String preferences, String createdAt, List<groupings> groups) {
         this.userId = userId;
         this.username = username;

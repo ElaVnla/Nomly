@@ -11,11 +11,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
-        android:src="@drawable/check_icon"/>
+        android:src="@drawable/info_outline"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Conguratulations"
+        android:text="ERROR: Wrong password/username"
         android:textColor="@color/text_color_black"
         android:textSize="20sp"
         android:layout_gravity="center"
@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="yor order Successfully Placed"
+        android:text="Please try again"
         android:textColor="@color/text_color_secondary"
         android:textSize="16sp"
         android:layout_marginBottom="10dp"
@@ -36,15 +36,6 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content">
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/cancelBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cornerRadius="10dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#EB5757"
-            style="@style/button_primary_style"
-            android:text="Cancel"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/confirmBtn"
@@ -53,7 +44,7 @@
             app:cornerRadius="10dp"
             android:layout_height="wrap_content"
             style="@style/button_primary_style"
-            android:text="Confirm"/>
+            android:text="Close"/>
     </LinearLayout>
 
 </LinearLayout>

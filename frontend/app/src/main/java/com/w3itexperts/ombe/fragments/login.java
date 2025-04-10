@@ -1,5 +1,6 @@
 package com.w3itexperts.ombe.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +21,8 @@ import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.activity.home;
 import com.w3itexperts.ombe.apimodals.users;
+import com.w3itexperts.ombe.databinding.DialogAreYouConfirmBinding;
+import com.w3itexperts.ombe.databinding.DialogError400Binding;
 import com.w3itexperts.ombe.databinding.FragmentLoginBinding;
 
 import java.util.List;
@@ -29,6 +33,7 @@ import retrofit2.Response;
 
 public class login extends Fragment {
     FragmentLoginBinding b;
+    Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,6 +44,8 @@ public class login extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        dialog = new Dialog(getContext() , R.style.TransparentDialog);
 
         b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
         b.createAccountBtn.setOnClickListener(v -> {
@@ -106,11 +113,23 @@ public class login extends Fragment {
                             }
                         }
                         if (!validUser) {
-                            Log.e("LOGIN", "Invalid credentials!");
+                            DialogAreYouConfirmBinding bb = DialogAreYouConfirmBinding.inflate(getLayoutInflater());
+                            //bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
+                            bb.confirmBtn.setOnClickListener(v1 -> dialog.dismiss());
+                            dialog.setContentView(bb.getRoot());
+                            dialog.show();
+                            //Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                            return;
+                            //Log.e("LOGIN", "Invalid credentials!");
                             // Optionally, show a Toast or error message to the user.
                         }
                     } else {
                         Log.e("LOGIN", "API response error: " + response.code());
+                        DialogError400Binding bb = DialogError400Binding.inflate(getLayoutInflater());
+                        //bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
+                        bb.confirmBtn.setOnClickListener(v1 -> dialog.dismiss());
+                        dialog.setContentView(bb.getRoot());
+                        dialog.show();
                     }
                 }
 

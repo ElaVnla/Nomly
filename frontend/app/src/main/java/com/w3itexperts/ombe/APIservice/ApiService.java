@@ -11,10 +11,13 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import com.w3itexperts.ombe.apimodals.OtpVerificationRequest;
+import com.w3itexperts.ombe.apimodals.RegistrationResponse;
 import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.apimodals.groupings;
 import com.w3itexperts.ombe.apimodals.usersgroupings;
+import com.w3itexperts.ombe.apimodals.RegistrationRequest;
 
 
 
@@ -83,6 +86,14 @@ public interface ApiService {
 
     @POST("groupings/add-grouping")
     Call<groupings> addGrouping(@Body groupings grouping);
+
+    // Email (Registration) API
+    @POST("email/register")
+    Call<RegistrationResponse> registerEmail(@Body RegistrationRequest registrationRequest);
+
+    // (Keep your other endpoints as before)
+    @POST("email/verify-otp")
+    Call<Boolean> verifyOtp(@Body com.w3itexperts.ombe.apimodals.OtpVerificationRequest otpRequest);
 
 
 }

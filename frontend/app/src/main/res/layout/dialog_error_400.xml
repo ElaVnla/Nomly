@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:src="@drawable/info_outline"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ERROR 404"
+        android:textColor="@color/text_color_black"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/semi_bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Something wrong with Nomly. Try again later"
+        android:textColor="@color/text_color_secondary"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/regular"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirmBtn"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            app:cornerRadius="10dp"
+            android:layout_height="wrap_content"
+            style="@style/button_primary_style"
+            android:text="Close"/>
+    </LinearLayout>
+
+</LinearLayout>
