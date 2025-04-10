@@ -41,11 +41,11 @@ public class allGroups extends Fragment {
         //b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
 
 
-        adapter = new allGroupsAdapter(DataGenerator.AllGroupsList());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        //adapter = new allGroupsAdapter(DataGenerator.AllGroupsList());
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
-        b.allgroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        b.allgroupsView.setAdapter(new allGroupsAdapter(DataGenerator.AllGroupsList()));
+        //b.allgroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        //b.allgroupsView.setAdapter(new allGroupsAdapter(DataGenerator.AllGroupsList()));
 
 
     }

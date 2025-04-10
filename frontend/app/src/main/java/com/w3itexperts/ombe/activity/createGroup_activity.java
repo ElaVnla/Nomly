@@ -53,7 +53,7 @@ public class createGroup_activity extends AppCompatActivity {
             // startActivity(intent);
 
             // For now, just a placeholder
-            Intent intent = new Intent(createGroup_activity.this, createGroup_activity.class);
+            Intent intent = new Intent(createGroup_activity.this, groupPage_Activity.class);
             startActivity(intent);
         });
     }
