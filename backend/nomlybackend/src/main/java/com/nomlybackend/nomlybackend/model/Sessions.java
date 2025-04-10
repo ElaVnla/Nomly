@@ -20,6 +20,9 @@ public class Sessions {
     @JoinColumn(name = "GroupId")
     private Groupings grouping;
 
+    @Column(name = "SessionName")
+    private String sessionName;
+
     @Column(name = "Location")
     private String location;
 
@@ -39,8 +42,10 @@ public class Sessions {
     public Sessions() {
     }
 
-    public Sessions(Groupings grouping, String location, String latlong,LocalDateTime meetingDateTime, LocalDateTime createdAt, Boolean completed) {
+
+    public Sessions(Groupings grouping, String sessionName, String location, String latlong, LocalDateTime meetingDateTime, LocalDateTime createdAt, Boolean completed) {
         this.grouping = grouping;
+        this.sessionName = sessionName;
         this.location = location;
         this.latlong = latlong;
         this.meetingDateTime = meetingDateTime;
@@ -58,6 +63,14 @@ public class Sessions {
 
     public void setGrouping(Groupings grouping) {
         this.grouping = grouping;
+    }
+
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
     }
 
     public String getLocation() {

@@ -52,6 +52,7 @@ CREATE TABLE NomlyDB.UsersGroupings (
 CREATE TABLE NomlyDB.Sessions(
 	SessionId int NOT NULL auto_increment,
 	GroupId int NOT NULL,
+    SessionName varchar(50),
     Location varchar(255) not null,
     LatLong varchar(50) not null,
     MeetingDateTime datetime not null,

@@ -118,6 +118,7 @@
                         app:startIconDrawable="@drawable/search_icon">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/searchEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/league_spartan"
@@ -135,6 +136,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/searchButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/button_secondary"
