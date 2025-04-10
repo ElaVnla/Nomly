@@ -54,7 +54,9 @@ CREATE TABLE NomlyDB.Sessions(
 	GroupId int NOT NULL,
     SessionName varchar(50),
     Location varchar(255) not null,
-    LatLong varchar(50) not null,
+    -- LatLong varchar(50) not null,
+    Latitude decimal(18,15) not null,
+    Longitude decimal(18,15) not null,
     MeetingDateTime datetime not null,
     CreatedAt datetime not null,
     Completed boolean,
@@ -64,20 +66,25 @@ CREATE TABLE NomlyDB.Sessions(
 );
 
 create table NomlyDB.Eateries(
-	EateryId int NOT NULL auto_increment,
-    Image int,
-	Location varchar(255) not null,
+	EateryId varchar(255) NOT NULL,
+	DisplayName varchar(255) not null,
+    Latitude decimal(18,15) not null,
+    Longitude decimal(18,15) not null,
+    PriceLevel ENUM("PRICE_LEVEL_UNSPECIFIED",
+    "PRICE_LEVEL_FREE",
+    "PRICE_LEVEL_INEXPENSIVE",
+    "PRICE_LEVEL_MODERATE",
+    "PRICE_LEVEL_EXPENSIVE",
+    "PRICE_LEVEL_VERY_EXPENSIVE"),
+    Cuisine varchar(255) not null,
+    Rating decimal(1,1),
     OperationHours varchar(50) not null,
-    PriceRange varchar(10) not null,
-    Cuisine varchar(50) not null,
-    Rating decimal(1,1) ,
-    primary key (EateryId),
-    FOREIGN KEY (Image) REFERENCES Images(imageId) ON DELETE CASCADE
+    primary key (EateryId)
 );
 
 create table NomlyDB.SessionsEateries(
 	SessionId int NOT NULL,
-	EateryId int NOT NULL,
+	EateryId varchar(255) NOT NULL,
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
     foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
 
@@ -86,7 +93,7 @@ create table NomlyDB.SessionsEateries(
 create table NomlyDB.UsersSessionsEateries(
 	UserId int NOT NULL,
 	SessionId int NOT NULL,
-	EateryId int NOT NULL,
+	EateryId varchar(255) NOT NULL,
     Liked bool not null,
     foreign key (UserId) references Users(UserId) ON DELETE CASCADE,
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
