@@ -6,11 +6,16 @@ public class yourGroupsModal {
     private String NoOfMembers;
     private String groupName;
 
-    public yourGroupsModal(String NoOfMembers, String noOfSessions, int groupImage, String groupName) {
+    private int groupId; //new id
+
+
+
+    public yourGroupsModal(String NoOfMembers, String noOfSessions, int groupImage, String groupName, int groupId) {
         this.NoOfMembers = NoOfMembers;
         this.noOfSessions = noOfSessions;
         this.groupImage = groupImage;
         this.groupName = groupName;
+        this.groupId = groupId;
     }
 
     // Getter and Setter for group Images
@@ -48,4 +53,8 @@ public class yourGroupsModal {
 //    public void setgroupName(String groupName) {
 //        this.groupName = groupName;
 //    }
+
+    public int getGroupId() {
+        return groupId;
+    }
 }

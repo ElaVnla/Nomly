@@ -199,24 +199,24 @@ public class DataGenerator {
         return reward;
     }
 
-    public static List<yourGroupsModal> AllGroupsList() {
-        List<yourGroupsModal> GroupList = new ArrayList<>();
-        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "The MOFOs"));
-        GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "The DOFOs"));
-        GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "Toni Fandom"));
-        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Erika Fandom"));
-        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "QX Fandom"));
-        GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "JY Fandom"));
-        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "JZ Fandom"));
-        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Gynn Fandom"));
-        GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Shonim Fandom"));
+    //public static List<yourGroupsModal> AllGroupsList() {
+        //List<yourGroupsModal> GroupList = new ArrayList<>();
+        //GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "The MOFOs"));
+        //GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "The DOFOs"));
+        //GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "Toni Fandom"));
+        //GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Erika Fandom"));
+        //GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "QX Fandom"));
+        //GroupList.add(new yourGroupsModal("13","14",R.drawable.tempgroupimg, "JY Fandom"));
+        //GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "JZ Fandom"));
+        //GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Gynn Fandom"));
+        //GroupList.add(new yourGroupsModal("12","15",R.drawable.tempgroupimg, "Shonim Fandom"));
 
 
 
 
 
-        return GroupList;
-    }
+        //return GroupList;
+    //}
 
     public static List<yourSessionsModal> AllSessionsList() {
         List<yourSessionsModal> SessionList = new ArrayList<>();

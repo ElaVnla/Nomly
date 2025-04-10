@@ -68,6 +68,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".activity.joinGroup_Activity"/>
+        <activity android:name=".activity.editGroup_activity"/>
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>

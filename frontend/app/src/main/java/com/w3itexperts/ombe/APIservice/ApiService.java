@@ -72,7 +72,7 @@ public interface ApiService {
     @GET("groupings/get-all-groupings")
     Call<List<groupings>> getAllGroupings();
 
-    @GET("groupings/get-groupings/{id}")
+    @GET("groupings/get-grouping/{id}")
     Call<groupings> getGrouping(@Path("id") int id);
 
     @DELETE("groupings/delete-grouping/{id}")

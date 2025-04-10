@@ -21,7 +21,9 @@ public class joinGroup_Activity extends AppCompatActivity {
 
                 // Navigate to GroupMainPageActivity
                 Intent intent = new Intent(joinGroup_Activity.this, groupPage_Activity.class);
+                intent.putExtra("fromFakeDemo", true);
                 startActivity(intent);
+
             }
         });
     }
