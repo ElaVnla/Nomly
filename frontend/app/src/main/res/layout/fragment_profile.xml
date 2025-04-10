@@ -66,6 +66,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                android:id="@+id/displayusername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -77,6 +78,7 @@
 
 
             <TextView
+                android:id="@+id/displayemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -145,6 +147,7 @@
                             android:baselineAligned="false">
 
                             <TextView
+                                android:id="@+id/dateNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/semi_bold"
@@ -154,6 +157,7 @@
                                 android:textSize="25sp"/>
 
                             <TextView
+                                android:id="@+id/dateMonth"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/semi_bold"
@@ -163,6 +167,7 @@
                                 android:textSize="25sp"/>
 
                             <TextView
+                                android:id="@+id/dateYear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/semi_bold"
@@ -214,6 +219,7 @@
                             android:baselineAligned="false">
 
                             <TextView
+                                android:id="@+id/NoOfGroups"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/semi_bold"
@@ -266,6 +272,7 @@
                             android:baselineAligned="false">
 
                             <TextView
+                                android:id="@+id/noActiveSessions"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/semi_bold"
