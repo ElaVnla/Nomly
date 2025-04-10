@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="frontend-app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-03-16T15:07:04.224193100Z">
+        <DropdownSelection timestamp="2025-04-10T12:02:57.498167700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\erika\.android\avd\Medium_Phone.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RF8M22CC3FJ" />
             </handle>
           </Target>
         </DropdownSelection>
