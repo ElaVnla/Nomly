@@ -112,28 +112,6 @@ public class home_fragment extends Fragment {
         int pageMarginPx = getResources().getDimensionPixelOffset(R.dimen.page_margin);
         int offsetPx = getResources().getDimensionPixelOffset(R.dimen.page_offset);
 
-
-//        adapter = new yourGroupsAdapter(DataGenerator.AllGroupsList());
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
-
-
-
-
-        //b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        b.yourGroupsView.setAdapter(new yourGroupsAdapter(DataGenerator.AllGroupsList()));
-
-//        b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-//        b.yourSessionView.setAdapter(new yourSessionAdapter(DataGenerator.AllSessionsList()));
-
-
-//        List<FeaturedModal> featuredList = DataGenerator.generateFeaturedList();
-//        FeaturedAdapter featuredAdapter = new FeaturedAdapter(featuredList, getContext());
-//
-//        b.featuredView.setAdapter(featuredAdapter);
-//        b.featuredView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
         b.menuBtn.setOnClickListener(v -> {
             animateViewRotation(b.containerMain, 0f, -4.97f);
             animateViewTranslation(b.containerMain, 0, 650, 250, 450, 0, -450, 0, -450);
@@ -209,10 +187,6 @@ public class home_fragment extends Fragment {
 
         });
 
-
-
-
-
         b.menu.rewards.setOnClickListener(v -> {
             new Handler().postDelayed(() -> {
                 SwitchFragment(new Reward());
@@ -227,9 +201,6 @@ public class home_fragment extends Fragment {
             Intent intent = new Intent(getActivity(), joinGroup_Activity.class);
             startActivity(intent);
         });
-
-
-
 
         b.viewAllGroups.setClickable(true);
         b.viewAllGroups.setOnClickListener(v -> {
@@ -271,88 +242,194 @@ public class home_fragment extends Fragment {
 
         // API STUFF HERE =====================================
 
+        // Retrieve the stored current user from SessionManager.
+        final users storedUser = com.w3itexperts.ombe.SessionService.SessionManager
+                .getInstance(getContext()).getCurrentUser();
+
+        if (storedUser == null) {
+            Log.e("API_MERGE", "No current user found in session!");
+            logoutUser(); // This method should force a logout (e.g., navigate to login)
+            return;
+        }
+
+        // Refresh the user data from the API so that you have the latest details.
         ApiService apiService = ApiClient.getApiService();
-        apiService.getAllUsers().enqueue(new Callback<List<users>>() {
+        apiService.getUser(storedUser.getUserId()).enqueue(new Callback<users>() {
             @Override
-            public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+            public void onResponse(Call<users> call, Response<users> response) {
+                users refreshedUser;
                 if (response.isSuccessful() && response.body() != null) {
-                    // Find the specific user with userId == 1
-                    users specificUser = null;
-                    for (users user : response.body()) {
-                        if (user.getUserId() == 1) {
-                            specificUser = user;
-                            break;
-                        }
-                    }
-                    if (specificUser == null) {
-                        Log.e("API_MERGE", "User with ID 1 not found.");
-                        return;
-                    }
-
-                    // --- Process Groups ---
-                    List<groupings> groupsList = specificUser.getGroups();
-                    List<yourGroupsModal> groupsModalList = new ArrayList<>();
-                    if (groupsList != null) {
-                        for (groupings grp : groupsList) {
-                            yourGroupsModal modal = new yourGroupsModal(
-                                    String.valueOf(grp.getNoUsers()),      // NoOfMembers (update if you have real data)
-                                    String.valueOf(grp.getNoSessions()),     // noOfSessions (update if you have real data)
-                                    R.drawable.tempgroupimg,                 // Replace with actual resource if available
-                                    grp.getGroupName()                       // Assuming getGroupName() returns the group name
-                            );
-                            groupsModalList.add(modal);
-                        }
-                    }
-                    // Set the groups adapter on the horizontal RecyclerView
-                    yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(groupsModalList);
-                    b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-                    b.yourGroupsView.setAdapter(groupsAdapter);
-                    Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
-
-                    // --- Process Sessions ---
-                    // Aggregate sessions from all groups for this specific user.
-                    List<yourSessionsModal> sessionsModalList = new ArrayList<>();
-                    if (groupsList != null) {
-                        for (groupings grp : groupsList) {
-                            if (grp.getSessions() != null) {
-                                for (sessions sess : grp.getSessions()) {
-                                    // Map fields from the session object:
-                                    String restaurantName = sess.getLocation();              // For example, using 'location' as restaurant name
-                                    String dateTimeAddress = sess.getMeetingDateTime();        // Using meetingDateTime as the date/time string
-                                    String groupName = grp.getGroupName();                     // Use parent's group name
-                                    String sessionStatus = sess.isCompleted() ? "Completed" : "Upcoming";
-                                    String sessionTitle = "Session " + sess.getSessionId();    // Dummy title; update as needed
-
-                                    yourSessionsModal sessionModal = new yourSessionsModal(
-                                            restaurantName,
-                                            dateTimeAddress,
-                                            groupName,
-                                            sessionStatus,
-                                            sessionTitle
-                                    );
-                                    sessionsModalList.add(sessionModal);
-                                }
-                            }
-                        }
-                    }
-                    // Set the sessions adapter on the vertical RecyclerView
-                    yourSessionAdapter sessionAdapter = new yourSessionAdapter(sessionsModalList);
-                    b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                    b.yourSessionView.setAdapter(sessionAdapter);
-                    Log.d("API_MERGE", "Displayed sessions count: " + sessionsModalList.size());
+                    // Use refreshed user data.
+                    refreshedUser = response.body();
+                    // Update SessionManager so the new data is available systemwide.
+                    com.w3itexperts.ombe.SessionService.SessionManager.getInstance(getContext())
+                            .setCurrentUser(refreshedUser);
                 } else {
-                    Log.e("API_MERGE", "Response error: " + response.code());
+                    // API call failed or returned no updated data; fall back to stored user.
+                    Log.e("API_MERGE", "getUserById error: " + response.code());
+                    refreshedUser = storedUser;
                 }
+
+                // Now update the UI using the (refreshed) user data.
+                updateUI(refreshedUser);
             }
 
             @Override
-            public void onFailure(Call<List<users>> call, Throwable t) {
+            public void onFailure(Call<users> call, Throwable t) {
                 Log.e("API_MERGE", "API call failed: " + t.getMessage());
+                // Fallback: update UI with stored user data.
+                updateUI(storedUser);
             }
         });
 
+//        ApiService apiService = ApiClient.getApiService();
+//        apiService.getAllUsers().enqueue(new Callback<List<users>>() {
+//            @Override
+//            public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    // Find the specific user with userId == 1
+//                    users specificUser = null;
+//                    for (users user : response.body()) {
+//                        if (user.getUserId() == 1) {
+//                            specificUser = user;
+//                            break;
+//                        }
+//                    }
+//                    if (specificUser == null) {
+//                        Log.e("API_MERGE", "User with ID 1 not found.");
+//                        return;
+//                    }
+//
+//                    // --- Process Groups ---
+//                    List<groupings> groupsList = specificUser.getGroups();
+//                    List<yourGroupsModal> groupsModalList = new ArrayList<>();
+//                    if (groupsList != null) {
+//                        for (groupings grp : groupsList) {
+//                            yourGroupsModal modal = new yourGroupsModal(
+//                                    String.valueOf(grp.getNoUsers()),      // NoOfMembers (update if you have real data)
+//                                    String.valueOf(grp.getNoSessions()),     // noOfSessions (update if you have real data)
+//                                    R.drawable.tempgroupimg,                 // Replace with actual resource if available
+//                                    grp.getGroupName()                       // Assuming getGroupName() returns the group name
+//                            );
+//                            groupsModalList.add(modal);
+//                        }
+//                    }
+//                    // Set the groups adapter on the horizontal RecyclerView
+//                    yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(groupsModalList);
+//                    b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//                    b.yourGroupsView.setAdapter(groupsAdapter);
+//                    Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
+//
+//                    // --- Process Sessions ---
+//                    // Aggregate sessions from all groups for this specific user.
+//                    List<yourSessionsModal> sessionsModalList = new ArrayList<>();
+//                    if (groupsList != null) {
+//                        for (groupings grp : groupsList) {
+//                            if (grp.getSessions() != null) {
+//                                for (sessions sess : grp.getSessions()) {
+//                                    // Map fields from the session object:
+//                                    String restaurantName = sess.getLocation();              // For example, using 'location' as restaurant name
+//                                    String dateTimeAddress = sess.getMeetingDateTime();        // Using meetingDateTime as the date/time string
+//                                    String groupName = grp.getGroupName();                     // Use parent's group name
+//                                    String sessionStatus = sess.isCompleted() ? "Completed" : "Upcoming";
+//                                    String sessionTitle = "Session " + sess.getSessionId();    // Dummy title; update as needed
+//
+//                                    yourSessionsModal sessionModal = new yourSessionsModal(
+//                                            restaurantName,
+//                                            dateTimeAddress,
+//                                            groupName,
+//                                            sessionStatus,
+//                                            sessionTitle
+//                                    );
+//                                    sessionsModalList.add(sessionModal);
+//                                }
+//                            }
+//                        }
+//                    }
+//                    // Set the sessions adapter on the vertical RecyclerView
+//                    yourSessionAdapter sessionAdapter = new yourSessionAdapter(sessionsModalList);
+//                    b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+//                    b.yourSessionView.setAdapter(sessionAdapter);
+//                    Log.d("API_MERGE", "Displayed sessions count: " + sessionsModalList.size());
+//                } else {
+//                    Log.e("API_MERGE", "Response error: " + response.code());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<users>> call, Throwable t) {
+//                Log.e("API_MERGE", "API call failed: " + t.getMessage());
+//            }
+//        });
+
 
     }
+
+    // Helper method that updates the UI based on the user's groups and sessions.
+    private void updateUI(users user) {
+        // --- Process Groups ---
+        List<groupings> groupsList = user.getGroups();
+        List<yourGroupsModal> groupsModalList = new ArrayList<>();
+        if (groupsList != null) {
+            for (groupings grp : groupsList) {
+                yourGroupsModal modal = new yourGroupsModal(
+                        String.valueOf(grp.getNoUsers()),      // NoOfMembers (update with real data if available)
+                        String.valueOf(grp.getNoSessions()),     // NoOfSessions (update with real data if available)
+                        R.drawable.tempgroupimg,                 // Replace with actual resource if available
+                        grp.getGroupName()                       // Group name
+                );
+                groupsModalList.add(modal);
+            }
+        }
+        // Set the groups adapter on the horizontal RecyclerView.
+        yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(groupsModalList);
+        b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        b.yourGroupsView.setAdapter(groupsAdapter);
+        Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
+
+        // --- Process Sessions ---
+        // Aggregate sessions across all groups.
+        List<yourSessionsModal> sessionsModalList = new ArrayList<>();
+        if (groupsList != null) {
+            for (groupings grp : groupsList) {
+                if (grp.getSessions() != null) {
+                    for (sessions sess : grp.getSessions()) {
+                        // Map fields; adjust the mapping as per your requirement.
+                        String restaurantName = sess.getLocation();           // Using location as the restaurant name
+                        String dateTimeAddress = sess.getMeetingDateTime();     // Using meetingDateTime for date/time
+                        String groupName = grp.getGroupName();                  // Parent group name
+                        String sessionStatus = sess.isCompleted() ? "Completed" : "Upcoming";
+                        String sessionTitle = "Session " + sess.getSessionId(); // Dummy title; update if needed
+
+                        yourSessionsModal sessionModal = new yourSessionsModal(
+                                restaurantName,
+                                dateTimeAddress,
+                                groupName,
+                                sessionStatus,
+                                sessionTitle
+                        );
+                        sessionsModalList.add(sessionModal);
+                    }
+                }
+            }
+        }
+        // Set the sessions adapter on the vertical RecyclerView.
+        yourSessionAdapter sessionAdapter = new yourSessionAdapter(sessionsModalList);
+        b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        b.yourSessionView.setAdapter(sessionAdapter);
+        Log.d("API_MERGE", "Displayed sessions count: " + sessionsModalList.size());
+    }
+
+    // Optional logout method if no user session is found.
+    private void logoutUser() {
+        // Clear session (set currentUser to null in SessionManager)
+        com.w3itexperts.ombe.SessionService.SessionManager.getInstance(getContext()).setCurrentUser(null);
+        Intent intent = new Intent(getContext(), com.w3itexperts.ombe.activity.Welcome.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
 
     private void SwitchFragment(Fragment fragment) {
 

@@ -2,6 +2,7 @@ package com.w3itexperts.ombe.fragments;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.w3itexperts.ombe.APIservice.ApiClient;
 import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.R;
+import com.w3itexperts.ombe.SessionService.SessionManager;
+import com.w3itexperts.ombe.activity.Welcome;
+import com.w3itexperts.ombe.activity.login_signin_Activity;
 import com.w3itexperts.ombe.adapter.allGroupsAdapter;
 import com.w3itexperts.ombe.adapter.yourGroupsAdapter;
 import com.w3itexperts.ombe.apimodals.groupings;
@@ -39,6 +43,10 @@ public class allGroups extends Fragment {
     FragmentAllgroupsBinding b;
 
     private allGroupsAdapter adapter;
+    private List<yourGroupsModal> fullGroupList = new ArrayList<>();
+
+    final allGroupsAdapter[] adapterHolder = new allGroupsAdapter[1];
+
 
     @Nullable
     @Override
@@ -51,88 +59,108 @@ public class allGroups extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Prepare a list to hold the full groups data for filtering later.
-        final List<yourGroupsModal> fullGroupList = new ArrayList<>();
-        // Adapter reference as a field so we can update it during searches.
-        final allGroupsAdapter[] adapterHolder = new allGroupsAdapter[1];
+        // Retrieve current user from SessionManager.
+        final users storedUser = SessionManager.getInstance(getContext()).getCurrentUser();
+        if (storedUser == null) {
+            Log.e("API_GROUPS", "No current user found in session!");
+            logoutUser();
+            return;
+        }
 
-        // Call the API to get all users.
+        // Refresh the user data from the API so you have the latest details.
         ApiService apiService = ApiClient.getApiService();
-        apiService.getAllUsers().enqueue(new Callback<List<users>>() {
+        apiService.getUser(storedUser.getUserId()).enqueue(new Callback<users>() {
             @Override
-            public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+            public void onResponse(Call<users> call, Response<users> response) {
+                users refreshedUser;
                 if (response.isSuccessful() && response.body() != null) {
-                    // Find the specific user with userId == 1.
-                    users specificUser = null;
-                    for (users user : response.body()) {
-                        if (user.getUserId() == 1) {
-                            specificUser = user;
-                            break;
-                        }
-                    }
-                    if (specificUser == null) {
-                        Log.e("API_GROUPS", "User with ID 1 not found.");
-                        return;
-                    }
-
-                    // Use only the groups of the specific user.
-                    List<groupings> groupsList = specificUser.getGroups();
-                    List<yourGroupsModal> modalList = new ArrayList<>();
-                    if (groupsList != null) {
-                        for (groupings grp : groupsList) {
-                            yourGroupsModal modal = new yourGroupsModal(
-                                    String.valueOf(grp.getNoUsers()),      // NoOfMembers (update if you have real data)
-                                    String.valueOf(grp.getNoSessions()),     // noOfSessions (update if you have real data)
-                                    R.drawable.tempgroupimg,                 // Replace with actual resource if available
-                                    grp.getGroupName()                       // Assuming getGroupName() returns the group name
-                            );
-                            modalList.add(modal);
-                        }
-                    }
-
-                    // Save the full list to use for filtering.
-                    fullGroupList.clear();
-                    fullGroupList.addAll(modalList);
-
-                    // Set adapter with dynamic API data on allgroupsView.
-                    allGroupsAdapter adapter = new allGroupsAdapter(modalList);
-                    adapterHolder[0] = adapter;  // store adapter reference for filtering later.
-                    b.allgroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                    b.allgroupsView.setAdapter(adapter);
-
-                    Log.d("API_GROUPS", "Displayed groups count: " + modalList.size());
+                    refreshedUser = response.body();
+                    // Update SessionManager with the new data.
+                    SessionManager.getInstance(getContext()).setCurrentUser(refreshedUser);
                 } else {
-                    Log.e("API_GROUPS", "Response error: " + response.code());
+                    Log.e("API_GROUPS", "getUser error: " + response.code());
+                    refreshedUser = storedUser;
                 }
+                updateUI(refreshedUser);
             }
 
             @Override
-            public void onFailure(Call<List<users>> call, Throwable t) {
+            public void onFailure(Call<users> call, Throwable t) {
                 Log.e("API_GROUPS", "API call failed: " + t.getMessage());
+                updateUI(storedUser);
             }
         });
 
         // Set an onClickListener for the search button to filter the list.
         // Make sure your layout includes these views with matching IDs.
+
+
         b.searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String query = b.searchEditText.getText().toString().trim().toLowerCase();
-                List<yourGroupsModal> filteredList = new ArrayList<>();
+                Log.d("SEARCH", "Query: " + query);
 
-                // Loop through the full list of groups and add items whose name contains the search query.
+                List<yourGroupsModal> filteredList = new ArrayList<>();
+                Log.d("SEARCH", "check full group list: " + fullGroupList.size());
                 for (yourGroupsModal modal : fullGroupList) {
+                    Log.d("SEARCH", "Checking group name: '" + modal.getgroupName() + "'");
                     if (modal.getgroupName().toLowerCase().contains(query)) {
                         filteredList.add(modal);
                     }
                 }
 
-                // Update the adapter: create a new adapter instance (or update the existing adapter's data if implemented).
+                Log.d("SEARCH", "Full list size: " + fullGroupList.size());
+                Log.d("SEARCH", "Filtered list size: " + filteredList.size());
+
+                // Check the adapterHolder status.
+                if (adapterHolder[0] == null) {
+                    Log.d("SEARCH", "adapterHolder[0] is null.");
+                } else {
+                    Log.d("SEARCH", "adapterHolder[0] is NOT null.");
+                }
+
+                // Create and set the new adapter
                 allGroupsAdapter filteredAdapter = new allGroupsAdapter(filteredList);
                 adapterHolder[0] = filteredAdapter;
                 b.allgroupsView.setAdapter(filteredAdapter);
+                Log.d("SEARCH", "Adapter updated with filtered list.");
             }
         });
+
+    }
+
+    private void updateUI(users user) {
+        // Process Groups: map the user's groups into a list of yourGroupsModal items.
+        List<groupings> groupsList = user.getGroups();
+        List<yourGroupsModal> groupsModalList = new ArrayList<>();
+        if (groupsList != null) {
+            for (groupings grp : groupsList) {
+                yourGroupsModal modal = new yourGroupsModal(
+                        String.valueOf(grp.getNoUsers()),      // NoOfMembers (update if needed)
+                        String.valueOf(grp.getNoSessions()),     // NoOfSessions (update if needed)
+                        R.drawable.tempgroupimg,                 // Group image resource
+                        grp.getGroupName()                       // Group name
+                );
+                groupsModalList.add(modal);
+            }
+        }
+
+        // Update the RecyclerView adapter for groups.
+        allGroupsAdapter adapter = new allGroupsAdapter(groupsModalList);
+        fullGroupList = groupsModalList;
+        b.allgroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        b.allgroupsView.setAdapter(adapter);
+        Log.d("API_GROUPS", "Displayed groups count: " + groupsModalList.size());
+    }
+
+    private void logoutUser() {
+        // Clear session info and navigate to login.
+        SessionManager.getInstance(getContext()).setCurrentUser(null);
+        Intent intent = new Intent(getContext(), Welcome.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void animateViewRotation(View view, float startRotation, float endRotation) {

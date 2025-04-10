@@ -1,7 +1,9 @@
 package com.w3itexperts.ombe.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.w3itexperts.ombe.APIservice.ApiClient;
+import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.R;
+import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.activity.home;
+import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.databinding.FragmentLoginBinding;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class login extends Fragment {
     FragmentLoginBinding b;
@@ -69,7 +81,47 @@ public class login extends Fragment {
 //            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main,fragment).commit();
         });
 
-        b.loginBtn.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
+        //b.loginBtn.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
+
+        // Login button click handler
+        b.loginBtn.setOnClickListener(v -> {
+            String enteredUsername = b.usernameEditText.getText().toString().trim();
+            String enteredPassword = b.passwordEditText.getText().toString().trim();
+
+            ApiService apiService = ApiClient.getApiService();
+            apiService.getAllUsers().enqueue(new Callback<List<users>>() {
+                @Override
+                public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        boolean validUser = false;
+                        for (users user : response.body()) {
+                            if (user.getUsername().equalsIgnoreCase(enteredUsername)
+                                    && user.getPassword().equals(enteredPassword)) {
+                                validUser = true;
+                                // Save the session info using the centralized SessionManager.
+                                SessionManager.getInstance(getContext()).setCurrentUser(user);
+                                // Navigate to the home activity.
+                                startActivity(new Intent(getContext(), home.class));
+                                break;
+                            }
+                        }
+                        if (!validUser) {
+                            Log.e("LOGIN", "Invalid credentials!");
+                            // Optionally, show a Toast or error message to the user.
+                        }
+                    } else {
+                        Log.e("LOGIN", "API response error: " + response.code());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<users>> call, Throwable t) {
+                    Log.e("LOGIN", "API call failed: " + t.getMessage());
+                }
+            });
+        });
+
+
         b.signInWithGoogle.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
 
     }
