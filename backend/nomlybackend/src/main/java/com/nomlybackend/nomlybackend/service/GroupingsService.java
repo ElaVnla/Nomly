@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,8 +61,21 @@ public class GroupingsService {
         LocalDateTime now = LocalDateTime.now();
 //        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
         LocalDateTime createdAt = LocalDateTime.now();
-        Groupings newGrouping = new Groupings(groupName,createdAt);
+        String code = generateRandomCode(); //TODO Check code duplicate
+        Groupings newGrouping = new Groupings(groupName,createdAt, code);
 
         return new GroupingsDTO(groupingsRepository.save(newGrouping), true) ;
+    }
+
+    private String generateRandomCode() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder code = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            code.append(chars.charAt(random.nextInt(chars.length())));
+        }
+
+        return code.toString();
     }
 }

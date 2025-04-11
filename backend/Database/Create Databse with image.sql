@@ -34,7 +34,7 @@ CREATE TABLE NomlyDB.Groupings (
     -- GroupPic varchar(255),
     GroupPic  int,
     createdAt datetime NOT NULL,
-    groupCode char(5),
+    groupCode char(10),
     PRIMARY KEY (GroupId),
     FOREIGN KEY (GroupPic) REFERENCES Images(imageId) ON DELETE CASCADE
 );

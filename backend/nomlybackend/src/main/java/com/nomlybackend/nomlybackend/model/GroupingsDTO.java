@@ -13,6 +13,7 @@ public class GroupingsDTO {
     private String groupName;
     private LocalDateTime createdAt;
 //    private List<Integer> userGroupIds;
+    private String groupCode;
     private List<UsersDTO> users;
     private List<SessionsDTO> sessions;
 
@@ -24,6 +25,8 @@ public class GroupingsDTO {
         this.groupId = grouping.getGroupId();
         this.groupName = grouping.getGroupName();
         this.createdAt = grouping.getCreatedAt();
+        this.groupCode = grouping.getGroupCode();
+
 //        if (grouping.getUsersGrouping() == null){
 //            this.userGroupIds = new ArrayList<>();
 //        }else{
@@ -71,7 +74,14 @@ public class GroupingsDTO {
         this.createdAt = createdAt;
     }
 
-//    public List<Integer> getUserGroupIds() {
+    public String getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(String groupCode) {
+        this.groupCode = groupCode;
+    }
+    //    public List<Integer> getUserGroupIds() {
 //        return userGroupIds;
 //    }
 //
