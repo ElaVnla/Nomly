@@ -20,6 +20,9 @@ public class Groupings {
     @Column (name = "CreatedAt")
     private LocalDateTime createdAt;
 
+    @Column (name = "groupCode")
+    private String groupCode;
+
     @OneToMany(mappedBy = "grouping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsersGroupings> usersGrouping;
 
@@ -30,9 +33,10 @@ public class Groupings {
 
     public Groupings() {}
 
-    public Groupings(String groupName, LocalDateTime createdAt) {
+    public Groupings(String groupName, LocalDateTime createdAt, String groupCode) {
         this.groupName = groupName;
         this.createdAt = createdAt;
+        this.groupCode = groupCode;
     }
 
     public Integer getGroupId() {
@@ -69,5 +73,17 @@ public class Groupings {
 
     public void setSessions(List<Sessions> sessions) {
         this.sessions = sessions;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(String groupCode) {
+        this.groupCode = groupCode;
     }
 }
