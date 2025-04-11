@@ -8,47 +8,37 @@ import jakarta.persistence.*;
 public class Eateries {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "EateryId") //TODO 1.1: UID only for us? or we can use globalCode
-    private Integer eateryId;
+    @Column (name = "EateryId")
+    private String eateryId;
 
-    @Column (name = "GlobalCode")
-    private String globalCode; //TODO 1.1
-
-    //TODO Add displayName
     @Column(name = "DisplayName")
     private String displayName;
 
-//    @Column(name = "Location") //change to 2, lat and long
-//    private String location; //TODO 1.2: Change location to Lat and Lng
     @Column(name = "Latitude")
     private Double latitude;
 
     @Column(name = "Longitude")
     private Double longitude;
 
-    //TODO 1.3: change from PriceRange(old) to PriceLevel in db, then change type to ENUM
     @Column(name = "PriceLevel") //enum type
     private PriceLevel priceLevel;
 
     @Column(name = "Cuisine") //to add "types"
     private String cuisine;
 
-    @Column(name = "Rating") //TODO 1.4 add rating to db
+    @Column(name = "Rating")
     private Double rating;
 
-    @Column(name = "OperationHours") //TODO 2: to be implemented, q complicated
+    @Column(name = "OperationHours") //TODO 1: to be implemented, q complicated
     private String operationHours;
 
     public Eateries() {
     }
 
-    public Integer getEateryId() {
+    public String getEateryId() {
         return eateryId;
     }
-
-    public String getGlobalCode() { return globalCode; }
-
-    public void setGlobalCode(String globalCode) { this.globalCode = globalCode; }
+    public void setEateryId(String eateryId) { this.eateryId = eateryId; }
 
     public String getDisplayName() { return displayName; }
 

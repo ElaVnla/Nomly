@@ -26,9 +26,11 @@ public class Sessions {
     @Column(name = "Location")
     private String location;
 
-    @Column(name = "LatLong")
-    private String latlong;
+    @Column(name = "Latitude")
+    private Double latitude;
 
+    @Column(name = "Longitude")
+    private Double longitude;
 
     @Column(name = "MeetingDateTime")
     private LocalDateTime meetingDateTime;
@@ -43,11 +45,12 @@ public class Sessions {
     }
 
 
-    public Sessions(Groupings grouping, String sessionName, String location, String latlong, LocalDateTime meetingDateTime, LocalDateTime createdAt, Boolean completed) {
+    public Sessions(Groupings grouping, String sessionName, String location, Double latitude, Double longitude, LocalDateTime meetingDateTime, LocalDateTime createdAt, Boolean completed) {
         this.grouping = grouping;
         this.sessionName = sessionName;
         this.location = location;
-        this.latlong = latlong;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.meetingDateTime = meetingDateTime;
         this.createdAt = createdAt;
         this.completed = completed;
@@ -81,17 +84,13 @@ public class Sessions {
         this.location = location;
     }
 
-    public String getLatitude() {
-        return latlong;
-    }
+    public Double getLatitude() { return latitude; }
 
-    public String getLatlong() {
-        return latlong;
-    }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
 
-    public void setLatlong(String latlong) {
-        this.latlong = latlong;
-    }
+    public Double getLongitude() { return longitude; }
+
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
 
     public LocalDateTime getMeetingDateTime() {
         return meetingDateTime;

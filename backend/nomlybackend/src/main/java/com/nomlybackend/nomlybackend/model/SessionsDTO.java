@@ -13,7 +13,8 @@ public class SessionsDTO {
     private GroupingsDTO grouping;
     private String sessionName;
     private String location;
-    private String latlong;
+    private Double latitude;
+    private Double longitude;
     private LocalDateTime meetingDateTime;
     private LocalDateTime createdAt;
     private Boolean completed;
@@ -32,7 +33,8 @@ public class SessionsDTO {
         }
         this.sessionName = session.getSessionName();
         this.location = session.getLocation();
-        this.latlong = session.getLatlong();
+        this.latitude = session.getLatitude();
+        this.longitude = session.getLongitude();
         this.meetingDateTime = session.getMeetingDateTime();
         this.createdAt = session.getCreatedAt();
         this.completed = session.getCompleted();
@@ -70,14 +72,13 @@ public class SessionsDTO {
         this.location = location;
     }
 
+    public Double getLatitude() { return latitude;}
 
-    public String getLatlong() {
-        return latlong;
-    }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
 
-    public void setLatlong(String latlong) {
-        this.latlong = latlong;
-    }
+    public Double getLongitude() { return longitude; }
+
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
 
     public LocalDateTime getMeetingDateTime() {
         return meetingDateTime;

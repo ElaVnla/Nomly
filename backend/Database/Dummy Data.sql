@@ -32,11 +32,8 @@ where Users.Email = "maryjane@xyz.com" and Groupings.GroupName = "nom nom time";
 
 select * from NomlyDB.UsersGroupings;
 
-insert into NomlyDB.Sessions(GroupId,Location, LatLong,MeetingDateTime,CreatedAt,Completed)
-values(1,"Tampines Mall", "1.3525636200333846, 103.94479657820084", "2025-04-20 12:00:00", current_timestamp, false);
+insert into NomlyDB.Sessions(GroupId,SessionName,Location, Latitude, longitude ,MeetingDateTime,CreatedAt,Completed)
+values(1,"yum yum time","Tampines Mall", 1.3525636200333846, 103.94479657820084, "2025-04-20 12:00:00", current_timestamp, false);
 
 
 select * from NomlyDB.Sessions;
-
-
-

@@ -48,7 +48,8 @@ public class SessionsService {
 
         current.setSessionName(body.get("sessionName"));
         current.setLocation(body.get("location"));
-        current.setLatlong(body.get("latlong"));
+        current.setLatitude(Double.valueOf(body.get("latitude")));
+        current.setLongitude(Double.valueOf(body.get("longitude")));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         current.setMeetingDateTime(LocalDateTime.parse(body.get("meetingDateTime"), formatter));
 
@@ -63,13 +64,14 @@ public class SessionsService {
         Groupings grouping = groupingsService.getGroupEntityById(groupId);
         String session = body.get("session");
         String location = body.get("location");
-        String latlong = body.get("latlong");
+        Double latitude = Double.valueOf(body.get("latitude"));
+        Double longitude = Double.valueOf(body.get("longitude"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime meetingDateTime = LocalDateTime.parse(body.get("meetingDateTime"), formatter);
         LocalDateTime createdAt = LocalDateTime.now();
         Boolean completed = false;
 
-        Sessions newSession = new Sessions(grouping,session,location,latlong,meetingDateTime,createdAt,completed);
+        Sessions newSession = new Sessions(grouping,session,location,latitude,longitude,meetingDateTime,createdAt,completed);
 
         return new SessionsDTO(sessionsRepository.save(newSession), true);
 

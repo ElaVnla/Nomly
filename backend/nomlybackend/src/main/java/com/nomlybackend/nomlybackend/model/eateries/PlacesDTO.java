@@ -15,7 +15,7 @@ public class PlacesDTO {
                 "point_of_interest",
                 "establishment"
         );
-        private PlusCode plusCode;
+        private String id;
         private LatLng location;
         private PriceLevel priceLevel;
         private DisplayName displayName;
@@ -30,13 +30,9 @@ public class PlacesDTO {
             Place.defaultTypes = defaultTypes;
         }
 
-        public PlusCode getPlusCode() {
-            return plusCode;
-        }
+        public String getId() { return id; }
 
-        public void setPlusCode(PlusCode plusCode) {
-            this.plusCode = plusCode;
-        }
+        public void setId(String id) { this.id = id; }
 
         public LatLng getLocation() {
             return location;
@@ -80,7 +76,7 @@ public class PlacesDTO {
 
         public Eateries toEntity(){
             Eateries eatery = new Eateries();
-            eatery.setGlobalCode(this.plusCode.globalCode);
+            eatery.setEateryId(this.id);
             eatery.setDisplayName(this.displayName.text);
             eatery.setLatitude(this.location.latitude);
             eatery.setLongitude(this.location.longitude);
