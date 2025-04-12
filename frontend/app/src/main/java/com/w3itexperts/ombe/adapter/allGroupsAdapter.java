@@ -1,5 +1,7 @@
 package com.w3itexperts.ombe.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.w3itexperts.ombe.R;
+import com.w3itexperts.ombe.activity.groupPage_Activity;
 import com.w3itexperts.ombe.methods.DataGenerator;
 import com.w3itexperts.ombe.modals.yourGroupsModal;
 
@@ -20,7 +23,10 @@ public class allGroupsAdapter extends RecyclerView.Adapter<allGroupsAdapter.allG
 
     private List<yourGroupsModal> AllGroupsList;
 
-    public allGroupsAdapter(List<yourGroupsModal> AllGroupsList) {
+    private Context context;
+
+    public allGroupsAdapter(Context context, List<yourGroupsModal> AllGroupsList) {
+        this.context = context;
         this.AllGroupsList = AllGroupsList;
     }
 
@@ -41,6 +47,11 @@ public class allGroupsAdapter extends RecyclerView.Adapter<allGroupsAdapter.allG
         holder.noOfSessions.setText(modal.getnoOfSessions());
         holder.NoOfMembers.setText(modal.getNoOfMembers());
         holder.groupName.setText(modal.getgroupName());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, groupPage_Activity.class);
+            intent.putExtra("groupId", modal.getGroupId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

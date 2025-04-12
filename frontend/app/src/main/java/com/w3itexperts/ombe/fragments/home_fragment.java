@@ -321,38 +321,84 @@ public class home_fragment extends Fragment {
 
     // Helper method that updates the UI based on the user's groups and sessions.
     private void updateUI(users user) {
-        // --- Process Groups ---
+        // Process Groups: refresh data for each grouping via API.
         List<groupings> groupsList = user.getGroups();
+        // This list will hold our refreshed modal objects.
         List<yourGroupsModal> groupsModalList = new ArrayList<>();
-        if (groupsList != null) {
-            for (groupings grp : groupsList) {
-                yourGroupsModal modal = new yourGroupsModal(
-                        String.valueOf(grp.getNoUsers()),      // NoOfMembers (update with real data if available)
-                        String.valueOf(grp.getNoSessions()),     // NoOfSessions (update with real data if available)
-                        R.drawable.tempgroupimg,                 // Replace with actual resource if available
-                        grp.getGroupName(),                       // Group name
-                        grp.getGroupId()
-                );
-                groupsModalList.add(modal);
-            }
-        }
-        // Set the groups adapter on the horizontal RecyclerView.
-        yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(getContext(),groupsModalList);
-        b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        b.yourGroupsView.setAdapter(groupsAdapter);
-        Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
 
-        // --- Process Sessions ---
-        // Aggregate sessions across all groups.
+        if (groupsList != null && !groupsList.isEmpty()) {
+            ApiService apiService = ApiClient.getApiService();
+            final int totalGroups = groupsList.size();
+
+            // For each group, fetch the updated details.
+            for (groupings grp : groupsList) {
+                final int groupId = grp.getGroupId();
+                apiService.getGrouping(groupId).enqueue(new retrofit2.Callback<groupings>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<groupings> call, retrofit2.Response<groupings> response) {
+                        groupings refreshedGroup;
+                        if (response.isSuccessful() && response.body() != null) {
+                            refreshedGroup = response.body();
+                        } else {
+                            // Fallback: use the original grouping data.
+                            refreshedGroup = grp;
+                            Log.e("API_GROUPS", "Failed to refresh group " + groupId + ": response code " + response.code());
+                        }
+
+                        yourGroupsModal modal = new yourGroupsModal(
+                                String.valueOf(refreshedGroup.getNoUsers()),     // Updated number of users
+                                String.valueOf(refreshedGroup.getNoSessions()),    // Updated number of sessions
+                                R.drawable.tempgroupimg,                           // Replace if needed
+                                refreshedGroup.getGroupName(),                     // Group name from refreshed data
+                                refreshedGroup.getGroupId()
+                        );
+                        groupsModalList.add(modal);
+
+                        // Once we have processed all groups, update the RecyclerView.
+                        if (groupsModalList.size() == totalGroups) {
+                            yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(getContext(), groupsModalList);
+                            b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                            b.yourGroupsView.setAdapter(groupsAdapter);
+                            Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<groupings> call, Throwable t) {
+                        // If the API call fails, use fallback data.
+                        Log.e("API_GROUPS", "Failure refreshing group " + groupId + ": " + t.getMessage());
+                        yourGroupsModal modal = new yourGroupsModal(
+                                String.valueOf(grp.getNoUsers()),
+                                String.valueOf(grp.getNoSessions()),
+                                R.drawable.tempgroupimg,
+                                grp.getGroupName(),
+                                grp.getGroupId()
+                        );
+                        groupsModalList.add(modal);
+
+                        if (groupsModalList.size() == totalGroups) {
+                            yourGroupsAdapter groupsAdapter = new yourGroupsAdapter(getContext(), groupsModalList);
+                            b.yourGroupsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                            b.yourGroupsView.setAdapter(groupsAdapter);
+                            Log.d("API_MERGE", "Displayed groups count: " + groupsModalList.size());
+                        }
+                    }
+                });
+            }
+        } else {
+            Log.d("API_MERGE", "No groups found for user.");
+        }
+
+        // Process Sessions - aggregate sessions from the original groups (or, if available, refresh similar to groups)
+        // This part remains synchronous as before:
         List<yourSessionsModal> sessionsModalList = new ArrayList<>();
         if (groupsList != null) {
             for (groupings grp : groupsList) {
                 if (grp.getSessions() != null) {
-                    for (sessions sess : grp.getSessions()) {
-                        // Map fields; adjust the mapping as per your requirement.
+                    for (com.w3itexperts.ombe.apimodals.sessions sess : grp.getSessions()) {
                         String restaurantName = sess.getLocation();           // Using location as the restaurant name
                         String dateTimeAddress = sess.getMeetingDateTime();     // Using meetingDateTime for date/time
-                        String groupName = grp.getGroupName();                  // Parent group name
+                        String groupName = grp.getGroupName();                  // Use parent's group name
                         String sessionStatus = sess.isCompleted() ? "Completed" : "Upcoming";
                         String sessionTitle = "Session " + sess.getSessionId(); // Dummy title; update if needed
 
@@ -368,12 +414,13 @@ public class home_fragment extends Fragment {
                 }
             }
         }
-        // Set the sessions adapter on the vertical RecyclerView.
+
         yourSessionAdapter sessionAdapter = new yourSessionAdapter(sessionsModalList);
         b.yourSessionView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         b.yourSessionView.setAdapter(sessionAdapter);
         Log.d("API_MERGE", "Displayed sessions count: " + sessionsModalList.size());
     }
+
 
     // Optional logout method if no user session is found.
     private void logoutUser() {
