@@ -77,24 +77,36 @@ create table NomlyDB.Eateries(
     "PRICE_LEVEL_EXPENSIVE",
     "PRICE_LEVEL_VERY_EXPENSIVE"),
     Cuisine varchar(255) not null,
-    Rating decimal(1,1),
+    Rating decimal(2,1),
     OperationHours varchar(50) not null,
     primary key (EateryId)
 );
 
+create table NomlyDB.EateriesPhotos(
+	EateryId varchar(255) NOT NULL,
+    photoName varchar(255) NOT NULL,
+    foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
+
+
+);
+
 create table NomlyDB.SessionsEateries(
+	SessionEateryId int NOT NULL auto_increment,
 	SessionId int NOT NULL,
 	EateryId varchar(255) NOT NULL,
+    primary key (SessionEateryId),
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
     foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
 
 );
 
 create table NomlyDB.UsersSessionsEateries(
+	UserSessionEateryId int NOT NULL auto_increment,
 	UserId int NOT NULL,
 	SessionId int NOT NULL,
 	EateryId varchar(255) NOT NULL,
     Liked bool not null,
+    primary key (UserSessionEateryId),
     foreign key (UserId) references Users(UserId) ON DELETE CASCADE,
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
     foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE

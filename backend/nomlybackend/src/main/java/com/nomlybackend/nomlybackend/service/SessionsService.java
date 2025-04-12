@@ -4,7 +4,6 @@ package com.nomlybackend.nomlybackend.service;
 import com.nomlybackend.nomlybackend.model.Groupings;
 import com.nomlybackend.nomlybackend.model.Sessions;
 import com.nomlybackend.nomlybackend.model.SessionsDTO;
-import com.nomlybackend.nomlybackend.repository.GroupingsRepository;
 import com.nomlybackend.nomlybackend.repository.SessionsRepository;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,11 @@ public class SessionsService {
     public SessionsDTO getSessionById(int id){
         return new SessionsDTO(sessionsRepository.findById(id).get(), true);
     }
+
+    public Sessions getSessionEntityById(int id) {
+        return sessionsRepository.findById(id).get();
+    }
+
 
     public boolean deleteSessionById(int id){
         if(!sessionsRepository.findById(id).equals(Optional.empty())){

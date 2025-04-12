@@ -17,6 +17,16 @@ public class UsersDTO {
 
     public UsersDTO(){}
 
+    public UsersDTO(Users user){
+        this.userId = user.getUserId();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.preferences = user.getPreferences();
+        this.createdAt = user.getCreatedAt();
+        this.groups = new ArrayList<>();
+    }
+
     public UsersDTO(Users user, boolean includeGroups) {
         this.userId = user.getUserId();
         this.username = user.getUsername();

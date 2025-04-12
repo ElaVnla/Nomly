@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "Eateries")
 public class Eateries {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "EateryId")
     private String eateryId;
 
@@ -20,6 +20,7 @@ public class Eateries {
     @Column(name = "Longitude")
     private Double longitude;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "PriceLevel") //enum type
     private PriceLevel priceLevel;
 
@@ -32,7 +33,21 @@ public class Eateries {
     @Column(name = "OperationHours") //TODO 1: to be implemented, q complicated
     private String operationHours;
 
+
+
+
     public Eateries() {
+    }
+
+    public Eateries(String eateryId, String displayName, Double latitude, Double longitude,  PriceLevel priceLevel, String cuisine, Double rating, String operationHours) {
+        this.eateryId = eateryId;
+        this.displayName = displayName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.priceLevel = priceLevel;
+        this.cuisine = cuisine;
+        this.rating = rating;
+        this.operationHours = operationHours;
     }
 
     public String getEateryId() {
