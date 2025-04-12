@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface GroupingsRepository extends JpaRepository<Groupings, Integer> {
 
+    Groupings findByGroupCode(String groupCode);
+
 
 
 

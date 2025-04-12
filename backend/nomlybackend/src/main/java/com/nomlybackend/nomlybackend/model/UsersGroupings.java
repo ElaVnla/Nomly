@@ -19,12 +19,12 @@ public class UsersGroupings {
 
     @ManyToOne
     @JoinColumn(name = "UserId")
-//    @JsonIgnore
+    @JsonIgnore
     private Users user;
 
     @ManyToOne
     @JoinColumn(name = "GroupId")
-//    @JsonIgnore
+    @JsonIgnore
     private Groupings grouping;
 
 

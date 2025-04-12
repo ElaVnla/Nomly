@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/input_background">
 
+    <ImageView
+        android:id="@+id/backbtnToHomeFromEnterCode"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/icon_button_bg_color"
+        android:src="@drawable/backarrowwhite"
+        app:iconTint="#650411"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 
     <TextView
         android:id="@+id/titleText"
@@ -31,18 +46,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="@font/regular"
+        android:hint="5432190691"
         android:letterSpacing="0.2"
         android:padding="16dp"
         android:shadowColor="#800000"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="4"
-        android:hint="54321"
         android:textColor="#FFFFFF"
-        android:textSize="70sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:boxCornerRadiusBottomEnd="50dp"
         app:boxCornerRadiusBottomStart="50dp"

@@ -231,11 +231,13 @@ public class home_fragment extends Fragment {
             startActivity(intent);
         });
 
-        b.createAGroupButton.setClickable(true);
+        //edited such that the userId gets passed to my createAGroupButton and so the user can be added!
         b.createAGroupButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), createGroup_activity.class);
+            intent.putExtra("userId", com.w3itexperts.ombe.SessionService.SessionManager.getInstance(getContext()).getCurrentUser().getUserId());
             startActivity(intent);
         });
+
 
 
 

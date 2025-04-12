@@ -78,4 +78,13 @@ public class GroupingsService {
 
         return code.toString();
     }
+
+    public GroupingsDTO getGroupingByCode(String code) {
+        Groupings group = groupingsRepository.findByGroupCode(code);
+        if (group == null) {
+            throw new RuntimeException("Group not found with code: " + code);
+        }
+        return new GroupingsDTO(group, true);
+    }
+
 }
