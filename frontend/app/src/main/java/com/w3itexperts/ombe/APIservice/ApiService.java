@@ -1,6 +1,8 @@
 package com.w3itexperts.ombe.APIservice;
 
 import java.util.List;
+import java.util.Map;
+
 import retrofit2.Retrofit;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -45,12 +47,24 @@ public interface ApiService {
 
 // Users Groupings API
 
+    //@POST("users-groupings/add-user-to-grouping")
+    //Call<Void> addUserToGrouping(@Body usersgroupings userGrouping);
+
+    //toni change
     @POST("users-groupings/add-user-to-grouping")
-    Call<Void> addUserToGrouping(@Body usersgroupings userGrouping);
+    Call<usersgroupings> addUserToGrouping(@Body Map<String, String> userGroupData);
+
 
     // Here we assume you pass two query parameters for removal.
-    @DELETE("users-groupings/remove-user-from-grouping")
-    Call<Void> removeUserFromGrouping(@Query("userId") int userId, @Query("groupingId") int groupingId);
+    //@DELETE("users-groupings/remove-user-from-grouping")
+    //Call<Void> removeUserFromGrouping(@Query("userId") int userId, @Query("groupingId") int groupingId);
+
+    //toni change
+    @POST("users-groupings/remove-user-from-grouping")
+    Call<Boolean> removeUserFromGrouping(@Body Map<String, String> body);
+
+
+
 
 // Sessions API
 
@@ -86,8 +100,14 @@ public interface ApiService {
     @PUT("groupings/update-grouping/{id}")
     Call<groupings> updateGrouping(@Path("id") int id, @Body groupings grouping);
 
+    //@POST("groupings/add-grouping")
+    //Call<groupings> addGrouping(@Body groupings grouping);
+
+
+    // ✅ FIXED: addGrouping now accepts a Map instead of a groupings object
+    //toni change
     @POST("groupings/add-grouping")
-    Call<groupings> addGrouping(@Body groupings grouping);
+    Call<groupings> addGrouping(@Body Map<String, String> groupData);
 
     // Email (Registration) API
     @POST("email/register")
@@ -96,6 +116,11 @@ public interface ApiService {
     // (Keep your other endpoints as before)
     @POST("email/verify-otp")
     Call<Boolean> verifyOtp(@Body com.w3itexperts.ombe.apimodals.OtpVerificationRequest otpRequest);
+
+    //new by toni
+    @GET("groupings/get-grouping-by-code/{code}")
+    Call<groupings> getGroupingByCode(@Path("code") String groupCode);
+
 
 
 }

@@ -24,10 +24,15 @@ public class UsersGroupingsController {
     }
 
 
-    @DeleteMapping("/remove-user-from-grouping")
+    // @DeleteMapping("/remove-user-from-grouping")
+    //public boolean removeUserFromGrouping(@RequestBody Map<String,String> body){
+        //return usersGroupingsService.removeUserFromGrouping(body);
+    //}
+    @PostMapping("/remove-user-from-grouping")
     public boolean removeUserFromGrouping(@RequestBody Map<String,String> body){
         return usersGroupingsService.removeUserFromGrouping(body);
     }
+
 
 
 }

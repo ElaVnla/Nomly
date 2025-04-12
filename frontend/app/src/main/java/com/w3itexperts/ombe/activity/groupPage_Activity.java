@@ -1,5 +1,6 @@
 package com.w3itexperts.ombe.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.button.MaterialButton;
@@ -17,21 +24,23 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.w3itexperts.ombe.APIservice.ApiClient;
 import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.R;
+import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.apimodals.groupings;
 import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.apimodals.users;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+// IMPORTANT: please do not edit anything out or change any of the existing codes,
+// you can add at the end tho.
+//but make sure my pages remain stable thanks.
 
 public class groupPage_Activity extends AppCompatActivity {
 
@@ -40,7 +49,7 @@ public class groupPage_Activity extends AppCompatActivity {
     private FlexboxLayout flexboxMembers;
     private RecyclerView sessionsRecyclerView;
     private ApiService apiService;
-    private int groupId;
+    private int groupId, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,52 +63,86 @@ public class groupPage_Activity extends AppCompatActivity {
         flexboxMembers = findViewById(R.id.flexboxMembers);
         sessionsRecyclerView = findViewById(R.id.yourGroupSessions);
 
-        // Get groupId from intent
+        userId = SessionManager.getInstance(this).getCurrentUser().getUserId();
+        apiService = ApiClient.getApiService();
+
         Intent intent = getIntent();
         boolean isFakeDemo = intent.getBooleanExtra("fromFakeDemo", false);
         groupId = intent.getIntExtra("groupId", -1);
 
-        Log.d("GROUP_PAGE", "Received groupId: " + groupId + ", isFakeDemo: " + isFakeDemo);
+        if (isFakeDemo) {
+            loadMockGroupData();
+        } else if (groupId != -1) {
+            fetchRealGroupData(groupId);
+        } else {
+            groupNameInput.setText("Could not load group!");
+        }
 
-        // Edit group button
-        ImageView editGroupButton = findViewById(R.id.editGroupButton);
-        editGroupButton.setOnClickListener(v -> {
-            Intent editIntent = new Intent(groupPage_Activity.this, editGroup_activity.class);
+        // Edit group
+        findViewById(R.id.editGroupButton).setOnClickListener(v -> {
+            Intent editIntent = new Intent(this, editGroup_activity.class);
             editIntent.putExtra("groupId", groupId);
             startActivity(editIntent);
         });
 
-        // Back to home page
-        ImageView backBtn = findViewById(R.id.backbtnToHomePage);
-        backBtn.setOnClickListener(v -> {
-            Intent homeIntent = new Intent(groupPage_Activity.this, home.class);
+        // Back button
+        findViewById(R.id.backbtnToHomePage).setOnClickListener(v -> {
+            Intent homeIntent = new Intent(this, home.class);
             homeIntent.putExtra("loadHomeFragment", true);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(homeIntent);
             finish();
         });
 
-        apiService = ApiClient.getApiService();
-
-        if (isFakeDemo) {
-            Log.d("GROUP_PAGE", "Loading mock group data...");
-            loadMockGroupData();
-        } else if (groupId != -1) {
-            Log.d("GROUP_PAGE", "Fetching real group data for ID: " + groupId);
-            fetchRealGroupData(groupId);
-        } else {
-            Log.w("GROUP_PAGE", "No valid groupId or demo flag. Falling back.");
-            groupNameInput.setText("Could not load group!");
-        }
+        // Leave group button
+        findViewById(R.id.leaveGroupButton).setOnClickListener(v -> showLeaveConfirmation());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (groupId != -1) {
-            fetchRealGroupData(groupId); // Optional: refresh after returning from edit
+            fetchRealGroupData(groupId);
         }
     }
+
+    private void showLeaveConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle("Leave Group")
+                .setMessage("Are you sure you want to leave this group?")
+                .setPositiveButton("Yes", (dialog, which) -> leaveGroup())
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void leaveGroup() {
+        Map<String, String> data = new HashMap<>();
+        data.put("userId", String.valueOf(userId));
+        data.put("groupId", String.valueOf(groupId));
+
+        apiService.removeUserFromGrouping(data).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful() && Boolean.TRUE.equals(response.body())) {
+                    // Successfully left group
+                    Intent intent = new Intent(groupPage_Activity.this, home.class);
+                    intent.putExtra("loadHomeFragment", true);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Log.e("LEAVE_GROUP", "❌ Failed to leave group. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("LEAVE_GROUP", "❌ API error: " + t.getMessage());
+            }
+        });
+    }
+
+
 
     private void loadMockGroupData() {
         groupNameInput.setText("Team Gardeners");
@@ -107,10 +150,11 @@ public class groupPage_Activity extends AppCompatActivity {
         dateCreatedGroup.setText("18 Mar 2025");
         Glide.with(this).load(R.drawable.person4).into(groupPhotoInput);
 
-        List<Member> mockMembers = new ArrayList<>();
-        mockMembers.add(new Member("ToniFoodie", R.drawable.person4));
-        mockMembers.add(new Member("Aminah123", R.drawable.person4));
-        mockMembers.add(new Member("Salim", R.drawable.person4));
+        List<Member> mockMembers = List.of(
+                new Member("ToniFoodie", R.drawable.person4),
+                new Member("Aminah123", R.drawable.person4),
+                new Member("Salim", R.drawable.person4)
+        );
         loadMembers(mockMembers);
 
         sessionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -123,19 +167,10 @@ public class groupPage_Activity extends AppCompatActivity {
             public void onResponse(Call<groupings> call, Response<groupings> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     groupings group = response.body();
-                    Log.d("GROUP_PAGE", "Fetched group: " + group.getGroupName());
-
                     groupNameInput.setText(group.getGroupName());
                     dateCreatedGroup.setText(group.getCreatedAt());
                     noOfPeopleGroup.setText(String.valueOf(group.getUsers().size()));
-
-                    // TODO: Enable this when backend supports groupPic
-//                    String groupPicUrl = group.getGroupPic();
-//                    if (groupPicUrl != null && !groupPicUrl.isEmpty()) {
-//                        Glide.with(groupPage_Activity.this).load(groupPicUrl).into(groupPhotoInput);
-//                    } else {
                     Glide.with(groupPage_Activity.this).load(R.drawable.person4).into(groupPhotoInput);
-//                    }
 
                     List<Member> members = new ArrayList<>();
                     for (users u : group.getUsers()) {
@@ -145,16 +180,13 @@ public class groupPage_Activity extends AppCompatActivity {
 
                     List<Session> sessionList = new ArrayList<>();
                     for (sessions s : group.getSessions()) {
-                        String title = "Session #" + s.getSessionId();
-                        String details = s.getMeetingDateTime() + ", " + s.getLocation();
-                        String status = s.isCompleted() ? "Done" : "Ongoing";
-                        sessionList.add(new Session(title, details, status));
+                        sessionList.add(new Session("Session #" + s.getSessionId(),
+                                s.getMeetingDateTime() + ", " + s.getLocation(),
+                                s.isCompleted() ? "Done" : "Ongoing"));
                     }
 
                     sessionsRecyclerView.setLayoutManager(new LinearLayoutManager(groupPage_Activity.this));
                     sessionsRecyclerView.setAdapter(new SessionsAdapter(sessionList));
-                } else {
-                    Log.e("GROUP_PAGE", "Failed to fetch group. Code: " + response.code());
                 }
             }
 
@@ -168,36 +200,33 @@ public class groupPage_Activity extends AppCompatActivity {
     private void loadMembers(List<Member> members) {
         flexboxMembers.removeAllViews();
         for (Member member : members) {
-            LinearLayout memberLayout = new LinearLayout(this);
-            memberLayout.setOrientation(LinearLayout.VERTICAL);
-            memberLayout.setGravity(LinearLayout.HORIZONTAL);
-            memberLayout.setPadding(20, 20, 20, 20);
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setPadding(20, 20, 20, 20);
 
-            ImageView profileImage = new ImageView(this);
-            profileImage.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
-            profileImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Glide.with(this).load(member.imageResId).into(profileImage);
+            ImageView img = new ImageView(this);
+            img.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Glide.with(this).load(member.imageResId).into(img);
 
-            MaterialButton nameButton = new MaterialButton(this);
-            ViewGroup.LayoutParams nameParams = new ViewGroup.LayoutParams(230, 90);
-            nameButton.setLayoutParams(nameParams);
-            nameButton.setText(member.name);
-            nameButton.setTextSize(10);
-            nameButton.setPadding(20, 20, 20, 20);
-            nameButton.setCornerRadius(5);
-            nameButton.setTextColor(getResources().getColor(android.R.color.white));
+            MaterialButton btn = new MaterialButton(this);
+            btn.setLayoutParams(new ViewGroup.LayoutParams(230, 90));
+            btn.setText(member.name);
+            btn.setTextSize(10);
+            btn.setCornerRadius(5);
+            btn.setTextColor(getResources().getColor(android.R.color.white));
 
-            memberLayout.addView(profileImage);
-            memberLayout.addView(nameButton);
-            flexboxMembers.addView(memberLayout);
+            layout.addView(img);
+            layout.addView(btn);
+            flexboxMembers.addView(layout);
         }
     }
 
     private List<Session> getMockSessions() {
-        List<Session> sessions = new ArrayList<>();
-        sessions.add(new Session("Lunchy Date", "19 February 25, 3pm, Tampines", "Ongoing"));
-        sessions.add(new Session("Dinner Date", "20 February 25, 7pm, Botanic Gardens", "Done"));
-        return sessions;
+        return List.of(
+                new Session("Lunchy Date", "19 Feb 25, 3pm, Tampines", "Ongoing"),
+                new Session("Dinner Date", "20 Feb 25, 7pm, Botanic Gardens", "Done")
+        );
     }
 
     private static class Member {
@@ -230,16 +259,16 @@ public class groupPage_Activity extends AppCompatActivity {
         @NonNull
         @Override
         public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sessions, parent, false);
-            return new SessionViewHolder(view);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sessions, parent, false);
+            return new SessionViewHolder(v);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull SessionViewHolder holder, int position) {
-            Session session = sessions.get(position);
-            holder.title.setText(session.title);
-            holder.details.setText(session.details);
-            holder.statusButton.setText(session.status);
+        public void onBindViewHolder(@NonNull SessionViewHolder h, int pos) {
+            Session s = sessions.get(pos);
+            h.title.setText(s.title);
+            h.details.setText(s.details);
+            h.statusButton.setText(s.status);
         }
 
         @Override

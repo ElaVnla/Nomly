@@ -79,4 +79,10 @@ public class GroupingsController {
 //        return groupingsRepository.save(newGrouping);
         return groupingsService.createGrouping(body);
     }
+
+    @GetMapping("/get-grouping-by-code/{code}")
+    public GroupingsDTO getGroupingByCode(@PathVariable("code") String code) {
+        return groupingsService.getGroupingByCode(code);
+    }
+
 }

@@ -53,4 +53,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.code.gson:gson:2.10.1'
 
+    //need for pretty pop-ups by tonie
+    implementation 'com.google.android.material:material:1.11.0'
+
 }

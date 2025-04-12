@@ -15,6 +15,11 @@ public class usersgroupings {
         this.JoinedAt = joinedAt;
     }
 
+    public usersgroupings(int userId, int groupId) {
+        this.UserId = userId;
+        this.GroupId = groupId;
+   }
+
     public int getUserGroupId() {
         return UserGroupId;
     }
