@@ -22,7 +22,7 @@ import java.util.List;
 public class yourGroupsAdapter extends RecyclerView.Adapter<yourGroupsAdapter.yourGroupsViewHolder> {
 
     private List<yourGroupsModal> AllGroupsList;
-    private Context context; // ✅ Added context for intent use
+    private Context context;
 
     public yourGroupsAdapter(Context context, List<yourGroupsModal> AllGroupsList) {
         this.context = context;
@@ -44,7 +44,6 @@ public class yourGroupsAdapter extends RecyclerView.Adapter<yourGroupsAdapter.yo
         holder.NoOfMembers.setText(modal.getNoOfMembers());
         holder.groupName.setText(modal.getgroupName());
 
-        // ✅ Handle click to open groupPage_Activity
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, groupPage_Activity.class);
             intent.putExtra("groupId", modal.getGroupId());

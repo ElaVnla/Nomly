@@ -10,6 +10,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import java.util.Map;
+
 
 import com.w3itexperts.ombe.apimodals.OtpVerificationRequest;
 import com.w3itexperts.ombe.apimodals.RegistrationResponse;
@@ -36,7 +38,7 @@ public interface ApiService {
     Call<Void> deleteUser(@Path("id") int id);
 
     @PUT("users/update-user/{id}")
-    Call<users> updateUser(@Path("id") int id, @Body users user);
+    Call<users> updateUser(@Path("id") int id, @Body Map<String, String> body);
 
     @POST("users/add-user")
     Call<users> addUser(@Body users user);

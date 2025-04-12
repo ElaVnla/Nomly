@@ -33,69 +33,78 @@ public class users {
         this.groups = groups;
     }
 
-    public List<groupings> getGroups() {
-        return groups;
+    public users() {
+
     }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
+    }
+    public void setProfilePic(int profilePic) {
+        this.ProfilePic = profilePic;
+    }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
     public void setGroups(List<groupings> groups) {
         this.groups = groups;
+    }
+
+    public List<groupings> getGroups() {
+        return groups;
     }
 
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        userId = userId;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        username = username;
-    }
+
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        password = password;
-    }
+
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        email = email;
-    }
+
 
     public int getProfilePic() {
         return ProfilePic;
     }
 
-    public void setProfilePic(int porfilePic) {
-        ProfilePic = porfilePic;
-    }
+
 
     public String getPreferences() {
         return preferences;
     }
 
-    public void setPreferences(String preferences) {
-        preferences = preferences;
-    }
+
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+
 
     @Override public String toString() { return "User{id=" + userId + ", username=" + username + ", email=" + email + "}"; }
 }
