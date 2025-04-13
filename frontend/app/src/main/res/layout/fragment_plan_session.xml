@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F1"
+    android:padding="0dp">
+
+    <!-- Curved red background (wave) -->
+    <ImageView
+        android:id="@+id/vector"
+        android:layout_width="390dp"
+        android:layout_height="500dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/blobvector"
+        android:translationX="-0dp"
+        android:translationY="-0dp" />
+
+    <!-- Main content wrapper -->
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp">
+
+        <!-- Header -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/rounded_yellow_header"
+            android:elevation="6dp"
+            android:padding="16dp"
+            android:text="When and Where\nshall we eat?"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <!-- Session Title -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="47dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/sessionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:hint="Session Title...."
+                android:padding="16dp"
+                android:inputType="text" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Set Location (now editable) -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="47dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/setLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Set Location.."
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:inputType="text" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Date -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="47dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="16dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/dateDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="MM/DD/YY"
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:inputType="none"
+                android:focusable="false" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Time -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="47dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="75dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/timeDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="50dp"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:hint="Set Time.."
+                android:inputType="none"
+                android:padding="16dp" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Create Session Button -->
+        <Button
+            android:id="@+id/createSessionBtn"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_primary_button"
+            android:padding="16dp"
+            android:text="Create"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <!-- Cancel Button -->
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="327dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_gray_button"
+            android:padding="16dp"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/startSwipingBtn"-->
+        <!--            android:layout_width="328dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/rounded_primary_button"-->
+        <!--            android:padding="16dp"-->
+        <!--            android:src="Start Swiping"-->
+        <!--            android:textColor="@android:color/white"-->
+        <!--            android:textSize="16sp" />-->
+
+        <!--        &lt;!&ndash; Cancel Button &ndash;&gt;-->
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/cancelBtn"-->
+        <!--            android:layout_width="327dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/rounded_gray_button"-->
+        <!--            android:padding="16dp"-->
+        <!--            android:src="Cancel"-->
+        <!--            android:textColor="@android:color/white"-->
+        <!--            android:textSize="16sp" />-->
+    </LinearLayout>
+</RelativeLayout>

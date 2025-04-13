@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class sessions {
     private int sessionId;
+    private String sessionName;
     private Object grouping;
     private int GroupId;
     private String location;
@@ -31,8 +32,23 @@ public class sessions {
         this.completed = completed;
     }
 
+    public sessions(int sessionId, String sessionName, int GroupId, String location, String latLong, String meetingDateTime, String createdAt, boolean completed) {
+        this.sessionId = sessionId;
+        this.sessionName = sessionName;
+        this.GroupId = GroupId;
+        this.location = location;
+        this.latlong = latLong;
+        this.meetingDateTime = meetingDateTime;
+        this.createdAt = createdAt;
+        this.completed = completed;
+    }
 
-
+    public String getSessionName() {
+        return sessionName;
+    }
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
     public int getSessionId() {
         return sessionId;
     }
@@ -96,4 +112,5 @@ public class sessions {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
 }

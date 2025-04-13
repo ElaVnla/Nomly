@@ -71,6 +71,9 @@
 
         <activity android:name=".activity.joinGroup_Activity"/>
         <activity android:name=".activity.editGroup_activity"/>
+
+        <activity android:name=".activity.SessionActivity"/>
+
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>

@@ -77,11 +77,20 @@ public interface ApiService {
     @DELETE("sessions/delete-session/{id}")
     Call<Void> deleteSession(@Path("id") int id);
 
-    @PUT("sessions/update-session")
-    Call<sessions> updateSession(@Body sessions session);
+//    @PUT("sessions/update-session")
+//    Call<sessions> updateSession(@Body sessions session);
 
+//    @PUT("sessions/update-session")
+//    Call<sessions> updateSession(@Body Map<String, String> session);
+    @PUT("sessions/update-session/{id}")
+    Call<sessions> updateSession(@Path("id") int id, @Body Map<String, String> session);
+
+
+    //    @POST("sessions/add-session")
+//    Call<sessions> addSession(@Body sessions session);
     @POST("sessions/add-session")
-    Call<sessions> addSession(@Body sessions session);
+    Call<sessions> addSession(@Body Map<String, String> body);
+
 
     @POST("sessions/session-completed/{id}")
     Call<Void> markSessionCompleted(@Path("id") int id);
