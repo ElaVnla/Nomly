@@ -25,11 +25,6 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/activity_session.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/allgroups.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -51,11 +46,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/dialog_error_400.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/forgetpassword_otp.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -145,11 +135,6 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_plan_session.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -160,22 +145,7 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_swiping.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_view_session.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_wishlist.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/group_page_main.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -186,11 +156,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/incomingsessions.xml">
-        <config>
-          <theme>@style/Theme.Ombe</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/item_card.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -266,62 +231,26 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="IT FINALLY WORKED">
-      <change afterPath="$PROJECT_DIR$/.idea/NomlyShonim.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/SessionActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/CardStackAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/PlanSessionFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/SwipingFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/ViewSessionFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/RestaurantCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/fade_in.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/fade_out.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/sweep_glow.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/arrow_back.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/blobvector.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/circlebutton.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/cross_swipe.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/finalizesession.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/greenbites.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/like_swipe.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/lolacafe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/pinkswipebuttonsvg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rectangle_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_card_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_gray_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_image_clip.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_primary_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_yellow_header.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/sushi.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/swipesymbol.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/variant2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/yellowsession.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/activity_session.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_plan_session.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_swiping.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_view_session.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/item_card.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/1ce8fbe9cd5f67467fbc6471b3e35c77ab6be457/metadata.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/1ce8fbe9cd5f67467fbc6471b3e35c77ab6be457/metadata.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+    <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="Updates EateriesPhotos table, added /get-images/{eateryId}">
+      <change afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/EateriesPhotos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Photo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PhotoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/EateriesPhotosRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/EateriesPhotosService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/ImageDownloadService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/APIservice/ApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/APIservice/ApiService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/groupPage_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/groupPage_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/groupings.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/groupings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/sessions.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/sessions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/group_page_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/group_page_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Database/Create Databse with image.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Database/Create Databse with image.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/controller/EateriesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/controller/EateriesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/controller/SessionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/controller/SessionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Eateries.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Eateries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Nearby.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Nearby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PlacesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PlacesDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PriceLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PriceLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/EateryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/EateriesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/SessionsEateriesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/SessionsEateriesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/UsersSessionsEateriesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/repository/UsersSessionsEateriesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/EateriesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/EateriesService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -331,7 +260,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/shonim/.android/avd/Pixel_8_API_35.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\hjunz\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -361,8 +290,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="Interface" />
         <option value="layoutResourceFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -370,7 +299,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="detached" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -384,7 +313,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ElaVnla/Nomly.git&quot;,
-    &quot;accountId&quot;: &quot;ae58eee6-18b0-43eb-93c5-7a37f4390f82&quot;
+    &quot;accountId&quot;: &quot;53ddda23-bda7-4f9a-9394-e79c6ece1806&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -412,33 +341,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;Android App.frontend-app.executor&quot;: &quot;Run&quot;,
-    &quot;Application.NomlybackendApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;shonim-fresh&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/shonim/AndroidStudioProjects/NomlyShonim/frontend/app/src/main/res/layout&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;device.mirroring&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "Android App.frontend-app.executor": "Run",
+    "Application.NomlybackendApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "b9c7a9b7",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/erika/AndroidStudioProjects/Nomly5/frontend/app/src/main/res/layout",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "device.mirroring"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/frontend/app/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/frontend/app/src/main/res/anim" />
-      <recent name="$PROJECT_DIR$/frontend/app/src/main/res/drawable" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly5\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\drawable" />
     </key>
@@ -446,48 +373,8 @@
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.w3itexperts.ombe.modals" />
-      <recent name="com.w3itexperts.ombe.adapter" />
-      <recent name="com.w3itexperts.ombe.fragments" />
-      <recent name="com.w3itexperts.ombe.activity" />
-    </key>
   </component>
-  <component name="RunManager" selected="Android App.frontend-app">
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="nomlybackend" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="nomlybackend" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Application.NomlybackendApplication">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="Ombe.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -508,40 +395,11 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Hybrid>
       <Java>
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
         <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Java>
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
@@ -579,40 +437,11 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Hybrid>
       <Java>
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
         <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Java>
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
-      </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
@@ -643,17 +472,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="nomlybackend" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="nomlybackend" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Android App.app" />
       <item itemvalue="Android App.frontend-app" />
@@ -661,6 +479,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.NomlybackendApplication" />
         <item itemvalue="Application.NomlybackendApplication" />
       </list>
     </recent_temporary>
@@ -738,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744287048011</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Updates EateriesPhotos table, added /get-images/{eateryId}">
+      <option name="closed" value="true" />
+      <created>1744562795660</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744562795660</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -761,19 +588,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="ToniAndErikaAPIMerge" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -789,23 +604,10 @@
     <MESSAGE value="updatesmt" />
     <MESSAGE value="api for homepage, allgroups and allsessions done" />
     <MESSAGE value="IT FINALLY WORKED" />
-    <option name="LAST_COMMIT_MESSAGE" value="IT FINALLY WORKED" />
+    <MESSAGE value="Updates EateriesPhotos table, added /get-images/{eateryId}" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates EateriesPhotos table, added /get-images/{eateryId}" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/groupPage_Activity.java</url>
-          <line>223</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$USER_HOME$/Library/Android/sdk/sources/android-35/android/os/MessageQueue.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="jdk.internal.net.http.HttpResponseImpl" memberName="version" />
@@ -819,12 +621,12 @@
       <map>
         <entry key="com.w3itexperts.ombe">
           <value>
-            <CheckInfo lastCheckTimestamp="1744484646842" />
+            <CheckInfo lastCheckTimestamp="1744308923219" />
           </value>
         </entry>
         <entry key="com.w3itexperts.ombe.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1744484646842" />
+            <CheckInfo lastCheckTimestamp="1744308923221" />
           </value>
         </entry>
       </map>

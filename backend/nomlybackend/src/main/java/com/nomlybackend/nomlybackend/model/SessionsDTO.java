@@ -22,6 +22,18 @@ public class SessionsDTO {
     public SessionsDTO() {
     }
 
+    public SessionsDTO(Sessions session) {
+        this.sessionId = session.getSessionId();
+        this.grouping = null;
+        this.sessionName = session.getSessionName();
+        this.location = session.getLocation();
+        this.latitude = session.getLatitude();
+        this.longitude = session.getLongitude();
+        this.meetingDateTime = session.getMeetingDateTime();
+        this.createdAt = session.getCreatedAt();
+        this.completed = session.getCompleted();
+    }
+
     public SessionsDTO(Sessions session,  boolean includeGroupings) {
         this.sessionId = session.getSessionId();
 //        this.grouping = session.getGrouping();

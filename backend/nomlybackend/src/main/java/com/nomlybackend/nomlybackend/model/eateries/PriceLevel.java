@@ -1,8 +1,6 @@
 package com.nomlybackend.nomlybackend.model.eateries;
 
-import jakarta.persistence.Embeddable;
 
-@Embeddable
 public enum PriceLevel {
     PRICE_LEVEL_UNSPECIFIED,
     PRICE_LEVEL_FREE,

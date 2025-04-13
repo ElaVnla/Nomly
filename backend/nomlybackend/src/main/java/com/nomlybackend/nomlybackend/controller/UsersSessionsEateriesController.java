@@ -1,0 +1,28 @@
+package com.nomlybackend.nomlybackend.controller;
+
+import com.nomlybackend.nomlybackend.model.SessionsEateriesDTO;
+import com.nomlybackend.nomlybackend.model.UsersSessionsEateriesDTO;
+import com.nomlybackend.nomlybackend.service.UsersSessionsEateriesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/users-sessions-eateries")
+public class UsersSessionsEateriesController {
+
+    @Autowired
+    UsersSessionsEateriesService usersSessionsEateriesService;
+
+    @GetMapping("/get-users-votes-by-eateryId/{id}")
+    public List<UsersSessionsEateriesDTO> getUsersVotesByEateryId(@PathVariable("id") String id){
+        return usersSessionsEateriesService.getUsersVotesByEateryId(id);
+    }
+
+    @PostMapping("/user-vote")
+    public UsersSessionsEateriesDTO userVote(@RequestBody Map<String, String> body){
+        return usersSessionsEateriesService.userVote(body);
+    }
+}

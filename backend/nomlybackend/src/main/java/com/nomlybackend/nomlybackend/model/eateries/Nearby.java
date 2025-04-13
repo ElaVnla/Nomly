@@ -4,7 +4,7 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 
 public class Nearby {
-    private static String[] includedTypes = {"restaurant"};
+    private String[] includedTypes = {"restaurant"};
     private int maxResultCount = 10;
 
     @Embedded
@@ -19,12 +19,12 @@ public class Nearby {
         this.setLatLong(lat, lng);
     }
 
-    public static String[] getIncludedTypes() {
+    public String[] getIncludedTypes() {
         return includedTypes;
     }
 
-    public static void setIncludedTypes(String[] includedTypes) {
-        Nearby.includedTypes = includedTypes;
+    public void setIncludedTypes(String[] includedTypes) {
+        this.includedTypes = includedTypes;
     }
 
     public int getMaxResultCount() {

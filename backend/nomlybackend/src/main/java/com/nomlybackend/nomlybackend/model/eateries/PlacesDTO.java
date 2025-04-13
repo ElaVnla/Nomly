@@ -21,6 +21,7 @@ public class PlacesDTO {
         private DisplayName displayName;
         private List<String> types;
         private Double rating;
+        private List<Photo> photos;
 
         public static Set<String> getDefaultTypes() {
             return defaultTypes;
@@ -74,13 +75,21 @@ public class PlacesDTO {
             this.rating = rating;
         }
 
+        public List<Photo> getPhotos() { return photos; }
+
+        public void setPhotos(List<Photo> photos) { this.photos = photos; }
+
         public Eateries toEntity(){
             Eateries eatery = new Eateries();
             eatery.setEateryId(this.id);
             eatery.setDisplayName(this.displayName.text);
             eatery.setLatitude(this.location.latitude);
             eatery.setLongitude(this.location.longitude);
-            eatery.setPriceLevel(this.priceLevel);
+            if (this.priceLevel == null){
+                eatery.setPriceLevel(PriceLevel.PRICE_LEVEL_UNSPECIFIED);
+            } else {
+                eatery.setPriceLevel(this.priceLevel);
+            }
             List<String> filtered = this.types.stream()
                             .filter(type -> !defaultTypes.contains(type))
                             .toList();
