@@ -28,6 +28,7 @@ import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.apimodals.groupings;
 import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.apimodals.users;
+import com.w3itexperts.ombe.fragments.ViewSessionFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,6 +97,19 @@ public class groupPage_Activity extends AppCompatActivity {
 
         // Leave group button
         findViewById(R.id.leaveGroupButton).setOnClickListener(v -> showLeaveConfirmation());
+
+        MaterialButton createSessionBtn = findViewById(R.id.createSessionBtn);
+
+        createSessionBtn.setOnClickListener(v -> {
+            if (groupId == -1) {
+                Log.e("CREATE_SESSION", "Group ID missing!");
+                return;
+            }
+
+            Intent createIntent = new Intent(groupPage_Activity.this, SessionActivity.class);
+            createIntent.putExtra("groupId", groupId);
+            startActivity(createIntent);
+        });
     }
 
     @Override
@@ -178,11 +192,32 @@ public class groupPage_Activity extends AppCompatActivity {
                     }
                     loadMembers(members);
 
+//                    List<Session> sessionList = new ArrayList<>();
+//                    for (sessions s : group.getSessions()) {
+//                        sessionList.add(new Session("Session #" + s.getSessionId(),
+//                                s.getMeetingDateTime() + ", " + s.getLocation(),
+//                                s.isCompleted() ? "Done" : "Ongoing"));
+//                    }
+
                     List<Session> sessionList = new ArrayList<>();
                     for (sessions s : group.getSessions()) {
-                        sessionList.add(new Session("Session #" + s.getSessionId(),
-                                s.getMeetingDateTime() + ", " + s.getLocation(),
-                                s.isCompleted() ? "Done" : "Ongoing"));
+                        String[] dateTime = s.getMeetingDateTime().split("T");
+                        String date = dateTime.length > 0 ? dateTime[0] : "N/A";
+                        String time = dateTime.length > 1 ? dateTime[1] : "N/A";
+
+                        Session session = new Session(
+                                s.getSessionName(),
+                                date,
+                                time,
+                                s.getLocation(),
+                                s.isCompleted() ? "Done" : "Ongoing"
+                        );
+
+                        // ✅ Set sessionId and groupId manually
+                        session.sessionId = s.getSessionId();
+                        session.groupId = groupId;
+
+                        sessionList.add(session);
                     }
 
                     sessionsRecyclerView.setLayoutManager(new LinearLayoutManager(groupPage_Activity.this));
@@ -240,12 +275,36 @@ public class groupPage_Activity extends AppCompatActivity {
     }
 
     private static class Session {
-        String title, details, status;
-
+        String title, details, location, date, time, status;
+        int sessionId;
+        int groupId;
         Session(String title, String details, String status) {
             this.title = title;
             this.details = details;
             this.status = status;
+        }
+
+        Session(String title, String date, String time, String location, String status) {
+//            this.title = title;
+//            this.details = details;
+//            this.status = status;
+            this.title = title;
+            this.location = location;
+            this.date = date;
+            this.time = time;
+            this.status = status;
+        }
+        Session(String title, String location, String date, String time, String status, int sessionId, int groupId) {
+//            this.title = title;
+//            this.details = details;
+//            this.status = status;
+            this.title = title;
+            this.location = location;
+            this.date = date;
+            this.time = time;
+            this.status = status;
+            this.sessionId = sessionId;
+            this.groupId = groupId;
         }
     }
 
@@ -267,8 +326,22 @@ public class groupPage_Activity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull SessionViewHolder h, int pos) {
             Session s = sessions.get(pos);
             h.title.setText(s.title);
-            h.details.setText(s.details);
+            h.details.setText(String.format("%s, %s, %s", s.date, s.time, s.location));
             h.statusButton.setText(s.status);
+
+            //  New: Click to open ViewSessionFragment
+            h.statusButton.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), SessionActivity.class);
+                intent.putExtra("title", s.title);
+                intent.putExtra("date", s.date);
+                intent.putExtra("time", s.time);
+                intent.putExtra("location", s.location);
+                intent.putExtra("status", s.status);
+                intent.putExtra("sessionId", s.sessionId);
+                intent.putExtra("groupId", groupId);
+                v.getContext().startActivity(intent);
+            });
+
         }
 
         @Override

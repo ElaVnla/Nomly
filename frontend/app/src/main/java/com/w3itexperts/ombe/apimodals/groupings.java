@@ -27,6 +27,10 @@ public class groupings {
         this.groupCode = groupCode;
     }
 
+    public groupings() {
+        // empty constructor required for session creation
+    }
+
     public int getGroupId() {
         return groupId;
     }

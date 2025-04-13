@@ -25,6 +25,11 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/activity_session.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/allgroups.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -140,6 +145,11 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_plan_session.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -150,7 +160,22 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_swiping.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_view_session.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_wishlist.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/group_page_main.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -161,6 +186,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/incomingsessions.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/item_card.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
         </config>
@@ -237,9 +267,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="IT FINALLY WORKED">
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/usersUpdate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/ResetPwOtp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/forgetpassword_otp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/NomlyShonim.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/SessionActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/CardStackAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/PlanSessionFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/SwipingFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/ViewSessionFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/modals/RestaurantCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/fade_in.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/fade_out.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/anim/sweep_glow.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/arrow_back.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/blobvector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/circlebutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/cross_swipe.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/finalizesession.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/greenbites.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/like_swipe.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/lolacafe.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/pinkswipebuttonsvg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rectangle_29.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_card_bg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_gray_button.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_image_clip.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_primary_button.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/rounded_yellow_header.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/sushi.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/swipesymbol.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/variant2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/drawable/yellowsession.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/activity_session.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_plan_session.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_swiping.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_view_session.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/item_card.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/1ce8fbe9cd5f67467fbc6471b3e35c77ab6be457/metadata.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/1ce8fbe9cd5f67467fbc6471b3e35c77ab6be457/metadata.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -248,27 +310,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Database/Dummy Data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Database/Dummy Data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/APIservice/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/APIservice/ApiClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/APIservice/ApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/APIservice/ApiService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/allGroupsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/allGroupsAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourGroupsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/adapter/yourGroupsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/groupPage_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/groupPage_Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/groupings.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/groupings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/sessions.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/sessions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/users.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/apimodals/users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/EditProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/EditProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/allGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/allGroups.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/create_password.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/create_password.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/home_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/home_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/reset_password.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/reset_password.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/create_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/create_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_edit_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_edit_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_reset_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_reset_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/group_page_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/group_page_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +331,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=RF8M22CC3FJ)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/shonim/.android/avd/Pixel_8_API_35.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -331,7 +384,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ElaVnla/Nomly.git&quot;,
-    &quot;accountId&quot;: &quot;820cf680-7b50-47c7-adb5-c78b33732bde&quot;
+    &quot;accountId&quot;: &quot;ae58eee6-18b0-43eb-93c5-7a37f4390f82&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -366,14 +419,15 @@
     &quot;Application.NomlybackendApplication.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;shonim-fresh&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/erika/AndroidStudioProjects/Nomly5&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/shonim/AndroidStudioProjects/NomlyShonim/frontend/app/src/main/res/layout&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -382,6 +436,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/frontend/app/src/main/res/anim" />
+      <recent name="$PROJECT_DIR$/frontend/app/src/main/res/drawable" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly5\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\drawable" />
     </key>
@@ -389,8 +446,48 @@
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.w3itexperts.ombe.modals" />
+      <recent name="com.w3itexperts.ombe.adapter" />
+      <recent name="com.w3itexperts.ombe.fragments" />
+      <recent name="com.w3itexperts.ombe.activity" />
+    </key>
   </component>
   <component name="RunManager" selected="Android App.frontend-app">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="nomlybackend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="nomlybackend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="Ombe.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -557,40 +654,6 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="nomlybackend" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="nomlybackend" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Android App.app" />
       <item itemvalue="Android App.frontend-app" />
@@ -729,6 +792,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="IT FINALLY WORKED" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/activity/groupPage_Activity.java</url>
+          <line>223</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$USER_HOME$/Library/Android/sdk/sources/android-35/android/os/MessageQueue.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="jdk.internal.net.http.HttpResponseImpl" memberName="version" />
@@ -742,12 +819,12 @@
       <map>
         <entry key="com.w3itexperts.ombe">
           <value>
-            <CheckInfo lastCheckTimestamp="1744396418190" />
+            <CheckInfo lastCheckTimestamp="1744484646842" />
           </value>
         </entry>
         <entry key="com.w3itexperts.ombe.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1744396418196" />
+            <CheckInfo lastCheckTimestamp="1744484646842" />
           </value>
         </entry>
       </map>
