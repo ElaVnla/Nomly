@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 @Table(name = "Eateries")
 public class Eateries {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "EateryId")
     private String eateryId;
 
@@ -32,9 +31,6 @@ public class Eateries {
 
     @Column(name = "OperationHours") //TODO 1: to be implemented, q complicated
     private String operationHours;
-
-
-
 
     public Eateries() {
     }

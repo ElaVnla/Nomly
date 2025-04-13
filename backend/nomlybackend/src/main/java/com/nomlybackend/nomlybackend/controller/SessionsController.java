@@ -44,5 +44,4 @@ public class SessionsController {
     public SessionsDTO sessionCompleted(@PathVariable("id") int id){
         return sessionsService.sessionCompleted(id);
     }
-
 }

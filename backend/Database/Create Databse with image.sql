@@ -82,19 +82,12 @@ create table NomlyDB.Eateries(
     primary key (EateryId)
 );
 
-create table NomlyDB.EateriesPhotos(
-	EateryId varchar(255) NOT NULL,
-    photoName varchar(255) NOT NULL,
-    foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
-
-
-);
-
 create table NomlyDB.SessionsEateries(
 	SessionEateryId int NOT NULL auto_increment,
 	SessionId int NOT NULL,
 	EateryId varchar(255) NOT NULL,
     primary key (SessionEateryId),
+	Ranking int NOT NULL,
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
     foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
 
@@ -109,5 +102,13 @@ create table NomlyDB.UsersSessionsEateries(
     primary key (UserSessionEateryId),
     foreign key (UserId) references Users(UserId) ON DELETE CASCADE,
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
+    foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
+);
+
+create table NomlyDB.EateriesPhotos(
+	PhotoId int NOT NULL auto_increment,
+    PhotoName varchar(1000) NOT NULL,
+    EateryId varchar(255) NOT NULL,
+    primary key (PhotoId),
     foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
 );
