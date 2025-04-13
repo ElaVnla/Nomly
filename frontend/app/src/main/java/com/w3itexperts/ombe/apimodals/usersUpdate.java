@@ -7,12 +7,15 @@ public class usersUpdate {
     private String email;
     private String preferences;
 
+    // constructor ====================================================
     public usersUpdate(String username, String password, String email, String preferences) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.preferences = preferences;
     }
+
+    // getter and setter ====================================
 
     public String getUsername() {
         return username;

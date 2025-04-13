@@ -24,10 +24,11 @@ import com.w3itexperts.ombe.apimodals.usersgroupings;
 import com.w3itexperts.ombe.apimodals.RegistrationRequest;
 
 
-
+// retrofit how to request/ use api
+// https://square.github.io/retrofit/
 public interface ApiService {
 
-    // Users API
+    // ALL USERS API STUFF HERE ================================================
 
     // Returns a list, data is:  userId,username,email,password,preferenes,createdAt,grouplist
     @GET("users/get-all-users")
@@ -43,9 +44,11 @@ public interface ApiService {
     Call<users> updateUser(@Path("id") int id, @Body Map<String, String> body);
 
     @POST("users/add-user")
-    Call<users> addUser(@Body users user);
+    Call<users> addUser(@Body Map<String, String> user);
 
-// Users Groupings API
+
+
+    // ALL GROUP USERS STUFF HERE ======================================================
 
     //@POST("users-groupings/add-user-to-grouping")
     //Call<Void> addUserToGrouping(@Body usersgroupings userGrouping);
@@ -63,10 +66,7 @@ public interface ApiService {
     @POST("users-groupings/remove-user-from-grouping")
     Call<Boolean> removeUserFromGrouping(@Body Map<String, String> body);
 
-
-
-
-// Sessions API
+    // ALL SESSIONS API HERE ================================================================
 
     @GET("sessions/get-all-sessions")
     Call<List<sessions>> getAllSessions();
@@ -86,7 +86,7 @@ public interface ApiService {
     @POST("sessions/session-completed/{id}")
     Call<Void> markSessionCompleted(@Path("id") int id);
 
-// Groupings API
+    // ALL PURELY GROUPINGS API HERE ==============================================================
 
     @GET("groupings/get-all-groupings")
     Call<List<groupings>> getAllGroupings();
@@ -103,12 +103,15 @@ public interface ApiService {
     //@POST("groupings/add-grouping")
     //Call<groupings> addGrouping(@Body groupings grouping);
 
-
-    // ✅ FIXED: addGrouping now accepts a Map instead of a groupings object
-    //toni change
     @POST("groupings/add-grouping")
     Call<groupings> addGrouping(@Body Map<String, String> groupData);
 
+    //new by toni
+    @GET("groupings/get-grouping-by-code/{code}")
+    Call<groupings> getGroupingByCode(@Path("code") String groupCode);
+
+
+    // ALL EMAIL API STUFF HERE ===================================================
     // Email (Registration) API
     @POST("email/register")
     Call<RegistrationResponse> registerEmail(@Body RegistrationRequest registrationRequest);
@@ -116,11 +119,6 @@ public interface ApiService {
     // (Keep your other endpoints as before)
     @POST("email/verify-otp")
     Call<Boolean> verifyOtp(@Body com.w3itexperts.ombe.apimodals.OtpVerificationRequest otpRequest);
-
-    //new by toni
-    @GET("groupings/get-grouping-by-code/{code}")
-    Call<groupings> getGroupingByCode(@Path("code") String groupCode);
-
 
 
 }

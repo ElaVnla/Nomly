@@ -15,7 +15,6 @@
         android:orientation="vertical"
         android:padding="0dp">
 
-
         <!-- blob -->
         <ImageView
             android:layout_width="508dp"
@@ -28,15 +27,15 @@
             android:translationY="-200dp" />
 
         <!-- Placeholder for Group Photo FROM spring boot -->
+        <!-- Changed to a circle shape (ensure width and height are equal) -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/groupPhotoInput"
-            android:layout_width="131dp"
-            android:layout_height="288dp"
+            android:layout_width="161dp"
+            android:layout_height="161dp"
             android:layout_marginTop="-100dp"
             android:src="@drawable/person4"
-            android:translationY="-310dp"
-            app:shapeAppearanceOverlay="@style/RoundedImageView"
-            />
+            android:translationY="-210dp"
+            app:shapeAppearanceOverlay="@style/abitcircleImageView"/>
 
         <!-- Placeholder for Group Name Text FROM spring boot -->
         <TextView
@@ -48,17 +47,16 @@
             android:gravity="center"
             android:text="GroupName"
             android:textColor="#FFFFFF"
-            android:textSize="28sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:translationY="-750dp" />
-
+            android:translationY="-585dp" />
 
         <!-- Small Circles in a Horizontal Row -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:translationY="-840dp">
+            android:translationY="-700dp">
 
             <ImageView
                 android:id="@+id/backbtnToHomePage"
@@ -72,8 +70,7 @@
                 android:src="@drawable/right_arrow"
                 app:iconTint="#650411"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/leaveGroupButton"
@@ -86,8 +83,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="22dp"
-                android:translationX="350dp"
-                />
+                android:translationX="350dp" />
 
             <ImageView
                 android:id="@+id/editGroupButton"
@@ -100,13 +96,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="-20dp"
                 android:layout_marginTop="26dp"
-                android:translationX="350dp"
-                />
+                android:translationX="350dp" />
 
             <ImageView
                 android:layout_width="135dp"
                 android:layout_height="290dp"
                 android:layout_marginStart="216dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/smallcircle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -116,6 +112,7 @@
                 android:layout_width="135dp"
                 android:layout_height="290dp"
                 android:layout_marginStart="56dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/smallcircle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -126,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="254dp"
-                android:layout_marginTop="105dp"
+                android:layout_marginTop="135dp"
                 android:text="10"
                 android:textColor="#FFFFFF"
                 android:textSize="50sp"
@@ -140,17 +137,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="97dp"
-                android:layout_marginTop="134dp"
+                android:layout_marginTop="164dp"
                 android:text="20 Feb 2025"
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -161,8 +155,8 @@
             android:textColor="#FFFFFF"
             android:textSize="10sp"
             android:textStyle="bold"
-            android:translationX="81dp"
-            android:translationY="-995dp" />
+            android:translationX="76dp"
+            android:translationY="-855dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -174,8 +168,7 @@
             android:textSize="10sp"
             android:textStyle="bold"
             android:translationX="-82dp"
-            android:translationY="-1060dp" />
-
+            android:translationY="-920dp" />
 
         <LinearLayout
             android:id="@+id/container"
@@ -184,10 +177,9 @@
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
             android:orientation="vertical"
-            android:translationY="-900dp">
+            android:translationY="-740dp">
 
             <!-- Flexbox Layout for Members -->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -201,7 +193,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Placeholder for Members LIST each linear layout is one Member ITEM FROM spring boot -->
+            <!-- Placeholder for Members LIST; each linear layout is one Member ITEM FROM spring boot -->
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flexboxMembers"
                 android:layout_width="match_parent"
@@ -217,12 +209,13 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
 
-                    <!-- Member Profile Image (Centered Below Button) -->
-                    <ImageView
+                    <!-- Member Profile Image (Displayed as a circle) -->
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/person4"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        app:shapeAppearanceOverlay="@style/CircularImageView" />
 
                     <!-- Member Name (Button) -->
                     <com.google.android.material.button.MaterialButton
@@ -234,10 +227,7 @@
                         style="@style/button_secondary"
                         android:text="ToniFoodie"
                         android:layout_marginTop="10dp"/>
-
-
                 </LinearLayout>
-
 
                 <!-- Member Item (Wraps Button + Image) -->
                 <LinearLayout
@@ -246,12 +236,13 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
 
-                    <!-- Member Profile Image (Centered Below Button) -->
-                    <ImageView
+                    <!-- Member Profile Image (Displayed as a circle) -->
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/person4"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        app:shapeAppearanceOverlay="@style/CircularImageView" />
 
                     <!-- Member Name (Button) -->
                     <com.google.android.material.button.MaterialButton
@@ -263,8 +254,6 @@
                         style="@style/button_secondary"
                         android:text="ToniFoodie"
                         android:layout_marginTop="10dp"/>
-
-
                 </LinearLayout>
 
                 <!-- Member Item 2 (Wraps Button + Image) -->
@@ -274,12 +263,13 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
 
-                    <!-- Member Profile Image (Centered Below Button) -->
-                    <ImageView
+                    <!-- Member Profile Image (Displayed as a circle) -->
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/person4"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        app:shapeAppearanceOverlay="@style/CircularImageView" />
 
                     <!-- Member Name (Button) -->
                     <com.google.android.material.button.MaterialButton
@@ -291,10 +281,7 @@
                         style="@style/button_secondary"
                         android:text="ToniFoodie"
                         android:layout_marginTop="10dp"/>
-
-
                 </LinearLayout>
-
 
             </com.google.android.flexbox.FlexboxLayout>
 
@@ -304,8 +291,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -331,7 +317,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="20dp"/>
 
-
                 <!-- Recycler view for Sessions from Spring Boot using layout/sessions.xml -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/yourGroupSessions"
@@ -342,15 +327,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="5"
                     tools:listitem="@layout/sessions" />
-
-
-
-
-
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>

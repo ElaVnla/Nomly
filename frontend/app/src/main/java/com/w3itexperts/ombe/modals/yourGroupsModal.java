@@ -8,8 +8,7 @@ public class yourGroupsModal {
 
     private int groupId; //new id
 
-
-
+    // Constructor here ===================================================
     public yourGroupsModal(String NoOfMembers, String noOfSessions, int groupImage, String groupName, int groupId) {
         this.NoOfMembers = NoOfMembers;
         this.noOfSessions = noOfSessions;

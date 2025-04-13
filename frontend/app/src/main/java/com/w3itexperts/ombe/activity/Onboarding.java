@@ -3,6 +3,7 @@ package com.w3itexperts.ombe.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.animation.AnimationUtils;
@@ -40,6 +41,7 @@ public class Onboarding extends AppCompatActivity {
         b = OnboardingBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
 
+        Log.e("NOMLYPROCESS", "Onboarding screen to be displayed");
         // When user click on "get started" button, this will be triggered and activate welcome
         // java class
         b.next.setOnClickListener(v -> startActivity(new Intent(this,Welcome.class)));

@@ -19,6 +19,9 @@ import com.w3itexperts.ombe.apimodals.OtpVerificationRequest;
 import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.databinding.OtpLayoutBinding;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +45,7 @@ public class otp extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Retrieve registration details from arguments.
+        // Retrieve registration details from arguments passed
         if (getArguments() != null) {
             username = getArguments().getString("username", "");
             email = getArguments().getString("email", "");
@@ -50,81 +53,92 @@ public class otp extends Fragment {
             allergies = getArguments().getString("allergies", "");
         }
 
+        // go back to create account page
         b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
 
         b.verifyBtn.setOnClickListener(v -> {
-            // Combine OTP fields.
-            String code = b.otp1.getText().toString().trim()
+            ApiService apiService = ApiClient.getApiService();
+            // get the 4 separate numbers and then combine them together
+            String OTPCode = b.otp1.getText().toString().trim()
                     + b.otp2.getText().toString().trim()
                     + b.otp3.getText().toString().trim()
                     + b.otp4.getText().toString().trim();
-            if (code.length() != 4) {
-                String msg = "Please enter the complete OTP";
+
+            // validation below
+            // if less than 4 numbers inputted, output an error
+            if (OTPCode.length() != 4) {
+                String msg = "Please enter the 4 digit OTP Number";
                 Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                Log.d("OTP", msg);
+                Log.d("NOMLYPROCESS", msg);
                 return;
             }
 
-            // Create the OTP verification request.
+            // initiale the class to be send to the backend to varify wehtehr the otp is correct or not
             OtpVerificationRequest otpRequest = new OtpVerificationRequest();
             otpRequest.setEmail(email);
-            otpRequest.setOtp(code);
+            otpRequest.setOtp(OTPCode);
             otpRequest.setUsername(username);
             otpRequest.setPassword(password);
             otpRequest.setAllergies(allergies);
 
-            ApiService apiService = ApiClient.getApiService();
-            // First, verify the OTP.
+            // call api
             apiService.verifyOtp(otpRequest).enqueue(new Callback<Boolean>() {
                 @Override
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                     if (response.isSuccessful() && Boolean.TRUE.equals(response.body())) {
-                        // OTP verified successfully.
+                        // OTP verified successfully
                         String msg = "OTP verified successfully.";
                         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                        Log.d("OTP", msg);
-                        // Now create the new user by calling addUser.
-                        users newUser = new users(username, email, password, allergies);
-                        apiService.addUser(newUser).enqueue(new Callback<users>() {
+                        Log.d("NOMLYPROCESS", msg);
+                        // Create a Map to to put user details to register
+                        Map<String, String> userMap = new HashMap<>();
+                        userMap.put("username", username);
+                        userMap.put("email", email);
+                        userMap.put("password", password);
+                        userMap.put("preferences", allergies);
+
+                        // since otp verified, add user call api
+                        apiService.addUser(userMap).enqueue(new Callback<users>() {
                             @Override
                             public void onResponse(Call<users> call, Response<users> response) {
                                 if (response.isSuccessful() && response.body() != null) {
-                                    users createdUser = response.body();
+                                    users newUser = response.body();
                                     String msg = "Account created successfully!";
                                     Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                                    Log.d("OTP", msg);
-                                    SessionManager.getInstance(getContext()).setCurrentUser(createdUser);
+                                    Log.d("NOMLYPROCESS", msg);
+                                    SessionManager.getInstance(getContext()).setCurrentUser(newUser);
                                     startActivity(new Intent(getContext(), home.class));
                                     getActivity().finish();
                                 } else {
-                                    String msg = "Account creation failed: " + response.code();
-                                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                                    Log.d("OTP", msg);
+                                    String errorMsg = "Internal: Account creation fail: " + response.code();
+                                    Toast.makeText(getContext(), errorMsg, Toast.LENGTH_LONG).show();
+                                    Log.d("NOMLYPROCESS", String.valueOf(response.errorBody()));
                                 }
                             }
                             @Override
                             public void onFailure(Call<users> call, Throwable t) {
                                 String msg = "Account creation failed: " + t.getMessage();
                                 Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                                Log.d("OTP", msg);
+                                Log.d("NOMLYPROCESS", msg);
                             }
                         });
+
                     } else {
                         String msg = "OTP verification failed";
                         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                        Log.d("OTP", msg);
+                        Log.d("NOMLYPROCESS", msg);
                     }
                 }
                 @Override
                 public void onFailure(Call<Boolean> call, Throwable t) {
                     String msg = "OTP verification failed: " + t.getMessage();
                     Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                    Log.d("OTP", msg);
+                    Log.d("NOMLYPROCESS", msg);
                 }
             });
         });
 
-        // Optional: Setup TextWatchers to auto-move focus between OTP fields.
+        // auto-move focus between OTP fields.
         b.otp1.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {

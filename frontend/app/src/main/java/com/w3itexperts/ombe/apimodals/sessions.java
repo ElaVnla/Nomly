@@ -12,6 +12,8 @@ public class sessions {
     private String createdAt;
     private boolean completed;
 
+    // Constructor here =======================================
+
     public sessions(int sessionId, Object grouping, String location, String latlong, String meetingDateTime, String createdAt, boolean completed) {
         this.sessionId = sessionId;
         this.grouping = grouping;
@@ -32,7 +34,7 @@ public class sessions {
     }
 
 
-
+    // getter and setter here ==========================================
     public int getSessionId() {
         return sessionId;
     }

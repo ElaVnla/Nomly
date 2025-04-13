@@ -1,6 +1,7 @@
 package com.w3itexperts.ombe.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +27,15 @@ public class login_signin_Activity extends AppCompatActivity {
 
         boolean showCreateAccount = getIntent().getBooleanExtra("showCreateAccount", false);
 
+        // we're using fragment, check whether user click on create account option
+        // or if they click login
         if (showCreateAccount) {
+            Log.e("NOMLYPROCESS", "User clicked on sign up page");
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main, new create_account())  // Replace login fragment with create_account
                     .commit();
         } else {
+            Log.e("NOMLYPROCESS", "User clicked on log in page");
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main, new login())
                     .commit();

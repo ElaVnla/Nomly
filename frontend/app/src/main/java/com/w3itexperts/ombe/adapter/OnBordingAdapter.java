@@ -27,7 +27,7 @@ public class OnBordingAdapter extends RecyclerView.Adapter<OnBordingAdapter.OnBo
     @NonNull
     @Override
     public OnBordingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.on_bording_item_layout, parent, false); // Replace with your actual layout file
+        View view = inflater.inflate(R.layout.on_bording_item_layout, parent, false);
         return new OnBordingViewHolder(view);
     }
 
@@ -52,7 +52,7 @@ public class OnBordingAdapter extends RecyclerView.Adapter<OnBordingAdapter.OnBo
 
         public OnBordingViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);  // Adjust IDs based on your layout
+            imageView = itemView.findViewById(R.id.imageView);
             titleView = itemView.findViewById(R.id.titleView);
             subTitleView = itemView.findViewById(R.id.subTitleView);
         }

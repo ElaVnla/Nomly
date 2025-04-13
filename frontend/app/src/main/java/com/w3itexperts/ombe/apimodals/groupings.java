@@ -12,6 +12,8 @@ public class groupings {
     private List<users> users;
     private List<sessions> sessions;
 
+    // Constructor here ======================
+
     public groupings(int groupId, String groupName, String createdAt, List<users> users, List<sessions> sessions) {
         this.groupId = groupId;
         this.groupName = groupName;
@@ -26,6 +28,8 @@ public class groupings {
         this.createdAt = createdAt;
         this.groupCode = groupCode;
     }
+
+    // getter and setter here ====================
 
     public int getGroupId() {
         return groupId;
