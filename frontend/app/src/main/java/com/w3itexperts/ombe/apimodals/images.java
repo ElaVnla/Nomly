@@ -6,11 +6,13 @@ public class images {
     private int ImageId;
     private Image Image;
 
+    // constructor here ==========================
     public images(int imageId, android.media.Image image) {
         ImageId = imageId;
         Image = image;
     }
 
+    // Getter and setter here ===================================
     public int getImageId() {
         return ImageId;
     }

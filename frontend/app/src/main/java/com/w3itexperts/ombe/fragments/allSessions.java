@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,10 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class allSessions extends Fragment {
 
@@ -54,45 +59,15 @@ public class allSessions extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Retrieve current user from SessionManager.
-        final users storedUser = SessionManager.getInstance(getContext()).getCurrentUser();
-        if (storedUser == null) {
-            Log.e("API_SESSIONS", "No current user found in session!");
-            logoutUser();
-            return;
-        }
-
-        // Refresh the user data from the API to get the latest details.
-        ApiService apiService = ApiClient.getApiService();
-        apiService.getUser(storedUser.getUserId()).enqueue(new Callback<users>() {
-            @Override
-            public void onResponse(Call<users> call, Response<users> response) {
-                users refreshedUser;
-                if (response.isSuccessful() && response.body() != null) {
-                    refreshedUser = response.body();
-                    // Update SessionManager with the new data.
-                    SessionManager.getInstance(getContext()).setCurrentUser(refreshedUser);
-                } else {
-                    Log.e("API_SESSIONS", "getUser error: " + response.code());
-                    refreshedUser = storedUser;
-                }
-                updateUI(refreshedUser);
-            }
-
-            @Override
-            public void onFailure(Call<users> call, Throwable t) {
-                Log.e("API_SESSIONS", "API call failed: " + t.getMessage());
-                updateUI(storedUser);
-            }
-        });
+        SessionAPISetup();
 
         // Set up search functionality to filter the sessions list.
         b.searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String query = b.searchEditText.getText().toString().trim().toLowerCase();
-                Log.d("SEARCH_SESSIONS", "Search query: '" + query + "'");
-                // If query is empty, reset the adapter to show the full list.
+                Log.d("NOMLYPROCESS", "Search query: '" + query + "'");
+                // If query is empty, reset the adapter to show the full list
                 if (query.isEmpty()) {
                     allSessionsAdapter adapter = new allSessionsAdapter(fullSessionList);
                     b.allsessionsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -101,7 +76,7 @@ public class allSessions extends Fragment {
                     return;
                 }
                 List<yourSessionsModal> filteredList = new ArrayList<>();
-                // Filter by checking if any key field contains the query.
+                // Filter by checking if any key field contains the query ===================
                 for (yourSessionsModal modal : fullSessionList) {
                     if (modal.getRestaurantName() != null &&
                             modal.getRestaurantName().trim().toLowerCase().contains(query)) {
@@ -117,7 +92,7 @@ public class allSessions extends Fragment {
                         filteredList.add(modal);
                     }
                 }
-                Log.d("SEARCH_SESSIONS", "Filtered list size: " + filteredList.size());
+                Log.d("NOMLYPROCESS", "Filtered list size: " + filteredList.size());
                 // Update the adapter with the filtered list.
                 allSessionsAdapter filteredAdapter = new allSessionsAdapter(filteredList);
                 b.allsessionsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -125,6 +100,47 @@ public class allSessions extends Fragment {
                 filteredAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void SessionAPISetup()
+    {
+        try {
+            // Retrieve current user from SessionManager.
+            final users CurrentlyLoggedUser = SessionManager.getInstance(getContext()).getCurrentUser();
+            if (CurrentlyLoggedUser == null) {
+                Log.e("NOMLYPROCESS", "No current user found in session!");
+                logoutUser();
+                return;
+            }
+
+            // Refresh the user data from the API to get the latest details.
+            ApiService apiService = ApiClient.getApiService();
+            apiService.getUser(CurrentlyLoggedUser.getUserId()).enqueue(new Callback<users>() {
+                @Override
+                public void onResponse(Call<users> call, Response<users> response) {
+                    users UserFound;
+                    if (response.isSuccessful() && response.body() != null) {
+                        UserFound = response.body();
+                        // Update SessionManager with the new data
+                        SessionManager.getInstance(getContext()).setCurrentUser(UserFound);
+                    } else {
+                        Log.e("NOMLYPROCESS", "getUser error: " + response.code());
+                        UserFound = CurrentlyLoggedUser;
+                    }
+                    updateUI(UserFound);
+                }
+
+                @Override
+                public void onFailure(Call<users> call, Throwable t) {
+                    Log.e("NOMLYPROCESS", "API call failed: " + t.getMessage());
+                    updateUI(CurrentlyLoggedUser);
+                }
+            });
+        }
+        catch (Exception e) {
+            Log.e("NOMLYPROCESS", "ERROR: When using getUser API - " + e.getMessage());
+            Toast.makeText(getContext(), "404 ERROR: Contact Admin Support", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateUI(users user) {
@@ -135,12 +151,12 @@ public class allSessions extends Fragment {
             for (groupings grp : groupsList) {
                 if (grp.getSessions() != null) {
                     for (sessions sess : grp.getSessions()) {
-                        // Map fields from the session object.
-                        String restaurantName = sess.getLocation();           // Using location as "restaurant name"
-                        String dateTimeAddress = sess.getMeetingDateTime();     // Using meetingDateTime as a string
-                        String groupName = grp.getGroupName();                  // Parent group name
+                        // store session object info stuff here
+                        String restaurantName = sess.getLocation();
+                        String dateTimeAddress = FormatDateTimeString(sess.getMeetingDateTime());
+                        String groupName = grp.getGroupName();
                         String sessionStatus = sess.isCompleted() ? "Completed" : "Upcoming";
-                        String sessionTitle = "Session " + sess.getSessionId(); // Dummy title; adjust if needed
+                        String sessionTitle = "Session @" + sess.getLocation();
 
                         yourSessionsModal modal = new yourSessionsModal(
                                 restaurantName,
@@ -160,7 +176,7 @@ public class allSessions extends Fragment {
         adapter = new allSessionsAdapter(sessionModalList);
         b.allsessionsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         b.allsessionsView.setAdapter(adapter);
-        Log.d("API_SESSIONS", "Displayed sessions count: " + sessionModalList.size());
+        Log.d("NOMLYPROCESS", "Displayed sessions count: " + sessionModalList.size());
     }
 
     private void logoutUser() {
@@ -170,4 +186,22 @@ public class allSessions extends Fragment {
         startActivity(intent);
         getActivity().finish();
     }
+
+
+    public String FormatDateTimeString(String jsonDateString) {
+        SimpleDateFormat CurrentFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        // convert to this format
+        SimpleDateFormat OutputResult = new SimpleDateFormat("dd MMM yyyy hh:mm a", Locale.ENGLISH);
+
+        try {
+            // Parse the JSON date string into a Date object.
+            Date date = CurrentFormat.parse(jsonDateString);
+            return OutputResult.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Return the original string if parsing fails.
+            return jsonDateString;
+        }
+    }
+
 }

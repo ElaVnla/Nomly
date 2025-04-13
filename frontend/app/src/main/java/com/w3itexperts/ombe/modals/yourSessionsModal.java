@@ -8,6 +8,8 @@ public class yourSessionsModal {
 
     private String sessionTitle;
 
+    // Constructor here ====================================
+
     public yourSessionsModal(String restaurantName,String DateTimeAddress,String GroupName, String sessionStatus, String sessionTitle)
     {
         this.DateTimeAddress = DateTimeAddress;
@@ -16,6 +18,8 @@ public class yourSessionsModal {
         this.sessionStatus = sessionStatus;
         this.sessionTitle = sessionTitle;
     }
+
+    // getter and setter here ==========================
 
     public String getRestaurantName() {
         return restaurantName;

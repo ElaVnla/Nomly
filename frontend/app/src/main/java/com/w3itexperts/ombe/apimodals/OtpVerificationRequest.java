@@ -7,7 +7,10 @@ public class OtpVerificationRequest {
     private String password;
     private String allergies;
 
+    // Constructor here ===========================
     public OtpVerificationRequest() {}
+
+    // Getter and setter here ==============================
 
     public String getEmail() {
         return email;

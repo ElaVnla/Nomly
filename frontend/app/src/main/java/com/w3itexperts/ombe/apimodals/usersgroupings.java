@@ -8,6 +8,8 @@ public class usersgroupings {
     private int UserId;
     private String JoinedAt;
 
+    // Constructor here =========================================================
+
     public usersgroupings(int userGroupId, int groupId, int userId, String joinedAt) {
         this.UserGroupId = userGroupId;
         this.GroupId = groupId;
@@ -20,6 +22,7 @@ public class usersgroupings {
         this.GroupId = groupId;
    }
 
+   // setter and getter here ====================================
     public int getUserGroupId() {
         return UserGroupId;
     }

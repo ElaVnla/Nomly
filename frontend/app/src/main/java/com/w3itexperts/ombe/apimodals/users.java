@@ -13,6 +13,8 @@ public class users {
     private String createdAt;
     private List<groupings> groups;
 
+    // constructor here ====================================================
+
     public users(String username, String email, String password, String preferences)
     {
 
@@ -36,6 +38,8 @@ public class users {
     public users() {
 
     }
+
+    // setter and getter here ===========================================
 
     public void setUserId(int userId) {
         this.userId = userId;

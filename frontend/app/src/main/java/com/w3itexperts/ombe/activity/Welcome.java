@@ -2,6 +2,7 @@ package com.w3itexperts.ombe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,8 @@ public class Welcome extends AppCompatActivity {
         EdgeToEdge.enable(this);
         b = WelcomeBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
+
+        Log.e("NOMLYPROCESS", "Welcome page is being displayed");
 
         b.logInAccount.setOnClickListener(v -> startActivity(new Intent(this, login_signin_Activity.class)));
         b.createNewAccount.setOnClickListener(v -> {
