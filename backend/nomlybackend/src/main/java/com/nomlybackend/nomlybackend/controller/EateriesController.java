@@ -28,11 +28,6 @@ public class EateriesController {
         return eateriesService.getAllEateries();
     }
 
-//    @GetMapping("/get-eateries/{sessionId}")
-//    public String getRestaurant() throws Exception {
-//        return "temp";
-//    }
-
     @GetMapping("/get-eatery/{id}")
     public EateriesDTO getEatery(@PathVariable("id") String id) {
         return eateriesService.getEateryById(id);

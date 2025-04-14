@@ -1,14 +1,13 @@
 package com.nomlybackend.nomlybackend.service;
 
 
-import com.nomlybackend.nomlybackend.model.Groupings;
-import com.nomlybackend.nomlybackend.model.GroupingsDTO;
-import com.nomlybackend.nomlybackend.model.Users;
-import com.nomlybackend.nomlybackend.model.UsersDTO;
+import com.nomlybackend.nomlybackend.model.*;
 import com.nomlybackend.nomlybackend.repository.GroupingsRepository;
+import com.nomlybackend.nomlybackend.repository.ImagesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -19,6 +18,9 @@ public class GroupingsService {
 
     @Autowired
     private GroupingsRepository groupingsRepository;
+
+    @Autowired
+    private ImagesRepository imagesRepository;
 
     public List<GroupingsDTO> getAllGroupings() {
         List<Groupings> groupings = groupingsRepository.findAll();
@@ -45,11 +47,24 @@ public class GroupingsService {
         return false;
     }
 
-    public GroupingsDTO updateGroupingById(int id, Map<String,String> body){
+    public GroupingsDTO updateGroupingById(int id, Map<String,String> body) throws IOException {
         Groupings current = groupingsRepository.findById(id).get();
 
 
         current.setGroupName(body.get("groupName"));
+        // TODO make groupings and users subclass of profile to remove code reuse
+        Images oldImage = current.getImage();
+        if (oldImage != null){
+            groupingsRepository.save(current);
+            current.setImage(null);
+            imagesRepository.delete(oldImage);
+        }
+
+        byte[] imageBytes = Base64.getDecoder().decode(body.get("profilePicture"));
+        Images image = new Images();
+        image.setProfilePicture(imageBytes);
+        imagesRepository.save(image);
+        current.setImage(image);
 
         groupingsRepository.save(current);
         return new GroupingsDTO(current, true);

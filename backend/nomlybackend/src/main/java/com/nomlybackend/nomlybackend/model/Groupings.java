@@ -3,12 +3,13 @@ package com.nomlybackend.nomlybackend.model;
 
 import jakarta.persistence.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "Groupings")
-public class Groupings {
+public class Groupings extends Profile{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +18,16 @@ public class Groupings {
 
     @Column(name = "GroupName")
     private String groupName;
+
     @Column (name = "CreatedAt")
     private LocalDateTime createdAt;
 
     @Column (name = "groupCode")
     private String groupCode;
+
+    @OneToOne
+    @JoinColumn (name = "ImageId",  referencedColumnName = "ImageId")
+    private Images profilePicture;
 
     @OneToMany(mappedBy = "grouping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsersGroupings> usersGrouping;
@@ -39,51 +45,32 @@ public class Groupings {
         this.groupCode = groupCode;
     }
 
-    public Integer getGroupId() {
-        return groupId;
-    }
+    public Integer getGroupId() { return groupId; }
 
-    public String getGroupName() {
-        return groupName;
-    }
+    public String getGroupName() { return groupName; }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
+    public void setGroupName(String groupName) { this.groupName = groupName; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt;}
 
-    public List<UsersGroupings> getUsersGrouping() {
-        return usersGrouping;
-    }
+    public List<UsersGroupings> getUsersGrouping() { return usersGrouping; }
 
-    public void setUsersGrouping(List<UsersGroupings> usersGrouping) {
-        this.usersGrouping = usersGrouping;
-    }
+    public void setUsersGrouping(List<UsersGroupings> usersGrouping) { this.usersGrouping = usersGrouping; }
 
-    public List<Sessions> getSessions() {
-        return sessions;
-    }
+    public List<Sessions> getSessions() { return sessions; }
 
-    public void setSessions(List<Sessions> sessions) {
-        this.sessions = sessions;
-    }
+    public void setSessions(List<Sessions> sessions) { this.sessions = sessions; }
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
-    }
+    public void setGroupId(Integer groupId) { this.groupId = groupId; }
 
-    public String getGroupCode() {
-        return groupCode;
-    }
+    public String getGroupCode() { return groupCode; }
 
-    public void setGroupCode(String groupCode) {
-        this.groupCode = groupCode;
-    }
+    public void setGroupCode(String groupCode) { this.groupCode = groupCode; }
+
+    public Images getImage() { return this.profilePicture; }
+
+    @Override
+    public void setImage(Images image) { this.profilePicture = image; }
 }

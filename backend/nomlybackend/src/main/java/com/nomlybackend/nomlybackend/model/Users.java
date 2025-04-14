@@ -2,13 +2,14 @@ package com.nomlybackend.nomlybackend.model;
 
 import jakarta.persistence.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Users")
-public class Users {
+public class Users extends Profile{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,10 @@ public class Users {
     private String preferences;
     @Column (name = "CreatedAt")
     private LocalDateTime createdAt;
+
+    @OneToOne
+    @JoinColumn (name = "ImageId",  referencedColumnName = "ImageId")
+    private Images profilePicture;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsersGroupings> userGroupings;
@@ -92,4 +97,8 @@ public class Users {
         this.userGroupings = userGroupings;
     }
 
+    public Images getImage() { return this.profilePicture; }
+
+    @Override
+    public void setImage(Images image) { this.profilePicture = image; }
 }

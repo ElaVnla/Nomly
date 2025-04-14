@@ -1,18 +1,18 @@
 package com.nomlybackend.nomlybackend.service;
 
+import com.nomlybackend.nomlybackend.model.Images;
 import com.nomlybackend.nomlybackend.model.Users;
 import com.nomlybackend.nomlybackend.model.UsersDTO;
+import com.nomlybackend.nomlybackend.repository.ImagesRepository;
 import com.nomlybackend.nomlybackend.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +20,9 @@ public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private ImagesRepository imagesRepository;
 
     public List<UsersDTO> getAllUsers() {
         List<Users> users = usersRepository.findAll();
@@ -49,7 +52,7 @@ public class UsersService {
     }
 
 
-    public UsersDTO updateUserById(int id, Map<String,String> body){
+    public UsersDTO updateUserById(int id, Map<String,String> body) throws IOException {
         Users current = usersRepository.findById(id).get();
 
 
@@ -57,6 +60,20 @@ public class UsersService {
         current.setEmail(body.get("email"));
         current.setPassword(body.get("password"));
         current.setPreferences(body.get("preferences"));
+
+        Images oldImage = current.getImage();
+        if (oldImage != null){
+            usersRepository.save(current);
+            current.setImage(null);
+            imagesRepository.delete(oldImage);
+        }
+
+        //upload image
+        byte[] imageBytes = Base64.getDecoder().decode(body.get("profilePicture"));
+        Images image = new Images();
+        image.setProfilePicture(imageBytes);
+        imagesRepository.save(image);
+        current.setImage(image);
 
         usersRepository.save(current);
 

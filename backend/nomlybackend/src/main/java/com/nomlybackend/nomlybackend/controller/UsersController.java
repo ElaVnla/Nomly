@@ -6,6 +6,7 @@ import com.nomlybackend.nomlybackend.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,12 +36,10 @@ public class UsersController {
 
 
     @PutMapping("/update-user/{id}")
-    public UsersDTO updateUsers(@PathVariable("id") int id, @RequestBody Map<String,String> body){
-
+    public UsersDTO updateUsers(@PathVariable("id") int id, @RequestBody Map<String,String> body) throws IOException {
         return usersService.updateUserById(id,body);
 
     }
-
 
     @PostMapping("/add-user")
     public UsersDTO createUser(@RequestBody Map<String,String> body){

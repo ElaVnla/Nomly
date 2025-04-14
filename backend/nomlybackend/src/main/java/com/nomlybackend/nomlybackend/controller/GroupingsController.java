@@ -9,6 +9,7 @@ import org.apache.catalina.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -58,7 +59,7 @@ public class GroupingsController {
 
 
     @PutMapping("/update-grouping/{id}")
-    public GroupingsDTO updateGroup(@PathVariable("id") int id, @RequestBody Map<String,String> body){
+    public GroupingsDTO updateGroup(@PathVariable("id") int id, @RequestBody Map<String,String> body) throws IOException {
 //        Groupings current = groupingsRepository.findById(id).get();
 //        current.setGroupName(body.get("groupName"));
 //        groupingsRepository.save(current);

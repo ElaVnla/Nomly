@@ -20,23 +20,25 @@ CREATE TABLE NomlyDB.Users (
     Username varchar(50) NOT NULL,
     Email varchar(255) NOT NULL,
     Password varchar(50) NOT NULL,
-    ProfilePic int,
+    ImageId int,
     Preferences varchar(255),
     createdAt datetime NOT NULL,
     PRIMARY KEY (UserId),
-    FOREIGN KEY (ProfilePic) REFERENCES Images(imageId) ON DELETE CASCADE,
+    FOREIGN KEY (ImageId) REFERENCES Images(ImageId) ON DELETE CASCADE,
     unique(Email)
 );
+
+
 
 CREATE TABLE NomlyDB.Groupings (
 	GroupId int NOT NULL auto_increment,
 	GroupName varchar(50) NOT NULL,
     -- GroupPic varchar(255),
-    GroupPic  int,
+    ImageId  int,
     createdAt datetime NOT NULL,
     groupCode char(10),
     PRIMARY KEY (GroupId),
-    FOREIGN KEY (GroupPic) REFERENCES Images(imageId) ON DELETE CASCADE
+    FOREIGN KEY (ImageId) REFERENCES Images(ImageId) ON DELETE CASCADE
 );
 
 CREATE TABLE NomlyDB.UsersGroupings (

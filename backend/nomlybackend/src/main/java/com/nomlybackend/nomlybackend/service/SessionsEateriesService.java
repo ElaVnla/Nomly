@@ -38,6 +38,8 @@ public class SessionsEateriesService {
         return new SessionsEateriesDTO(sessionsEateriesRepository.save(new SessionsEateries(session,eatery)));
     }
 
+    public boolean updateRanking(String action, String eateryId, String sessionId){
 
-
+        return true;
+    }
 }
