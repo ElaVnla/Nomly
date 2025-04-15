@@ -281,6 +281,11 @@
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/values/dimens.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Database/Create Databse with image.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Database/Create Databse with image.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/EditProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/EditProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/java/com/w3itexperts/ombe/fragments/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/allsessions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/allsessions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/LocationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/LocationDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/main/AndroidManifest.xml" afterDir="false" />
@@ -303,6 +308,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=RF8M22CC3FJ)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -342,7 +348,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="detached" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -356,7 +362,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ElaVnla/Nomly.git&quot;,
-    &quot;accountId&quot;: &quot;ae58eee6-18b0-43eb-93c5-7a37f4390f82&quot;
+    &quot;accountId&quot;: &quot;820cf680-7b50-47c7-adb5-c78b33732bde&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -574,6 +580,8 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Android App.frontend-app" />
       <item itemvalue="Application.NomlybackendApplication" />
     </list>
     <recent_temporary>
@@ -664,7 +672,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744562795660</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="check here">
+      <option name="closed" value="true" />
+      <created>1744711392299</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744711392299</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -687,7 +703,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="triedtofixshonimpart" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -706,7 +734,8 @@
     <MESSAGE value="Updates EateriesPhotos table, added /get-images/{eateryId}" />
     <option name="LAST_COMMIT_MESSAGE" value="Updates EateriesPhotos table, added /get-images/{eateryId}" />
     <MESSAGE value="left to clean : profile, editprofile, createpassowrd, resestpassowrdotp,resetpassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="left to clean : profile, editprofile, createpassowrd, resestpassowrdotp,resetpassword" />
+    <MESSAGE value="check here" />
+    <option name="LAST_COMMIT_MESSAGE" value="check here" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -741,12 +770,12 @@
       <map>
         <entry key="com.w3itexperts.ombe">
           <value>
-            <CheckInfo lastCheckTimestamp="1744612523610" />
+            <CheckInfo lastCheckTimestamp="1744732889921" />
           </value>
         </entry>
         <entry key="com.w3itexperts.ombe.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1744612523610" />
+            <CheckInfo lastCheckTimestamp="1744732889960" />
           </value>
         </entry>
       </map>

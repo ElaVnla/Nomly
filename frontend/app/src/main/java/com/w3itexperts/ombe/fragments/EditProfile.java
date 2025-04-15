@@ -11,9 +11,9 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.inputmethod.EditorInfo;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -46,6 +46,8 @@ public class EditProfile extends Fragment {
     private FragmentEditProfileBinding b;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Set<String> allergySet = new HashSet<>();
+    // This variable holds the profile image as a Base64-encoded string.
+    // It is initially populated with the current image and only overwritten if the user edits the image.
     private String encodedImage = "";
 
     @Nullable
@@ -54,7 +56,6 @@ public class EditProfile extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         b = FragmentEditProfileBinding.inflate(inflater, container, false);
-        // Set back button listener.
         b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
         return b.getRoot();
     }
@@ -70,106 +71,95 @@ public class EditProfile extends Fragment {
             b.usernameEditText.setText(currentUser.getUsername());
             b.emailEditText.setText(currentUser.getEmail());
 
-            // Pre-populate the allergy tags from preferences.
+            // Pre-populate allergy tags.
             String preferences = currentUser.getPreferences();
             if (!TextUtils.isEmpty(preferences)) {
                 String[] allergies = preferences.split(",");
                 b.tagContainer.removeAllViews();
                 allergySet.clear();
                 for (String allergy : allergies) {
-                    if (!TextUtils.isEmpty(allergy)) {
+                    if (!TextUtils.isEmpty(allergy))
                         addTag(allergy.trim());
-                    }
                 }
             }
 
-            // Set the profile image (if available), otherwise a default.
-            // Assuming that if an image was previously set, it is stored as a base64 string.
-            // If you are storing a drawable resource as the default, use that as a fallback.
+            // Set the current profile image.
+            // If a stored Base64 string exists, decode and display it;
+            // otherwise, use the default profile image.
             if (!TextUtils.isEmpty(currentUser.getProfilePic())) {
-                // If the stored image is in Base64, you might convert it back to a bitmap if needed.
-                // Here we simply set encodedImage so that it is passed to the update API.
                 encodedImage = currentUser.getProfilePic();
-                // Optionally, you can decode and display the image.
+                try {
+                    byte[] decodedBytes = Base64.decode(encodedImage, Base64.DEFAULT);
+                    Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                    b.profileImage.setImageBitmap(decodedBitmap);
+                } catch (IllegalArgumentException e) {
+                    Log.e("EDIT_PROFILE", "Error decoding profile image: " + e.getMessage());
+                    b.profileImage.setImageResource(R.drawable.defaultprofile);
+                }
             } else {
-                b.profileImage.setImageResource(R.drawable.person1);
+                b.profileImage.setImageResource(R.drawable.defaultprofile);
             }
         } else {
             Toast.makeText(getContext(), "No current user found", Toast.LENGTH_SHORT).show();
         }
 
-        // When the Save Profile button is clicked, validate and send updates.
+        // Save Profile button click.
         b.saveProfile.setOnClickListener(v -> {
             String updatedUsername = b.usernameEditText.getText().toString().trim();
             String updatedEmail = b.emailEditText.getText().toString().trim();
             String enteredPassword = b.enterpassword.getText().toString().trim();
             String confirmPassword = b.confirmpassword.getText().toString().trim();
 
-            // Validate that username and email are not empty.
             if (TextUtils.isEmpty(updatedUsername) || TextUtils.isEmpty(updatedEmail)) {
-                String msg = "Username and Email cannot be empty";
-                Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                Log.d("EDIT_PROFILE", msg);
+                Toast.makeText(getContext(), "Username and Email cannot be empty", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Determine updated password: if user did not enter a new password, retain current password.
             String updatedPassword;
             if (TextUtils.isEmpty(enteredPassword) && TextUtils.isEmpty(confirmPassword)) {
                 updatedPassword = currentUser.getPassword();
             } else {
                 if (!enteredPassword.equals(confirmPassword)) {
-                    String msg = "Passwords do not match";
-                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                    Log.d("EDIT_PROFILE", msg);
+                    Toast.makeText(getContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 updatedPassword = enteredPassword;
             }
 
-            // Gather allergy preferences from the allergySet (if any).
             String updatedPreferences = TextUtils.join(",", allergySet);
 
-            // Prepare the map payload that the backend expects.
+            // Use "profilePicture" as the key to match backend expectations.
             Map<String, String> updateBody = new HashMap<>();
             updateBody.put("username", updatedUsername);
             updateBody.put("email", updatedEmail);
             updateBody.put("password", updatedPassword);
             updateBody.put("preferences", updatedPreferences);
-            updateBody.put("image", encodedImage);
+            updateBody.put("profilePicture", encodedImage);
 
             ApiService apiService = ApiClient.getApiService();
-            Log.d("EDIT_PROFILE", "Calling updateUser with payload: " + updateBody.toString());
-            // Call the updateUser API.
+            Log.d("EDIT_PROFILE", "Payload: " + updateBody.toString());
             apiService.updateUser(currentUser.getUserId(), updateBody).enqueue(new Callback<users>() {
                 @Override
                 public void onResponse(Call<users> call, Response<users> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        String msg = "Profile updated successfully";
-                        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                        Log.d("EDIT_PROFILE", msg);
-                        // Update the session with the new user details.
+                        Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
                         SessionManager.getInstance(getContext()).setCurrentUser(response.body());
-                        // Optionally, redirect back to Profile page.
                         getActivity().onBackPressed();
                     } else {
-                        String msg = "Profile update failed: " + response.code();
                         try {
                             String errorBody = response.errorBody().string();
-                            Log.d("EDIT_PROFILE", "Error body: " + errorBody);
+                            Log.d("EDIT_PROFILE", "Error: " + errorBody);
                         } catch (IOException e) {
                             Log.d("EDIT_PROFILE", "Error reading error body: " + e.getMessage());
                         }
-                        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                        Log.d("EDIT_PROFILE", msg);
+                        Toast.makeText(getContext(), "Profile update failed: " + response.code(), Toast.LENGTH_SHORT).show();
+                        Log.d("EDIT_PROFILE", response.errorBody().toString());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<users> call, Throwable t) {
-                    String msg = "Profile update failed: " + t.getMessage();
-                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                    Log.d("EDIT_PROFILE", msg);
+                    Toast.makeText(getContext(), "Profile update failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });
@@ -198,7 +188,7 @@ public class EditProfile extends Fragment {
         });
     }
 
-    // Add allergy tag as a MaterialCardView-like element.
+    // Helper: Dynamically add an allergy tag view.
     private void addTag(String text) {
         allergySet.add(text);
         LinearLayout tagLayout = new LinearLayout(getContext());
@@ -238,7 +228,7 @@ public class EditProfile extends Fragment {
         b.tagContainer.addView(tagLayout);
     }
 
-    // Handle result from the gallery image picker.
+    // Handle result from image picker.
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -248,11 +238,11 @@ public class EditProfile extends Fragment {
                 try {
                     InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    // Set the image in the ImageView for preview
+                    // Display the selected image.
                     b.profileImage.setImageBitmap(bitmap);
-                    // Convert the selected image to a Base64 encoded string.
-                    encodedImage = ImageToB64(bitmap);
-                    Log.d("EDIT_PROFILE", "Image converted to Base64 string.");
+                    // Convert image to Base64 and update encodedImage.
+                    encodedImage = imageToB64(bitmap);
+                    Log.d("EDIT_PROFILE", "Image converted to Base64.");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(), "Error processing image", Toast.LENGTH_SHORT).show();
@@ -261,13 +251,11 @@ public class EditProfile extends Fragment {
         }
     }
 
-    // Helper method: convert Bitmap to Base64 encoded String.
-    private String ImageToB64(Bitmap bitmap) {
+    // Helper: Convert a Bitmap to a Base64 encoded string.
+    private String imageToB64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // Compress the bitmap; adjust format/quality as needed.
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
     }
-
 }
