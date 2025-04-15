@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Sessions")
-public class Sessions {
+public class Sessions extends CreateDatabaseEntry{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,6 @@ public class Sessions {
     @Column(name = "MeetingDateTime")
     private LocalDateTime meetingDateTime;
 
-    @Column(name = "CreatedAt")
-    private LocalDateTime createdAt;
-
     @Column(name = "Completed")
     private Boolean completed;
 
@@ -45,14 +42,13 @@ public class Sessions {
     }
 
 
-    public Sessions(Groupings grouping, String sessionName, String location, Double latitude, Double longitude, LocalDateTime meetingDateTime, LocalDateTime createdAt, Boolean completed) {
+    public Sessions(Groupings grouping, String sessionName, String location, Double latitude, Double longitude, LocalDateTime meetingDateTime, Boolean completed) {
         this.grouping = grouping;
         this.sessionName = sessionName;
         this.location = location;
         this.latitude = latitude;
         this.longitude = longitude;
         this.meetingDateTime = meetingDateTime;
-        this.createdAt = createdAt;
         this.completed = completed;
     }
 
@@ -99,11 +95,6 @@ public class Sessions {
     public void setMeetingDateTime(LocalDateTime meetingDateTime) {
         this.meetingDateTime = meetingDateTime;
     }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
 
     public Boolean getCompleted() {
         return completed;

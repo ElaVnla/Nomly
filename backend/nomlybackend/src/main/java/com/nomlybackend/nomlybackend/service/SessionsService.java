@@ -72,10 +72,9 @@ public class SessionsService {
         Double longitude = Double.valueOf(body.get("longitude"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime meetingDateTime = LocalDateTime.parse(body.get("meetingDateTime"), formatter);
-        LocalDateTime createdAt = LocalDateTime.now();
         Boolean completed = false;
 
-        Sessions newSession = new Sessions(grouping,session,location,latitude,longitude,meetingDateTime,createdAt,completed);
+        Sessions newSession = new Sessions(grouping,session,location,latitude,longitude,meetingDateTime,completed);
 
         return new SessionsDTO(sessionsRepository.save(newSession), true);
 

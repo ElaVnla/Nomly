@@ -80,7 +80,6 @@ public class GroupingsService {
         Groupings newGrouping = new Groupings();
         newGrouping.setGroupName(body.get("groupName"));
 //        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
-        newGrouping.setCreatedAt();
 
         String code = generateRandomCode(); //TODO Check code duplicate
         newGrouping.setGroupCode(code);

@@ -31,13 +31,12 @@ public class Groupings extends Profile{
 
 
     public Groupings() {
-        super();
     }
 
     public Groupings(String groupName, String groupCode) {
+        super.setCreatedAt();
         this.groupName = groupName;
         this.groupCode = groupCode;
-        setCreatedAt();
     }
 
     public Integer getGroupId() { return groupId; }
