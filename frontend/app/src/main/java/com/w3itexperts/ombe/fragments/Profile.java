@@ -1,8 +1,11 @@
 package com.w3itexperts.ombe.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -18,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.card.MaterialCardView;
@@ -54,13 +56,30 @@ public class Profile extends Fragment {
             b.displayusername.setText(currentUser.getUsername());
             b.displayemail.setText(currentUser.getEmail());
 
+            // Decode and display the profile picture.
+            // If the Base64 string is null or empty, use the default profile image.
+            String profilePicString = currentUser.getProfilePic();
+            if (!TextUtils.isEmpty(profilePicString)) {
+                try {
+                    byte[] decodedBytes = Base64.decode(profilePicString, Base64.DEFAULT);
+                    Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                    b.DisplayProfilePicture.setImageBitmap(decodedBitmap);
+                } catch (Exception e) {
+                    Log.e("Profile", "Error decoding profile picture: " + e.getMessage());
+                    b.DisplayProfilePicture.setImageResource(R.drawable.defaultprofile);
+                    e.printStackTrace();
+                }
+            } else {
+                b.DisplayProfilePicture.setImageResource(R.drawable.defaultprofile);
+            }
+
             // Update creation date.
             String createdAt = currentUser.getCreatedAt(); // e.g., "2025-04-12T02:37:29"
             try {
                 if (!TextUtils.isEmpty(createdAt)) {
-                    String[] dateTimeParts = createdAt.split("T"); // Split date and time
+                    String[] dateTimeParts = createdAt.split("T");
                     if (dateTimeParts.length > 0) {
-                        String datePart = dateTimeParts[0]; // "yyyy-MM-dd"
+                        String datePart = dateTimeParts[0];
                         String[] dateComponents = datePart.split("-");
                         if (dateComponents.length == 3) {
                             b.dateYear.setText(dateComponents[0]);
@@ -78,7 +97,7 @@ public class Profile extends Fragment {
             int groupCount = (currentUser.getGroups() == null) ? 0 : currentUser.getGroups().size();
             b.NoOfGroups.setText(String.valueOf(groupCount));
 
-            // Calculate active sessions count (only count sessions where completed == false).
+            // Calculate active sessions count (only sessions where completed == false).
             int activeSessions = 0;
             if (currentUser.getGroups() != null) {
                 for (groupings grp : currentUser.getGroups()) {
@@ -95,15 +114,13 @@ public class Profile extends Fragment {
 
             // Update allergies (stored in "preferences").
             String preferences = currentUser.getPreferences();
-            // Clear the Flexbox container first.
             b.tagContainer.removeAllViews();
             if (!TextUtils.isEmpty(preferences)) {
                 String[] allergiesArr = preferences.split(",");
                 for (String allergy : allergiesArr) {
                     if (!TextUtils.isEmpty(allergy.trim())) {
-                        // Inflate a card view dynamically for each allergy.
+                        // Dynamically add a MaterialCardView for each allergy.
                         MaterialCardView card = new MaterialCardView(getContext());
-                        // Set layout parameters (convert 110dp x 150dp to pixels).
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(110), dpToPx(150));
                         params.setMargins(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
                         card.setLayoutParams(params);
@@ -111,20 +128,20 @@ public class Profile extends Fragment {
                         card.setCardElevation(dpToPx(4));
                         card.setCardBackgroundColor(getResources().getColor(R.color.white));
 
-                        // Create inner LinearLayout.
+                        // Create an inner layout.
                         LinearLayout innerLayout = new LinearLayout(getContext());
                         innerLayout.setOrientation(LinearLayout.VERTICAL);
                         innerLayout.setGravity(Gravity.CENTER);
                         innerLayout.setPadding(dpToPx(12), dpToPx(12), dpToPx(12), dpToPx(12));
 
-                        // Optionally, add an ImageView (for an allergy icon; using a placeholder here).
+                        // Add an allergy icon.
                         ImageView allergyIcon = new ImageView(getContext());
                         LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(dpToPx(90), dpToPx(90));
                         allergyIcon.setLayoutParams(imageParams);
                         allergyIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                        allergyIcon.setImageResource(R.drawable.lobstericon); // Replace with appropriate resource
+                        allergyIcon.setImageResource(R.drawable.lobstericon); // Replace if needed
 
-                        // Create a TextView for the allergy name.
+                        // Allergy name.
                         TextView allergyName = new TextView(getContext());
                         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -133,24 +150,16 @@ public class Profile extends Fragment {
                         allergyName.setText(allergy.trim());
                         allergyName.setTextColor(getResources().getColor(R.color.color_primary));
                         allergyName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-                        // If you use a custom font, you can set it using:
-                        // allergyName.setTypeface(ResourcesCompat.getFont(getContext(), R.font.semi_bold));
 
-                        // Add the icon and name into the inner layout.
                         innerLayout.addView(allergyIcon);
                         innerLayout.addView(allergyName);
-
-                        // Add inner layout to the card.
                         card.addView(innerLayout);
-
-                        // Finally, add this card to your Flexbox container.
                         b.tagContainer.addView(card);
                     }
                 }
             }
         } else {
             Log.e("Profile", "No current user found.");
-            // Redirect to login if no user is found.
             startActivity(new Intent(getContext(), login_signin_Activity.class));
         }
 
@@ -165,18 +174,17 @@ public class Profile extends Fragment {
 
         // Set up the logout button.
         b.logout.setOnClickListener(v -> {
-            // Clear user session and navigate to Welcome.
             SessionManager.getInstance(getContext()).setCurrentUser(null);
             startActivity(new Intent(getContext(), Welcome.class));
         });
     }
 
-    // Helper method to convert dp to pixels.
+    // Helper method: Convert dp to pixels.
     private int dpToPx(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
 
-    // Helper method to convert month number strings to three-letter abbreviations.
+    // Helper method: Convert month number strings to three-letter abbreviations.
     private String convertMonth(String monthNum) {
         switch (monthNum) {
             case "01": return "JAN";
