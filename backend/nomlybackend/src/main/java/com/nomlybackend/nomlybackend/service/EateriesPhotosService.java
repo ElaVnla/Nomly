@@ -14,6 +14,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 
 @Service
 public class EateriesPhotosService {
@@ -23,37 +24,56 @@ public class EateriesPhotosService {
     //TODO store API key in another file
     static String apiKey = "AIzaSyCCpR2DMrJpe4Lv3maS070IRysQWVevESs";
 
-    public List<byte[]> getImages(String eateryId) throws URISyntaxException, IOException, InterruptedException {
+    public List<byte[]> getImages(String eateryId) throws Exception {
         int heightPx = 213;
         int widthPx = 319;
         List<String> photos = eateriesPhotosRepository.findPhotoNamesByEateryId(eateryId);
-        Gson gson = new Gson();
-        List<byte[]> encodedImages = new ArrayList<>();
-        if (photos.isEmpty()){
-            return null;
-        }
-        for (String photoName: photos){ //todo multithread for each image
-            String baseURI = "https://places.googleapis.com/v1/places/%s/photos/%s/media?key=%s&maxHeightPx=%d&maxWidthPx=%d&skipHttpRedirect=false";
+        if (photos.isEmpty()) return null;
 
+        String baseURI = "https://places.googleapis.com/v1/places/%s/photos/%s/media?key=%s&maxHeightPx=%d&maxWidthPx=%d&skipHttpRedirect=false";
+        HttpClient httpClient = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.NEVER)
+                .build();
+
+        List<CompletableFuture<byte[]>> futures = new ArrayList<>();
+
+        for (int i = 0; i < Math.min(4, photos.size()); i++) {
+            final String photoName = photos.get(i);
             HttpRequest getRequest = HttpRequest.newBuilder()
-                    .uri(new URI(String.format(baseURI, eateryId, photoName, apiKey, heightPx,widthPx)))
+                    .uri(new URI(String.format(baseURI, eateryId, photoName, apiKey, heightPx, widthPx)))
                     .GET()
                     .build();
 
-            HttpClient httpClient = HttpClient.newBuilder()
-                    .followRedirects(HttpClient.Redirect.NEVER)
-                    .build();
+            CompletableFuture<byte[]> future = httpClient.sendAsync(getRequest, HttpResponse.BodyHandlers.ofByteArray())
+                    .thenCompose(response -> {
+                        if (response.statusCode() == 302) {
+                            String redirectUrl = response.headers().firstValue("location").orElseThrow();
+                            return CompletableFuture.supplyAsync(() -> {
+                                try {
+                                    return ImageDownloadService.downloadImageAsBase64(redirectUrl);
+                                } catch (IOException e) {
+                                    throw new CompletionException(e);
+                                }
+                            });
+                        } else {
+                            return CompletableFuture.failedFuture(
+                                    new RuntimeException("Unexpected response: " + response.statusCode()));
+                        }
+                    });
 
-            HttpResponse<byte[]> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofByteArray());
-            if (getResponse.statusCode() == 302) {
-                String redirectUrl = getResponse.headers().firstValue("location").orElseThrow();
-                byte[] encodedImage = ImageDownloadService.downloadImageAsBase64(redirectUrl);
-                encodedImages.add(encodedImage);
-            }
-            else {
-                throw new RuntimeException("Unexpected response: " + getResponse.statusCode());
-            }
+            futures.add(future);
         }
+
+        // Wait for all to complete
+        CompletableFuture<Void> allDone = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+        allDone.join(); // Wait for completion
+
+        // Collect results
+        List<byte[]> encodedImages = futures.stream()
+                .map(CompletableFuture::join)
+                .filter(result -> result != null)
+                .toList();
+
         return encodedImages;
     }
 }
