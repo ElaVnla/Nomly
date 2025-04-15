@@ -239,9 +239,19 @@ public class groupPage_Activity extends AppCompatActivity {
             layout.setOrientation(LinearLayout.VERTICAL);
             layout.setPadding(20, 20, 20, 20);
 
-            ImageView img = new ImageView(this);
+            ShapeableImageView img = new ShapeableImageView(this);
             img.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            img.setPadding(0, 0, 0, 0);
+            img.setShapeAppearanceModel(
+                    img.getShapeAppearanceModel()
+                            .toBuilder()
+                            .setAllCornerSizes(90f) // 180dp / 2 = 90f
+                            .build()
+            );
+
+            Glide.with(this).load(member.imageResId).into(img);
+
             Glide.with(this).load(member.imageResId).into(img);
 
             MaterialButton btn = new MaterialButton(this);
