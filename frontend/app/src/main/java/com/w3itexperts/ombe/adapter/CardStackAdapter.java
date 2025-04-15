@@ -49,11 +49,15 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         holder.title.setText(card.getName());
         holder.location.setText(card.getLocation());
         holder.price.setText(card.getPriceLevel());
-        holder.image.setImageResource(card.getImageResId());
+        holder.image.setImageBitmap(card.getImage());
     }
 
     @Override
     public int getItemCount() {
         return cards.size();
+    }
+
+    public RestaurantCard getCardAt(int position) {
+        return cards.get(position);
     }
 }

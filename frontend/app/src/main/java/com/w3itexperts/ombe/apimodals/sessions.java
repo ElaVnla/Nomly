@@ -13,6 +13,9 @@ public class sessions {
     private String createdAt;
     private boolean completed;
 
+    private double latitude;
+    private double longitude;
+
     // Constructor here =======================================
 
     public sessions(int sessionId, Object grouping, String location, String latlong, String meetingDateTime, String createdAt, boolean completed) {
@@ -116,4 +119,19 @@ public class sessions {
         this.completed = completed;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 }

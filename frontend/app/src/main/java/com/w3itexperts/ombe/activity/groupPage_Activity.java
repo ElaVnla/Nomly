@@ -216,6 +216,8 @@ public class groupPage_Activity extends AppCompatActivity {
                         // ✅ Set sessionId and groupId manually
                         session.sessionId = s.getSessionId();
                         session.groupId = groupId;
+                        session.lat = s.getLatitude();     // ✅ Add this
+                        session.lng = s.getLongitude();    // ✅ Add this
 
                         sessionList.add(session);
                     }
@@ -278,6 +280,9 @@ public class groupPage_Activity extends AppCompatActivity {
         String title, details, location, date, time, status;
         int sessionId;
         int groupId;
+
+        double lat;
+        double lng;
         Session(String title, String details, String status) {
             this.title = title;
             this.details = details;
@@ -294,7 +299,7 @@ public class groupPage_Activity extends AppCompatActivity {
             this.time = time;
             this.status = status;
         }
-        Session(String title, String location, String date, String time, String status, int sessionId, int groupId) {
+        Session(String title, String location, String date, String time, String status, int sessionId, int groupId, double lat, double lng) {
 //            this.title = title;
 //            this.details = details;
 //            this.status = status;
@@ -305,6 +310,8 @@ public class groupPage_Activity extends AppCompatActivity {
             this.status = status;
             this.sessionId = sessionId;
             this.groupId = groupId;
+            this.lat = lat;
+            this.lng = lng;
         }
     }
 
@@ -339,6 +346,9 @@ public class groupPage_Activity extends AppCompatActivity {
                 intent.putExtra("status", s.status);
                 intent.putExtra("sessionId", s.sessionId);
                 intent.putExtra("groupId", groupId);
+                intent.putExtra("lat", s.lat);        // ✅ Add this
+                intent.putExtra("lng", s.lng);        // ✅ Add this
+
                 v.getContext().startActivity(intent);
             });
 

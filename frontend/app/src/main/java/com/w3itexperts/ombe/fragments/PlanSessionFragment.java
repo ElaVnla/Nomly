@@ -62,10 +62,25 @@ public class PlanSessionFragment extends Fragment {
             String rawDate = args.getString("date", "");
             String formattedDate = formatToMMDDYYYY(rawDate);
             b.dateDropdown.setText(formattedDate);
-
             b.timeDropdown.setText(args.getString("time", ""));
 
+            if (args.containsKey("lat") && args.containsKey("lng")) {
+                b.setLocation.setTag(R.id.lat_tag, args.getDouble("lat"));
+                b.setLocation.setTag(R.id.lng_tag, args.getDouble("lng"));
+            }
         }
+
+        getParentFragmentManager().setFragmentResultListener("locationPicked", this, (key, bundle) -> {
+            double lat = bundle.getDouble("lat");
+            double lng = bundle.getDouble("lng");
+            String locationName = bundle.getString("locationName");
+
+            b.setLocation.setText(locationName);
+            b.setLocation.setTag(R.id.lat_tag, lat);
+            b.setLocation.setTag(R.id.lng_tag, lng);
+            validateForm();
+        });
+
 
         // Listeners to monitor form changes
         b.sessionTitle.addTextChangedListener(simpleWatcher());
@@ -96,13 +111,23 @@ public class PlanSessionFragment extends Fragment {
             TimePickerDialog timePickerDialog = new TimePickerDialog(requireContext(),
                     (view12, selectedHour, selectedMinute) -> {
                         String amPm = selectedHour >= 12 ? "PM" : "AM";
-                        int hourIn12Format = selectedHour % 12 == 0 ? 12 : selectedHour % 12;
+//                        int hourIn12Format = selectedHour % 12 == 0 ? 12 : selectedHour % 12;
+                        int hourIn12Format = selectedHour > 12 ? selectedHour - 12 : (selectedHour == 0 ? 12 : selectedHour);
                         String formattedTime = String.format(Locale.getDefault(), "%02d:%02d %s", hourIn12Format, selectedMinute, amPm);
                         b.timeDropdown.setText(formattedTime);
                         validateForm();
                     },
                     hour, minute, false);
             timePickerDialog.show();
+        });
+
+        b.setLocation.setOnClickListener(v -> {
+            MapPickerFragment mapPickerFragment = new MapPickerFragment();
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_popup, 0, 0, R.anim.fragment_popdown)
+                    .replace(R.id.fragment_view, mapPickerFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         // PREVIOUS BUTTON USED FOR CREATE SESSION
@@ -370,6 +395,11 @@ public class PlanSessionFragment extends Fragment {
             String rawDate = b.dateDropdown.getText().toString().trim();
             String rawTime = b.timeDropdown.getText().toString().trim();
 
+            if (!rawTime.matches(".*(AM|PM).*")) {
+                Toast.makeText(requireContext(), "Please re-pick the time", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             SimpleDateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.getDefault());
             SimpleDateFormat apiFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
 
@@ -389,12 +419,32 @@ public class PlanSessionFragment extends Fragment {
                 return;
             }
 
+            Object latTag = b.setLocation.getTag(R.id.lat_tag);
+            Object lngTag = b.setLocation.getTag(R.id.lng_tag);
+
+            if (latTag == null && args != null && args.containsKey("lat")) {
+                latTag = args.getDouble("lat");
+                b.setLocation.setTag(R.id.lat_tag, latTag);
+            }
+            if (lngTag == null && args != null && args.containsKey("lng")) {
+                lngTag = args.getDouble("lng");
+                b.setLocation.setTag(R.id.lng_tag, lngTag);
+            }
+
+            if (latTag == null || lngTag == null) {
+                Toast.makeText(requireContext(), "Please re-pick the location", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double lat = (double) latTag;
+            double lng = (double) lngTag;
+
             Map<String, String> payload = new HashMap<>();
-            payload.put("sessionName", sessionName);
+            payload.put("session", sessionName);
             payload.put("groupId", String.valueOf(groupId));
             payload.put("location", location);
-            payload.put("latitude", "0.0");
-            payload.put("longitude", "0.0");
+            payload.put("latitude", String.valueOf(lat));
+            payload.put("longitude", String.valueOf(lng));
             payload.put("meetingDateTime", meetingDateTimeFormatted);
 
             ApiService apiService = ApiClient.getApiService();
@@ -412,13 +462,17 @@ public class PlanSessionFragment extends Fragment {
                             Toast.makeText(requireContext(), "✅ Session updated!", Toast.LENGTH_SHORT).show();
                             // Send user back to ViewSessionFragment
                             Bundle bundle = new Bundle();
-                            bundle.putString("title", sessionName);
+                            bundle.putString("session", sessionName);
                             bundle.putString("location", location);
                             bundle.putString("date", rawDate);
                             bundle.putString("time", rawTime);
                             bundle.putString("status", "Ongoing");
                             bundle.putInt("sessionId", sessionId);
                             bundle.putInt("groupId", groupId);
+                            bundle.putDouble("lat", lat);
+                            bundle.putDouble("lng", lng);
+
+                            Log.d("DEBUG_PLANSESSION", "Passing lat=" + lat + ", lng=" + lng);
 
                             ViewSessionFragment viewSessionFragment = new ViewSessionFragment();
                             viewSessionFragment.setArguments(bundle);
@@ -456,6 +510,10 @@ public class PlanSessionFragment extends Fragment {
                             bundle.putString("status", created.isCompleted() ? "Done" : "Ongoing");
                             bundle.putInt("sessionId", created.getSessionId());
                             bundle.putInt("groupId", groupId);
+                            bundle.putDouble("lat", lat);
+                            bundle.putDouble("lng", lng);
+
+                            Log.d("DEBUG_PLANSESSION", "Passing lat=" + lat + ", lng=" + lng);
 
                             ViewSessionFragment viewSessionFragment = new ViewSessionFragment();
                             viewSessionFragment.setArguments(bundle);
@@ -488,8 +546,10 @@ public class PlanSessionFragment extends Fragment {
 
     private String formatToMMDDYYYY(String inputDate) {
         try {
-            SimpleDateFormat backendFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            SimpleDateFormat uiFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+//            SimpleDateFormat backendFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+//            SimpleDateFormat uiFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+            SimpleDateFormat backendFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            SimpleDateFormat uiFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
             Date parsed = backendFormat.parse(inputDate);
             return uiFormat.format(parsed);
         } catch (Exception e) {
