@@ -11,12 +11,12 @@ public class GroupingsDTO {
 
     private Integer groupId;
     private String groupName;
-    private byte[] image;
     private LocalDateTime createdAt;
     //    private List<Integer> userGroupIds;
     private String groupCode;
     private List<UsersDTO> users;
     private List<SessionsDTO> sessions;
+    private byte[] image;
 
 
     public GroupingsDTO() {
@@ -110,5 +110,13 @@ public class GroupingsDTO {
 
     public void setSessions(List<SessionsDTO> sessions) {
         this.sessions = sessions;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
