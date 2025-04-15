@@ -29,13 +29,16 @@ public class Eateries {
     @Column(name = "Rating")
     private Double rating;
 
+    @Column(name = "Location")
+    private String location;
+
     @Column(name = "OperationHours") //TODO 1: to be implemented, q complicated
     private String operationHours;
 
     public Eateries() {
     }
 
-    public Eateries(String eateryId, String displayName, Double latitude, Double longitude,  PriceLevel priceLevel, String cuisine, Double rating, String operationHours) {
+    public Eateries(String eateryId, String displayName, Double latitude, Double longitude,  PriceLevel priceLevel, String cuisine, Double rating, String location, String operationHours) {
         this.eateryId = eateryId;
         this.displayName = displayName;
         this.latitude = latitude;
@@ -43,6 +46,7 @@ public class Eateries {
         this.priceLevel = priceLevel;
         this.cuisine = cuisine;
         this.rating = rating;
+        this.location = location;
         this.operationHours = operationHours;
     }
 
@@ -84,6 +88,10 @@ public class Eateries {
     public void setRating(Double rating) {
         this.rating = rating;
     }
+
+    public String getLocation() { return location; }
+
+    public void setLocation(String location) { this.location = location; }
 
     public String getOperationHours() {
         return operationHours;

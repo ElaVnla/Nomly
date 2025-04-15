@@ -100,6 +100,7 @@ public class PlacesDTO {
                             .toList();
             eatery.setCuisine(String.valueOf(filtered)); // can be csv of multiple "chinese_restaurant, vegetarian_restaurant"
             eatery.setRating(this.rating);
+            eatery.setLocation(this.formattedAddress);
             eatery.setOperationHours("to be implemented");
             return eatery;
         }

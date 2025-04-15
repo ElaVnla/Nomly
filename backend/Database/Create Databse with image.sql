@@ -81,7 +81,7 @@ create table NomlyDB.Eateries(
     Cuisine varchar(255) not null,
     Rating decimal(2,1),
     OperationHours varchar(50) not null,
-    --Location varchar(255), -- formatted address to be added
+    Location varchar(255),
     primary key (EateryId)
 );
 

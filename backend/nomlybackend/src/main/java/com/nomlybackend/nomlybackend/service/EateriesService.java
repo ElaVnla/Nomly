@@ -6,6 +6,7 @@ import com.nomlybackend.nomlybackend.repository.EateriesRepository;
 import com.nomlybackend.nomlybackend.repository.EateriesPhotosRepository;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.nomlybackend.nomlybackend.model.EateriesPhotos;
 
@@ -53,7 +54,11 @@ public class EateriesService {
         PlacesDTO places = gson.fromJson(postResponse.body(), PlacesDTO.class);
 
         List<Eateries> eateries = new ArrayList<>();
-        for (PlacesDTO.Place place: places.getPlaces()){ //local9 error response means invalid latlong
+        PlacesDTO.Place[] placesEntities = places.getPlaces();
+        if (placesEntities == null){
+            return null;
+        }
+        for (PlacesDTO.Place place: placesEntities){ //local9 error response means invalid latlong
             Eateries eatery = place.toEntity();
             eateries.add(eatery);
             eateryRepository.save(eatery);
@@ -122,9 +127,10 @@ public class EateriesService {
         PriceLevel priceLevel = PriceLevel.valueOf(body.get("priceLevel"));
         String cuisine = body.get("cuisine");
         Double rating = Double.parseDouble(body.get("rating"));
+        String location = body.get("location");
         String operationHours = body.get("operationHours");
 
-        Eateries eatery= new Eateries(eateryId,displayName,latitude,longitude,priceLevel,cuisine,rating,operationHours);
+        Eateries eatery= new Eateries(eateryId,displayName,latitude,longitude,priceLevel,cuisine,rating,location,operationHours);
         return new EateriesDTO(eateryRepository.save(eatery));
     }
 }

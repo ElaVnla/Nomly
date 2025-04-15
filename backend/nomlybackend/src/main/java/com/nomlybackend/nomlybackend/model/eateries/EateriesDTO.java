@@ -10,6 +10,7 @@ public class EateriesDTO {
     private PriceLevel priceLevel;
     private String cuisine;
     private Double rating;
+    private String location;
     private String operationHours;
 
 
@@ -21,6 +22,7 @@ public class EateriesDTO {
         this.priceLevel = eatery.getPriceLevel();
         this.cuisine = eatery.getCuisine();
         this.rating = eatery.getRating();
+        this.location = eatery.getLocation();
         this.operationHours = eatery.getOperationHours();
     }
 
@@ -79,6 +81,10 @@ public class EateriesDTO {
     public void setRating(Double rating) {
         this.rating = rating;
     }
+
+    public String getLocation() { return location; }
+
+    public void setLocation(String location) { this.location = location; }
 
     public String getOperationHours() {
         return operationHours;
