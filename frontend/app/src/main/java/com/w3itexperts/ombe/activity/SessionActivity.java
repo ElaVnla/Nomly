@@ -28,6 +28,8 @@ public class SessionActivity extends AppCompatActivity {
                 args.putString("status", intent.getStringExtra("status"));
                 args.putInt("sessionId", intent.getIntExtra("sessionId", -1));
                 args.putInt("groupId", intent.getIntExtra("groupId", -1));
+                args.putDouble("lat", intent.getDoubleExtra("lat", 0.0));
+                args.putDouble("lng", intent.getDoubleExtra("lng", 0.0));
 
                 com.w3itexperts.ombe.fragments.ViewSessionFragment viewSessionFragment = new com.w3itexperts.ombe.fragments.ViewSessionFragment();
                 viewSessionFragment.setArguments(args);

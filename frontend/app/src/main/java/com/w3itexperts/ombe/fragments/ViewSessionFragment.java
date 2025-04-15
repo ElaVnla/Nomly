@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -21,8 +23,11 @@ import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.activity.groupPage_Activity;
 import com.w3itexperts.ombe.databinding.FragmentViewSessionBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +37,9 @@ public class ViewSessionFragment extends Fragment {
 
     FragmentViewSessionBinding b;
 
+
+    private double lat = 0.0;
+    private double lng = 0.0;
     private int sessionId = -1;
     private boolean isSessionFinalized = false;
     private String title, location, date, time, status;
@@ -52,11 +60,18 @@ public class ViewSessionFragment extends Fragment {
         // Get session info from arguments
         Bundle args = getArguments();
         if (args != null) {
+
+            Log.d("DEBUG_ARGS_BUNDLE", args.toString());
+
             title = args.getString("title", "Untitled");
             location = args.getString("location", "Unknown");
             date = args.getString("date", "N/A");
             time = args.getString("time", "N/A");
             status = args.getString("status", "Ongoing");
+            lat = args.getDouble("lat", 0.0);
+            lng = args.getDouble("lng", 0.0);
+
+            Log.d("DEBUG_VIEWSESSION", "lat=" + lat + " lng=" + lng + " sessionId=" + sessionId);
 
         } else {
             Toast.makeText(getContext(), "Session data not found.", Toast.LENGTH_SHORT).show();
@@ -115,25 +130,72 @@ public class ViewSessionFragment extends Fragment {
             requireActivity().finish(); // 🚪 Finish the current activity
         });
 
+//        b.editButton.setOnClickListener(v -> {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("title", title);
+//            bundle.putString("location", location);
+//            bundle.putString("date", date);
+//
+//            if (!time.toUpperCase().contains("AM") && !time.toUpperCase().contains("PM")) {
+//                time += " AM"; // or " PM" based on your logic if needed
+//            }
+//            bundle.putString("time", time);
+//            bundle.putBoolean("isEdit", true);
+//            bundle.putInt("sessionId", sessionId);
+//            bundle.putInt("groupId", getArguments().getInt("groupId", -1));
+//
+//            if (b.sessionLocation.getTag(R.id.lat_tag) != null && b.sessionLocation.getTag(R.id.lng_tag) != null) {
+//                bundle.putDouble("lat", (double) b.sessionLocation.getTag(R.id.lat_tag));
+//                bundle.putDouble("lng", (double) b.sessionLocation.getTag(R.id.lng_tag));
+//            }
+//
+//            PlanSessionFragment planSessionFragment = new PlanSessionFragment();
+//            planSessionFragment.setArguments(bundle);
+//
+//            switchFragment(planSessionFragment);
+//        });
+
         b.editButton.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("title", title);
             bundle.putString("location", location);
             bundle.putString("date", date);
 
-            if (!time.toUpperCase().contains("AM") && !time.toUpperCase().contains("PM")) {
-                time += " AM"; // or " PM" based on your logic if needed
-            }
-            bundle.putString("time", time);
+            Object latTag = b.sessionLocation.getTag(R.id.lat_tag);
+            Object lngTag = b.sessionLocation.getTag(R.id.lng_tag);
 
+            if (latTag != null && lngTag != null) {
+                bundle.putDouble("lat", (double) latTag);
+                bundle.putDouble("lng", (double) lngTag);
+            }
+
+            // Handle time format (convert from 24h like "17:56:00" to "05:56 PM" if needed)
+            try {
+                if (!time.toUpperCase().contains("AM") && !time.toUpperCase().contains("PM")) {
+                    SimpleDateFormat fromFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()); // 24-hour input
+                    SimpleDateFormat toFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());    // 12-hour output
+                    Date timeObj = fromFormat.parse(time);
+                    if (timeObj != null) {
+                        time = toFormat.format(timeObj);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // Fallback: keep original
+            }
+
+            bundle.putString("time", time);
             bundle.putBoolean("isEdit", true);
             bundle.putInt("sessionId", sessionId);
             bundle.putInt("groupId", getArguments().getInt("groupId", -1));
 
+            // Also include lat/lng if they exist
+            if (b.sessionLocation.getTag(R.id.lat_tag) != null && b.sessionLocation.getTag(R.id.lng_tag) != null) {
+                bundle.putDouble("lat", (double) b.sessionLocation.getTag(R.id.lat_tag));
+                bundle.putDouble("lng", (double) b.sessionLocation.getTag(R.id.lng_tag));
+            }
 
             PlanSessionFragment planSessionFragment = new PlanSessionFragment();
             planSessionFragment.setArguments(bundle);
-
             switchFragment(planSessionFragment);
         });
 
@@ -144,10 +206,50 @@ public class ViewSessionFragment extends Fragment {
             bundle.putString("date", date);
             bundle.putString("time", time);
 
+            bundle.putDouble("lat", lat); // ✅ add this
+            bundle.putDouble("lng", lng); // ✅ add this
+            bundle.putInt("sessionId", sessionId); // ✅ add this
+
+
             SwipingFragment swipingFragment = new SwipingFragment();
             swipingFragment.setArguments(bundle);
 
             switchFragment(swipingFragment);
+        });
+
+        b.deleteSessionText.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Delete Session")
+                    .setMessage("Are you sure you want to delete this session?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+                        int sessionId = getArguments().getInt("sessionId", -1);
+                        if (sessionId == -1) {
+                            Toast.makeText(requireContext(), "Invalid session ID", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        ApiClient.getApiService().deleteSession(sessionId).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(requireContext(), "✅ Session deleted", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(requireContext(), groupPage_Activity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    requireActivity().finish();
+                                } else {
+                                    Toast.makeText(requireContext(), "❌ Failed to delete session. Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(requireContext(), "API error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
         });
 
 //        b.finalizeButton.setOnClickListener(v -> {

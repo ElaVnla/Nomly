@@ -17,6 +17,9 @@ import java.util.Map;
 
 import com.w3itexperts.ombe.apimodals.OtpVerificationRequest;
 import com.w3itexperts.ombe.apimodals.RegistrationResponse;
+import com.w3itexperts.ombe.apimodals.eateries;
+import com.w3itexperts.ombe.apimodals.locationDTO;
+import com.w3itexperts.ombe.apimodals.userVoteDTO;
 import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.apimodals.groupings;
@@ -130,4 +133,12 @@ public interface ApiService {
     Call<Boolean> verifyOtp(@Body com.w3itexperts.ombe.apimodals.OtpVerificationRequest otpRequest);
 
 
+    @PUT("/eateries/find-eateries")
+    Call<List<eateries>> findEateries(@Body locationDTO locationdto);
+
+    @GET("/eateries/get-images/{eateryId}")
+    Call<List<byte[]>> getEateryImages(@Path("eateryId") String eateryId);
+
+    @POST("/users-sessions-eateries/user-vote")
+    Call<Void> sendUserVote(@Body userVoteDTO vote);
 }

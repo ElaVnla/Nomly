@@ -59,4 +59,7 @@ dependencies {
     // swiping stuff imported from github
     implementation 'com.github.yuyakaido:CardStackView:v2.3.4'
 
+    // for set location
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
 }
