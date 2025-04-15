@@ -5,14 +5,20 @@ import jakarta.persistence.Embedded;
 
 public class Nearby {
     private String[] includedTypes = {"restaurant"};
+    private String[] excludedType = {"gas"};
     private int maxResultCount = 10;
+    private double radius = 500;
 
     @Embedded
     private LocationRestriction locationRestriction;
 
     public void setLatLong(double latitude, double longitude){
         this.locationRestriction = new LocationRestriction(
-                new Circle(new LatLng(latitude, longitude), 500.0));
+                new Circle(new LatLng(latitude, longitude), radius));
+    }
+
+    public void increaseRange(){
+        this.locationRestriction.increaseCircle();
     }
 
     public Nearby(double lat, double lng){
@@ -60,6 +66,8 @@ class LocationRestriction{
     public void setCircle(Circle circle) {
         this.circle = circle;
     }
+
+    public void increaseCircle() {this.circle.setRadius(circle.getRadius() + 500);}
 }
 
 @Embeddable

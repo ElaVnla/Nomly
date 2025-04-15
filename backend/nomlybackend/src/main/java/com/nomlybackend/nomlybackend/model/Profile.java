@@ -6,7 +6,7 @@ import org.springframework.cglib.core.Local;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class Profile  extends CreateDatabaseEntry{
+public abstract class Profile extends CreateDatabaseEntry{
     @OneToOne
     @JoinColumn (name = "ImageId",  referencedColumnName = "ImageId")
     private Images profilePicture;

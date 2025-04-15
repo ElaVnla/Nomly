@@ -26,14 +26,12 @@ public class EateriesService {
     EateriesRepository eateryRepository;
     @Autowired
     EateriesPhotosRepository eateriesPhotosRepository;
-
-    //TODO store API key in another file
-    static String apiKey = "AIzaSyCCpR2DMrJpe4Lv3maS070IRysQWVevESs";
-//    @Value("${google.api.key}")
-//    private String apiKey;
+    @Autowired
+    GoogleApiProperties google;
 
     //TODO Return Restaurant[]
     public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
+        String[] fieldMask = {"places.id", "places.displayName.text", "places.priceLevel", "places.types", "places.rating", "places.photos.name","places.formattedAddress","places.location"};
         Nearby nearby = new Nearby(locationDTO.getLatitude(), locationDTO.getLongitude());
 
         Gson gson = new Gson();
@@ -42,8 +40,8 @@ public class EateriesService {
         HttpRequest postRequest = HttpRequest.newBuilder()
                 .uri(new URI("https://places.googleapis.com/v1/places:searchNearby"))
                 //TODO 2 set up api key in Constants.API_KEY
-                .header("X-Goog-Api-Key", apiKey)
-                .header("X-Goog-FieldMask", "places.id,places.displayName.text,places.priceLevel,places.types,places.rating,places.photos.name,places.formattedAddress,places.location")
+                .header("X-Goog-Api-Key", google.key())
+                .header("X-Goog-FieldMask", String.join(",", fieldMask))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
@@ -56,7 +54,7 @@ public class EateriesService {
         List<Eateries> eateries = new ArrayList<>();
         PlacesDTO.Place[] placesEntities = places.getPlaces();
         if (placesEntities == null){
-            return null;
+            return null; //TODO IF FAIL THEN EXPAND RANGE UNTIL OK
         }
         for (PlacesDTO.Place place: placesEntities){ //local9 error response means invalid latlong
             Eateries eatery = place.toEntity();

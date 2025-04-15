@@ -11,6 +11,7 @@ public class GroupingsDTO {
 
     private Integer groupId;
     private String groupName;
+    private byte[] image;
     private LocalDateTime createdAt;
     //    private List<Integer> userGroupIds;
     private String groupCode;
@@ -26,6 +27,11 @@ public class GroupingsDTO {
         this.groupName = grouping.getGroupName();
         this.createdAt = grouping.getCreatedAt();
         this.groupCode = grouping.getGroupCode();
+        Images imageId = grouping.getImage();
+        if ( imageId != null){
+            this.image = imageId.getProfilePicture();
+        }
+
 
 //        if (grouping.getUsersGrouping() == null){
 //            this.userGroupIds = new ArrayList<>();

@@ -14,6 +14,7 @@ public class UsersDTO {
     private LocalDateTime createdAt;
 //    private List<Integer> userGroupIds;
     private List<GroupingsDTO> groups;
+    private byte[] image;
 
     public UsersDTO(){}
 
@@ -25,6 +26,8 @@ public class UsersDTO {
         this.preferences = user.getPreferences();
         this.createdAt = user.getCreatedAt();
         this.groups = new ArrayList<>();
+        Images imageId = user.getImage();
+        if ( imageId != null ){ this.image = imageId.getProfilePicture(); }
     }
 
     public UsersDTO(Users user, boolean includeGroups) {
@@ -34,6 +37,8 @@ public class UsersDTO {
         this.password = user.getPassword();
         this.preferences = user.getPreferences();
         this.createdAt = user.getCreatedAt();
+        Images imageId = user.getImage();
+        if ( imageId != null){ this.image = imageId.getProfilePicture(); }
 //        if (user.getUserGroupings() == null){
 //            this.userGroupIds = new ArrayList<>();
 //        }else{
@@ -112,5 +117,13 @@ public class UsersDTO {
 
     public void setGroups(List<GroupingsDTO> groups) {
         this.groups = groups;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

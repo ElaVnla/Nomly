@@ -23,7 +23,7 @@ public class Images {
 
     public Integer getImageId() { return imageId;}
 
-    public byte[] profilePicture() { return Image; }
+    public byte[] getProfilePicture() { return Image; }
 
     public void setProfilePicture(byte[] profilePicture) { this.Image = profilePicture;}
 }

@@ -17,7 +17,7 @@ public class UsersSessionsEateriesDTO {
 
     public UsersSessionsEateriesDTO(UsersSessionsEateries usersSessionsEateries) {
         this.userSessionEateryId = usersSessionsEateries.getUserSessionEateryId();
-        this.user =new UsersDTO(usersSessionsEateries.getUser());
+        this.user = new UsersDTO(usersSessionsEateries.getUser());
         this.session = new SessionsDTO(usersSessionsEateries.getSession());
         this.eatery = usersSessionsEateries.getEatery();
         this.liked = usersSessionsEateries.getLiked();
