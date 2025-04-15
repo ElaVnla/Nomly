@@ -111,27 +111,37 @@ public class SwipingFragment extends Fragment {
             @Override public void onCardDisappeared(View view, int position) {}
         });
 
+        Log.d("TESTING","here1");
+
         layoutManager.setStackFrom(StackFrom.Top);
         layoutManager.setVisibleCount(3);
         layoutManager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
         layoutManager.setDirections(Direction.HORIZONTAL);
 
         b.cardStackView.setLayoutManager(layoutManager);
+        Log.d("TESTING","here2");
+
 
         ApiService apiService = ApiClient.getApiService();
         locationDTO dto = new locationDTO(lat, lng, sessionId); // NEW
         Log.d("DTO_SENT", new Gson().toJson(dto));
         Log.d("DEBUG_REQ", "lat=" + lat + " lng=" + lng + " sessionId=" + sessionId);
+        Log.d("TESTING","here3");
+
 
         apiService.findEateries(dto).enqueue(new Callback<List<eateries>>() {
+
             @Override
             public void onResponse(Call<List<eateries>> call, Response<List<eateries>> response) {
+                Log.d("TESTING","here4");
 
                 Log.d("DEBUG_HTTP", "Response code: " + response.code());
 
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("TESTING","here5");
 
-                    Log.d("DEBUG_RES", new Gson().toJson(response.body()));
+
+                    Log.d("DEBUG_RES THIS ONE", new Gson().toJson(response.body()));
 
                     List<eateries> eateriesList = response.body();
 
@@ -140,7 +150,10 @@ public class SwipingFragment extends Fragment {
                     List<RestaurantCard> cards = new ArrayList<>();
                     viewModel.setTotalCards(eateriesList.size());
 
+                    Log.d("TESTING","here6");
+
                     for (eateries eatery : eateriesList) {
+                        Log.d("TESTING","here7");
 
                         double safeRating = eatery.getRating() != null ? eatery.getRating() : 0.0;
 
@@ -149,11 +162,17 @@ public class SwipingFragment extends Fragment {
                         }
 
                         Log.d("DEBUG_SAFE_RATING", "Using rating: " + safeRating);
+                        Log.d("TESTING","here8");
 
                         apiService.getEateryImages(eatery.getEateryId()).enqueue(new Callback<List<byte[]>>() {
+
                             @Override
                             public void onResponse(Call<List<byte[]>> call, Response<List<byte[]>> imgResponse) {
+                                Log.d("TESTING","here9");
+
                                 if (imgResponse.isSuccessful() && imgResponse.body() != null && !imgResponse.body().isEmpty()) {
+                                    Log.d("TESTING","here10");
+
                                     byte[] imageBytes = imgResponse.body().get(0);
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
@@ -167,6 +186,8 @@ public class SwipingFragment extends Fragment {
                                     cards.add(card);
 
                                     if (cards.size() == eateriesList.size()) {
+                                        Log.d("TESTING","here11");
+
                                         adapter = new CardStackAdapter(cards);
                                         b.cardStackView.setAdapter(adapter);
                                     }
@@ -174,18 +195,25 @@ public class SwipingFragment extends Fragment {
                             }
                             @Override
                             public void onFailure(Call<List<byte[]>> call, Throwable t) {
+                                Log.d("TESTING","here12");
+
                                 Toast.makeText(getContext(), "Failed to load image", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 } else {
+                    Log.d("TESTING","here13");
+
                     Toast.makeText(getContext(), "No eateries found nearby", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<eateries>> call, Throwable t) {
+                Log.d("TESTING","here14");
+
                 Toast.makeText(getContext(), "API error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("eateryerror",t.getMessage());
             }
         });
     }
