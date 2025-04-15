@@ -8,7 +8,7 @@ public class users {
     private String username;
     private String password;
     private String email;
-    private int ProfilePic;
+    private String ProfilePic;
     private String preferences;
     private String createdAt;
     private List<groupings> groups;
@@ -24,7 +24,7 @@ public class users {
         this.email = email;
     }
 
-    public users(int userId, String username, String password, String email, int porfilePic, String preferences, String createdAt, List<groupings> groups) {
+    public users(int userId, String username, String password, String email, String porfilePic, String preferences, String createdAt, List<groupings> groups) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -56,7 +56,7 @@ public class users {
     public void setPreferences(String preferences) {
         this.preferences = preferences;
     }
-    public void setProfilePic(int profilePic) {
+    public void setProfilePic(String profilePic) {
         this.ProfilePic = profilePic;
     }
     public void setCreatedAt(String createdAt) {
@@ -92,7 +92,7 @@ public class users {
 
 
 
-    public int getProfilePic() {
+    public String getProfilePic() {
         return ProfilePic;
     }
 

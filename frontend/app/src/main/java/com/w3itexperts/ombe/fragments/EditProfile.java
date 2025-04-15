@@ -2,9 +2,12 @@ package com.w3itexperts.ombe.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,7 +30,9 @@ import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.databinding.FragmentEditProfileBinding;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +46,7 @@ public class EditProfile extends Fragment {
     private FragmentEditProfileBinding b;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Set<String> allergySet = new HashSet<>();
+    private String encodedImage = "";
 
     @Nullable
     @Override
@@ -78,8 +84,13 @@ public class EditProfile extends Fragment {
             }
 
             // Set the profile image (if available), otherwise a default.
-            if (currentUser.getProfilePic() != 0) {
-                b.profileImage.setImageResource(currentUser.getProfilePic());
+            // Assuming that if an image was previously set, it is stored as a base64 string.
+            // If you are storing a drawable resource as the default, use that as a fallback.
+            if (!TextUtils.isEmpty(currentUser.getProfilePic())) {
+                // If the stored image is in Base64, you might convert it back to a bitmap if needed.
+                // Here we simply set encodedImage so that it is passed to the update API.
+                encodedImage = currentUser.getProfilePic();
+                // Optionally, you can decode and display the image.
             } else {
                 b.profileImage.setImageResource(R.drawable.person1);
             }
@@ -125,6 +136,7 @@ public class EditProfile extends Fragment {
             updateBody.put("email", updatedEmail);
             updateBody.put("password", updatedPassword);
             updateBody.put("preferences", updatedPreferences);
+            updateBody.put("image", encodedImage);
 
             ApiService apiService = ApiClient.getApiService();
             Log.d("EDIT_PROFILE", "Calling updateUser with payload: " + updateBody.toString());
@@ -233,10 +245,29 @@ public class EditProfile extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             Uri selectedImageUri = data.getData();
             if (selectedImageUri != null) {
-                b.profileImage.setImageURI(selectedImageUri);
-                Log.d("EDIT_PROFILE", "Profile image updated with URI: " + selectedImageUri.toString());
-                // Optionally: upload the new image to your server.
+                try {
+                    InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    // Set the image in the ImageView for preview
+                    b.profileImage.setImageBitmap(bitmap);
+                    // Convert the selected image to a Base64 encoded string.
+                    encodedImage = ImageToB64(bitmap);
+                    Log.d("EDIT_PROFILE", "Image converted to Base64 string.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "Error processing image", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
+
+    // Helper method: convert Bitmap to Base64 encoded String.
+    private String ImageToB64(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        // Compress the bitmap; adjust format/quality as needed.
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+    }
+
 }

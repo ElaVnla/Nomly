@@ -80,12 +80,24 @@ public class reset_password extends Fragment {
                         transaction.addToBackStack(null);
                         transaction.commit();
                     } else {
+                        String errorBody = "";
+                        try {
+                            if (response.errorBody() != null) {
+                                errorBody = response.errorBody().string();
+                            }
+                        } catch (Exception e) {
+                            errorBody = "Unable to read error body: " + e.getMessage();
+                        }
                         Toast.makeText(getContext(), "Error retrieving users: " + response.code(), Toast.LENGTH_SHORT).show();
+                        android.util.Log.e("RESET_PASSWORD", "Retrieval failed. Code: " + response.code() + ", Error body: " + errorBody);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<List<users>> call, Throwable t) {
                     Toast.makeText(getContext(), "Failed to retrieve users: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                    android.util.Log.e("RESET_PASSWORD", "Error retrieving users", t);
                 }
             });
         });
