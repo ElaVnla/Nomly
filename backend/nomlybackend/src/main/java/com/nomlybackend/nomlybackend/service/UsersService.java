@@ -90,9 +90,6 @@ public class UsersService {
         newUser.setEmail(body.get("email"));
         newUser.setPassword(body.get("password"));
         newUser.setPreferences(body.get("preferences"));
-        LocalDateTime now = LocalDateTime.now();
-//        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
-        newUser.setCreatedAt(LocalDateTime.now());
 
         String profilePic = body.get("profilePicture");
         if (profilePic != null){

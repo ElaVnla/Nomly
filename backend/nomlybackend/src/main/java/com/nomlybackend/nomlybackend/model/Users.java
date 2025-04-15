@@ -23,25 +23,21 @@ public class Users extends Profile{
     private String password;
     @Column (name = "Preferences")
     private String preferences;
-    @Column (name = "CreatedAt")
-    private LocalDateTime createdAt;
-
-    @OneToOne
-    @JoinColumn (name = "ImageId",  referencedColumnName = "ImageId")
-    private Images profilePicture;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsersGroupings> userGroupings;
 
 
-    public Users(){}
+    public Users(){
+        super();
+    }
 
-    public Users(String username, String email, String password, String preferences, LocalDateTime createdAt) {
+    public Users(String username, String email, String password, String preferences) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.preferences = preferences;
-        this.createdAt = createdAt;
+        setCreatedAt();
     }
 
 
@@ -81,14 +77,6 @@ public class Users extends Profile{
         this.preferences = preferences;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public List<UsersGroupings> getUserGroupings() {
         return userGroupings;
     }
@@ -96,9 +84,4 @@ public class Users extends Profile{
     public void setUserGroupings(List<UsersGroupings> userGroupings) {
         this.userGroupings = userGroupings;
     }
-
-    public Images getImage() { return this.profilePicture; }
-
-    @Override
-    public void setImage(Images image) { this.profilePicture = image; }
 }

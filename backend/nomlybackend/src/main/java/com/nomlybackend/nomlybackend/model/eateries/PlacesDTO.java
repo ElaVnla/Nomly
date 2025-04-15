@@ -22,6 +22,7 @@ public class PlacesDTO {
         private List<String> types;
         private Double rating;
         private List<Photo> photos;
+        private String formattedAddress;
 
         public static Set<String> getDefaultTypes() {
             return defaultTypes;
@@ -78,6 +79,10 @@ public class PlacesDTO {
         public List<Photo> getPhotos() { return photos; }
 
         public void setPhotos(List<Photo> photos) { this.photos = photos; }
+
+        public String formattedAddress() { return formattedAddress; }
+
+        public void setFormattedAddress(String formattedAddress) { this.formattedAddress = formattedAddress; }
 
         public Eateries toEntity(){
             Eateries eatery = new Eateries();

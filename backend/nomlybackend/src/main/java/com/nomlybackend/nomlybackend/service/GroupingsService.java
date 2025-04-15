@@ -79,10 +79,9 @@ public class GroupingsService {
     public GroupingsDTO createGrouping( Map<String,String> body){
         Groupings newGrouping = new Groupings();
         newGrouping.setGroupName(body.get("groupName"));
-        LocalDateTime now = LocalDateTime.now();
 //        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
-        LocalDateTime createdAt = LocalDateTime.now();
-        newGrouping.setCreatedAt(createdAt);
+        newGrouping.setCreatedAt();
+
         String code = generateRandomCode(); //TODO Check code duplicate
         newGrouping.setGroupCode(code);
 

@@ -29,6 +29,9 @@ public class EateriesPhotosService {
         List<String> photos = eateriesPhotosRepository.findPhotoNamesByEateryId(eateryId);
         Gson gson = new Gson();
         List<byte[]> encodedImages = new ArrayList<>();
+        if (photos.isEmpty()){
+            return null;
+        }
         for (String photoName: photos){ //todo multithread for each image
             String baseURI = "https://places.googleapis.com/v1/places/%s/photos/%s/media?key=%s&maxHeightPx=%d&maxWidthPx=%d&skipHttpRedirect=false";
 

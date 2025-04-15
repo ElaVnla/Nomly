@@ -19,15 +19,8 @@ public class Groupings extends Profile{
     @Column(name = "GroupName")
     private String groupName;
 
-    @Column (name = "CreatedAt")
-    private LocalDateTime createdAt;
-
     @Column (name = "groupCode")
     private String groupCode;
-
-    @OneToOne
-    @JoinColumn (name = "ImageId",  referencedColumnName = "ImageId")
-    private Images profilePicture;
 
     @OneToMany(mappedBy = "grouping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UsersGroupings> usersGrouping;
@@ -37,12 +30,14 @@ public class Groupings extends Profile{
 
 
 
-    public Groupings() {}
+    public Groupings() {
+        super();
+    }
 
-    public Groupings(String groupName, LocalDateTime createdAt, String groupCode) {
+    public Groupings(String groupName, String groupCode) {
         this.groupName = groupName;
-        this.createdAt = createdAt;
         this.groupCode = groupCode;
+        setCreatedAt();
     }
 
     public Integer getGroupId() { return groupId; }
@@ -50,10 +45,6 @@ public class Groupings extends Profile{
     public String getGroupName() { return groupName; }
 
     public void setGroupName(String groupName) { this.groupName = groupName; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt;}
 
     public List<UsersGroupings> getUsersGrouping() { return usersGrouping; }
 
@@ -68,9 +59,4 @@ public class Groupings extends Profile{
     public String getGroupCode() { return groupCode; }
 
     public void setGroupCode(String groupCode) { this.groupCode = groupCode; }
-
-    public Images getImage() { return this.profilePicture; }
-
-    @Override
-    public void setImage(Images image) { this.profilePicture = image; }
 }
