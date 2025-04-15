@@ -42,7 +42,7 @@ public class EateriesService {
                 .uri(new URI("https://places.googleapis.com/v1/places:searchNearby"))
                 //TODO 2 set up api key in Constants.API_KEY
                 .header("X-Goog-Api-Key", apiKey)
-                .header("X-Goog-FieldMask", "places.id,places.displayName.text,places,places.priceLevel,places.types,places.rating,places.photos.name")
+                .header("X-Goog-FieldMask", "places.id,places.displayName.text,places.priceLevel,places.types,places.rating,places.photos.name,places.formattedAddress,places.location")
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
@@ -57,10 +57,14 @@ public class EateriesService {
             Eateries eatery = place.toEntity();
             eateries.add(eatery);
             eateryRepository.save(eatery);
-            for (Photo photo: place.getPhotos()){
-                EateriesPhotos eateriesPhotos = new EateriesPhotos(eatery, photo.getName());
-                eateriesPhotosRepository.save(eateriesPhotos);
+            List<Photo> photos = place.getPhotos();
+            if (photos != null){
+                for (Photo photo: place.getPhotos()){
+                    EateriesPhotos eateriesPhotos = new EateriesPhotos(eatery, photo.getName());
+                    eateriesPhotosRepository.save(eateriesPhotos);
+                }
             }
+
         }
         return eateries;
     }

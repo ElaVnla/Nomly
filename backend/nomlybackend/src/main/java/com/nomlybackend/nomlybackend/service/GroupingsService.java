@@ -53,18 +53,23 @@ public class GroupingsService {
 
         current.setGroupName(body.get("groupName"));
         // TODO make groupings and users subclass of profile to remove code reuse
-        Images oldImage = current.getImage();
-        if (oldImage != null){
-            groupingsRepository.save(current);
-            current.setImage(null);
-            imagesRepository.delete(oldImage);
-        }
+        // TODO make body.get(profilepicture) optional
+        String profilePic = body.get("profilePicture");
+        if (profilePic != null){
+            Images oldImage = current.getImage();
+            if (oldImage != null){
+                groupingsRepository.save(current);
+                current.setImage(null);
+                imagesRepository.delete(oldImage);
+            }
 
-        byte[] imageBytes = Base64.getDecoder().decode(body.get("profilePicture"));
-        Images image = new Images();
-        image.setProfilePicture(imageBytes);
-        imagesRepository.save(image);
-        current.setImage(image);
+            //upload image
+            byte[] imageBytes = Base64.getDecoder().decode(profilePic);
+            Images image = new Images();
+            image.setProfilePicture(imageBytes);
+            imagesRepository.save(image);
+            current.setImage(image);
+        }
 
         groupingsRepository.save(current);
         return new GroupingsDTO(current, true);
@@ -72,12 +77,23 @@ public class GroupingsService {
 
 
     public GroupingsDTO createGrouping( Map<String,String> body){
-        String groupName = body.get("groupName");
+        Groupings newGrouping = new Groupings();
+        newGrouping.setGroupName(body.get("groupName"));
         LocalDateTime now = LocalDateTime.now();
 //        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
         LocalDateTime createdAt = LocalDateTime.now();
+        newGrouping.setCreatedAt(createdAt);
         String code = generateRandomCode(); //TODO Check code duplicate
-        Groupings newGrouping = new Groupings(groupName,createdAt, code);
+        newGrouping.setGroupCode(code);
+
+        String profilePic = body.get("profilePicture");
+        if (profilePic != null){
+            byte[] imageBytes = Base64.getDecoder().decode(profilePic);
+            Images image = new Images();
+            image.setProfilePicture(imageBytes);
+            imagesRepository.save(image);
+            newGrouping.setImage(image);
+        }
 
         return new GroupingsDTO(groupingsRepository.save(newGrouping), true) ;
     }

@@ -3,7 +3,7 @@ package com.nomlybackend.nomlybackend.model.eateries;
 public class LocationDTO {
     private Double latitude;
     private Double longitude;
-    private String sessionId;
+    private Integer sessionId;
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
@@ -13,7 +13,7 @@ public class LocationDTO {
         this.longitude = longitude;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(Integer sessionId) {
         this.sessionId = sessionId;
     }
 
@@ -25,7 +25,7 @@ public class LocationDTO {
         return longitude;
     }
 
-    public String getSessionId() {
+    public Integer getSessionId() {
         return sessionId;
     }
 }

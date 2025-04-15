@@ -61,19 +61,22 @@ public class UsersService {
         current.setPassword(body.get("password"));
         current.setPreferences(body.get("preferences"));
 
-        Images oldImage = current.getImage();
-        if (oldImage != null){
-            usersRepository.save(current);
-            current.setImage(null);
-            imagesRepository.delete(oldImage);
-        }
+        String profilePic = body.get("profilePicture");
+        if (profilePic != null){
+            Images oldImage = current.getImage();
+            if (oldImage != null){
+                usersRepository.save(current);
+                current.setImage(null);
+                imagesRepository.delete(oldImage);
+            }
 
-        //upload image
-        byte[] imageBytes = Base64.getDecoder().decode(body.get("profilePicture"));
-        Images image = new Images();
-        image.setProfilePicture(imageBytes);
-        imagesRepository.save(image);
-        current.setImage(image);
+            //upload image
+            byte[] imageBytes = Base64.getDecoder().decode(profilePic);
+            Images image = new Images();
+            image.setProfilePicture(imageBytes);
+            imagesRepository.save(image);
+            current.setImage(image);
+        }
 
         usersRepository.save(current);
 
@@ -82,17 +85,25 @@ public class UsersService {
 
 
     public UsersDTO createUser(Map<String,String> body){
-
-        String username = body.get("username");
-        String email = body.get("email");
-        String password = body.get("password");
-        String preferences = body.get("preferences");
+        Users newUser = new Users();
+        newUser.setUsername(body.get("username"));
+        newUser.setEmail(body.get("email"));
+        newUser.setPassword(body.get("password"));
+        newUser.setPreferences(body.get("preferences"));
         LocalDateTime now = LocalDateTime.now();
 //        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
-        LocalDateTime createdAt =  LocalDateTime.now();
-        Users newUser = new Users(username,email,password,preferences,createdAt);
-        UsersDTO newUserDTO = new UsersDTO(usersRepository.save(newUser), true);
-        return newUserDTO;
+        newUser.setCreatedAt(LocalDateTime.now());
+
+        String profilePic = body.get("profilePicture");
+        if (profilePic != null){
+            byte[] imageBytes = Base64.getDecoder().decode(profilePic);
+            Images image = new Images();
+            image.setProfilePicture(imageBytes);
+            imagesRepository.save(image);
+            newUser.setImage(image);
+        }
+
+        return new UsersDTO(usersRepository.save(newUser), true);
     }
 }
 
