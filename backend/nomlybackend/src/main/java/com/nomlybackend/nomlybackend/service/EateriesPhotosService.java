@@ -25,8 +25,8 @@ public class EateriesPhotosService {
     static String apiKey = "AIzaSyCCpR2DMrJpe4Lv3maS070IRysQWVevESs";
 
     public List<byte[]> getImages(String eateryId) throws Exception {
-        int heightPx = 213;
-        int widthPx = 319;
+        int heightPx = 606;
+        int widthPx = 375;
         List<String> photos = eateriesPhotosRepository.findPhotoNamesByEateryId(eateryId);
         if (photos.isEmpty()) return null;
 
