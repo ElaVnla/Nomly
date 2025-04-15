@@ -8,17 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.w3itexperts.ombe.APIservice.ApiClient;
 import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.activity.login_signin_Activity;
 import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.databinding.CreatePasswordBinding;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,12 +88,13 @@ public class create_password extends Fragment {
                         users currentUser = response.body();
                         Log.d("CREATE_PW", "User retrieved: " + currentUser.getUserId());
                         // Build a map containing the fields required by your backend.
-                        // If you want to preserve the current username and preferences, get them from currentUser.
                         Map<String, String> updateBody = new HashMap<>();
                         updateBody.put("username", currentUser.getUsername() != null ? currentUser.getUsername() : "");
                         updateBody.put("email", email);
                         updateBody.put("password", newPassword);
                         updateBody.put("preferences", currentUser.getPreferences() != null ? currentUser.getPreferences() : "");
+                        // Include the current user's image from the retrieved data.
+                        updateBody.put("image", currentUser.getProfilePic() != null ? currentUser.getProfilePic() : "");
 
                         Log.d("CREATE_PW", "Calling updateUser with updateBody: " + updateBody.toString());
                         apiService.updateUser(userId, updateBody).enqueue(new Callback<users>() {
@@ -101,15 +107,18 @@ public class create_password extends Fragment {
                                     startActivity(new Intent(getContext(), login_signin_Activity.class));
                                     getActivity().finish();
                                 } else {
-                                    String msg = "Password update failed: " + response.code();
+                                    String errorMsg = "Password update failed: " + response.code();
                                     try {
-                                        String errorBody = response.errorBody().string();
-                                        Log.d("CREATE_PW", "Error body: " + errorBody);
+                                        if (response.errorBody() != null) {
+                                            String errorBody = response.errorBody().string();
+                                            errorMsg += " | " + errorBody;
+                                        }
                                     } catch (IOException e) {
                                         e.printStackTrace();
+                                        errorMsg += " | Error parsing error body: " + e.getMessage();
                                     }
-                                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                                    Log.d("CREATE_PW", msg);
+                                    Toast.makeText(getContext(), errorMsg, Toast.LENGTH_LONG).show();
+                                    Log.d("CREATE_PW", errorMsg);
                                 }
                             }
                             @Override
