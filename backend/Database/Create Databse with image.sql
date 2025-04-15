@@ -10,7 +10,7 @@ CREATE DATABASE NomlyDB;
 
 create table NomlyDB.Images(
 	ImageId int NOT NULL auto_increment,
-    Image longblob not null,
+    Image blob not null,
     primary key(imageId)
 );
 
