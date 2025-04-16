@@ -47,7 +47,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RestaurantCard card = cards.get(position);
         holder.title.setText(card.getName());
-        holder.location.setText(card.getLocation());
+        //holder.location.setText(card.getLocation());
         holder.price.setText(card.getPriceLevel());
         holder.image.setImageBitmap(card.getImage());
     }

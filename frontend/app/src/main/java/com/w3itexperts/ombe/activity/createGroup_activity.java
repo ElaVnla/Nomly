@@ -1,9 +1,13 @@
 package com.w3itexperts.ombe.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,9 +23,12 @@ import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.apimodals.groupings;
 import com.w3itexperts.ombe.apimodals.usersgroupings;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +40,7 @@ public class createGroup_activity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> imagePickerLauncher;
     private Uri selectedImageUri;
     private int userId;
+    private String base64Image = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,25 +52,21 @@ public class createGroup_activity extends AppCompatActivity {
         backButton = findViewById(R.id.backbtnToHomeFromCreate);
 
         userId = getIntent().getIntExtra("userId", -1);
-
         if (userId == -1) {
             Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // ⬅️ Handle Back Button to Home Fragment
-        backButton.setOnClickListener(v -> {
-            finish(); // Just finishes this activity and returns to home_fragment
-        });
+        backButton.setOnClickListener(v -> finish());
 
-        // 📸 Image picker logic
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         selectedImageUri = result.getData().getData();
                         groupImageView.setImageURI(selectedImageUri);
+                        convertImageToBase64(selectedImageUri);
                     }
                 });
 
@@ -72,9 +76,22 @@ public class createGroup_activity extends AppCompatActivity {
             imagePickerLauncher.launch(pickIntent);
         });
 
-        // 🚀 Create Group
         Button createGroupButton = findViewById(R.id.createGroupButton);
         createGroupButton.setOnClickListener(v -> createGroup());
+    }
+
+    private void convertImageToBase64(Uri uri) {
+        try {
+            ContentResolver resolver = getContentResolver();
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(resolver, uri);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+            base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+        } catch (IOException e) {
+            Toast.makeText(this, "Failed to encode image", Toast.LENGTH_SHORT).show();
+            Log.e("IMAGE_ENCODE", "Error encoding image: ", e);
+        }
     }
 
     private void createGroup() {
@@ -87,7 +104,12 @@ public class createGroup_activity extends AppCompatActivity {
 
         Map<String, String> groupData = new HashMap<>();
         groupData.put("groupName", groupName);
+        if (base64Image != null) {
+            groupData.put("profilePicture", base64Image);
+        }
 
+        // 👇 Add this debug log
+        Log.d("CREATE_GROUP_DEBUG", "Creating group with: name=" + groupName + ", hasImage=" + (base64Image != null));
         ApiService apiService = ApiClient.getApiService();
         Call<groupings> call = apiService.addGrouping(groupData);
 
@@ -99,7 +121,6 @@ public class createGroup_activity extends AppCompatActivity {
                     int groupId = createdGroup.getGroupId();
                     String groupCode = createdGroup.getGroupCode();
 
-                    // Step 2: Add user to the group
                     Map<String, String> userGroupData = new HashMap<>();
                     userGroupData.put("userId", String.valueOf(userId));
                     userGroupData.put("groupId", String.valueOf(groupId));
@@ -115,26 +136,37 @@ public class createGroup_activity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             } else {
-                                String errorMessage = "Group made but failed to add user. Code: " + response.code();
-                                Toast.makeText(createGroup_activity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                Toast.makeText(createGroup_activity.this, "Group created, but failed to add user", Toast.LENGTH_SHORT).show();
+                                Log.e("ADD_USER_FAIL", "Error code: " + response.code());
                             }
                         }
 
                         @Override
                         public void onFailure(Call<usersgroupings> call, Throwable t) {
                             Toast.makeText(createGroup_activity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                            t.printStackTrace();
+                            Log.e("ADD_USER_API", "Failure: ", t);
                         }
                     });
 
                 } else {
-                    Toast.makeText(createGroup_activity.this, "Failed to create group!", Toast.LENGTH_SHORT).show();
+                    String errorMsg = "Failed to create group. Code: " + response.code();
+                    try {
+                        ResponseBody errorBody = response.errorBody();
+                        if (errorBody != null) {
+                            errorMsg += " - " + errorBody.string();
+                        }
+                    } catch (IOException e) {
+                        errorMsg += " - Could not parse error body.";
+                    }
+                    Toast.makeText(createGroup_activity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    Log.e("CREATE_GROUP", errorMsg);
                 }
             }
 
             @Override
             public void onFailure(Call<groupings> call, Throwable t) {
                 Toast.makeText(createGroup_activity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("CREATE_GROUP_API", "Failure: ", t);
             }
         });
     }

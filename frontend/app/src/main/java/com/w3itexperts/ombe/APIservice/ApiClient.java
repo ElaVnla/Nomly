@@ -13,7 +13,7 @@ public class ApiClient {
     // GUYS CHANGE THIS ONE IF YOU USING THE PHONE
     // 1. open terminal cmd: type ipconfig
     // 2. copy the ipv4 address thingy
-    private static final String BASE_URL = "http://10.0.2.2:8080";
+    private static final String BASE_URL = "http://10.32.27.23:8080";
     private static Retrofit retrofit = null;
 
     public static ApiService getApiService() {

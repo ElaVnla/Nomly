@@ -109,8 +109,11 @@ public interface ApiService {
     @DELETE("groupings/delete-grouping/{id}")
     Call<Void> deleteGrouping(@Path("id") int id);
 
+   // @PUT("groupings/update-grouping/{id}")
+    //Call<groupings> updateGrouping(@Path("id") int id, @Body groupings grouping);
+
     @PUT("groupings/update-grouping/{id}")
-    Call<groupings> updateGrouping(@Path("id") int id, @Body groupings grouping);
+    Call<groupings> updateGrouping(@Path("id") int id, @Body Map<String, String> body); // ✅
 
     //@POST("groupings/add-grouping")
     //Call<groupings> addGrouping(@Body groupings grouping);

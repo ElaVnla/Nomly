@@ -2,7 +2,7 @@ package com.w3itexperts.ombe.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.activity.groupPage_Activity;
 import com.w3itexperts.ombe.modals.yourGroupsModal;
@@ -39,10 +38,17 @@ public class yourGroupsAdapter extends RecyclerView.Adapter<yourGroupsAdapter.yo
     @Override
     public void onBindViewHolder(@NonNull yourGroupsViewHolder holder, int position) {
         yourGroupsModal modal = AllGroupsList.get(position);
-        holder.groupImage.setImageResource(modal.getgroupImage());
-        holder.noOfSessions.setText(modal.getnoOfSessions());
+
+        Bitmap groupBitmap = modal.getGroupImage();
+        if (groupBitmap != null) {
+            holder.groupImage.setImageBitmap(groupBitmap);
+        } else {
+            holder.groupImage.setImageResource(R.drawable.tempgroupimg); // fallback
+        }
+
+        holder.noOfSessions.setText(modal.getNoOfSessions());
         holder.NoOfMembers.setText(modal.getNoOfMembers());
-        holder.groupName.setText(modal.getgroupName());
+        holder.groupName.setText(modal.getGroupName());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, groupPage_Activity.class);
