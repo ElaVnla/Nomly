@@ -498,9 +498,23 @@ public class PlanSessionFragment extends Fragment {
                     public void onResponse(Call<sessions> call, Response<sessions> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             sessions created = response.body();
-                            String[] parts = created.getMeetingDateTime().split(" ");
-                            String displayDate = parts.length > 0 ? parts[0] : "";
-                            String displayTime = parts.length > 1 ? parts[1] : "";
+
+                            String displayDate = "";
+                            String displayTime = "";
+                            try {
+                                SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                                Date parsedDate = isoFormat.parse(created.getMeetingDateTime());
+                                if (parsedDate != null) {
+                                    displayDate = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(parsedDate);
+                                    displayTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(parsedDate);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace(); // fallback if parsing fails
+                            }
+
+//                            String[] parts = created.getMeetingDateTime().split(" ");
+//                            String displayDate = parts.length > 0 ? parts[0] : "";
+//                            String displayTime = parts.length > 1 ? parts[1] : "";
 
                             Bundle bundle = new Bundle();
                             bundle.putString("title", created.getSessionName());
