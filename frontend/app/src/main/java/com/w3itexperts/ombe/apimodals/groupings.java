@@ -1,18 +1,18 @@
 package com.w3itexperts.ombe.apimodals;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class groupings {
     private int groupId;
     private String groupName;
-    private int GroupPic;
+    private int groupPic; // Renamed to follow Java conventions
     private String createdAt;
     private String groupCode;
+    private String image; // ✅ Base64 string from backend
     private List<users> users;
     private List<sessions> sessions;
 
-    // Constructor here ======================
+    // ================== Constructors ==================
 
     public groupings(int groupId, String groupName, String createdAt, List<users> users, List<sessions> sessions) {
         this.groupId = groupId;
@@ -21,25 +21,27 @@ public class groupings {
         this.users = users;
         this.sessions = sessions;
     }
+
     public groupings(int groupId, String groupName, int groupPic, String createdAt, String groupCode) {
-        groupId = groupId;
-        groupName = groupName;
-        GroupPic = groupPic;
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.groupPic = groupPic;
         this.createdAt = createdAt;
         this.groupCode = groupCode;
     }
 
     public groupings() {
-        // empty constructor required for session creation
+        // Empty constructor required for deserialization / default init
     }
-    // getter and setter here ====================
+
+    // ================== Getters & Setters ==================
 
     public int getGroupId() {
         return groupId;
     }
 
     public void setGroupId(int groupId) {
-        groupId = groupId;
+        this.groupId = groupId;
     }
 
     public String getGroupName() {
@@ -47,41 +49,15 @@ public class groupings {
     }
 
     public void setGroupName(String groupName) {
-        groupName = groupName;
+        this.groupName = groupName;
     }
 
     public int getGroupPic() {
-        return GroupPic;
+        return groupPic;
     }
 
     public void setGroupPic(int groupPic) {
-        GroupPic = groupPic;
-    }
-
-    public List<com.w3itexperts.ombe.apimodals.users> getUsers() {
-        return users;
-    }
-
-    public int getNoUsers()
-    {
-        return this.users.size();
-    }
-
-    public int getNoSessions()
-    {
-        return this.sessions.size();
-    }
-
-    public void setUsers(List<com.w3itexperts.ombe.apimodals.users> users) {
-        this.users = users;
-    }
-
-    public List<com.w3itexperts.ombe.apimodals.sessions> getSessions() {
-        return sessions;
-    }
-
-    public void setSessions(List<com.w3itexperts.ombe.apimodals.sessions> sessions) {
-        this.sessions = sessions;
+        this.groupPic = groupPic;
     }
 
     public String getCreatedAt() {
@@ -98,5 +74,37 @@ public class groupings {
 
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<users> users) {
+        this.users = users;
+    }
+
+    public List<sessions> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<sessions> sessions) {
+        this.sessions = sessions;
+    }
+
+    public int getNoUsers() {
+        return (users != null) ? users.size() : 0;
+    }
+
+    public int getNoSessions() {
+        return (sessions != null) ? sessions.size() : 0;
     }
 }

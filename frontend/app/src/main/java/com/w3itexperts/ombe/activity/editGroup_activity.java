@@ -1,9 +1,11 @@
 package com.w3itexperts.ombe.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +20,11 @@ import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.apimodals.groupings;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +37,7 @@ public class editGroup_activity extends AppCompatActivity {
     private Uri selectedImageUri;
     private int groupId;
 
+    private String base64Image = null;
     private ActivityResultLauncher<Intent> imagePickerLauncher;
 
     @Override
@@ -56,6 +64,7 @@ public class editGroup_activity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         selectedImageUri = result.getData().getData();
                         groupImageChangeInput.setImageURI(selectedImageUri);
+                        convertImageToBase64(selectedImageUri);
                     }
                 });
 
@@ -68,6 +77,19 @@ public class editGroup_activity extends AppCompatActivity {
         saveDetailsButton.setOnClickListener(v -> updateGroupDetails());
     }
 
+    private void convertImageToBase64(Uri uri) {
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+            base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+        } catch (IOException e) {
+            Toast.makeText(this, "Image conversion failed", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
     private void updateGroupDetails() {
         String newName = groupNameEditText.getText().toString().trim();
 
@@ -76,11 +98,14 @@ public class editGroup_activity extends AppCompatActivity {
             return;
         }
 
-        // Temporarily skip image field until backend supports it
-        groupings updatedGroup = new groupings(groupId, newName, null, null, null);
+        Map<String, String> groupData = new HashMap<>();
+        groupData.put("groupName", newName);
+        if (base64Image != null) {
+            groupData.put("profilePicture", base64Image);
+        }
 
         ApiService apiService = ApiClient.getApiService();
-        Call<groupings> call = apiService.updateGrouping(groupId, updatedGroup);
+        Call<groupings> call = apiService.updateGrouping(groupId, groupData);
 
         call.enqueue(new Callback<groupings>() {
             @Override

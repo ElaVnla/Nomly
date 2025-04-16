@@ -15,6 +15,9 @@ import java.util.ArrayList; import java.util.List;
 
 import retrofit2.Call; import retrofit2.Callback; import retrofit2.Response;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class allGroups extends Fragment {
     private FragmentAllgroupsBinding b;
     private allGroupsAdapter adapter;
@@ -47,8 +50,8 @@ public class allGroups extends Fragment {
                 List<yourGroupsModal> filteredSearchList = new ArrayList<>();
                 Log.d("NOMLYPROCESS", "check full group list: " + fullGroupList.size());
                 for (yourGroupsModal modal : fullGroupList) {
-                    Log.d("NOMLYPROCESS", "Checking group name: '" + modal.getgroupName() + "'");
-                    if (modal.getgroupName().toLowerCase().contains(query)) {
+                    Log.d("NOMLYPROCESS", "Checking group name: '" + modal.getGroupName() + "'");
+                    if (modal.getGroupName().toLowerCase().contains(query)) {
                         filteredSearchList.add(modal);
                     }
                 }
@@ -141,13 +144,26 @@ public class allGroups extends Fragment {
                                 Log.e("NOMLYPROCESS", "Failed to refresh group " + groupId + ": response code " + response.code());
                             }
 
+                            String base64Image = refreshedGroup.getImage();  // assuming getImage() returns a String
+                            byte[] imageBytes = null;
+                            if (base64Image != null && !base64Image.isEmpty()) {
+                                imageBytes = android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT);
+                            }
+                            Bitmap decodedImage;
+                            if (imageBytes != null && imageBytes.length > 0) {
+                                decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                            } else {
+                                decodedImage = BitmapFactory.decodeResource(getResources(), R.drawable.tempgroupimg);
+                            }
+
                             yourGroupsModal modal = new yourGroupsModal(
                                     String.valueOf(refreshedGroup.getNoUsers()),
                                     String.valueOf(refreshedGroup.getNoSessions()),
-                                    R.drawable.tempgroupimg,
+                                    decodedImage,
                                     refreshedGroup.getGroupName(),
                                     refreshedGroup.getGroupId()
                             );
+
                             groupsModalList.add(modal);
 
                             // Once we have processed all groups, update the RecyclerView.
@@ -168,13 +184,15 @@ public class allGroups extends Fragment {
                             yourGroupsView.setVisibility(View.VISIBLE);
                             // If the API call fails, use fallback data.
                             Log.e("NOMLYPROCESS", "Failure refreshing group " + groupId + ": " + t.getMessage());
+                            Bitmap fallbackImage = BitmapFactory.decodeResource(getResources(), R.drawable.tempgroupimg);
                             yourGroupsModal modal = new yourGroupsModal(
                                     String.valueOf(grp.getNoUsers()),
                                     String.valueOf(grp.getNoSessions()),
-                                    R.drawable.tempgroupimg,
+                                    fallbackImage,
                                     grp.getGroupName(),
                                     grp.getGroupId()
                             );
+
                             groupsModalList.add(modal);
 
                             if (groupsModalList.size() == totalGroups) {

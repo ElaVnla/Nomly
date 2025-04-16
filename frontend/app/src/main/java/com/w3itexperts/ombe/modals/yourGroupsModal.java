@@ -1,57 +1,39 @@
 package com.w3itexperts.ombe.modals;
 
+import android.graphics.Bitmap;
+
 public class yourGroupsModal {
-    private int groupImage;
+    private Bitmap groupImage;
     private String noOfSessions;
-    private String NoOfMembers;
+    private String noOfMembers;
     private String groupName;
+    private int groupId;
 
-    private int groupId; //new id
-
-    // Constructor here ===================================================
-    public yourGroupsModal(String NoOfMembers, String noOfSessions, int groupImage, String groupName, int groupId) {
-        this.NoOfMembers = NoOfMembers;
+    // Constructor
+    public yourGroupsModal(String noOfMembers, String noOfSessions, Bitmap groupImage, String groupName, int groupId) {
+        this.noOfMembers = noOfMembers;
         this.noOfSessions = noOfSessions;
         this.groupImage = groupImage;
         this.groupName = groupName;
         this.groupId = groupId;
     }
 
-    // Getter and Setter for group Images
-    public int getgroupImage() {
+    // Getters
+    public Bitmap getGroupImage() {
         return groupImage;
     }
 
-//    public void setgroupImage(int groupImage) {
-//        this.groupImage = groupImage;
-//    }
-
-    // Getter and Setter for No of Groups
     public String getNoOfMembers() {
-        return NoOfMembers;
+        return noOfMembers;
     }
 
-//    public void setNoOfGroups(String NoOfGroups) {
-//        this.NoOfGroups = NoOfGroups;
-//    }
-
-    // Getter and Setter for no of sessions
-    public String getnoOfSessions() {
+    public String getNoOfSessions() {
         return noOfSessions;
     }
 
-//    public void setnoOfSessions(String noOfSessions) {
-//        this.noOfSessions = noOfSessions;
-//    }
-
-    // Getter and Setter for no of group of Name
-    public String getgroupName() {
+    public String getGroupName() {
         return groupName;
     }
-
-//    public void setgroupName(String groupName) {
-//        this.groupName = groupName;
-//    }
 
     public int getGroupId() {
         return groupId;

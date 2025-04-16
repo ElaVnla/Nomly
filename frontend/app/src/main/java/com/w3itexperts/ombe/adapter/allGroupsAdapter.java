@@ -43,10 +43,16 @@ public class allGroupsAdapter extends RecyclerView.Adapter<allGroupsAdapter.allG
     public void onBindViewHolder(@NonNull allGroupsViewHolder holder, int position) {
         int actualPosition = position % AllGroupsList.size();
         yourGroupsModal modal = AllGroupsList.get(actualPosition);
-        holder.groupImage.setImageResource(modal.getgroupImage());
-        holder.noOfSessions.setText(modal.getnoOfSessions());
+        //tonie changed this
+        if (modal.getGroupImage() != null) {
+            holder.groupImage.setImageBitmap(modal.getGroupImage());
+        } else {
+            holder.groupImage.setImageResource(R.drawable.tempgroupimg); // fallback
+        }
+
+        holder.noOfSessions.setText(modal.getNoOfSessions());
         holder.NoOfMembers.setText(modal.getNoOfMembers());
-        holder.groupName.setText(modal.getgroupName());
+        holder.groupName.setText(modal.getGroupName());
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, groupPage_Activity.class);
             intent.putExtra("groupId", modal.getGroupId());

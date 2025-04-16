@@ -2,7 +2,10 @@ package com.w3itexperts.ombe.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +31,6 @@ import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.apimodals.groupings;
 import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.apimodals.users;
-import com.w3itexperts.ombe.fragments.ViewSessionFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,10 +40,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-// IMPORTANT: please do not edit anything out or change any of the existing codes,
-// you can add at the end tho.
-//but make sure my pages remain stable thanks.
 
 public class groupPage_Activity extends AppCompatActivity {
 
@@ -79,14 +77,12 @@ public class groupPage_Activity extends AppCompatActivity {
             groupNameInput.setText("Could not load group!");
         }
 
-        // Edit group
         findViewById(R.id.editGroupButton).setOnClickListener(v -> {
             Intent editIntent = new Intent(this, editGroup_activity.class);
             editIntent.putExtra("groupId", groupId);
             startActivity(editIntent);
         });
 
-        // Back button
         findViewById(R.id.backbtnToHomePage).setOnClickListener(v -> {
             Intent homeIntent = new Intent(this, home.class);
             homeIntent.putExtra("loadHomeFragment", true);
@@ -95,11 +91,9 @@ public class groupPage_Activity extends AppCompatActivity {
             finish();
         });
 
-        // Leave group button
         findViewById(R.id.leaveGroupButton).setOnClickListener(v -> showLeaveConfirmation());
 
         MaterialButton createSessionBtn = findViewById(R.id.createSessionBtn);
-
         createSessionBtn.setOnClickListener(v -> {
             if (groupId == -1) {
                 Log.e("CREATE_SESSION", "Group ID missing!");
@@ -138,7 +132,6 @@ public class groupPage_Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful() && Boolean.TRUE.equals(response.body())) {
-                    // Successfully left group
                     Intent intent = new Intent(groupPage_Activity.this, home.class);
                     intent.putExtra("loadHomeFragment", true);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -155,8 +148,6 @@ public class groupPage_Activity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void loadMockGroupData() {
         groupNameInput.setText("Team Gardeners");
@@ -182,22 +173,37 @@ public class groupPage_Activity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     groupings group = response.body();
                     groupNameInput.setText(group.getGroupName());
-                    dateCreatedGroup.setText(group.getCreatedAt());
+                    //dateCreatedGroup.setText(group.getCreatedAt());
+                    String createdAt = group.getCreatedAt(); // e.g., "2025-04-16T05:23:48"
+                    if (createdAt != null && createdAt.contains("T")) {
+                        String[] dateTimeParts = createdAt.split("T");
+                        if (dateTimeParts.length > 0) {
+                            String[] dateParts = dateTimeParts[0].split("-"); // [YYYY, MM, DD]
+                            if (dateParts.length == 3) {
+                                String formattedDate = dateParts[2] + " " + convertMonth(dateParts[1]) + " " + dateParts[0]; // e.g., "16 Apr 2025"
+                                dateCreatedGroup.setText(formattedDate);
+                            }
+                        }
+                    }
+
                     noOfPeopleGroup.setText(String.valueOf(group.getUsers().size()));
-                    Glide.with(groupPage_Activity.this).load(R.drawable.person4).into(groupPhotoInput);
+
+                    // ✅ DECODE and DISPLAY base64 image
+                    if (group.getImage() != null) {
+                        try {
+                            byte[] decodedBytes = Base64.decode(group.getImage(), Base64.DEFAULT);
+                            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                            groupPhotoInput.setImageBitmap(decodedBitmap);
+                        } catch (Exception e) {
+                            Log.e("GROUP_PAGE", "Failed to decode image", e);
+                        }
+                    }
 
                     List<Member> members = new ArrayList<>();
                     for (users u : group.getUsers()) {
                         members.add(new Member(u.getUsername(), R.drawable.person4));
                     }
                     loadMembers(members);
-
-//                    List<Session> sessionList = new ArrayList<>();
-//                    for (sessions s : group.getSessions()) {
-//                        sessionList.add(new Session("Session #" + s.getSessionId(),
-//                                s.getMeetingDateTime() + ", " + s.getLocation(),
-//                                s.isCompleted() ? "Done" : "Ongoing"));
-//                    }
 
                     List<Session> sessionList = new ArrayList<>();
                     for (sessions s : group.getSessions()) {
@@ -212,13 +218,8 @@ public class groupPage_Activity extends AppCompatActivity {
                                 s.getLocation(),
                                 s.isCompleted() ? "Done" : "Ongoing"
                         );
-
-                        // ✅ Set sessionId and groupId manually
                         session.sessionId = s.getSessionId();
                         session.groupId = groupId;
-                        session.lat = s.getLatitude();     // ✅ Add this
-                        session.lng = s.getLongitude();    // ✅ Add this
-
                         sessionList.add(session);
                     }
 
@@ -241,19 +242,9 @@ public class groupPage_Activity extends AppCompatActivity {
             layout.setOrientation(LinearLayout.VERTICAL);
             layout.setPadding(20, 20, 20, 20);
 
-            ShapeableImageView img = new ShapeableImageView(this);
+            ImageView img = new ImageView(this);
             img.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            img.setPadding(0, 0, 0, 0);
-            img.setShapeAppearanceModel(
-                    img.getShapeAppearanceModel()
-                            .toBuilder()
-                            .setAllCornerSizes(90f) // 180dp / 2 = 90f
-                            .build()
-            );
-
-            Glide.with(this).load(member.imageResId).into(img);
-
             Glide.with(this).load(member.imageResId).into(img);
 
             MaterialButton btn = new MaterialButton(this);
@@ -291,8 +282,6 @@ public class groupPage_Activity extends AppCompatActivity {
         int sessionId;
         int groupId;
 
-        double lat;
-        double lng;
         Session(String title, String details, String status) {
             this.title = title;
             this.details = details;
@@ -300,19 +289,14 @@ public class groupPage_Activity extends AppCompatActivity {
         }
 
         Session(String title, String date, String time, String location, String status) {
-//            this.title = title;
-//            this.details = details;
-//            this.status = status;
             this.title = title;
             this.location = location;
             this.date = date;
             this.time = time;
             this.status = status;
         }
-        Session(String title, String location, String date, String time, String status, int sessionId, int groupId, double lat, double lng) {
-//            this.title = title;
-//            this.details = details;
-//            this.status = status;
+
+        Session(String title, String location, String date, String time, String status, int sessionId, int groupId) {
             this.title = title;
             this.location = location;
             this.date = date;
@@ -320,8 +304,6 @@ public class groupPage_Activity extends AppCompatActivity {
             this.status = status;
             this.sessionId = sessionId;
             this.groupId = groupId;
-            this.lat = lat;
-            this.lng = lng;
         }
     }
 
@@ -346,7 +328,6 @@ public class groupPage_Activity extends AppCompatActivity {
             h.details.setText(String.format("%s, %s, %s", s.date, s.time, s.location));
             h.statusButton.setText(s.status);
 
-            //  New: Click to open ViewSessionFragment
             h.statusButton.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), SessionActivity.class);
                 intent.putExtra("title", s.title);
@@ -356,12 +337,8 @@ public class groupPage_Activity extends AppCompatActivity {
                 intent.putExtra("status", s.status);
                 intent.putExtra("sessionId", s.sessionId);
                 intent.putExtra("groupId", groupId);
-                intent.putExtra("lat", s.lat);        // ✅ Add this
-                intent.putExtra("lng", s.lng);        // ✅ Add this
-
                 v.getContext().startActivity(intent);
             });
-
         }
 
         @Override
@@ -380,5 +357,26 @@ public class groupPage_Activity extends AppCompatActivity {
                 statusButton = itemView.findViewById(R.id.status_button);
             }
         }
+
+
     }
+
+    private String convertMonth(String monthNum) {
+        switch (monthNum) {
+            case "01": return "Jan";
+            case "02": return "Feb";
+            case "03": return "Mar";
+            case "04": return "Apr";
+            case "05": return "May";
+            case "06": return "Jun";
+            case "07": return "Jul";
+            case "08": return "Aug";
+            case "09": return "Sep";
+            case "10": return "Oct";
+            case "11": return "Nov";
+            case "12": return "Dec";
+            default: return "";
+        }
+    }
+
 }

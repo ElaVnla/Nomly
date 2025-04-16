@@ -65,6 +65,11 @@ import java.util.List;
 import java.util.List;
 import java.util.Locale;
 
+//tonie add these
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+
 // how to use enqueue from retrofit https://medium.com/@alaxhenry0121/understanding-enqueue-and-execute-in-detail-205f5bee7cbb
 
 public class home_fragment extends Fragment {
@@ -186,13 +191,28 @@ public class home_fragment extends Fragment {
                             }
 
                             // intialize new yourgroups modal
+                            //tonie change from here till line  214
+                            String base64Image = refreshedGroup.getImage();  // assuming it’s a String
+                            byte[] imageBytes = null;
+                            if (base64Image != null && !base64Image.isEmpty()) {
+                                imageBytes = android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT);
+                            }
+                            Bitmap decodedImage;
+
+                            if (imageBytes != null && imageBytes.length > 0) {
+                                decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                            } else {
+                                decodedImage = BitmapFactory.decodeResource(getResources(), R.drawable.tempgroupimg);
+                            }
+
                             yourGroupsModal modal = new yourGroupsModal(
                                     String.valueOf(refreshedGroup.getNoUsers()),
                                     String.valueOf(refreshedGroup.getNoSessions()),
-                                    R.drawable.tempgroupimg,
+                                    decodedImage,
                                     refreshedGroup.getGroupName(),
                                     refreshedGroup.getGroupId()
                             );
+
                             GroupsModalList.add(modal);
 
                             if (GroupsModalList.size() == totalGroups) {
@@ -210,14 +230,19 @@ public class home_fragment extends Fragment {
                             yourGroupsView.setVisibility(View.VISIBLE);
 
                             // display wtv we have
+
                             Log.e("NOMLYPROCESS", "Failed to get group's data for grp " + groupId + ": " + t.getMessage());
+                            //tonie changed this part till line 240
+                            Bitmap fallbackImage = BitmapFactory.decodeResource(getResources(), R.drawable.tempgroupimg);
+
                             yourGroupsModal modal = new yourGroupsModal(
                                     String.valueOf(grp.getNoUsers()),
                                     String.valueOf(grp.getNoSessions()),
-                                    R.drawable.tempgroupimg,
+                                    fallbackImage,
                                     grp.getGroupName(),
                                     grp.getGroupId()
                             );
+
                             GroupsModalList.add(modal);
 
                             if (GroupsModalList.size() == totalGroups) {
