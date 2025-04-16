@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -103,21 +102,9 @@ public class groupPage_Activity extends AppCompatActivity {
 
             Intent createIntent = new Intent(groupPage_Activity.this, SessionActivity.class);
             createIntent.putExtra("groupId", groupId);
-            startActivity(createIntent); // code
-            //startActivityForResult(createIntent, 101); // code
+            startActivity(createIntent);
         });
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 101) {
-//            Log.d("GROUP_PAGE", "onActivityResult triggered");
-//            fetchRealGroupData(groupId); // 👈 force refresh
-//        }
-//    }
-
 
     @Override
     protected void onResume() {
@@ -126,11 +113,6 @@ public class groupPage_Activity extends AppCompatActivity {
             fetchRealGroupData(groupId);
         }
     }
-//    protected void onRestart() {
-//        super.onRestart();
-//        Log.d("GROUP_PAGE", "onRestart triggered");
-//        fetchRealGroupData(groupId); // force re-fetch
-//    }
 
     private void showLeaveConfirmation() {
         new AlertDialog.Builder(this)
@@ -238,11 +220,6 @@ public class groupPage_Activity extends AppCompatActivity {
                         );
                         session.sessionId = s.getSessionId();
                         session.groupId = groupId;
-                        session.lat = s.getLatitude();     // ✅ Add this
-                        session.lng = s.getLongitude();    // ✅ Add this
-
-                        session.members = members;
-
                         sessionList.add(session);
                     }
 
@@ -305,10 +282,6 @@ public class groupPage_Activity extends AppCompatActivity {
         int sessionId;
         int groupId;
 
-        double lat;
-        double lng;
-
-        List<Member> members;
         Session(String title, String details, String status) {
             this.title = title;
             this.details = details;
@@ -364,17 +337,6 @@ public class groupPage_Activity extends AppCompatActivity {
                 intent.putExtra("status", s.status);
                 intent.putExtra("sessionId", s.sessionId);
                 intent.putExtra("groupId", groupId);
-                intent.putExtra("lat", s.lat);        // ✅ Add this
-                intent.putExtra("lng", s.lng);        // ✅ Add this
-
-                ArrayList<String> memberNames = new ArrayList<>();
-                if (s.members != null) {
-                    for (Member m : s.members) {
-                        memberNames.add(m.name);
-                    }
-                }
-                intent.putStringArrayListExtra("members", memberNames);
-
                 v.getContext().startActivity(intent);
             });
         }

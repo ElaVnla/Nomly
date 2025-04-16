@@ -26,6 +26,7 @@ import com.w3itexperts.ombe.apimodals.groupings;
 import com.w3itexperts.ombe.apimodals.usersgroupings;
 import com.w3itexperts.ombe.apimodals.RegistrationRequest;
 
+
 // retrofit how to request/ use api
 // https://square.github.io/retrofit/
 public interface ApiService {
@@ -82,7 +83,7 @@ public interface ApiService {
 //    @PUT("sessions/update-session")
 //    Call<sessions> updateSession(@Body sessions session);
 
-    //    @PUT("sessions/update-session")
+//    @PUT("sessions/update-session")
 //    Call<sessions> updateSession(@Body Map<String, String> session);
     @PUT("sessions/update-session/{id}")
     Call<sessions> updateSession(@Path("id") int id, @Body Map<String, String> session);
@@ -94,7 +95,7 @@ public interface ApiService {
     Call<sessions> addSession(@Body Map<String, String> body);
 
 
-    @PUT("sessions/session-completed/{id}")
+    @POST("sessions/session-completed/{id}")
     Call<Void> markSessionCompleted(@Path("id") int id);
 
     // ALL PURELY GROUPINGS API HERE ==============================================================
@@ -138,15 +139,9 @@ public interface ApiService {
     @PUT("/eateries/find-eateries")
     Call<List<eateries>> findEateries(@Body locationDTO locationdto);
 
-//    @GET("/eateries/get-images/{eateryId}")
-//    Call<List<byte[]>> getEateryImages(@Path("eateryId") String eateryId);
-
     @GET("/eateries/get-images/{eateryId}")
-    Call<List<String>> getEateryImages(@Path("eateryId") String eateryId);
+    Call<List<byte[]>> getEateryImages(@Path("eateryId") String eateryId);
 
     @POST("/users-sessions-eateries/user-vote")
     Call<Void> sendUserVote(@Body userVoteDTO vote);
-
-    @GET("users-sessions-eateries/get-users-votes-by-eateryId/{id}")
-    Call<List<userVoteDTO>> getUsersVotesByEateryId(@Path("id") String eateryId);
 }

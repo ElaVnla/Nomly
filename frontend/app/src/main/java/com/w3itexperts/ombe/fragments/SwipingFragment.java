@@ -27,8 +27,6 @@ import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
-import android.util.Base64;
-
 import com.w3itexperts.ombe.APIservice.ApiClient;
 import com.w3itexperts.ombe.APIservice.ApiService;
 
@@ -40,8 +38,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SwipingFragment extends Fragment {
@@ -80,7 +78,7 @@ public class SwipingFragment extends Fragment {
             @Override
             public void onCardSwiped(Direction direction) {
                 viewModel.incrementSwipedCards();
-                checkIfSwipingFinished(sessionId);
+                checkIfSwipingFinished();
 
                 int position = layoutManager.getTopPosition() - 1;
                 if (position >= 0 && adapter != null && position < adapter.getItemCount()) {
@@ -93,24 +91,12 @@ public class SwipingFragment extends Fragment {
 
                     userVoteDTO vote = new userVoteDTO(userId, sessionIdStr, eateryId, liked); // NEW
                     ApiClient.getApiService().sendUserVote(vote).enqueue(new Callback<Void>() {
-
-
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            if (response.isSuccessful()) {
-                                Log.d("VOTE_SENT", new Gson().toJson(vote));
-
-                                Log.d("VOTE_SUCCESS", "Vote stored for: " + vote.getEateryId());
-                            } else {
-                                Log.e("VOTE_FAIL", "Vote failed: " + response.code());
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getContext(), "Failed to save vote", Toast.LENGTH_SHORT).show();
                             }
                         }
-//                        @Override
-//                        public void onResponse(Call<Void> call, Response<Void> response) {
-//                            if (!response.isSuccessful()) {
-//                                Toast.makeText(getContext(), "Failed to save vote", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             Toast.makeText(getContext(), "Vote API error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -167,115 +153,53 @@ public class SwipingFragment extends Fragment {
                     Log.d("TESTING","here6");
 
                     for (eateries eatery : eateriesList) {
-                        Log.d("TESTING", "here7");
+                        Log.d("TESTING","here7");
 
                         double safeRating = eatery.getRating() != null ? eatery.getRating() : 0.0;
+
                         if (safeRating > 9.9) {
                             safeRating = 9.9;
                         }
 
                         Log.d("DEBUG_SAFE_RATING", "Using rating: " + safeRating);
-                        Log.d("TESTING", "here8");
+                        Log.d("TESTING","here8");
 
-                        apiService.getEateryImages(eatery.getEateryId()).enqueue(new Callback<List<String>>() {
+                        apiService.getEateryImages(eatery.getEateryId()).enqueue(new Callback<List<byte[]>>() {
+
                             @Override
-                            public void onResponse(Call<List<String>> call, Response<List<String>> imgResponse) {
-                                Log.d("IMAGE_API", "response code = " + imgResponse.code());
+                            public void onResponse(Call<List<byte[]>> call, Response<List<byte[]>> imgResponse) {
+                                Log.d("TESTING","here9");
 
                                 if (imgResponse.isSuccessful() && imgResponse.body() != null && !imgResponse.body().isEmpty()) {
-                                    Log.d("IMAGE_API", "Image list size: " + imgResponse.body().size());
+                                    Log.d("TESTING","here10");
 
-                                    String base64 = imgResponse.body().get(0);  // use first image
-                                    byte[] imageBytes = android.util.Base64.decode(base64, android.util.Base64.DEFAULT);
+                                    byte[] imageBytes = imgResponse.body().get(0);
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
                                     RestaurantCard card = new RestaurantCard(
                                             eatery.getDisplayName(),
                                             eatery.getCuisine(),
                                             eatery.getPriceLevel(),
-                                            //Collections.singletonList(bitmap),
                                             bitmap,
-                                            eatery.getEateryId()
+                                            eatery.getEateryId() // NEW
                                     );
                                     cards.add(card);
 
                                     if (cards.size() == eateriesList.size()) {
-                                        Log.d("IMAGE_API", "All cards prepared, attaching adapter.");
-
-                                        Bundle result = new Bundle();
-                                        result.putParcelableArrayList("restaurantCards", new ArrayList<>(cards));
-                                        getParentFragmentManager().setFragmentResult("restaurantCardsResult", result);
+                                        Log.d("TESTING","here11");
 
                                         adapter = new CardStackAdapter(cards);
                                         b.cardStackView.setAdapter(adapter);
                                     }
-                                } else {
-                                    Log.d("IMAGE_API", "Image fetch failed or empty response");
                                 }
                             }
-
                             @Override
-                            public void onFailure(Call<List<String>> call, Throwable t) {
-                                Log.e("IMAGE_API", "Failed to get images: " + t.getMessage());
+                            public void onFailure(Call<List<byte[]>> call, Throwable t) {
+                                Log.d("TESTING","here12");
+
+                                Toast.makeText(getContext(), "Failed to load image", Toast.LENGTH_SHORT).show();
                             }
                         });
-//                        apiService.getEateryImages(eatery.getEateryId()).enqueue(new Callback<List<byte[]>>() {
-//                            @Override
-//                            public void onResponse(Call<List<byte[]>> call, Response<List<byte[]>> imgResponse) {
-//                                Log.d("TESTING", "here9");
-//
-//                                Bitmap bitmap;
-//
-//                                if (imgResponse.isSuccessful() && imgResponse.body() != null && !imgResponse.body().isEmpty()) {
-//                                    Log.d("TESTING", "Image fetch successful for eatery: " + eatery.getEateryId());
-//
-//                                    byte[] imageBytes = imgResponse.body().get(0);
-//                                    bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-//                                } else {
-//                                    Log.d("TESTING", "Image response empty, using placeholder for: " + eatery.getEateryId());
-//
-//                                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.lolacafe);
-//                                }
-//
-//                                RestaurantCard card = new RestaurantCard(
-//                                        eatery.getDisplayName(),
-//                                        eatery.getPriceLevel(),
-//                                        bitmap,
-//                                        eatery.getEateryId()
-//                                );
-//                                cards.add(card);
-//                                Log.d("DEBUG_CARD_ADDED", "Card added for: " + eatery.getDisplayName());
-//
-//                                if (cards.size() == eateriesList.size()) {
-//                                    Log.d("TESTING", "here11 — All cards added, setting adapter.");
-//                                    adapter = new CardStackAdapter(cards);
-//                                    b.cardStackView.setAdapter(adapter);
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<List<byte[]>> call, Throwable t) {
-//                                Log.d("TESTING", "here12 — Image fetch failed for: " + eatery.getEateryId());
-//                                Log.e("ImageLoadError", "Failed to fetch image", t);
-//
-//                                Bitmap fallback = BitmapFactory.decodeResource(getResources(), R.drawable.lolacafe);
-//                                RestaurantCard card = new RestaurantCard(
-//                                        eatery.getDisplayName(),
-//                                        eatery.getPriceLevel(),
-//                                        fallback,
-//                                        eatery.getEateryId()
-//                                );
-//                                cards.add(card);
-//
-//                                if (cards.size() == eateriesList.size()) {
-//                                    Log.d("TESTING", "here11 — All cards added (with fallback), setting adapter.");
-//                                    adapter = new CardStackAdapter(cards);
-//                                    b.cardStackView.setAdapter(adapter);
-//                                }
-//                            }
-//                        });
-
-
                     }
                 } else {
                     Log.d("TESTING","here13");
@@ -314,30 +238,11 @@ public class SwipingFragment extends Fragment {
         });
     }
 
-    private void checkIfSwipingFinished(int sessionId) {
+    private void checkIfSwipingFinished() {
         if (viewModel.getSwipedCards() == viewModel.getTotalCards()) {
             viewModel.setSwipingFinished(true);
-
-            SessionManager.getInstance(requireContext()).markSwipingCompleted(sessionId);
-
             Toast.makeText(getContext(), "Swiping complete. You can now finalize.", Toast.LENGTH_SHORT).show();
-
-            // Step: Collect eateryIds
-            ArrayList<String> eateryIds = new ArrayList<>();
-            for (int i = 0; i < adapter.getItemCount(); i++) {
-                eateryIds.add(adapter.getCardAt(i).getEateryId());
-            }
-
-            // Step: Store in arguments so ViewSessionFragment can access it later
-            requireActivity().getSupportFragmentManager().setFragmentResult("eateryIdsResult", createEateryBundle(eateryIds));
         }
-    }
-
-    // Helper method to create the bundle
-    private Bundle createEateryBundle(ArrayList<String> eateryIds) {
-        Bundle bundle = new Bundle();
-        bundle.putStringArrayList("eateryIds", eateryIds);
-        return bundle;
     }
 
     public static boolean hasFinishedSwiping() {

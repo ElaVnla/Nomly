@@ -188,22 +188,4 @@ public class SessionManager {
     public void cancelSessionTimer() {
         handler.removeCallbacks(timeoutRunnable);
     }
-
-
-    // if user has finished swiping
-    public void markSwipingCompleted(int sessionId) {
-        if (currentUser == null) return;
-
-        String key = "swiped_session_" + sessionId + "_user_" + currentUser.getUserId();
-        SessionEditor.putBoolean(key, true);
-        SessionEditor.apply();
-    }
-
-    public boolean hasUserSwiped(int sessionId) {
-        if (currentUser == null) return false;
-
-        String key = "swiped_session_" + sessionId + "_user_" + currentUser.getUserId();
-        return prefs.getBoolean(key, false);
-    }
-
 }
