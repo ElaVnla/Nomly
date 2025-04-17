@@ -103,21 +103,9 @@ public class groupPage_Activity extends AppCompatActivity {
 
             Intent createIntent = new Intent(groupPage_Activity.this, SessionActivity.class);
             createIntent.putExtra("groupId", groupId);
-            startActivity(createIntent); // code
-            //startActivityForResult(createIntent, 101); // code
+            startActivity(createIntent);
         });
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 101) {
-//            Log.d("GROUP_PAGE", "onActivityResult triggered");
-//            fetchRealGroupData(groupId); // 👈 force refresh
-//        }
-//    }
-
 
     @Override
     protected void onResume() {
@@ -126,11 +114,6 @@ public class groupPage_Activity extends AppCompatActivity {
             fetchRealGroupData(groupId);
         }
     }
-//    protected void onRestart() {
-//        super.onRestart();
-//        Log.d("GROUP_PAGE", "onRestart triggered");
-//        fetchRealGroupData(groupId); // force re-fetch
-//    }
 
     private void showLeaveConfirmation() {
         new AlertDialog.Builder(this)
@@ -174,9 +157,9 @@ public class groupPage_Activity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.person4).into(groupPhotoInput);
 
         List<Member> mockMembers = List.of(
-                new Member("ToniFoodie", R.drawable.person4),
-                new Member("Aminah123", R.drawable.person4),
-                new Member("Salim", R.drawable.person4)
+                new Member("ToniFoodie", null),
+                new Member("Aminah123", null),
+                new Member("Salim", null)
         );
         loadMembers(mockMembers);
 
@@ -191,22 +174,19 @@ public class groupPage_Activity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     groupings group = response.body();
                     groupNameInput.setText(group.getGroupName());
-                    //dateCreatedGroup.setText(group.getCreatedAt());
-                    String createdAt = group.getCreatedAt(); // e.g., "2025-04-16T05:23:48"
+
+                    String createdAt = group.getCreatedAt();
                     if (createdAt != null && createdAt.contains("T")) {
                         String[] dateTimeParts = createdAt.split("T");
-                        if (dateTimeParts.length > 0) {
-                            String[] dateParts = dateTimeParts[0].split("-"); // [YYYY, MM, DD]
-                            if (dateParts.length == 3) {
-                                String formattedDate = dateParts[2] + " " + convertMonth(dateParts[1]) + " " + dateParts[0]; // e.g., "16 Apr 2025"
-                                dateCreatedGroup.setText(formattedDate);
-                            }
+                        String[] dateParts = dateTimeParts[0].split("-");
+                        if (dateParts.length == 3) {
+                            String formattedDate = dateParts[2] + " " + convertMonth(dateParts[1]) + " " + dateParts[0];
+                            dateCreatedGroup.setText(formattedDate);
                         }
                     }
 
                     noOfPeopleGroup.setText(String.valueOf(group.getUsers().size()));
 
-                    // ✅ DECODE and DISPLAY base64 image
                     if (group.getImage() != null) {
                         try {
                             byte[] decodedBytes = Base64.decode(group.getImage(), Base64.DEFAULT);
@@ -219,7 +199,7 @@ public class groupPage_Activity extends AppCompatActivity {
 
                     List<Member> members = new ArrayList<>();
                     for (users u : group.getUsers()) {
-                        members.add(new Member(u.getUsername(), R.drawable.person4));
+                        members.add(new Member(u.getUsername(), u.getImage()));
                     }
                     loadMembers(members);
 
@@ -229,18 +209,12 @@ public class groupPage_Activity extends AppCompatActivity {
                         String date = dateTime.length > 0 ? dateTime[0] : "N/A";
                         String time = dateTime.length > 1 ? dateTime[1] : "N/A";
 
-                        Session session = new Session(
-                                s.getSessionName(),
-                                date,
-                                time,
-                                s.getLocation(),
-                                s.isCompleted() ? "Done" : "Ongoing"
-                        );
+                        Session session = new Session(s.getSessionName(), date, time, s.getLocation(),
+                                s.isCompleted() ? "Done" : "Ongoing");
                         session.sessionId = s.getSessionId();
                         session.groupId = groupId;
-                        session.lat = s.getLatitude();     // ✅ Add this
-                        session.lng = s.getLongitude();    // ✅ Add this
-
+                        session.lat = s.getLatitude();
+                        session.lng = s.getLongitude();
                         session.members = members;
 
                         sessionList.add(session);
@@ -268,7 +242,20 @@ public class groupPage_Activity extends AppCompatActivity {
             ImageView img = new ImageView(this);
             img.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Glide.with(this).load(member.imageResId).into(img);
+
+            // Handle Base64 decode
+            if (member.imageBase64 != null && !member.imageBase64.isEmpty()) {
+                try {
+                    byte[] decodedBytes = Base64.decode(member.imageBase64, Base64.DEFAULT);
+                    Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                    img.setImageBitmap(decodedBitmap);
+                } catch (Exception e) {
+                    Log.e("MEMBER_IMAGE", "Decode error", e);
+                    img.setImageResource(R.drawable.defaultprofile);
+                }
+            } else {
+                img.setImageResource(R.drawable.defaultprofile);
+            }
 
             MaterialButton btn = new MaterialButton(this);
             btn.setLayoutParams(new ViewGroup.LayoutParams(230, 90));
@@ -292,23 +279,20 @@ public class groupPage_Activity extends AppCompatActivity {
 
     private static class Member {
         String name;
-        int imageResId;
+        String imageBase64; // 🔥 changed from int to base64 string
 
-        Member(String name, int imageResId) {
+        Member(String name, String imageBase64) {
             this.name = name;
-            this.imageResId = imageResId;
+            this.imageBase64 = imageBase64;
         }
     }
 
     private static class Session {
         String title, details, location, date, time, status;
-        int sessionId;
-        int groupId;
-
-        double lat;
-        double lng;
-
+        int sessionId, groupId;
+        double lat, lng;
         List<Member> members;
+
         Session(String title, String details, String status) {
             this.title = title;
             this.details = details;
@@ -364,8 +348,8 @@ public class groupPage_Activity extends AppCompatActivity {
                 intent.putExtra("status", s.status);
                 intent.putExtra("sessionId", s.sessionId);
                 intent.putExtra("groupId", groupId);
-                intent.putExtra("lat", s.lat);        // ✅ Add this
-                intent.putExtra("lng", s.lng);        // ✅ Add this
+                intent.putExtra("lat", s.lat);
+                intent.putExtra("lng", s.lng);
 
                 ArrayList<String> memberNames = new ArrayList<>();
                 if (s.members != null) {
@@ -374,7 +358,6 @@ public class groupPage_Activity extends AppCompatActivity {
                     }
                 }
                 intent.putStringArrayListExtra("members", memberNames);
-
                 v.getContext().startActivity(intent);
             });
         }
@@ -395,8 +378,6 @@ public class groupPage_Activity extends AppCompatActivity {
                 statusButton = itemView.findViewById(R.id.status_button);
             }
         }
-
-
     }
 
     private String convertMonth(String monthNum) {
@@ -416,5 +397,4 @@ public class groupPage_Activity extends AppCompatActivity {
             default: return "";
         }
     }
-
 }
