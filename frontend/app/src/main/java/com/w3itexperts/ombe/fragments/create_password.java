@@ -94,7 +94,7 @@ public class create_password extends Fragment {
                         updateBody.put("password", newPassword);
                         updateBody.put("preferences", currentUser.getPreferences() != null ? currentUser.getPreferences() : "");
                         // Include the current user's image from the retrieved data.
-                        updateBody.put("image", currentUser.getProfilePic() != null ? currentUser.getProfilePic() : "");
+                        updateBody.put("image", currentUser.getImage() != null ? currentUser.getImage() : "");
 
                         Log.d("CREATE_PW", "Calling updateUser with updateBody: " + updateBody.toString());
                         apiService.updateUser(userId, updateBody).enqueue(new Callback<users>() {

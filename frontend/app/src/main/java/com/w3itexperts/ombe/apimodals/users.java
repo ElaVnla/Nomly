@@ -8,7 +8,7 @@ public class users {
     private String username;
     private String password;
     private String email;
-    private String ProfilePic;
+    private String image;
     private String preferences;
     private String createdAt;
     private List<groupings> groups;
@@ -24,12 +24,12 @@ public class users {
         this.email = email;
     }
 
-    public users(int userId, String username, String password, String email, String porfilePic, String preferences, String createdAt, List<groupings> groups) {
+    public users(int userId, String username, String password, String email, String image, String preferences, String createdAt, List<groupings> groups) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.ProfilePic = porfilePic;
+        this.image = image;
         this.preferences = preferences;
         this.createdAt = createdAt;
         this.groups = groups;
@@ -56,8 +56,8 @@ public class users {
     public void setPreferences(String preferences) {
         this.preferences = preferences;
     }
-    public void setProfilePic(String profilePic) {
-        this.ProfilePic = profilePic;
+    public void setImage(String image) {
+        this.image = image;
     }
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
@@ -92,8 +92,8 @@ public class users {
 
 
 
-    public String getProfilePic() {
-        return ProfilePic;
+    public String getImage() {
+        return image;
     }
 
 
