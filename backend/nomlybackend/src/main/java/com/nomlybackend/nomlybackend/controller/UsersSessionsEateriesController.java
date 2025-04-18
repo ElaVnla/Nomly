@@ -21,6 +21,12 @@ public class UsersSessionsEateriesController {
         return usersSessionsEateriesService.getUsersVotesByEateryId(id);
     }
 
+    @GetMapping("/get-users-votes-by-sessionId/{id}")
+    public List<UsersSessionsEateriesDTO> getUsersVotesByEateryId(@PathVariable("id") int id){
+        return usersSessionsEateriesService.getUsersVotesBySessionId(id);
+    }
+
+
     @PostMapping("/user-vote")
     public UsersSessionsEateriesDTO userVote(@RequestBody Map<String, String> body){
         return usersSessionsEateriesService.userVote(body);

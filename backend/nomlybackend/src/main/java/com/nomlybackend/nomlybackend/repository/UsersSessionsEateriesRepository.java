@@ -10,4 +10,6 @@ public interface UsersSessionsEateriesRepository extends JpaRepository<UsersSess
 
 
     List<UsersSessionsEateries> findByEateryEateryId(String eateryId);
+
+    List<UsersSessionsEateries> findBySessionSessionId(int sessionId);
 }
