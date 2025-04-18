@@ -1,5 +1,7 @@
 package com.nomlybackend.nomlybackend.model;
 
+import org.apache.catalina.User;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;

@@ -92,3 +92,30 @@ SELECT * FROM NomlyDB.Users;
 SELECT * FROM NomlyDB.Groupings;
 SELECT * FROM NomlyDB.UsersGroupings;
 SELECT * FROM NomlyDB.Sessions;
+
+INSERT INTO NomlyDB.Eateries (EateryId, DisplayName, Latitude, Longitude, PriceLevel, Cuisine, Rating, OperationHours, Location) VALUES
+('eatery_1', 'Tasty Noodles', 1.300000, 103.800000, 'PRICE_LEVEL_MODERATE', 'Chinese', 4.2, '9AM-9PM', 'Downtown'),
+('eatery_2', 'Burger Blast', 1.301000, 103.801000, 'PRICE_LEVEL_INEXPENSIVE', 'Western', 4.0, '10AM-10PM', 'Central Mall'),
+('eatery_3', 'Sushi Zen', 1.302000, 103.802000, 'PRICE_LEVEL_EXPENSIVE', 'Japanese', 4.5, '11AM-9PM', 'Uptown'),
+('eatery_4', 'Curry Kingdom', 1.303000, 103.803000, 'PRICE_LEVEL_MODERATE', 'Indian', 4.1, '10AM-10PM', 'Little India');
+
+INSERT INTO NomlyDB.Sessions (
+    SessionId, GroupId, SessionName, Location,
+    Latitude, Longitude, MeetingDateTime, CreatedAt, Completed
+) VALUES (
+    19, 1, 'Food Hunt #1', 'Bugis Junction',
+    1.300123456789000, 103.853123456789000,
+    NOW(), NOW(), FALSE
+);
+
+INSERT INTO NomlyDB.SessionsEateries (SessionId, EateryId, Ranking) VALUES
+(19, 'eatery_1', 1),
+(19, 'eatery_2', 2),
+(19, 'eatery_3', 3),
+(19, 'eatery_4', 4);
+
+INSERT INTO NomlyDB.UsersSessionsEateries (UserId, SessionId, EateryId, Liked) VALUES
+(1, 19, 'eatery_1', TRUE),
+(1, 19, 'eatery_2', TRUE),
+(1, 19, 'eatery_3', TRUE),
+(1, 19, 'eatery_4', TRUE);

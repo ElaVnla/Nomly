@@ -2,6 +2,7 @@ package com.nomlybackend.nomlybackend.service;
 
 import com.nomlybackend.nomlybackend.model.*;
 import com.nomlybackend.nomlybackend.model.eateries.Eateries;
+import com.nomlybackend.nomlybackend.repository.UsersRepository;
 import com.nomlybackend.nomlybackend.repository.UsersSessionsEateriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ public class UsersSessionsEateriesService {
 
     @Autowired
     UsersSessionsEateriesRepository usersSessionsEateriesRepository;
+    @Autowired
+    UsersRepository usersRepository;
     @Autowired
     UsersService usersService;
     @Autowired
@@ -43,4 +46,8 @@ public class UsersSessionsEateriesService {
         return usersSessionsEateries.stream().map(userSessionEatery -> new UsersSessionsEateriesDTO(userSessionEatery)).collect(Collectors.toList());
     }
 
+    public List<UsersDTO> getFinishedUsersBySessionId(Integer sessionId) {
+        List<Users> users = usersRepository.findUsersWithAllEateriesInSession(sessionId);
+        return users.stream().map(UsersDTO::new).toList();
+    }
 }
