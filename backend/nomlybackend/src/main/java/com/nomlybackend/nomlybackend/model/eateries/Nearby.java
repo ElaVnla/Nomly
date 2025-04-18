@@ -20,6 +20,8 @@ public class Nearby {
         this.locationRestriction.increaseCircle();
     }
 
+    public Double getRange(){ return this.locationRestriction.getCircle().getRadius(); }
+
     public Nearby(double lat, double lng){
         this.setLatLong(lat, lng);
     }
@@ -66,7 +68,7 @@ class LocationRestriction{
         this.circle = circle;
     }
 
-    public void increaseCircle() {this.circle.setRadius(circle.getRadius() + 500);}
+    public void increaseCircle() {this.circle.setRadius(circle.getRadius()*2);}
 }
 
 @Embeddable

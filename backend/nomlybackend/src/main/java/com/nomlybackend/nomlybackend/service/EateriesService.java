@@ -29,9 +29,9 @@ public class EateriesService {
     @Autowired
     GoogleApiProperties google;
 
-    public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
+    public PlacesDTO.Place[] getEateriesFromGoogle(Nearby nearby) throws Exception{
         String[] fieldMask = {"places.id", "places.displayName.text", "places.priceLevel", "places.types", "places.rating", "places.photos.name","places.formattedAddress","places.location"};
-        Nearby nearby = new Nearby(locationDTO.getLatitude(), locationDTO.getLongitude());
+
 
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(nearby);
@@ -50,24 +50,40 @@ public class EateriesService {
         PlacesDTO places = gson.fromJson(postResponse.body(), PlacesDTO.class);
         System.out.println(places);
 
-        List<Eateries> eateries = new ArrayList<>();
-        PlacesDTO.Place[] placesEntities = places.getPlaces();
-        if (placesEntities == null){
-            //TODO IF FAIL THEN EXPAND RANGE UNTIL OK
-            nearby.increaseRange();
-        }
-        for (PlacesDTO.Place place: placesEntities){ //local9 error response means invalid latlong
-            Eateries eatery = place.toEntity();
-            eateries.add(eatery);
-            eateryRepository.save(eatery);
-            List<Photo> photos = place.getPhotos();
-            if (photos != null){
-                for (Photo photo: place.getPhotos()){
-                    EateriesPhotos eateriesPhotos = new EateriesPhotos(eatery, photo.getName());
-                    eateriesPhotosRepository.save(eateriesPhotos);
-                }
-            }
+        return places.getPlaces();
+    }
+    public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
+        Nearby nearby = new Nearby(locationDTO.getLatitude(), locationDTO.getLongitude());
+        boolean found = false;
 
+        PlacesDTO.Place[] placesEntities = new PlacesDTO.Place[]{};
+
+        while (!found && nearby.getRange() < 2000){
+            placesEntities = getEateriesFromGoogle(nearby);
+
+            if (placesEntities != null){
+                found = true;
+            }
+            else {
+            nearby.increaseRange();
+            }
+        }
+
+        List<Eateries> eateries = new ArrayList<>();
+        if (found){
+            for (PlacesDTO.Place place: placesEntities){
+                Eateries eatery = place.toEntity();
+                eateries.add(eatery);
+                eateryRepository.save(eatery);
+                List<Photo> photos = place.getPhotos();
+                if (photos != null){
+                    for (Photo photo: place.getPhotos()){
+                        EateriesPhotos eateriesPhotos = new EateriesPhotos(eatery, photo.getName());
+                        eateriesPhotosRepository.save(eateriesPhotos);
+                    }
+                }
+
+            }
         }
         return eateries;
     }
