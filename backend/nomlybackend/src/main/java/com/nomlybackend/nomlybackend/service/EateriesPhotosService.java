@@ -20,9 +20,8 @@ import java.util.concurrent.*;
 public class EateriesPhotosService {
     @Autowired
     EateriesPhotosRepository eateriesPhotosRepository;
-
-    //TODO store API key in another file
-    static String apiKey = "AIzaSyCCpR2DMrJpe4Lv3maS070IRysQWVevESs";
+    @Autowired
+    GoogleApiProperties google;
 
     public List<byte[]> getImages(String eateryId) throws Exception {
         int heightPx = 606;
@@ -40,7 +39,7 @@ public class EateriesPhotosService {
         for (int i = 0; i < Math.min(4, photos.size()); i++) {
             final String photoName = photos.get(i);
             HttpRequest getRequest = HttpRequest.newBuilder()
-                    .uri(new URI(String.format(baseURI, eateryId, photoName, apiKey, heightPx, widthPx)))
+                    .uri(new URI(String.format(baseURI, eateryId, photoName, google.key(), heightPx, widthPx)))
                     .GET()
                     .build();
 

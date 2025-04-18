@@ -29,7 +29,6 @@ public class EateriesService {
     @Autowired
     GoogleApiProperties google;
 
-    //TODO Return Restaurant[]
     public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
         String[] fieldMask = {"places.id", "places.displayName.text", "places.priceLevel", "places.types", "places.rating", "places.photos.name","places.formattedAddress","places.location"};
         Nearby nearby = new Nearby(locationDTO.getLatitude(), locationDTO.getLongitude());
@@ -39,7 +38,6 @@ public class EateriesService {
 
         HttpRequest postRequest = HttpRequest.newBuilder()
                 .uri(new URI("https://places.googleapis.com/v1/places:searchNearby"))
-                //TODO 2 set up api key in Constants.API_KEY
                 .header("X-Goog-Api-Key", google.key())
                 .header("X-Goog-FieldMask", String.join(",", fieldMask))
                 .header("Content-Type", "application/json")
@@ -50,11 +48,13 @@ public class EateriesService {
 
         HttpResponse<String> postResponse = httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
         PlacesDTO places = gson.fromJson(postResponse.body(), PlacesDTO.class);
+        System.out.println(places);
 
         List<Eateries> eateries = new ArrayList<>();
         PlacesDTO.Place[] placesEntities = places.getPlaces();
         if (placesEntities == null){
-            return null; //TODO IF FAIL THEN EXPAND RANGE UNTIL OK
+            //TODO IF FAIL THEN EXPAND RANGE UNTIL OK
+            nearby.increaseRange();
         }
         for (PlacesDTO.Place place: placesEntities){ //local9 error response means invalid latlong
             Eateries eatery = place.toEntity();
