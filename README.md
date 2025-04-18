@@ -46,7 +46,7 @@
 
 ## 📸 Project Screenshots
 
-(Replace with actual screenshots if available)
+(Coming soon...)
 
 ---
 
