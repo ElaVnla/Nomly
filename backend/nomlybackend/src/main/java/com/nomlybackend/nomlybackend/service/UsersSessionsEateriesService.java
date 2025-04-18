@@ -38,4 +38,9 @@ public class UsersSessionsEateriesService {
         return usersSessionsEateries.stream().map(userSessionEatery -> new UsersSessionsEateriesDTO(userSessionEatery)).collect(Collectors.toList());
     }
 
+    public List<UsersSessionsEateriesDTO> getUsersVotesBySessionId(int sessionId) {
+        List<UsersSessionsEateries> usersSessionsEateries = usersSessionsEateriesRepository.findBySessionSessionId(sessionId);
+        return usersSessionsEateries.stream().map(userSessionEatery -> new UsersSessionsEateriesDTO(userSessionEatery)).collect(Collectors.toList());
+    }
+
 }
