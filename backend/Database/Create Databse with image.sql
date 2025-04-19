@@ -90,7 +90,7 @@ create table NomlyDB.SessionsEateries(
 	SessionId int NOT NULL,
 	EateryId varchar(255) NOT NULL,
     primary key (SessionEateryId),
-	Ranking int NOT NULL,
+	-- Ranking int NOT NULL,
     foreign key (SessionId) references Sessions(SessionId) ON DELETE CASCADE,
     foreign key (EateryId) references Eateries(EateryId) ON DELETE CASCADE
 

@@ -29,10 +29,10 @@ public class SessionsEateriesController {
         return sessionsEateriesService.addEateryToSession(body);
     }
 
-    @PostMapping("/update-session-eateries/{action}")
-    public boolean updateSessionEateryRanking(@PathVariable("action") String action, @RequestBody Map<String, String> body){
-        String eateryId = body.get("eateryId");
-        String sessionId = body.get("sessionId");
-        return sessionsEateriesService.updateRanking(action, eateryId, sessionId);
-    }
+//    @PostMapping("/update-session-eateries/{action}")
+//    public boolean updateSessionEateryRanking(@PathVariable("action") String action, @RequestBody Map<String, String> body){
+//        String eateryId = body.get("eateryId");
+//        String sessionId = body.get("sessionId");
+//        return sessionsEateriesService.updateRanking(action, eateryId, sessionId);
+//    }
 }
