@@ -166,6 +166,13 @@ public class SwipingFragment extends Fragment {
 
                     Log.d("TESTING","here6");
 
+                    Log.d("DEBUG_REQ", "lat=" + lat + " lng=" + lng + " sessionId=" + sessionId);
+
+                    Log.d("DEBUG_RES", "Eateries count: " + eateriesList.size());
+                    if (eateriesList.isEmpty()) {
+                        Log.w("DEBUG_RES", "No eateries returned from API — list is empty.");
+                    }
+
                     for (eateries eatery : eateriesList) {
                         Log.d("TESTING", "here7");
 

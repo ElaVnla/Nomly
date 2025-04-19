@@ -88,11 +88,11 @@ public class ViewSessionFragment extends Fragment {
 
         sessionId = getArguments().getInt("sessionId", -1);
 
-        if (SessionManager.getInstance(requireContext()).hasUserSwiped(sessionId)) {
-            swipeStarted = true;
-            b.swipeButton.setVisibility(View.GONE);
-            Log.d("SWIPE_STATUS", "User has already swiped for this session.");
-        }
+//        if (SessionManager.getInstance(requireContext()).hasUserSwiped(sessionId)) {
+//            swipeStarted = true;
+//            b.swipeButton.setVisibility(View.GONE);
+//            Log.d("SWIPE_STATUS", "User has already swiped for this session.");
+//        }
 
         requireActivity().getSupportFragmentManager().setFragmentResultListener(
                 "eateryIdsResult", this, (key, result) -> {
