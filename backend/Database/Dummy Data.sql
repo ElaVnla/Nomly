@@ -108,11 +108,11 @@ INSERT INTO NomlyDB.Sessions (
     NOW(), NOW(), FALSE
 );
 
-INSERT INTO NomlyDB.SessionsEateries (SessionId, EateryId, Ranking) VALUES
-(19, 'eatery_1', 1),
-(19, 'eatery_2', 2),
-(19, 'eatery_3', 3),
-(19, 'eatery_4', 4);
+INSERT INTO NomlyDB.SessionsEateries (SessionId, EateryId) VALUES
+(19, 'eatery_1'),
+(19, 'eatery_2'),
+(19, 'eatery_3'),
+(19, 'eatery_4');
 
 INSERT INTO NomlyDB.UsersSessionsEateries (UserId, SessionId, EateryId, Liked) VALUES
 (1, 19, 'eatery_1', TRUE),

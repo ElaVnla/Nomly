@@ -25,6 +25,8 @@ public class EateriesService {
     @Autowired
     EateriesRepository eateryRepository;
     @Autowired
+    SessionsEateriesService sessionsEateriesService;
+    @Autowired
     EateriesPhotosRepository eateriesPhotosRepository;
     @Autowired
     GoogleApiProperties google;
@@ -48,7 +50,6 @@ public class EateriesService {
 
         HttpResponse<String> postResponse = httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
         PlacesDTO places = gson.fromJson(postResponse.body(), PlacesDTO.class);
-        System.out.println(places);
 
         return places.getPlaces();
     }
@@ -75,6 +76,7 @@ public class EateriesService {
                 Eateries eatery = place.toEntity();
                 eateries.add(eatery);
                 eateryRepository.save(eatery);
+                sessionsEateriesService.addEateryToSession(locationDTO.getSessionId(), eatery); //"error": "An unexpected error occurred: No value present" means no sessionId in db
                 List<Photo> photos = place.getPhotos();
                 if (photos != null){
                     for (Photo photo: place.getPhotos()){

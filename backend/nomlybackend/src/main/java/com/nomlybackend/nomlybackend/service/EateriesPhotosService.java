@@ -36,7 +36,7 @@ public class EateriesPhotosService {
 
         List<CompletableFuture<byte[]>> futures = new ArrayList<>();
 
-        for (int i = 0; i < Math.min(4, photos.size()); i++) {
+        for (int i = 0; i < 2; i++) { //now only return 1 photo, for 4 -> Math.min(4, photos.size())
             final String photoName = photos.get(i);
             HttpRequest getRequest = HttpRequest.newBuilder()
                     .uri(new URI(String.format(baseURI, eateryId, photoName, google.key(), heightPx, widthPx)))
