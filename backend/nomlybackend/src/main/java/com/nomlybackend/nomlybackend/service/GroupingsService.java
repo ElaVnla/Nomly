@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.*;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,8 +51,6 @@ public class GroupingsService {
 
 
         current.setGroupName(body.get("groupName"));
-        // TODO make groupings and users subclass of profile to remove code reuse
-        // TODO make body.get(profilepicture) optional
         String profilePic = body.get("profilePicture");
         if (profilePic != null){
             Images oldImage = current.getImage();
@@ -79,9 +76,8 @@ public class GroupingsService {
     public GroupingsDTO createGrouping( Map<String,String> body){
         Groupings newGrouping = new Groupings();
         newGrouping.setGroupName(body.get("groupName"));
-//        Date createdAt = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
 
-        String code = generateRandomCode(); //TODO Check code duplicate
+        String code = generateRandomCode();
         newGrouping.setGroupCode(code);
 
         String profilePic = body.get("profilePicture");
@@ -98,22 +94,24 @@ public class GroupingsService {
 
     private String generateRandomCode() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder code = new StringBuilder();
         Random random = new Random();
+        String code;
 
-        for (int i = 0; i < 10; i++) {
-            code.append(chars.charAt(random.nextInt(chars.length())));
-        }
+        do {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < 10; i++) {
+                builder.append(chars.charAt(random.nextInt(chars.length())));
+            }
+            code = builder.toString();
+        } while (groupingsRepository.findByGroupCode(code).isPresent()); // retry if exists
 
-        return code.toString();
+        return code;
     }
 
     public GroupingsDTO getGroupingByCode(String code) {
-        Groupings group = groupingsRepository.findByGroupCode(code);
-        if (group == null) {
-            throw new RuntimeException("Group not found with code: " + code);
-        }
+        Groupings group = groupingsRepository.findByGroupCode(code)
+                .orElseThrow(() -> new RuntimeException("Group not found with code: " + code));
+
         return new GroupingsDTO(group, true);
     }
-
 }

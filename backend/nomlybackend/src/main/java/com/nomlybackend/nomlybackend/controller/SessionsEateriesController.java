@@ -24,10 +24,13 @@ public class SessionsEateriesController {
         return sessionsEateriesService.getAllSessionEateriesByEateryId(id);
     }
 
-    @PostMapping("/add-eatery-to-session")
-    public SessionsEateriesDTO addEateryToSession(@RequestBody Map<String, String> body){
-        return sessionsEateriesService.addEateryToSession(body);
-    }
+    // im pretty sure this is unused
+//    @PostMapping("/add-eatery-to-session")
+//    public SessionsEateriesDTO addEateryToSession(@RequestBody Map<String, String> body){
+//        int sessionId = Integer.parseInt(body.get("sessionId"));
+//        String eateryId = body.get("eateryId");
+//        return sessionsEateriesService.addEateryToSession(sessionId, eateryId);
+//    }
 
 //    @PostMapping("/update-session-eateries/{action}")
 //    public boolean updateSessionEateryRanking(@PathVariable("action") String action, @RequestBody Map<String, String> body){

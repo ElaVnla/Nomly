@@ -20,8 +20,6 @@ public class SessionsEateriesService {
     SessionsEateriesRepository sessionsEateriesRepository;
     @Autowired
     SessionsService sessionsService;
-    @Autowired
-    EateriesService eateriesService;
 
     public List<SessionsEateriesDTO> getAllSessionEateriesByEateryId(String eateryId){
         List<SessionsEateries> sessionsEateries = sessionsEateriesRepository.findByEateryEateryId(eateryId);
@@ -29,13 +27,10 @@ public class SessionsEateriesService {
 
     }
 
-    public SessionsEateriesDTO addEateryToSession(Map<String,String> body){
-
-        int sessionId = Integer.parseInt(body.get("sessionId"));
-        String eateryId = body.get("eateryId");
+    public SessionsEateriesDTO addEateryToSession(Integer sessionId, Eateries eatery){
         Sessions session = sessionsService.getSessionEntityById(sessionId);
-        Eateries eatery = eateriesService.getEateryEntityById(eateryId);
-        return new SessionsEateriesDTO(sessionsEateriesRepository.save(new SessionsEateries(session,eatery)));
+        SessionsEateries s = new SessionsEateries(session,eatery);
+        return new SessionsEateriesDTO(sessionsEateriesRepository.save(s));
     }
 
 //    public boolean updateRanking(String action, String eateryId, String sessionId){
