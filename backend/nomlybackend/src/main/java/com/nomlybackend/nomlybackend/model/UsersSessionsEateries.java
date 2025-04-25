@@ -14,7 +14,7 @@ public class UsersSessionsEateries {
     private Integer userSessionEateryId;
 
     @ManyToOne
-    @JoinColumn(name = "UserId")
+    @JoinColumn(name = "userId")
     private Users user;
 
     @ManyToOne

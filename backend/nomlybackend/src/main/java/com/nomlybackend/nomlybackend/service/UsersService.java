@@ -30,8 +30,6 @@ public class UsersService {
         return users.stream().map(user -> new UsersDTO(user,true)).collect(Collectors.toList());
     }
 
-
-
     public UsersDTO getUserById(int id){
         Users user = usersRepository.findById(id).get();
         return new UsersDTO(user,true);

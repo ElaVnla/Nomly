@@ -5,9 +5,11 @@ import com.nomlybackend.nomlybackend.repository.EateriesRepository;
 import com.nomlybackend.nomlybackend.service.EateriesPhotosService;
 import com.nomlybackend.nomlybackend.service.EateriesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +24,8 @@ public class EateriesController {
     @PutMapping("/find-eateries")
     public ResponseEntity<List<Eateries>> findEateries(@RequestBody LocationDTO locationDTO) throws Exception {
         List<Eateries> eateries = eateriesService.findEateries(locationDTO);
-        if (eateries == null){ return ResponseEntity.noContent().build(); }
-        return ResponseEntity.ok(eateries);
+        if (eateries == null){ return ResponseEntity.noContent().build(); } //204: no content
+        return ResponseEntity.ok(eateries); //200: OK with list of eateries
     }
 
     @GetMapping("/get-all-eateries")

@@ -1,12 +1,12 @@
 package com.nomlybackend.nomlybackend.service;
 
 import com.google.gson.Gson;
+import com.nomlybackend.nomlybackend.model.DietaryRestrictions;
 import com.nomlybackend.nomlybackend.model.eateries.*;
 import com.nomlybackend.nomlybackend.repository.EateriesRepository;
 import com.nomlybackend.nomlybackend.repository.EateriesPhotosRepository;
-import jakarta.persistence.Column;
+import com.nomlybackend.nomlybackend.repository.UsersSessionsEateriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.nomlybackend.nomlybackend.model.EateriesPhotos;
 
@@ -14,10 +14,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,74 +24,112 @@ public class EateriesService {
     @Autowired
     SessionsEateriesService sessionsEateriesService;
     @Autowired
+    UsersSessionsEateriesRepository usersSessionsEateriesRepository;
+    @Autowired
     EateriesPhotosRepository eateriesPhotosRepository;
     @Autowired
-    GoogleApiProperties google;
+    GooglePlacesService googlePlacesService;
 
-    public PlacesDTO.Place[] getEateriesFromGoogle(Nearby nearby) throws Exception{
-        String[] fieldMask = {"places.id", "places.displayName.text", "places.priceLevel", "places.types", "places.rating", "places.photos.name","places.formattedAddress","places.location"};
+    public DietaryRestrictions getDiet(Integer sessionId) {
+        // Get the user preferences for the given sessionId
+        Set<String> preferencesList = new HashSet<>(usersSessionsEateriesRepository.findPreferencesBySessionId(sessionId));
 
+        // Create Sets to store unique inclusions and exclusions
+        Set<IncludedType> inclusionsSet = new HashSet<>();  // Add default inclusions
+        Set<ExcludedType> exclusionsSet = new HashSet<>();  // Add default exclusions
 
-        Gson gson = new Gson();
-        String jsonRequest = gson.toJson(nearby);
+        // Loop through each user's preferences
+        for (String preferences : preferencesList) {
+            String[] splitPreferences = preferences.split(",");
 
-        HttpRequest postRequest = HttpRequest.newBuilder()
-                .uri(new URI("https://places.googleapis.com/v1/places:searchNearby"))
-                .header("X-Goog-Api-Key", google.key())
-                .header("X-Goog-FieldMask", String.join(",", fieldMask))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
-                .build();
+            // For each preference, map to the appropriate inclusion or exclusion type
+            for (String preference : splitPreferences) {
+                // Check for inclusions
+                IncludedType inclusion = IncludedType.fromPreference(preference);
+                if (inclusion != null) {
+                    inclusionsSet.add(inclusion);  // Add to inclusions if valid
+                }
 
-        HttpClient httpClient = HttpClient.newHttpClient();
-
-        HttpResponse<String> postResponse = httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
-        PlacesDTO places = gson.fromJson(postResponse.body(), PlacesDTO.class);
-
-        return places.getPlaces();
-    }
-    public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
-        Nearby nearby = new Nearby(locationDTO.getLatitude(), locationDTO.getLongitude());
-        boolean found = false;
-
-        PlacesDTO.Place[] placesEntities = new PlacesDTO.Place[]{};
-
-        while (!found && nearby.getRange() < 2000){
-            placesEntities = getEateriesFromGoogle(nearby);
-
-            if (placesEntities != null){
-                found = true;
-            }
-            else {
-            nearby.increaseRange();
+                // Check for exclusions
+                ExcludedType exclusion = ExcludedType.fromPreference(preference);
+                if (exclusion != null) {
+                    exclusionsSet.add(exclusion);  // Add to exclusions if valid
+                }
             }
         }
 
-        List<Eateries> eateries = new ArrayList<>();
-        if (found){
-            for (PlacesDTO.Place place: placesEntities){
-                Eateries eatery = place.toEntity();
-                eateries.add(eatery);
-                eateryRepository.save(eatery);
-                sessionsEateriesService.addEateryToSession(locationDTO.getSessionId(), eatery); //"error": "An unexpected error occurred: No value present" means no sessionId in db
-                List<Photo> photos = place.getPhotos();
-                if (photos != null){
-                    for (Photo photo: place.getPhotos()){
-                        EateriesPhotos eateriesPhotos = new EateriesPhotos(eatery, photo.getName());
-                        eateriesPhotosRepository.save(eateriesPhotos);
-                    }
-                }
+        // Convert the Sets to arrays
+        IncludedType[] inclusionsArray = inclusionsSet.toArray(new IncludedType[0]);
+        ExcludedType[] exclusionsArray = exclusionsSet.toArray(new ExcludedType[0]);
 
+        // Return both inclusions and exclusions as a DietaryRestrictions object
+        return new DietaryRestrictions(inclusionsArray, exclusionsArray);
+    }
+
+    public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
+        Nearby nearby = createNearby(locationDTO);
+        PlacesDTO.Place[] placesEntities = findEateriesNearby(nearby);
+
+        return saveEateriesAndPhotos(locationDTO, placesEntities);
+    }
+
+    private Nearby createNearby(LocationDTO locationDTO) {
+        return new Nearby.NearbyBuilder()
+                .setLatLong(locationDTO.getLatitude(), locationDTO.getLongitude())
+                .addDietaryRestriction(getDiet(locationDTO.getSessionId()))
+                .setMaxResultCount(1)
+                .build();
+    }
+
+    private PlacesDTO.Place[] findEateriesNearby(Nearby nearby) throws Exception{
+        PlacesDTO.Place[] placesEntities = new PlacesDTO.Place[]{};
+        boolean found = false;
+
+        while (!found && nearby.getRange() < 2000){
+            placesEntities = googlePlacesService.getEateriesFromGoogle(nearby);
+
+            if (placesEntities != null && placesEntities.length > 0){
+                found = true;
             }
+            else {
+                nearby.increaseRange();
+            }
+        }
+
+        if(!found){ throw new Exception("No eateries found within range");}
+
+        return placesEntities;
+    }
+
+    private List<Eateries> saveEateriesAndPhotos(LocationDTO locationDTO, PlacesDTO.Place[] placesEntities) {
+        List<Eateries> eateries = new ArrayList<>();
+
+        for (PlacesDTO.Place place: placesEntities){
+            Eateries eatery = place.toEntity();
+            eateries.add(eatery);
+            saveEatery(eatery);
+            savePhotos(place, eatery);
+            sessionsEateriesService.addEateryToSession(locationDTO.getSessionId(), eatery); //"error": "An unexpected error occurred: No value present" means no sessionId in db
         }
         return eateries;
     }
 
+    private void saveEatery(Eateries eatery){
+        eateryRepository.save(eatery);
+    }
 
+    private void savePhotos(PlacesDTO.Place place, Eateries eatery) {
+        List<Photo> photos = place.getPhotos();
+        if (photos != null){
+            for (Photo photo: place.getPhotos()){
+                EateriesPhotos eateriesPhotos = new EateriesPhotos(eatery, photo.getName());
+                eateriesPhotosRepository.save(eateriesPhotos);
+            }
+        }
+    }
 
     public List<EateriesDTO> getAllEateries(){
         List<Eateries> eateries = eateryRepository.findAll();
-
         return eateries.stream().map(eatery -> new EateriesDTO(eatery)).collect(Collectors.toList());
     }
 

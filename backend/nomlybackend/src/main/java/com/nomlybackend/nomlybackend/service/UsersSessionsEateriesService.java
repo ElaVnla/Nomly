@@ -50,4 +50,6 @@ public class UsersSessionsEateriesService {
         List<Users> users = usersRepository.findUsersWithAllEateriesInSession(sessionId);
         return users.stream().map(UsersDTO::new).toList();
     }
+
+
 }

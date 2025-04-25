@@ -1,19 +1,65 @@
 package com.nomlybackend.nomlybackend.model.eateries;
 
+import com.nomlybackend.nomlybackend.model.DietaryRestrictions;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 
-public class Nearby {
-    private String[] includedTypes = {"restaurant"};
-    private String[] excludedTypes = {"gas_station"};
-    private int maxResultCount = 10;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+public class Nearby {
+    private String[] includedTypes;
+    private String[] excludedTypes;
+    private int maxResultCount = 10;
     @Embedded
     private LocationRestriction locationRestriction;
 
-    public void setLatLong(double latitude, double longitude){
-        this.locationRestriction = new LocationRestriction(
-                new Circle(new LatLng(latitude, longitude), 500));
+    private Nearby(NearbyBuilder builder, String[] includedTypes, String[] excludedTypes){
+        this.includedTypes = includedTypes;
+        this.excludedTypes = excludedTypes;
+        this.maxResultCount = builder.maxResultCount;
+        this.locationRestriction = builder.locationRestriction;
+    }
+
+    public static class NearbyBuilder{
+        private Set<IncludedType> includedTypes = new HashSet<>(List.of(IncludedType.RESTAURANT));
+        private Set<ExcludedType> excludedTypes = new HashSet<>(List.of(ExcludedType.GAS_STATION));
+        private int maxResultCount = 10;
+        private LocationRestriction locationRestriction;
+
+        public NearbyBuilder(){}
+
+        public NearbyBuilder setLatLong(double latitude, double longitude){
+            this.locationRestriction = new LocationRestriction(
+                    new Circle(new LatLng(latitude, longitude), 500));
+            return this;
+        }
+
+        public NearbyBuilder addDietaryRestriction(DietaryRestrictions restrictions) {
+            this.includedTypes.addAll(Arrays.asList(restrictions.getInclusions()));
+            this.excludedTypes.addAll(Arrays.asList(restrictions.getExclusions()));
+            return this;
+        }
+
+        public NearbyBuilder setMaxResultCount(int results){
+            this.maxResultCount = results;
+            return this;
+        }
+
+        public Nearby build() {
+            // Convert Sets to arrays of Strings
+            String[] includedTypesArray = includedTypes.stream()
+                    .map(IncludedType::getType)  // Convert each IncludedType to its corresponding String
+                    .toArray(String[]::new);
+            String[] excludedTypesArray = excludedTypes.stream()
+                    .map(ExcludedType::getType)  // Convert each ExcludedType to its corresponding String
+                    .toArray(String[]::new);
+
+            // Create and return the Nearby object with the set data
+            return new Nearby(this, includedTypesArray, excludedTypesArray);
+        }
     }
 
     public void increaseRange(){
@@ -21,10 +67,6 @@ public class Nearby {
     }
 
     public Double getRange(){ return this.locationRestriction.getCircle().getRadius(); }
-
-    public Nearby(double lat, double lng){
-        this.setLatLong(lat, lng);
-    }
 
     public String[] getIncludedTypes() {
         return includedTypes;
@@ -34,12 +76,12 @@ public class Nearby {
         this.includedTypes = includedTypes;
     }
 
-    public int getMaxResultCount() {
-        return maxResultCount;
+    public String[] getExcludedTypes() {
+        return excludedTypes;
     }
 
-    public void setMaxResultCount(int maxResultCount) {
-        this.maxResultCount = maxResultCount;
+    public int getMaxResultCount() {
+        return maxResultCount;
     }
 
     LocationRestriction getLocationRestriction() {
@@ -97,3 +139,4 @@ class Circle{
         this.radius = radius;
     }
 }
+
