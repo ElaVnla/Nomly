@@ -28,14 +28,33 @@ public class EateriesController {
         return ResponseEntity.ok(eateries); //200: OK with list of eateries
     }
 
+    @GetMapping("/get-eatery/{id}")
+    public ResponseEntity<EateriesDTO> getEatery(@PathVariable("id") String id) {
+        EateriesDTO eatery = eateriesService.getEateryById(id);
+        if (eatery == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
+        }
+        return ResponseEntity.ok(eatery); // 200 OK with the eatery data
+    }
+
+    @GetMapping("/get-images/{eateryId}")
+    public ResponseEntity<List<byte[]>> getImages(@PathVariable(name = "eateryId") String eateryId) {
+        try {
+            List<byte[]> images = eateriesPhotosService.getImages(eateryId);
+            if (images.isEmpty()) {
+                return ResponseEntity.noContent().build(); // 204 No Content if no images are found
+            }
+            return ResponseEntity.ok(images); // 200 OK with the list of images
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null); // 500 Internal Server Error in case of any error
+        }
+    }
+
+    //Basic methods
     @GetMapping("/get-all-eateries")
     public List<EateriesDTO> getAllEateries() {
         return eateriesService.getAllEateries();
-    }
-
-    @GetMapping("/get-eatery/{id}")
-    public EateriesDTO getEatery(@PathVariable("id") String id) {
-        return eateriesService.getEateryById(id);
     }
 
     @DeleteMapping("/delete-eatery/{id}")
@@ -51,10 +70,5 @@ public class EateriesController {
     @PostMapping("/add-eatery")
     public EateriesDTO createEatery(@RequestBody Map<String, String> body) {
         return eateriesService.createEatery(body);
-    }
-
-    @GetMapping("/get-images/{eateryId}")
-    public List<byte[]> getImages(@PathVariable(name = "eateryId") String eateryId) throws Exception {
-        return eateriesPhotosService.getImages(eateryId);
     }
 }
