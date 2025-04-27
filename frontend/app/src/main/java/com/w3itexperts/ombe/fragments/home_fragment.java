@@ -510,12 +510,12 @@ public class home_fragment extends Fragment {
         SimpleDateFormat OutputResult = new SimpleDateFormat("dd MMM yyyy hh:mm a", Locale.ENGLISH);
 
         try {
-            // Parse the JSON date string into a Date object.
+            // Parse the JSON date string into a Date object
             Date date = CurrentFormat.parse(jsonDateString);
             return OutputResult.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
-            // Return the original string if parsing fails.
+            // Rparse fail return back the string
             return jsonDateString;
         }
     }

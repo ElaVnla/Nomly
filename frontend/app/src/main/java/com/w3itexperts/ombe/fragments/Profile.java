@@ -47,13 +47,15 @@ public class Profile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         users currentUser = SessionManager.getInstance(getContext()).getCurrentUser();
+        // please use this to make sure they are logged out when session expires (in case)
         if (currentUser != null) {
             updateUIWithUser(currentUser);
         } else {
-            Log.e("Profile", "No current user found.");
+            Log.e("NOMLYPROCESS", "No current user found.");
             startActivity(new Intent(getContext(), login_signin_Activity.class));
         }
 
+        // when user want edit their info
         b.editProfile.setOnClickListener(v -> {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fragment_popup, 0, 0, R.anim.fragment_popdown);
@@ -62,6 +64,7 @@ public class Profile extends Fragment {
             transaction.commitAllowingStateLoss();
         });
 
+        // end the user session and navigate back to login page
         b.logout.setOnClickListener(v -> {
             SessionManager.getInstance(getContext()).setCurrentUser(null);
             startActivity(new Intent(getContext(), Welcome.class));
@@ -72,18 +75,22 @@ public class Profile extends Fragment {
     public void onResume() {
         super.onResume();
         users updatedUser = SessionManager.getInstance(getContext()).getCurrentUser();
+        // needthis to get latest info instead of manually refreshing
         if (updatedUser != null) {
             updateUIWithUser(updatedUser);
         }
     }
 
     private void updateUIWithUser(users currentUser) {
+        // display user information
         b.displayusername.setText(currentUser.getUsername());
         b.displayemail.setText(currentUser.getEmail());
 
-        String profilePicString = currentUser.getImage();
-        Log.d("PROFILE_PIC_STRING", "Raw: " + profilePicString);
 
+        String profilePicString = currentUser.getImage();
+        Log.d("NOMLYPROCESS", "Raw: " + profilePicString);
+
+        // get user's profile picture. it's currently in bitmap so need to decode
         if (!TextUtils.isEmpty(profilePicString)) {
             try {
                 if (profilePicString.contains(",")) {
@@ -97,21 +104,22 @@ public class Profile extends Fragment {
 
                 if (decodedBitmap != null) {
                     b.DisplayProfilePicture.setImageBitmap(decodedBitmap);
-                    Log.d("PROFILE_IMAGE", "✅ Image decoded successfully");
+                    Log.d("NOMLYPROCESS", "Image decoded successfully");
                 } else {
-                    Log.e("PROFILE_IMAGE", "❌ Bitmap decoding returned null");
+                    Log.e("NOMLYPROCESS", "Bitmap decoding returned null");
                     b.DisplayProfilePicture.setImageResource(R.drawable.defaultprofile);
                 }
             } catch (IllegalArgumentException e) {
-                Log.e("PROFILE_IMAGE_ERROR", "❌ Base64 decode failed: " + e.getMessage());
+                Log.e("NOMLYPROCESS", "Base64 decode failed: " + e.getMessage());
                 b.DisplayProfilePicture.setImageResource(R.drawable.defaultprofile);
             }
         } else {
-            Log.w("PROFILE_IMAGE", "❗ profilePicString is empty");
+            Log.w("NOMLYPROCESS", "profilePicString is empty");
             b.DisplayProfilePicture.setImageResource(R.drawable.defaultprofile);
         }
 
         String createdAt = currentUser.getCreatedAt();
+        // format of the date is weird rn so need reformat
         try {
             if (!TextUtils.isEmpty(createdAt)) {
                 String[] dateTimeParts = createdAt.split("T");
@@ -126,10 +134,17 @@ public class Profile extends Fragment {
                 }
             }
         } catch (Exception e) {
-            Log.e("Profile", "Error parsing creation date: " + e.getMessage());
+            Log.e("NOMLYPROCESS", "Error parsing date: " + e.getMessage());
         }
 
-        int groupCount = (currentUser.getGroups() == null) ? 0 : currentUser.getGroups().size();
+        // count the number of active sessions and groups here ==========================================
+        int groupCount;
+        if (currentUser.getGroups() == null) {
+            groupCount = 0;
+        } else {
+            groupCount = currentUser.getGroups().size();
+        }
+
         b.NoOfGroups.setText(String.valueOf(groupCount));
 
         int activeSessions = 0;
@@ -146,46 +161,75 @@ public class Profile extends Fragment {
         }
         b.noActiveSessions.setText(String.valueOf(activeSessions));
 
+        // display user's allergy here =================
         String preferences = currentUser.getPreferences();
+        // clear first
         b.tagContainer.removeAllViews();
+
         if (!TextUtils.isEmpty(preferences)) {
             String[] allergiesArr = preferences.split(",");
             for (String allergy : allergiesArr) {
                 if (!TextUtils.isEmpty(allergy.trim())) {
-                    MaterialCardView card = new MaterialCardView(getContext());
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(110), dpToPx(150));
-                    params.setMargins(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
-                    card.setLayoutParams(params);
-                    card.setRadius(dpToPx(16));
-                    card.setCardElevation(dpToPx(4));
-                    card.setCardBackgroundColor(getResources().getColor(R.color.white));
-
-                    LinearLayout innerLayout = new LinearLayout(getContext());
-                    innerLayout.setOrientation(LinearLayout.VERTICAL);
-                    innerLayout.setGravity(Gravity.CENTER);
-                    innerLayout.setPadding(dpToPx(12), dpToPx(12), dpToPx(12), dpToPx(12));
-
-                    ImageView allergyIcon = new ImageView(getContext());
-                    LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(dpToPx(90), dpToPx(90));
-                    allergyIcon.setLayoutParams(imageParams);
-                    allergyIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                    allergyIcon.setImageResource(R.drawable.lobstericon);
-
-                    TextView allergyName = new TextView(getContext());
-                    allergyName.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT));
-                    allergyName.setText(allergy.trim());
-                    allergyName.setTextColor(getResources().getColor(R.color.color_primary));
-                    allergyName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
-                    innerLayout.addView(allergyIcon);
-                    innerLayout.addView(allergyName);
-                    card.addView(innerLayout);
-                    b.tagContainer.addView(card);
+                    setUpAllergy(allergy);
                 }
+
             }
         }
+    }
+
+    private void setUpAllergy(String allergy)
+    {
+        //set up the card part
+        MaterialCardView card = new MaterialCardView(getContext());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(105), dpToPx(145));
+        params.setMargins(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
+        card.setLayoutParams(params);
+        card.setRadius(dpToPx(16));
+        card.setCardElevation(dpToPx(4));
+        card.setCardBackgroundColor(getResources().getColor(R.color.white));
+
+        LinearLayout innerLayout = new LinearLayout(getContext());
+        innerLayout.setOrientation(LinearLayout.VERTICAL);
+        innerLayout.setGravity(Gravity.CENTER);
+        innerLayout.setPadding(dpToPx(12), dpToPx(12), dpToPx(12), dpToPx(12));
+
+        // set up the image part
+        ImageView allergyIcon = new ImageView(getContext());
+        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(dpToPx(90), dpToPx(90));
+        allergyIcon.setLayoutParams(imageParams);
+        allergyIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+        // Set allergy icon based on allergy name
+        int iconResId = R.drawable.allergysvg;
+        switch (allergy.trim().toLowerCase()) {
+            case "vegan":
+                iconResId = R.drawable.vegan;
+                break;
+            case "no beef":
+                iconResId = R.drawable.cow;
+                break;
+            case "vegetarian":
+                iconResId = R.drawable.vegetable;
+                break;
+            case "no seafood":
+                iconResId = R.drawable.seafood;
+                break;
+        }
+        allergyIcon.setImageResource(iconResId);
+
+        // allergy title
+        TextView allergyName = new TextView(getContext());
+        allergyName.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        allergyName.setText(allergy.trim());
+        allergyName.setTextColor(getResources().getColor(R.color.color_primary));
+        allergyName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+
+        innerLayout.addView(allergyIcon);
+        innerLayout.addView(allergyName);
+        card.addView(innerLayout);
+        b.tagContainer.addView(card);
     }
 
     private int dpToPx(int dp) {
@@ -194,19 +238,32 @@ public class Profile extends Fragment {
 
     private String convertMonth(String monthNum) {
         switch (monthNum) {
-            case "01": return "JAN";
-            case "02": return "FEB";
-            case "03": return "MAR";
-            case "04": return "APR";
-            case "05": return "MAY";
-            case "06": return "JUN";
-            case "07": return "JUL";
-            case "08": return "AUG";
-            case "09": return "SEP";
-            case "10": return "OCT";
-            case "11": return "NOV";
-            case "12": return "DEC";
-            default: return "";
+            case "01":
+                return "JAN";
+            case "02":
+                return "FEB";
+            case "03":
+                return "MAR";
+            case "04":
+                return "APR";
+            case "05":
+                return "MAY";
+            case "06":
+                return "JUN";
+            case "07":
+                return "JUL";
+            case "08":
+                return "AUG";
+            case "09":
+                return "SEP";
+            case "10":
+                return "OCT";
+            case "11":
+                return "NOV";
+            case "12":
+                return "DEC";
+            default:
+                return "";
         }
     }
 }

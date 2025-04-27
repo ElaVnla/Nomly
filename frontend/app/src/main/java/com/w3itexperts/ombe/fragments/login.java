@@ -24,6 +24,7 @@ import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.databinding.DialogAreYouConfirmBinding;
 import com.w3itexperts.ombe.databinding.DialogError400Binding;
 import com.w3itexperts.ombe.databinding.FragmentLoginBinding;
+import com.w3itexperts.ombe.methods.EncryptionUtil;
 
 import java.util.List;
 
@@ -47,12 +48,17 @@ public class login extends Fragment {
 
         dialog = new Dialog(getContext() , R.style.TransparentDialog);
 
+        // button listener thingy her e=======================
+        // redirect them back to welcome page
         b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
+
+        // if they wan to navigate to creat account
         b.createAccountBtn.setOnClickListener(v -> {
 
             Fragment fragment = new create_account();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
+            // Animation for transition
             transaction.setCustomAnimations(
                     android.R.anim.slide_in_left,  // Enter animation
                     android.R.anim.slide_out_right,  // Exit animation
@@ -68,6 +74,7 @@ public class login extends Fragment {
 //            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main,fragment).commit();
         });
 
+        // if user when reset password, navigate them to reset password page
         b.resetPasswordBnt.setOnClickListener(v -> {
 
             Fragment fragment = new reset_password(); // call this specific fragment
@@ -92,56 +99,79 @@ public class login extends Fragment {
 
         // Login button click handler
         b.loginBtn.setOnClickListener(v -> {
+
+            // Obtain the inputted details
             String enteredUsername = b.usernameEditText.getText().toString().trim();
             String enteredPassword = b.passwordEditText.getText().toString().trim();
 
-            ApiService apiService = ApiClient.getApiService();
-            apiService.getAllUsers().enqueue(new Callback<List<users>>() {
-                @Override
-                public void onResponse(Call<List<users>> call, Response<List<users>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        boolean validUser = false;
-                        for (users user : response.body()) {
-                            if (user.getUsername().equalsIgnoreCase(enteredUsername)
-                                    && user.getPassword().equals(enteredPassword)) {
-                                validUser = true;
-                                // Save the session info using the centralized SessionManager.
-                                SessionManager.getInstance(getContext()).setCurrentUser(user);
-                                // Navigate to the home activity.
-                                startActivity(new Intent(getContext(), home.class));
-                                break;
+            try {
+                ApiService apiService = ApiClient.getApiService();
+
+                // check if user exist. call api
+                apiService.getAllUsers().enqueue(new Callback<List<users>>() {
+                    @Override
+                    public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+
+                            boolean validUser = false;
+                            for (users user : response.body()) {
+                                // check if user exist
+                                if (user.getUsername().equalsIgnoreCase(enteredUsername)) {
+                                    try {
+                                        // password is encrypted so need to decrypt
+                                        String decryptedPassword = EncryptionUtil.decrypt(user.getPassword());
+
+                                        // if password is correct, login is successful
+                                        if (decryptedPassword.equals(enteredPassword)) {
+                                            validUser = true;
+                                            // create a session then login
+                                            SessionManager.getInstance(getContext()).setCurrentUser(user);
+                                            startActivity(new Intent(getContext(), home.class));
+                                            break;
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(getContext(), "Error decrypting password", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
                             }
-                        }
-                        if (!validUser) {
-                            DialogAreYouConfirmBinding bb = DialogAreYouConfirmBinding.inflate(getLayoutInflater());
+                            if (!validUser) {
+                                DialogAreYouConfirmBinding bb = DialogAreYouConfirmBinding.inflate(getLayoutInflater());
+                                //bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
+                                bb.confirmBtn.setOnClickListener(v1 -> dialog.dismiss());
+                                dialog.setContentView(bb.getRoot());
+                                dialog.show();
+                                //Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                                return;
+                                //Log.e("LOGIN", "Invalid credentials!");
+                                // Optionally, show a Toast or error message to the user.
+                            }
+                        } else {
+                            Log.e("LOGIN", "API response error: " + response.code());
+                            DialogError400Binding bb = DialogError400Binding.inflate(getLayoutInflater());
                             //bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
                             bb.confirmBtn.setOnClickListener(v1 -> dialog.dismiss());
                             dialog.setContentView(bb.getRoot());
                             dialog.show();
-                            //Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                            return;
-                            //Log.e("LOGIN", "Invalid credentials!");
-                            // Optionally, show a Toast or error message to the user.
                         }
-                    } else {
-                        Log.e("LOGIN", "API response error: " + response.code());
-                        DialogError400Binding bb = DialogError400Binding.inflate(getLayoutInflater());
-                        //bb.cancelBtn.setOnClickListener(v1 -> dialog.dismiss());
-                        bb.confirmBtn.setOnClickListener(v1 -> dialog.dismiss());
-                        dialog.setContentView(bb.getRoot());
-                        dialog.show();
                     }
-                }
 
-                @Override
-                public void onFailure(Call<List<users>> call, Throwable t) {
-                    Log.e("LOGIN", "API call failed: " + t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<List<users>> call, Throwable t) {
+                        Log.e("LOGIN", "API call failed: " + t.getMessage());
+                    }
+                });
+
+            } catch (Exception e) {
+                Log.e("NOMLYPROCESS", "ERROR: Failed to login  - " + e.getMessage());
+                Toast.makeText(getContext(), "404 ERROR: Contact Admin Support", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
 
-        b.signInWithGoogle.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
+        //b.signInWithGoogle.setOnClickListener(v -> startActivity(new Intent(getContext(), home.class)));
 
     }
 }
