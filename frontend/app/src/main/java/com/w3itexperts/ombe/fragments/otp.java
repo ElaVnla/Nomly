@@ -50,10 +50,14 @@ public class otp extends Fragment {
         // Function stuff ================================================================
         // Retrieve registration details from the arguments passed from the other page
         if (getArguments() != null) {
+            android.util.Log.d("NOMLYPROCESS", "user info retrieve");
+
             username = getArguments().getString("username", "");
             email = getArguments().getString("email", "");
             password = getArguments().getString("password", "");
             allergies = getArguments().getString("allergies", "");
+            android.util.Log.d("NOMLYPROCESS", "Email retrieve: "+ username);
+
         }
         else {
             Toast.makeText(getContext(),"Unable to retrieve your details. Please try again or contact Admin support",Toast.LENGTH_SHORT).show();
