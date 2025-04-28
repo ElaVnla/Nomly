@@ -1,6 +1,7 @@
-package com.nomlybackend.nomlybackend.model.eateries;
+package com.nomlybackend.nomlybackend.model.eateries.Nearby;
 
 import com.nomlybackend.nomlybackend.model.DietaryRestrictions;
+import com.nomlybackend.nomlybackend.model.eateries.Places.LatLng;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 

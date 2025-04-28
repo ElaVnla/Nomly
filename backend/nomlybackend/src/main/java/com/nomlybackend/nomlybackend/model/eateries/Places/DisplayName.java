@@ -1,14 +1,10 @@
-package com.nomlybackend.nomlybackend.model.eateries;
+package com.nomlybackend.nomlybackend.model.eateries.Places;
 
 public class DisplayName{
     // To make displayName be an object, not a string (Expected by google)
-    String text;
+    private String text;
 
     public String getText() {
         return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

@@ -1,4 +1,4 @@
-package com.nomlybackend.nomlybackend.model.eateries;
+package com.nomlybackend.nomlybackend.model.eateries.Nearby;
 
 public enum IncludedType {
     RESTAURANT("restaurant"),

@@ -1,4 +1,4 @@
-package com.nomlybackend.nomlybackend.model.eateries;
+package com.nomlybackend.nomlybackend.model.eateries.Places;
 
 public class LatLng{
     Double latitude;

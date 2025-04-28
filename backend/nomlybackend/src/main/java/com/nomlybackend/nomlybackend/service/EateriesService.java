@@ -2,6 +2,11 @@ package com.nomlybackend.nomlybackend.service;
 
 import com.nomlybackend.nomlybackend.model.DietaryRestrictions;
 import com.nomlybackend.nomlybackend.model.eateries.*;
+import com.nomlybackend.nomlybackend.model.eateries.Nearby.ExcludedType;
+import com.nomlybackend.nomlybackend.model.eateries.Nearby.IncludedType;
+import com.nomlybackend.nomlybackend.model.eateries.Nearby.NearbyDTO;
+import com.nomlybackend.nomlybackend.model.eateries.Places.PlacesDTO;
+import com.nomlybackend.nomlybackend.model.eateries.Places.PriceLevel;
 import com.nomlybackend.nomlybackend.repository.EateriesRepository;
 import com.nomlybackend.nomlybackend.repository.EateriesPhotosRepository;
 import com.nomlybackend.nomlybackend.repository.UsersSessionsEateriesRepository;

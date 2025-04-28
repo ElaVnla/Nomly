@@ -1,4 +1,6 @@
-package com.nomlybackend.nomlybackend.model.eateries;
+package com.nomlybackend.nomlybackend.model.eateries.Places;
+
+import com.nomlybackend.nomlybackend.model.eateries.*;
 
 import java.util.List;
 import java.util.Set;
@@ -87,7 +89,7 @@ public class PlacesDTO {
         public Eateries toEntity(){
             Eateries eatery = new Eateries();
             eatery.setEateryId(this.id);
-            eatery.setDisplayName(this.displayName.text);
+            eatery.setDisplayName(this.displayName.getText());
             eatery.setLatitude(this.location.latitude);
             eatery.setLongitude(this.location.longitude);
             if (this.priceLevel == null){

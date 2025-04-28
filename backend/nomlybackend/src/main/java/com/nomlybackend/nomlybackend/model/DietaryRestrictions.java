@@ -1,7 +1,7 @@
 package com.nomlybackend.nomlybackend.model;
 
-import com.nomlybackend.nomlybackend.model.eateries.ExcludedType;
-import com.nomlybackend.nomlybackend.model.eateries.IncludedType;
+import com.nomlybackend.nomlybackend.model.eateries.Nearby.ExcludedType;
+import com.nomlybackend.nomlybackend.model.eateries.Nearby.IncludedType;
 
 public class DietaryRestrictions {
     private final IncludedType[] inclusions;

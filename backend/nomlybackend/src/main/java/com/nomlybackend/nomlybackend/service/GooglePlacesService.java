@@ -1,8 +1,8 @@
 package com.nomlybackend.nomlybackend.service;
 
 import com.google.gson.Gson;
-import com.nomlybackend.nomlybackend.model.eateries.NearbyDTO;
-import com.nomlybackend.nomlybackend.model.eateries.PlacesDTO;
+import com.nomlybackend.nomlybackend.model.eateries.Nearby.NearbyDTO;
+import com.nomlybackend.nomlybackend.model.eateries.Places.PlacesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

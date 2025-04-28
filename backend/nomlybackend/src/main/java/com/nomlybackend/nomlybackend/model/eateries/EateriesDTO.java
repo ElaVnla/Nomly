@@ -1,5 +1,7 @@
 package com.nomlybackend.nomlybackend.model.eateries;
 
+import com.nomlybackend.nomlybackend.model.eateries.Places.PriceLevel;
+
 public class EateriesDTO {
 
 
