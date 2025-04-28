@@ -72,7 +72,13 @@ public class SwipingFragment extends Fragment {
     }
 
     private void setupBackButton() {
-        b.backBtn.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        b.backBtn.setOnClickListener(v -> {
+            if (!viewModel.isSwipingFinished()) {
+                Toast.makeText(requireContext(), "Please finish swiping through all restaurants!", Toast.LENGTH_SHORT).show();
+            } else {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
     }
 
     private void setupCardStack(double lat, double lng, int sessionId) {
@@ -105,7 +111,7 @@ public class SwipingFragment extends Fragment {
                                 Log.e("VOTE_FAIL", "Vote failed: " + response.code());
                             }
                         }
-//                        @Override
+                        //                        @Override
 //                        public void onResponse(Call<Void> call, Response<Void> response) {
 //                            if (!response.isSuccessful()) {
 //                                Toast.makeText(getContext(), "Failed to save vote", Toast.LENGTH_SHORT).show();
@@ -325,8 +331,6 @@ public class SwipingFragment extends Fragment {
         if (viewModel.getSwipedCards() == viewModel.getTotalCards()) {
             viewModel.setSwipingFinished(true);
 
-            SessionManager.getInstance(requireContext()).markSwipingCompleted(sessionId);
-
             Toast.makeText(getContext(), "Swiping complete. You can now finalize.", Toast.LENGTH_SHORT).show();
 
             // Step: Collect eateryIds
@@ -337,6 +341,7 @@ public class SwipingFragment extends Fragment {
 
             // Step: Store in arguments so ViewSessionFragment can access it later
             requireActivity().getSupportFragmentManager().setFragmentResult("eateryIdsResult", createEateryBundle(eateryIds));
+
         }
     }
 

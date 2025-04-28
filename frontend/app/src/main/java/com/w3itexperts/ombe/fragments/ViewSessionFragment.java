@@ -43,6 +43,7 @@ import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.SessionService.SessionManager;
 import com.w3itexperts.ombe.activity.groupPage_Activity;
 import com.w3itexperts.ombe.apimodals.userVoteDTO;
+import com.w3itexperts.ombe.apimodals.usersDTO;
 import com.w3itexperts.ombe.databinding.FragmentViewSessionBinding;
 import com.w3itexperts.ombe.modals.RestaurantCard;
 
@@ -88,6 +89,9 @@ public class ViewSessionFragment extends Fragment {
 
         sessionId = getArguments().getInt("sessionId", -1);
 
+        fetchFinishedUsers(sessionId);
+        checkIfUserFinishedSwiping();
+
 //        if (SessionManager.getInstance(requireContext()).hasUserSwiped(sessionId)) {
 //            swipeStarted = true;
 //            b.swipeButton.setVisibility(View.GONE);
@@ -111,6 +115,7 @@ public class ViewSessionFragment extends Fragment {
                         Log.e("LEADERBOARD_DATA", "No RestaurantCards received.");
                     }
                 });
+
 
         // Get session info from arguments
         Bundle args = getArguments();
@@ -244,10 +249,10 @@ public class ViewSessionFragment extends Fragment {
         b.dateCardText.setText(formatDateVertically(date));
         b.statusCard.setText(status);
 
-        SessionManager sessionManager = SessionManager.getInstance(requireContext());
-        if (sessionManager.hasUserSwiped(sessionId)) {
-            b.swipeButton.setVisibility(View.GONE);
-        }
+//        SessionManager sessionManager = SessionManager.getInstance(requireContext());
+//        if (sessionManager.hasUserSwiped(sessionId)) {
+//            b.swipeButton.setVisibility(View.GONE);
+//        }
 
         // Populate done swiping list (dummy data for now)
         List<String> doneSwipingUsers = new ArrayList<>();
@@ -266,13 +271,15 @@ public class ViewSessionFragment extends Fragment {
             b.finalizeButton.setVisibility(View.GONE);
             b.swipeButton.setVisibility(View.GONE);
             b.resultsPrompt.setVisibility(View.GONE);
-           // b.deleteSessionText.setVisibility(View.GONE);
+            // b.deleteSessionText.setVisibility(View.GONE);
             b.editButton.setVisibility(View.GONE);
 
             b.leaderboardHeader.setVisibility(View.VISIBLE);
             // Show leaderboard immediately
             b.leaderboardLayout.setVisibility(View.VISIBLE);
             isSessionFinalized = true;
+
+            fetchVotesBySessionId(sessionId);
         } else {
             // Still ongoing, animate the swipe button
             ObjectAnimator pulse = ObjectAnimator.ofFloat(b.swipeButton, "alpha", 1f, 0.5f, 1f);
@@ -285,10 +292,7 @@ public class ViewSessionFragment extends Fragment {
 
     private void setupListeners() {
         b.backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), groupPage_Activity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            requireActivity().finish(); // 🚪 Finish the current activity
+            requireActivity().onBackPressed();
         });
 
 //        b.editButton.setOnClickListener(v -> {
@@ -703,6 +707,145 @@ public class ViewSessionFragment extends Fragment {
         return (monthNumber >= 1 && monthNumber <= 12) ? months[monthNumber - 1] : "???";
     }
 
+    private void showFinishedUsers(List<String> usernames) {
+        b.memberContainer.removeAllViews(); // reuse container
+        for (String name : usernames) {
+            LinearLayout layout = new LinearLayout(requireContext());
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setPadding(20, 20, 20, 20);
+            layout.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            ShapeableImageView img = new ShapeableImageView(requireContext());
+            LinearLayout.LayoutParams imgParams = new LinearLayout.LayoutParams(180, 180);
+            img.setLayoutParams(imgParams);
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            img.setShapeAppearanceModel(
+                    img.getShapeAppearanceModel().toBuilder().setAllCornerSizes(90f).build()
+            );
+            Glide.with(requireContext()).load(R.drawable.person4).into(img);
+
+            MaterialButton btn = new MaterialButton(requireContext());
+            LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(230, 90);
+            btn.setLayoutParams(btnParams);
+            btn.setText(name);
+            btn.setTextSize(10);
+            btn.setCornerRadius(5);
+            btn.setTextColor(getResources().getColor(android.R.color.white));
+
+            layout.addView(img);
+            layout.addView(btn);
+            b.memberContainer.addView(layout);
+        }
+    }
+
+
+    private void fetchFinishedUsers(int sessionId) {
+        Log.d("FINISHED_USERS", "🔍 Starting fetchFinishedUsers() for sessionId: " + sessionId);
+
+        ApiClient.getApiService().getFinishedUsers(sessionId).enqueue(new Callback<List<usersDTO>>() {
+            @Override
+            public void onResponse(Call<List<usersDTO>> call, Response<List<usersDTO>> response) {
+                Log.d("FINISHED_USERS", "📡 Received response: " + response.code());
+
+                if (response.isSuccessful() && response.body() != null) {
+                    List<usersDTO> usersList = response.body();
+                    Log.d("FINISHED_USERS", "✅ Success. Number of users: " + usersList.size());
+
+                    List<String> usernames = new ArrayList<>();
+                    for (usersDTO user : usersList) {
+                        usernames.add(user.getUsername());
+                        Log.d("FINISHED_USERS", "➡️ User added: " + user.getUsername());
+                    }
+
+                    if (usernames.isEmpty()) {
+                        Log.d("FINISHED_USERS", "⚠️ No users found. Hiding memberContainer.");
+                        b.memberContainer.setVisibility(View.GONE);
+                    } else {
+                        Log.d("FINISHED_USERS", "🎉 Showing finished users.");
+                        b.memberContainer.setVisibility(View.VISIBLE);
+                        showFinishedUsers(usernames);
+                    }
+
+                } else {
+                    Log.e("FINISHED_USERS", "❌ Failed or empty response. Code: " + response.code());
+                    b.memberContainer.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<usersDTO>> call, Throwable t) {
+                Log.e("FINISHED_USERS", "🚨 API error: " + t.getMessage(), t);
+                b.memberContainer.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    // for checking if user finished swiping or not, swipe button will disappear based on that
+    private void checkIfUserFinishedSwiping() {
+        int sessionId = getArguments().getInt("sessionId", -1);
+        int currentUserId = SessionManager.getInstance(requireContext()).getCurrentUser().getUserId();
+
+        ApiClient.getApiService().getFinishedUsers(sessionId).enqueue(new Callback<List<usersDTO>>() {
+            @Override
+            public void onResponse(Call<List<usersDTO>> call, Response<List<usersDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    boolean userHasFinished = false;
+                    for (usersDTO user : response.body()) {
+                        if (user.getUserId() == currentUserId) {
+                            userHasFinished = true;
+                            break;
+                        }
+                    }
+
+                    if (userHasFinished) {
+                        b.swipeButton.setVisibility(View.GONE);
+                        Log.d("SWIPE_CHECK", "User finished swiping. Hiding button.");
+                    } else {
+                        b.swipeButton.setVisibility(View.VISIBLE);
+                        Log.d("SWIPE_CHECK", "User still needs to swipe. Showing button.");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<usersDTO>> call, Throwable t) {
+                Log.e("SWIPE_CHECK", "API error checking finished swipes", t);
+            }
+        });
+    }
+
+
+    // for displaying leaderboard after re-entering session
+    private void fetchVotesBySessionId(int sessionId) {
+        ApiClient.getApiService().getUsersVotesBySessionId(sessionId).enqueue(new Callback<List<userVoteDTO>>() {
+            @Override
+            public void onResponse(Call<List<userVoteDTO>> call, Response<List<userVoteDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d("LEADERBOARD_REGEN", "✅ Votes received: " + response.body().size());
+
+                    // Count likes per eateryId
+                    Map<String, Integer> voteMap = new HashMap<>();
+                    for (userVoteDTO vote : response.body()) {
+                        if (vote.isLiked()) {
+                            String eateryId = vote.getEateryId();
+                            voteMap.put(eateryId, voteMap.getOrDefault(eateryId, 0) + 1);
+                        }
+                    }
+
+                    // Proceed to show leaderboard (uses existing method)
+                    showLeaderboardWithImages(voteMap);
+                } else {
+                    Log.e("LEADERBOARD_REGEN", "❌ Failed to fetch votes. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<userVoteDTO>> call, Throwable t) {
+                Log.e("LEADERBOARD_REGEN", "🚨 Error fetching votes", t);
+            }
+        });
+    }
+
     private void fetchLeaderboard(int sessionId, List<String> eateryIds, List<RestaurantCard> cards) {
         ApiService apiService = ApiClient.getApiService();
 
@@ -895,7 +1038,7 @@ public class ViewSessionFragment extends Fragment {
             likesText.setTextColor(Color.RED);
             likesText.setGravity(Gravity.CENTER_HORIZONTAL);
 
-           // WORKS!!
+            // WORKS!!
             // Image
 //            ImageView imageView = new ImageView(requireContext());
 //            imageView.setImageBitmap(matchingCard.getImage());
@@ -926,7 +1069,7 @@ public class ViewSessionFragment extends Fragment {
 
 
 
-          //  ========
+            //  ========
 //            ShapeableImageView imageView = new ShapeableImageView(requireContext());
 //            LinearLayout.LayoutParams imgParams = new LinearLayout.LayoutParams(
 //                    ViewGroup.LayoutParams.MATCH_PARENT, 400);  // increase height
