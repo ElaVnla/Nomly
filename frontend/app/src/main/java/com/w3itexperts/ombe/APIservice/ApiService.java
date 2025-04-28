@@ -23,11 +23,12 @@ import com.w3itexperts.ombe.apimodals.userVoteDTO;
 import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.apimodals.sessions;
 import com.w3itexperts.ombe.apimodals.groupings;
+import com.w3itexperts.ombe.apimodals.usersDTO;
 import com.w3itexperts.ombe.apimodals.usersgroupings;
 import com.w3itexperts.ombe.apimodals.RegistrationRequest;
 
 // retrofit how to request/ use api
-// https://square.github.io/retrofit/
+// EXTERNAL RESOURCES AND TOOLS: https://square.github.io/retrofit/, youtube retrofit tutorial
 public interface ApiService {
 
     // ALL USERS API STUFF HERE ================================================
@@ -108,7 +109,7 @@ public interface ApiService {
     @DELETE("groupings/delete-grouping/{id}")
     Call<Void> deleteGrouping(@Path("id") int id);
 
-   // @PUT("groupings/update-grouping/{id}")
+    // @PUT("groupings/update-grouping/{id}")
     //Call<groupings> updateGrouping(@Path("id") int id, @Body groupings grouping);
 
     @PUT("groupings/update-grouping/{id}")
@@ -149,4 +150,12 @@ public interface ApiService {
 
     @GET("users-sessions-eateries/get-users-votes-by-eateryId/{id}")
     Call<List<userVoteDTO>> getUsersVotesByEateryId(@Path("id") String eateryId);
+
+    // for leaderboard
+    @GET("/users-sessions-eateries/get-users-votes-by-sessionId/{sessionId}")
+    Call<List<userVoteDTO>> getUsersVotesBySessionId(@Path("sessionId") int sessionId);
+
+    // for done swiping users
+    @GET("users-sessions-eateries/get-finished-users/{sessionId}")
+    Call<List<usersDTO>> getFinishedUsers(@Path("sessionId") int sessionId);
 }

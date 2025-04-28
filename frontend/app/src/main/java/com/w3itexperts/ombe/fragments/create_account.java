@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -23,9 +25,12 @@ import com.w3itexperts.ombe.APIservice.ApiService;
 import com.w3itexperts.ombe.R;
 import com.w3itexperts.ombe.apimodals.RegistrationRequest;
 import com.w3itexperts.ombe.apimodals.RegistrationResponse;
+import com.w3itexperts.ombe.apimodals.users;
 import com.w3itexperts.ombe.databinding.FragmentCreateAccountBinding;
+import com.w3itexperts.ombe.methods.EncryptionUtil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import retrofit2.Call;
@@ -49,6 +54,11 @@ public class create_account extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // functions here ================================================
+        SetUpDropDown();
+
+        // BUTTON CLICK LISTENER THINGY HERE =========================================
+
         // click here when they wan go back welcome page
         b.backbtn.setOnClickListener(v -> getActivity().onBackPressed());
 
@@ -63,6 +73,8 @@ public class create_account extends Fragment {
             String confirmPassword = b.confirmpassword.getText().toString().trim();
 
             // VALIDATION OF FORM HERE =====================================================
+
+            // check if the user fill in the inputs if not ask them fill up
             if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) ||
                     TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
                 String msg = "Please fill in all fields";
@@ -71,6 +83,15 @@ public class create_account extends Fragment {
                 return;
             }
 
+            // password security make sure the password is appropriately hard to solve
+            if (!isValidPassword(password)) {
+                String msg = "Password must be at least 8 characters long, include 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.";
+                Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                android.util.Log.d("NOMLYPROCESS", msg);
+                return;
+            }
+
+            // make sure both password is the same
             if (!password.equals(confirmPassword)) {
                 String msg = "Passwords do not match";
                 Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
@@ -81,116 +102,191 @@ public class create_account extends Fragment {
             // instead of storing as list we store all as string separated by comma
             String allergies = TextUtils.join(",", allergySet);
 
-            // prep the email to sned otp
-            RegistrationRequest regRequest = new RegistrationRequest(email);
-
-
             try {
-                apiService.registerEmail(regRequest).enqueue(new Callback<RegistrationResponse>() {
+                // Call getAllUsers to check if email already exist
+                apiService.getAllUsers().enqueue(new Callback<List<users>>() {
                     @Override
-                    public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                    public void onResponse(Call<List<users>> call, Response<List<users>> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            String msg = response.body().getMessage();
-                            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-                            android.util.Log.d("NOMLYPROCESS", msg);
+                            Log.d("NOMLYPROCESS", "RETRIEVE USER STARTING TO CREATE");
 
-                            // group the registration details to pass to the OTP fragment.
-                            Bundle args = new Bundle();
-                            args.putString("username", username);
-                            args.putString("email", email);
-                            args.putString("password", password);
-                            args.putString("allergies", allergies);
+                            boolean emailExists = false;
+                            for (users user : response.body()) {
+                                Log.d("NOMLYPROCESS", "EMAIL OF USER: "+user.getEmail());
+                                if (user.getEmail().equalsIgnoreCase(email)) {
+                                    emailExists = true;
+                                    break;
+                                }
+                            }
+                            Log.d("NOMLYPROCESS", "EMAIL exist: "+ emailExists);
 
-                            // Navigate to OTP fragment.
-                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            otp otpFragment = new otp();
-                            otpFragment.setArguments(args); // we pass in to different fragment here
-                            transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
-                                    android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                            transaction.replace(getActivity().findViewById(R.id.main).getId(), otpFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+                            if (emailExists) {
+                                String msg = "Email already taken. Please use another email.";
+                                Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                                android.util.Log.d("NOMLYPROCESS", msg);
+                                return;
+                            }
+                            Log.d("NOMLYPROCESS", "EMAIL DOES NOT EXIST THEREFORE PROCEED");
+
+                            // email is not taken, proceed to send OTP email
+                            RegistrationRequest regRequest = new RegistrationRequest(email);
+
+                            apiService.registerEmail(regRequest).enqueue(new Callback<RegistrationResponse>() {
+                                @Override
+                                public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                                    if (response.isSuccessful() && response.body() != null) {
+                                        String msg = response.body().getMessage();
+                                        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                                        android.util.Log.d("NOMLYPROCESS", msg);
+
+                                        // after sending email successful, continue encryption and navigate to OTP
+                                        proceedToOtp(username, email, password, allergies);
+                                    } else {
+                                        String msg = "Registration failed: " + response.code();
+                                        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                                        android.util.Log.d("NOMLYPROCESS", msg);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                                    String msg = "Registration failed: " + t.getMessage();
+                                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                                    android.util.Log.d("NOMLYPROCESS", msg);
+                                }
+                            });
+
                         } else {
-                            String msg = "Registration failed: " + response.code();
+                            String msg = "Failed to retrieve users. Error code: " + response.code();
                             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
                             android.util.Log.d("NOMLYPROCESS", msg);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<RegistrationResponse> call, Throwable t) {
-                        String msg = "Registration failed: " + t.getMessage();
+                    public void onFailure(Call<List<users>> call, Throwable t) {
+                        String msg = "Failed to retrieve users: " + t.getMessage();
                         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
                         android.util.Log.d("NOMLYPROCESS", msg);
                     }
                 });
-            }
-            catch (Exception e)
-            {
-                Log.e("NOMLYPROCESS", "ERROR: Failed to registeremail  - " + e.getMessage());
+            } catch (Exception e) {
+                Log.e("NOMLYPROCESS", "ERROR: Failed to check existing emails - " + e.getMessage());
                 Toast.makeText(getContext(), "404 ERROR: Contact Admin Support", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // https://stackoverflow.com/questions/27981167/implement-custom-spinner-on-drop-down-menu-select
+        //https://www.digitalocean.com/community/tutorials/android-spinner-drop-down-list
+        b.allergySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedAllergy = parent.getItemAtPosition(position).toString();
 
-        b.allergyInput.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE ||
-                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
-
-                String allergyText = b.allergyInput.getText().toString().trim();
-                if (!TextUtils.isEmpty(allergyText) && !allergySet.contains(allergyText)) {
-                    addTag(allergyText);
-                    b.allergyInput.setText(""); // Clear input field
-                    android.util.Log.d("NOMLYPROCESS", "Added allergy tag: " + allergyText);
+                if (!selectedAllergy.equals("Select your allergy") && !allergySet.contains(selectedAllergy)) {
+                    addTag(selectedAllergy);
                 }
-                return true;
             }
-            return false;
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
     }
 
-    // allergy tag thingy
+    // password safety
+    // External sources - stackoverflow https://stackoverflow.com/questions/3802192/regexp-java-for-password-validation
+    private boolean isValidPassword(String password) {
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
+        return password.matches(passwordPattern);
+    }
+
+    private void SetUpDropDown() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                new String[]{"Select your allergy", "No Beef", "No Seafood", "Vegetarian", "Vegan"}
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        b.allergySpinner.setAdapter(adapter);
+    }
+
     // lost my braincells doing this
+    // https://stackoverflow.com/questions/1851633/how-to-add-a-button-dynamically-in-android
+    // https://www.geeksforgeeks.org/how-to-generate-dynamic-multiple-buttons-in-android/
     private void addTag(String text) {
         allergySet.add(text);
-        // Tag Layout segment
-        LinearLayout tagLayout = new LinearLayout(getContext());
-        tagLayout.setOrientation(LinearLayout.HORIZONTAL);
-        tagLayout.setPadding(10, 5, 10, 5);
-        tagLayout.setBackground(getResources().getDrawable(R.drawable.tag_background));
-        tagLayout.setElevation(8);
-        tagLayout.setLayoutParams(new LinearLayout.LayoutParams(
+        LinearLayout TagLL = new LinearLayout(getContext());
+        TagLL.setOrientation(LinearLayout.HORIZONTAL);
+        TagLL.setPadding(10, 5, 10, 5);
+        TagLL.setBackground(getResources().getDrawable(R.drawable.tag_background));
+        TagLL.setElevation(8);
+        TagLL.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        // Tag button segment
-        MaterialButton tagButton = new MaterialButton(getContext());
-        tagButton.setText(text);
-        tagButton.setTextSize(12);
-        tagButton.setPadding(20, 10, 20, 10);
-        tagButton.setBackgroundColor(getResources().getColor(R.color.color_secondary));
-        tagButton.setTextColor(getResources().getColor(R.color.white));
-        tagButton.setAllCaps(false);
-        tagButton.setCornerRadius(10);
-        tagButton.setLayoutParams(new LinearLayout.LayoutParams(
+        MaterialButton TagBtn = new MaterialButton(getContext());
+        TagBtn.setText(text);
+        TagBtn.setTextSize(12);
+        TagBtn.setPadding(20, 10, 20, 10);
+        TagBtn.setBackgroundColor(getResources().getColor(R.color.color_secondary));
+        TagBtn.setTextColor(getResources().getColor(R.color.white));
+        TagBtn.setAllCaps(false);
+        TagBtn.setCornerRadius(10);
+        TagBtn.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        // Close button segment
-        ImageView closeButton = new ImageView(getContext());
-        closeButton.setImageResource(R.drawable.ic_close);
-        closeButton.setColorFilter(getResources().getColor(R.color.black));
-        closeButton.setPadding(8, 5, 8, 5);
-        closeButton.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-        closeButton.setOnClickListener(v -> {
-            b.tagContainer.removeView(tagLayout);
+        ImageView CloseBtn = new ImageView(getContext());
+        CloseBtn.setImageResource(R.drawable.ic_close);
+        CloseBtn.setColorFilter(getResources().getColor(R.color.black));
+        CloseBtn.setPadding(8, 5, 8, 5);
+        CloseBtn.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+        CloseBtn.setOnClickListener(v -> {
+            b.tagContainer.removeView(TagLL);
             allergySet.remove(text);
             android.util.Log.d("NOMLYPROCESS", "Removed allergy tag: " + text);
         });
 
-        // tag layout segment again
-        tagLayout.addView(tagButton);
-        tagLayout.addView(closeButton);
-        b.tagContainer.addView(tagLayout);
+        TagLL.addView(TagBtn);
+        TagLL.addView(CloseBtn);
+        b.tagContainer.addView(TagLL);
+    }
+
+    // encrypt password and navigate
+    private void proceedToOtp(String username, String email, String password, String allergies) {
+        Bundle args = new Bundle();
+        args.putString("username", username);
+        args.putString("email", email);
+
+        String encryptedPassword = password;
+        boolean encryptstat = false;
+        try {
+            encryptedPassword = EncryptionUtil.encrypt(password);
+            encryptstat = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Error encrypting password", Toast.LENGTH_SHORT).show();
+        }
+
+        if (encryptstat) {
+            args.putString("password", encryptedPassword);
+            args.putString("allergies", allergies);
+
+            android.util.Log.d("NOMLYPROCESS", "navigating to otp page now");
+
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            otp otpFragment = new otp();
+            otpFragment.setArguments(args);
+            transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+                    android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            transaction.replace(getActivity().findViewById(R.id.main).getId(), otpFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else {
+            String erroroutput = "ERROR ENCRYPTING PASSWORD";
+            Toast.makeText(getContext(), "404 Error: Please contact admin", Toast.LENGTH_SHORT).show();
+            android.util.Log.d("NOMLYPROCESS", erroroutput);
+        }
     }
 }

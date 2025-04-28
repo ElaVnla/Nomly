@@ -50,6 +50,11 @@
           <theme>@style/Theme.Ombe</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/forgetpassword_otp.xml">
+        <config>
+          <theme>@style/Theme.Ombe</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/frontend/app/src/main/res/layout/fragment_add_card.xml">
         <config>
           <theme>@style/Theme.Ombe</theme>
@@ -261,20 +266,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="some refactoring">
+    <list default="true" id="0a3b1f9b-de43-4f46-8d61-48d58abdc98c" name="Changes" comment="add cite comments stuff">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/1ce8fbe9cd5f67467fbc6471b3e35c77ab6be457/metadata.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/1ce8fbe9cd5f67467fbc6471b3e35c77ab6be457/metadata.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/DietaryRestrictions.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/DietaryRestrictions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/DisplayName.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Places/DisplayName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Eateries.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Eateries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/EateriesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/EateriesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/ExcludedType.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Nearby/ExcludedType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/IncludedType.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Nearby/IncludedType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/LatLng.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Places/LatLng.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/NearbyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Nearby/NearbyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PlacesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Places/PlacesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/PriceLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/model/eateries/Places/PriceLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/EateriesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/EateriesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/GooglePlacesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/java/com/nomlybackend/nomlybackend/service/GooglePlacesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nomlybackend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nomlybackend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +286,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\hjunz\.android\avd\Medium_Phone.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/shonim/.android/avd/Pixel_8_API_35.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -338,7 +340,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ElaVnla/Nomly.git&quot;,
-    &quot;accountId&quot;: &quot;2ab335dd-2a6f-42a5-9689-d83c1811b625&quot;
+    &quot;accountId&quot;: &quot;820cf680-7b50-47c7-adb5-c78b33732bde&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -366,35 +368,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.app.executor": "Run",
-    "Android App.frontend-app.executor": "Run",
-    "Application.NomlybackendApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ScreenRecorder.SavePath": "/Users/shonim/Movies",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "refactorBackend",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/erika/Downloads/NomlyOfficial306",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "device.mirroring"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;Android App.frontend-app.executor&quot;: &quot;Run&quot;,
+    &quot;Application.NomlybackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ScreenRecorder.SavePath&quot;: &quot;/Users/shonim/Movies&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;shonimV7&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/shonim/AndroidStudioProjects/NomlyShonimV6&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;device.mirroring&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly5\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\drawable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\erika\AndroidStudioProjects\Nomly\frontend\app\src\main\res\drawable" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly2\frontend\app\src\main\res\layout" />
       <recent name="C:\Users\erika\AndroidStudioProjects\Nomly" />
     </key>
@@ -420,11 +424,40 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
       <Java>
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
         <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
@@ -462,11 +495,40 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
       <Java>
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
         <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
@@ -498,8 +560,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Android App.app" />
-      <item itemvalue="Android App.frontend-app" />
       <item itemvalue="Application.NomlybackendApplication" />
     </list>
     <recent_temporary>
@@ -606,7 +666,31 @@
       <option name="project" value="LOCAL" />
       <updated>1744736416734</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="dropdown, encryption, cleanup, password validation">
+      <option name="closed" value="true" />
+      <created>1745785454978</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745785454978</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add cite comments stuff">
+      <option name="closed" value="true" />
+      <created>1745825651002</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745825651002</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add cite comments stuff">
+      <option name="closed" value="true" />
+      <created>1745825834091</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745825834091</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -635,7 +719,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="triedtofixshonimpart" />
+                        <option value="ErikaNewUpdates" />
                       </list>
                     </value>
                   </entry>
@@ -658,9 +742,10 @@
     <MESSAGE value="api for homepage, allgroups and allsessions done" />
     <MESSAGE value="IT FINALLY WORKED" />
     <MESSAGE value="left to clean : profile, editprofile, createpassowrd, resestpassowrdotp,resetpassword" />
+    <MESSAGE value="dropdown, encryption, cleanup, password validation" />
+    <MESSAGE value="add cite comments stuff" />
     <MESSAGE value="Updates EateriesPhotos table, added /get-images/{eateryId}" />
-    <MESSAGE value="some refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="some refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates EateriesPhotos table, added /get-images/{eateryId}" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -676,12 +761,12 @@
       <map>
         <entry key="com.w3itexperts.ombe">
           <value>
-            <CheckInfo lastCheckTimestamp="1744732889921" />
+            <CheckInfo lastCheckTimestamp="1745768301188" />
           </value>
         </entry>
         <entry key="com.w3itexperts.ombe.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1744732889960" />
+            <CheckInfo lastCheckTimestamp="1745768301188" />
           </value>
         </entry>
       </map>

@@ -33,7 +33,7 @@ public class allGroupsAdapter extends RecyclerView.Adapter<allGroupsAdapter.allG
     @NonNull
     @Override
     public allGroupsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("SESSION_DATA", "Size: " + DataGenerator.AllSessionsList().size());
+        Log.d("NOMLYPROCESS", "Size: " + DataGenerator.AllSessionsList().size());
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.allgroups, parent, false);
         return new allGroupsViewHolder(view);
