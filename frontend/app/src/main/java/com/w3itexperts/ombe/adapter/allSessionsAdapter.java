@@ -28,7 +28,7 @@ public class allSessionsAdapter extends RecyclerView.Adapter<allSessionsAdapter.
     @NonNull
     @Override
     public allSessionsAdapter.allSessionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("SESSION_DATA", "Size: " + DataGenerator.AllSessionsList().size());
+        Log.d("NOMLYPROCESS", "Size: " + DataGenerator.AllSessionsList().size());
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.allsessions, parent, false);
         return new allSessionsAdapter.allSessionsViewHolder(view);

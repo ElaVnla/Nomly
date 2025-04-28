@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.inputmethod.EditorInfo;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -44,7 +46,7 @@ import retrofit2.Response;
 
 public class EditProfile extends Fragment {
     private FragmentEditProfileBinding b;
-    private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int pickimg = 1;
     private Set<String> allergySet = new HashSet<>();
     private String encodedImage = "";
 
@@ -64,6 +66,7 @@ public class EditProfile extends Fragment {
 
         users currentUser = SessionManager.getInstance(getContext()).getCurrentUser();
         if (currentUser != null) {
+            // get user info then we display their info
             b.usernameEditText.setText(currentUser.getUsername());
             b.emailEditText.setText(currentUser.getEmail());
 
@@ -77,7 +80,7 @@ public class EditProfile extends Fragment {
                 }
             }
 
-            // ✅ Load image from new .getImage() field
+            // Load image from new .getImage() field
             String base64Image = currentUser.getImage();
             encodedImage = base64Image;
 
@@ -90,7 +93,7 @@ public class EditProfile extends Fragment {
                     Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
                     b.profileImage.setImageBitmap(decodedBitmap);
                 } catch (Exception e) {
-                    Log.e("EDIT_PROFILE", "Error decoding profile image: " + e.getMessage());
+                    Log.e("NOMLYPROCESS", "Error decoding profile image: " + e.getMessage());
                     b.profileImage.setImageResource(R.drawable.defaultprofile);
                 }
             } else {
@@ -120,13 +123,14 @@ public class EditProfile extends Fragment {
                 return;
             }
 
+            // Update the allergy
             String updatedPreferences = TextUtils.join(",", allergySet);
             Map<String, String> updateBody = new HashMap<>();
             updateBody.put("username", updatedUsername);
             updateBody.put("email", updatedEmail);
             updateBody.put("password", updatedPassword);
             updateBody.put("preferences", updatedPreferences);
-            updateBody.put("profilePicture", encodedImage); // ✅ sent to backend
+            updateBody.put("profilePicture", encodedImage);
 
             ApiService apiService = ApiClient.getApiService();
             apiService.updateUser(currentUser.getUserId(), updateBody).enqueue(new Callback<users>() {
@@ -153,24 +157,36 @@ public class EditProfile extends Fragment {
             });
         });
 
-        b.allergyInput.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE ||
-                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER &&
-                            event.getAction() == KeyEvent.ACTION_DOWN)) {
-                String allergyText = b.allergyInput.getText().toString().trim();
-                if (!TextUtils.isEmpty(allergyText) && !allergySet.contains(allergyText)) {
-                    addTag(allergyText);
-                    b.allergyInput.setText("");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                new String[]{"Select your allergy", "No Beef", "No Seafood", "Vegetarian", "Vegan"}
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        b.allergySpinner.setAdapter(adapter);
+
+        b.allergySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedAllergy = parent.getItemAtPosition(position).toString();
+                if (!selectedAllergy.equals("Select your allergy") && !allergySet.contains(selectedAllergy)) {
+                    addTag(selectedAllergy);
+                    b.allergySpinner.setSelection(0); // Reset back to "Select your allergy"
                 }
-                return true;
             }
-            return false;
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
         });
+
+
 
         b.editProfileImageBtn.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            startActivityForResult(intent, pickimg);
         });
     }
 
@@ -215,7 +231,7 @@ public class EditProfile extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == pickimg && resultCode == Activity.RESULT_OK && data != null) {
             Uri selectedImageUri = data.getData();
             if (selectedImageUri != null) {
                 try {
