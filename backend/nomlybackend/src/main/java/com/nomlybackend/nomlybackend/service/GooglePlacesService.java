@@ -1,7 +1,7 @@
 package com.nomlybackend.nomlybackend.service;
 
 import com.google.gson.Gson;
-import com.nomlybackend.nomlybackend.model.eateries.Nearby;
+import com.nomlybackend.nomlybackend.model.eateries.NearbyDTO;
 import com.nomlybackend.nomlybackend.model.eateries.PlacesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class GooglePlacesService {
         this.gson = gson;
     }
 
-    public PlacesDTO.Place[] getEateriesFromGoogle(Nearby nearby) throws Exception{
+    public PlacesDTO.Place[] getEateriesFromGoogle(NearbyDTO nearby) throws Exception{
         String[] fieldMask = {"places.id", "places.displayName.text", "places.priceLevel", "places.types", "places.rating", "places.photos.name","places.formattedAddress","places.location"};
         String jsonRequest = gson.toJson(nearby);
 

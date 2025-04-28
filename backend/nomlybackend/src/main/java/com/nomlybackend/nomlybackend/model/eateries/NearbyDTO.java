@@ -9,14 +9,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Nearby {
+public class NearbyDTO {
     private String[] includedTypes;
     private String[] excludedTypes;
     private int maxResultCount = 10;
     @Embedded
     private LocationRestriction locationRestriction;
 
-    private Nearby(NearbyBuilder builder, String[] includedTypes, String[] excludedTypes){
+    private NearbyDTO(NearbyBuilder builder, String[] includedTypes, String[] excludedTypes){
         this.includedTypes = includedTypes;
         this.excludedTypes = excludedTypes;
         this.maxResultCount = builder.maxResultCount;
@@ -48,7 +48,7 @@ public class Nearby {
             return this;
         }
 
-        public Nearby build() {
+        public NearbyDTO build() {
             // Convert Sets to arrays of Strings
             String[] includedTypesArray = includedTypes.stream()
                     .map(IncludedType::getType)  // Convert each IncludedType to its corresponding String
@@ -58,7 +58,7 @@ public class Nearby {
                     .toArray(String[]::new);
 
             // Create and return the Nearby object with the set data
-            return new Nearby(this, includedTypesArray, excludedTypesArray);
+            return new NearbyDTO(this, includedTypesArray, excludedTypesArray);
         }
     }
 

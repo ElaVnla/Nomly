@@ -62,21 +62,21 @@ public class EateriesService {
     }
 
     public List<Eateries> findEateries(LocationDTO locationDTO) throws Exception{
-        Nearby nearby = createNearby(locationDTO);
+        NearbyDTO nearby = createNearby(locationDTO);
         PlacesDTO.Place[] placesEntities = findEateriesNearby(nearby);
 
         return saveEateriesAndPhotos(locationDTO, placesEntities);
     }
 
-    private Nearby createNearby(LocationDTO locationDTO) {
-        return new Nearby.NearbyBuilder()
+    private NearbyDTO createNearby(LocationDTO locationDTO) {
+        return new NearbyDTO.NearbyBuilder()
                 .setLatLong(locationDTO.getLatitude(), locationDTO.getLongitude())
                 .addDietaryRestriction(getDiet(locationDTO.getSessionId()))
                 .setMaxResultCount(1)
                 .build();
     }
 
-    private PlacesDTO.Place[] findEateriesNearby(Nearby nearby) throws Exception{
+    private PlacesDTO.Place[] findEateriesNearby(NearbyDTO nearby) throws Exception{
         PlacesDTO.Place[] placesEntities = new PlacesDTO.Place[]{};
         boolean found = false;
 
