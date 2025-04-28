@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 // https://stackoverflow.com/questions/48453077/how-to-configure-spring-boot-to-send-email-via-sendgrid/48457911
 // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/SimpleMailMessage.html
 // https://www.twilio.com/
+// https://try.mailgun.com/api-1/?utm_source=google&utm_medium=cpc&utm_campaign=APAC%20%7C%20EN%20%7C%20Brand&utm_id=21209483929&utm_content=161813825272&utm_term=mailgun&gad_source=1&gbraid=0AAAAAofVncc81me-2g_EiaOpcgQYacasn&gclid=Cj0KCQjwzrzABhD8ARIsANlSWNMsME5TK-UxZ3mj-xueOl6HAr8vMZnqIFmNaij3kK15kC_QNastgrUaAigLEALw_wcB
+
 @Service
 public class EmailService {
 

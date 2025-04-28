@@ -24,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// can use retrofit to communcicate/use API
+// https://square.github.io/retrofit/
 public class reset_password extends Fragment {
     FragmentResetPasswordBinding b;
 

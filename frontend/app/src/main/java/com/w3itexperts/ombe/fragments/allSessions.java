@@ -38,6 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+// EXTERNAL SOURCES: Stackoverflow - how to call retrofit api, how to pass, chatgpt debug when data not passing
+// https://square.github.io/retrofit/
 public class allSessions extends Fragment {
 
     private FragmentAllsessionsBinding b;
@@ -65,10 +67,10 @@ public class allSessions extends Fragment {
         b.searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String query = b.searchEditText.getText().toString().trim().toLowerCase();
-                Log.d("NOMLYPROCESS", "Search query: '" + query + "'");
+                String searchsess = b.searchEditText.getText().toString().trim().toLowerCase();
+                Log.d("NOMLYPROCESS", "Search sess: '" + searchsess + "'");
                 // If query is empty, reset the adapter to show the full list
-                if (query.isEmpty()) {
+                if (searchsess.isEmpty()) {
                     allSessionsAdapter adapter = new allSessionsAdapter(fullSessionList);
                     b.allsessionsView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                     b.allsessionsView.setAdapter(adapter);
@@ -79,16 +81,16 @@ public class allSessions extends Fragment {
                 // Filter by checking if any key field contains the query ===================
                 for (yourSessionsModal modal : fullSessionList) {
                     if (modal.getRestaurantName() != null &&
-                            modal.getRestaurantName().trim().toLowerCase().contains(query)) {
+                            modal.getRestaurantName().trim().toLowerCase().contains(searchsess)) {
                         filteredList.add(modal);
                     } else if (modal.getGroupName() != null &&
-                            modal.getGroupName().trim().toLowerCase().contains(query)) {
+                            modal.getGroupName().trim().toLowerCase().contains(searchsess)) {
                         filteredList.add(modal);
                     } else if (modal.getDateTimeAddress() != null &&
-                            modal.getDateTimeAddress().trim().toLowerCase().contains(query)) {
+                            modal.getDateTimeAddress().trim().toLowerCase().contains(searchsess)) {
                         filteredList.add(modal);
                     } else if (modal.getSessionTitle() != null &&
-                            modal.getSessionTitle().trim().toLowerCase().contains(query)) {
+                            modal.getSessionTitle().trim().toLowerCase().contains(searchsess)) {
                         filteredList.add(modal);
                     }
                 }
@@ -188,18 +190,19 @@ public class allSessions extends Fragment {
     }
 
 
+    // generate by chatgpt, edit by erika, jingyu
     public String FormatDateTimeString(String jsonDateString) {
         SimpleDateFormat CurrentFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
         // convert to this format
         SimpleDateFormat OutputResult = new SimpleDateFormat("dd MMM yyyy hh:mm a", Locale.ENGLISH);
 
         try {
-            // Parse the JSON date string into a Date object.
+            // Parse the JSON date string into a Date object
             Date date = CurrentFormat.parse(jsonDateString);
             return OutputResult.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
-            // Return the original string if parsing fails.
+            // Return the original string if parsing fails
             return jsonDateString;
         }
     }
