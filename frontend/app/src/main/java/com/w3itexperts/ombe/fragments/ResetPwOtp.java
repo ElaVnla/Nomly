@@ -27,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// can use retrofit to communcicate/use API
+// https://square.github.io/retrofit/
 public class ResetPwOtp extends Fragment {
     private ForgetpasswordOtpBinding b;
     private String email;
@@ -201,6 +203,7 @@ public class ResetPwOtp extends Fragment {
         });
     }
 
+    // Debug and amended with stackoverflow and chatgpt assistance
     public void SendOtpEmail(ApiService apiService)
     {
         try {

@@ -4,9 +4,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 // We prep the API communication here ==============
+// EXTERNAL RESOURCES AND TOOLS:
 // https://stackoverflow.com/questions/49725171/cannot-resolve-symbol-apiclient-retrofit how to prep
 // can use retrofit to communcicate/use API
 // https://square.github.io/retrofit/
+// https://www.youtube.com/watch?v=j7lRiTJ_-cI
 public class ApiClient {
     // if we run locally: 10.0.2.2
     // if we run physically: ip address + same wifi network
