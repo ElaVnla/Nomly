@@ -27,7 +27,7 @@ import com.w3itexperts.ombe.apimodals.usersgroupings;
 import com.w3itexperts.ombe.apimodals.RegistrationRequest;
 
 // retrofit how to request/ use api
-// https://square.github.io/retrofit/
+// EXTERNAL RESOURCES AND TOOLS: https://square.github.io/retrofit/, youtube retrofit tutorial
 public interface ApiService {
 
     // ALL USERS API STUFF HERE ================================================

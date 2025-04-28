@@ -26,6 +26,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// can use retrofit to communcicate/use API
+// https://square.github.io/retrofit/
 public class otp extends Fragment {
     private OtpLayoutBinding b;
     // Registration details passed from create_account.
@@ -99,6 +101,8 @@ public class otp extends Fragment {
 
 
                 // call api
+                // https://stackoverflow.com/questions/64256637/how-can-i-handle-the-response-from-the-retrofit-here-my-response-not-showing-th
+                // chatgpt assisted with debugging
                 apiService.verifyOtp(otpRequest).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -176,6 +180,8 @@ public class otp extends Fragment {
         });
 
         // Create the animation for otp inputs to move from the left to the right
+        //https://stackoverflow.com/questions/26361953/java-syntax-of-addtextchangedlistenernew-textwatcher
+        // https://www.geeksforgeeks.org/how-to-implement-textwatcher-in-android/
         b.otp1.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
