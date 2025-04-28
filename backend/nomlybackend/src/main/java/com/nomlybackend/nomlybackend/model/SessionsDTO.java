@@ -1,10 +1,6 @@
 package com.nomlybackend.nomlybackend.model;
 
-import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class SessionsDTO {
 
@@ -36,7 +32,6 @@ public class SessionsDTO {
 
     public SessionsDTO(Sessions session,  boolean includeGroupings) {
         this.sessionId = session.getSessionId();
-//        this.grouping = session.getGrouping();
         if (includeGroupings && session.getGrouping() != null) {
             this.grouping = new GroupingsDTO(session.getGrouping(), false);
         }

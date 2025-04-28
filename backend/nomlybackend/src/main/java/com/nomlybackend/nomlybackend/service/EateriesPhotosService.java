@@ -1,14 +1,11 @@
 package com.nomlybackend.nomlybackend.service;
 
-import com.google.gson.Gson;
-import com.nomlybackend.nomlybackend.model.eateries.PhotoDTO;
 import com.nomlybackend.nomlybackend.repository.EateriesPhotosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;

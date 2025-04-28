@@ -1,9 +1,6 @@
 package com.nomlybackend.nomlybackend.model;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class Profile extends CreateDatabaseEntry{

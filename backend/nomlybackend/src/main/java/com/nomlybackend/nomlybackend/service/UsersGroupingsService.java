@@ -4,7 +4,6 @@ import com.nomlybackend.nomlybackend.model.Groupings;
 import com.nomlybackend.nomlybackend.model.Users;
 import com.nomlybackend.nomlybackend.model.UsersGroupings;
 import com.nomlybackend.nomlybackend.repository.UsersGroupingsRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

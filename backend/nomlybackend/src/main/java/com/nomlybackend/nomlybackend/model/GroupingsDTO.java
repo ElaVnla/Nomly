@@ -1,10 +1,7 @@
 package com.nomlybackend.nomlybackend.model;
 
-import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GroupingsDTO {
@@ -12,7 +9,6 @@ public class GroupingsDTO {
     private Integer groupId;
     private String groupName;
     private LocalDateTime createdAt;
-    //    private List<Integer> userGroupIds;
     private String groupCode;
     private List<UsersDTO> users;
     private List<SessionsDTO> sessions;
@@ -31,13 +27,6 @@ public class GroupingsDTO {
         if ( imageId != null){
             this.image = imageId.getProfilePicture();
         }
-
-
-//        if (grouping.getUsersGrouping() == null){
-//            this.userGroupIds = new ArrayList<>();
-//        }else{
-//            this.userGroupIds = grouping.getUsersGrouping().stream().map(UsersGroupings::getUserGroupId).toList();
-//        }
         if (includeUsers && grouping.getUsersGrouping() != null) {
             this.users = grouping.getUsersGrouping().stream()
                     .map(ug -> new UsersDTO(ug.getUser(), false))  // prevent loop
@@ -87,14 +76,6 @@ public class GroupingsDTO {
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
     }
-    //    public List<Integer> getUserGroupIds() {
-//        return userGroupIds;
-//    }
-//
-//    public void setUserGroupIds(List<Integer> userGroupIds) {
-//        this.userGroupIds = userGroupIds;
-//    }
-
 
     public List<UsersDTO> getUsers() {
         return users;

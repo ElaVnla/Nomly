@@ -5,7 +5,6 @@ import com.nomlybackend.nomlybackend.model.Groupings;
 import com.nomlybackend.nomlybackend.model.Sessions;
 import com.nomlybackend.nomlybackend.model.SessionsDTO;
 import com.nomlybackend.nomlybackend.repository.SessionsRepository;
-import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
