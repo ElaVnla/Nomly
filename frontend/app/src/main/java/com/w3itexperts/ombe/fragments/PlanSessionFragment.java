@@ -243,7 +243,7 @@ public class PlanSessionFragment extends Fragment {
 //            }
 //        });
 
-          // CREATE SESSION VER2, DOES NOT WORK
+        // CREATE SESSION VER2, DOES NOT WORK
 
 //        b.createSessionBtn.setOnClickListener(v -> {
 //            if (isFormComplete()) {
@@ -302,6 +302,7 @@ public class PlanSessionFragment extends Fragment {
 //                                bundle.putString("title", sessionName);
 //                                bundle.putString("location", location);
 //                                bundle.putString("date", rawDate);
+//
 //                                bundle.putString("time", rawTime);
 //                                bundle.putString("status", "Ongoing");
 //                                bundle.putInt("sessionId", sessionId);
