@@ -1,6 +1,5 @@
 package com.nomlybackend.nomlybackend.service;
 
-import com.google.gson.Gson;
 import com.nomlybackend.nomlybackend.model.DietaryRestrictions;
 import com.nomlybackend.nomlybackend.model.eateries.*;
 import com.nomlybackend.nomlybackend.repository.EateriesRepository;
@@ -10,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nomlybackend.nomlybackend.model.EateriesPhotos;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 

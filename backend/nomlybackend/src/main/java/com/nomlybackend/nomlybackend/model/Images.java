@@ -1,6 +1,5 @@
 package com.nomlybackend.nomlybackend.model;
 
-import com.nomlybackend.nomlybackend.service.ImageDownloadService;
 import jakarta.persistence.*;
 
 @Entity

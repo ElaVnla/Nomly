@@ -1,7 +1,6 @@
 package com.nomlybackend.nomlybackend.controller;
 
 import com.nomlybackend.nomlybackend.model.eateries.*;
-import com.nomlybackend.nomlybackend.repository.EateriesRepository;
 import com.nomlybackend.nomlybackend.service.EateriesPhotosService;
 import com.nomlybackend.nomlybackend.service.EateriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 

@@ -1,7 +1,5 @@
 package com.nomlybackend.nomlybackend.repository;
 
-import com.nomlybackend.nomlybackend.model.SessionsEateries;
-import com.nomlybackend.nomlybackend.model.Users;
 import com.nomlybackend.nomlybackend.model.UsersSessionsEateries;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

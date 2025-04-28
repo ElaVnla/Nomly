@@ -23,7 +23,6 @@ public class GroupingsService {
 
     public List<GroupingsDTO> getAllGroupings() {
         List<Groupings> groupings = groupingsRepository.findAll();
-//        return groupings.stream().map(GroupingsDTO::new).collect(Collectors.toList());
         return groupings.stream().map(group -> new GroupingsDTO(group, true)).collect(Collectors.toList());
 
     }
@@ -35,7 +34,6 @@ public class GroupingsService {
 
     public Groupings getGroupEntityById(int id) {
         return groupingsRepository.findById(id).get();
-//                .orElseThrow(() -> new RuntimeException("Group not found"));
     }
 
     public boolean deleteGroupingById(int id){

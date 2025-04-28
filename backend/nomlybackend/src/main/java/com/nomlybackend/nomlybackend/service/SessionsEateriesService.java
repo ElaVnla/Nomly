@@ -1,7 +1,6 @@
 package com.nomlybackend.nomlybackend.service;
 
 import com.nomlybackend.nomlybackend.model.Sessions;
-import com.nomlybackend.nomlybackend.model.SessionsDTO;
 import com.nomlybackend.nomlybackend.model.SessionsEateries;
 import com.nomlybackend.nomlybackend.model.SessionsEateriesDTO;
 import com.nomlybackend.nomlybackend.model.eateries.Eateries;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,8 +31,4 @@ public class SessionsEateriesService {
         return new SessionsEateriesDTO(sessionsEateriesRepository.save(s));
     }
 
-//    public boolean updateRanking(String action, String eateryId, String sessionId){
-//
-//        return true;
-//    }
 }

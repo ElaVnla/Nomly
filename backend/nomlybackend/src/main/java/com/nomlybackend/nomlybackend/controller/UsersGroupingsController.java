@@ -1,9 +1,7 @@
 package com.nomlybackend.nomlybackend.controller;
 
 
-import com.nomlybackend.nomlybackend.model.UsersDTO;
 import com.nomlybackend.nomlybackend.model.UsersGroupings;
-import com.nomlybackend.nomlybackend.repository.UsersGroupingsRepository;
 import com.nomlybackend.nomlybackend.service.UsersGroupingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +21,6 @@ public class UsersGroupingsController {
         return usersGroupingsService.addUserToGrouping(body);
     }
 
-
-    // @DeleteMapping("/remove-user-from-grouping")
-    //public boolean removeUserFromGrouping(@RequestBody Map<String,String> body){
-        //return usersGroupingsService.removeUserFromGrouping(body);
-    //}
     @PostMapping("/remove-user-from-grouping")
     public boolean removeUserFromGrouping(@RequestBody Map<String,String> body){
         return usersGroupingsService.removeUserFromGrouping(body);

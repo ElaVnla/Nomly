@@ -32,7 +32,7 @@ public class Eateries {
     @Column(name = "Location")
     private String location;
 
-    @Column(name = "OperationHours") //TODO 1: to be implemented, q complicated
+    @Column(name = "OperationHours")
     private String operationHours;
 
     public Eateries() {
