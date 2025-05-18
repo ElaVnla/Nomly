@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://media.licdn.com/dms/image/v2/D562DAQECB79fsoKZlQ/profile-treasury-image-shrink_1280_1280/B56ZZHJCJ4GQAQ-/0/1744950274847?e=1745571600&amp;v=beta&amp;t=rlzeSxGhPA5K75eTN1a0Oj_pRahUY3KE3jyDcclOnB0" alt="Nomly Poster" width="600">
+  ![image](https://github.com/user-attachments/assets/54876391-1bde-45f6-838c-a26b71af1af3)
 </p>
 
 ---
