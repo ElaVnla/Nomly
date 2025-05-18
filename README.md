@@ -1,7 +1,5 @@
 
-<p align="center">
-  ![image](https://github.com/user-attachments/assets/54876391-1bde-45f6-838c-a26b71af1af3)
-</p>
+![image](https://github.com/user-attachments/assets/54876391-1bde-45f6-838c-a26b71af1af3)
 
 ---
 <br>
